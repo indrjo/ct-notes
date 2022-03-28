@@ -1,0 +1,56 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../cats.tex
+
+\section{Iso, mono and epi}
+
+The categorial axioms state two identities that deals with morphisms, that is equality between morphisms is involved; actually, we have tacitly assumed that the predicate of equality makes sense for morphisms. For that reason, we shall regard those two as axioms about morphism, since objects barely appear as start/end point of morphisms.
+
+Thus categories have a notion of sameness between morphisms, the equality, but nothing is said about objects. Yes, if a category has also the equality for objects, that would be fine, but experience helps us to craft the \q{right} notion of sameness of objects. Not because equality is bad, but because this is better and, above all, this notion is purely expressed in categorial terms.
+
+\begin{example}[Set Theory, equinumerousity]
+Set Theory has equality for sets, but quite sooner it turns out there is something less strict but more interesting. It is worth saying that Cantor, the father of Set Theory, conducted its enquiry on cardinalities and infiniteness years before the first axioms for Set Theories were written down. For \(A\) and \(B\) sets, the following statements are equivalent:
+\begin{enumerate}
+\item there exists a bijective function \(A \to B\);
+\item there exist two functions
+\begin{tikzcd}
+A \ar["f", r, shift left] & B \ar["g", l, shift left]
+\end{tikzcd}
+such that \(g f = \id_A\) and \(fg = \id_B\).
+\end{enumerate}
+Though they are logically equivalent, they are deeply different in some sense. In Set Theory, the adjective \q{bijective} is defined in reference of the fact that sets are things that have elements, that is
+\begin{quotation}
+for every \(y \in B\) there is one and only one \(x \in A\) such that \(f(x) = y\).
+\end{quotation}
+In contrast, (2) is a statement written in terms of functions and compositions of functions: so (2) is written in a categorial language.
+\end{example}
+
+\begin{exercise}
+Demonstrate the equivalence above. (That requires some work.)
+\end{exercise}
+
+Obviously, one can provide a generous amount of similar patterns that occur in \(\Set\)-based categories. We will not do that here and just leave it as exercise for the readers. However, this is enough to formulate a definition.
+
+\begin{definition}[Isomorphic objects]
+Let \(\cat C\) be a category and \(a\) and \(b\) two of its objects. A morphism \(f : a \to b\) of \(\cat C\) is an {\em isomorphism} whenever there is in the same category a morphism \(g : b \to a\) such that \(gf = \id_a\) and \(fg = \id_b\).
+In that case, \(a\) is said {\em isomorphic} to \(b\) when there is an isomorphism \(a \to b\) in \(\cat C\).
+\end{definition}
+
+[\dots{}]
+
+\begin{definition}[Monomorphisms and epimorphisms]
+A morphism \(f : a \to b\) of a category \(\cat C\) is said to be:
+\begin{itemize}
+\item a {\em monomorphism} whenever for every object \(c\) and morphisms \(g, h : c \to a\) of \(\cat C\), if \(fg = fh\) then \(g = h\);
+\item an {\em epimorphism} when for every object \(d\) and morphisms \(m, n : b \to d\) of \(\cat C\), if \(mf = nf\) then \(m = n\).
+\end{itemize}
+\end{definition}
+
+[\dots{}]
+
+%Another way to express the things of the previous definition is this:
+%\(f : a \to b\) is a monomorphism whenever for every \(c \in \obj{\cat C}\) the function
+%\begin{equation}\cat C (c, a) \to \cat C (c, b)\,, \ g \to fg \label{eqn:PreCirc}\end{equation}
+%is injective. Similarly, \(f : a \to b\) is an epimorphism when for every \(d \in \obj{\cat C}\) the function
+%\begin{equation}\cat C (a, d) \to \cat C (b, d)\,, \ h \to hf \label{eqn:PostCirc}\end{equation}
+%is injective. Category theorists call the functions~\eqref{eqn:PreCirc} {\em precompositions} with \(f\) and~\eqref{eqn:PostCirc} {\em postcompositions} with \(f\).

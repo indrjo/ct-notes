@@ -1,0 +1,66 @@
+% !TEX program = lualatex
+% !TEX root = ./CT.tex
+% !TEX spellcheck = en_GB
+
+\documentclass[ structure      = article
+              , maketitlestyle = standard
+              , secstyle       = center
+              , secfont        = smallcaps
+              , subsecstyle    = center
+              , subsecfont     = smallcaps
+              , liststyle      = aligned
+              , quotesize      = normalsize
+              , headerstyle    = center
+              , footnotestyle  = superscript
+              ]{suftesi}
+
+\usepackage[no-math]{fontspec}
+\setmainfont{Linux Libertine O}
+%\usepackage{libertine}
+
+\usepackage{polyglossia}
+\setmainlanguage[variant=uk]{english}
+
+\usepackage[english=british]{csquotes}
+\newcommand\q\enquote
+
+\usepackage{hyperref}
+\hypersetup{breaklinks,hidelinks}
+
+\usepackage{anyfontsize}
+
+\usepackage{indentfirst}
+
+\usepackage{libertinust1math}
+\usepackage{MnSymbol,extarrows,mathtools}
+\usepackage[bb=ams]{mathalfa}
+
+\usepackage{amsthm}
+\newcounter{coun}
+\counterwithin{coun}{section}
+\theoremstyle{definition}
+\newtheorem{definition}  [coun]{Definition}
+\newtheorem{construction}[coun]{Construction}
+\newtheorem{lemma}       [coun]{Lemma}
+\newtheorem{proposition} [coun]{Proposition}
+\newtheorem{corollary}   [coun]{Corollary}
+\newtheorem{remark}      [coun]{Remark}
+\newtheorem{sandbox}     [coun]{Sandbox}
+\newtheorem{example}     [coun]{Example}
+\newtheorem{exercise}    [coun]{Exercise}
+
+\renewcommand\theequation{\thesection.\arabic{equation}}
+
+\usepackage{tikz}
+\usetikzlibrary{ calc
+               , babel
+               , cd
+               }
+\tikzcdset{ row sep/normal=.7cm
+          , column sep/normal=.7cm
+          , arrow style=tikz
+          , diagrams={>={To[length=3.5pt,width=4pt]}}
+          , shorten=-2pt
+          , natural/.style={shorten=2pt, Rightarrow}
+          }
+

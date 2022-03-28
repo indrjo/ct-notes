@@ -1,0 +1,55 @@
+% |TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../functors.tex
+
+\section{Definition}
+
+\begin{definition}[Functors]\label{definition:Functors}
+A functor \(F\) from a category \(\cat C\) to a category \(\cat D\) is having the following functions, all indicated with \(F\):
+\begin{itemize}
+\item a \q{function on objects}
+\[F : \obj{\cat C} \to \obj{\cat D}\,,\ x \to F(x)\]
+\item for every objects \(a\) and  \(b\), one \q{function on morphisms}
+\[F : \cat C(a, b) \to \cat D(F(a), F(b))\,,\ f \to F(f)\]
+\end{itemize}
+such that
+\begin{enumerate}
+\item for every object \(x\) of \(\cat C\) we have \(F(\id_x) = \id_{F(x)}\);
+\item for every objects \(x, y, z\) and morphisms \(f : x \to y\) and \(g : y \to z\) of \(\cat C\) we have \(F(g) F(f) = F(gf)\).
+\end{enumerate}
+To say that \(F\) is a functor from \(\cat C\) to \(\cat D\) we use \(F : \cat C \to \cat D\), a symbolism that recalls that one of morphism in categories.
+\end{definition}
+
+\begin{example}[Set functions]
+Take a category whose class of objects is an actual set and devoid of morphisms. In that case, compositions are functions between empty sets and the categorial axioms are vacuous truths. So, for \(X\) and \(Y\) two sets, regarded as categories in the sense just outlined, functors \(F : X \to Y\) are practically reduced to a function on objects, that is elements; in that case a functor between sets \q{is} a function of sets. Observe that, in this --- legal! --- case not having any morphism yields that the functorial axioms are bare vacuous truths: so, also the converse holds, that is set funtions can be seen as functors. 
+\end{example}
+
+\begin{example}[Monotonic functions]
+We have met before, how a preordered set is a category; recall also the pure set-theoretic definition of this notion. For \((A, \le_A)\) and \((B, \le_B)\) preordered sets, a function \(f : A \to B\) is said {\em monotonic} whenever for every \(x, y \in A\) we have \(f(x) \le_B f(y)\) provided that \(x \le_A y\). In bare set-theoretic terms, this can be rewritten as follows: for every \(x, y \in A\) such that \((x, y) \in \le_A\), then \((f(x), f(y)) \in \le_B\), where  we make explicit the pairs, that are morphisms of the preordered sets seen as categories. [\dots{}]
+\end{example}
+
+\begin{example}[Monoid homomorphsisms]
+We have previously shown that a monoid \q{is} a single-object category. Consider now two such categories \(\cat G\) and \(\cat H\), so that we can see what a functor \(f : \cat G \to \cat H\) is. By writing \(\bullet_{\cat G}\) and \(\bullet_{\cat H}\) the object of \(\cat G\) and \(\cat H\) respectively, there is a unique possibility:
+\begin{equation}
+f(\bullet_{\cat G}) = \bullet_{\cat H} .\label{eqn:MonHomProp0}
+\end{equation}
+For morphisms happens this:
+\begin{equation}
+f(xy) = f(x)f(y) \label{eqn:MonHomProp1}
+\end{equation}
+for every morphisms \(x\) and \(y\) of \(\cat G\) and
+\begin{equation}
+f(1_{\cat G}) = 1_{\cat H} ,\label{eqn:MonHomProp1}
+\end{equation}
+where \(1_{\cat G}\) and \(1_{\cat H}\) are the identities of \(\cat G\) and \(\cat H\) respectively. [\dots{}] 
+\end{example}
+
+\begin{example}[Monoid actions]
+[\dots{}]
+\end{example}
+
+\begin{example}[A functor \(\Mat_k \to \FDVect_k\)]
+For \(k\) field, consider the functor
+\[M_k : \Mat_k \to \FDVect_k\]
+that maps \(n \in \obj{\Mat_k} = \mathbb{N}\) to \(M_k(n) \coloneq k^n\) and \(A \in \Mat_k(p, q)\) to the homomorphism of vector spaces \(M_k(A) : k^p \to k^q\) defined by \((M_k(A))(x) = Ax\). (Here the elements of \(k^n\) \q{are} matrices of type \(n \times 1\).)
+\end{example}

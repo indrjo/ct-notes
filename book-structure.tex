@@ -1,0 +1,62 @@
+% !TEX program = lualatex
+% !TEX root = ./book.tex
+
+\documentclass[ structure      = book
+              , pagelayout     = compact
+              , maketitlestyle = standard
+              , partfont       = smallcaps
+              , partstyle      = parright 
+              , chapstyle      = parcenter
+              %, secstyle       = center
+              , secfont        = roman
+              , liststyle      = aligned
+              , quotesize      = normalsize
+              , headerstyle    = center
+              ]{suftesi}
+
+\usepackage[no-math]{fontspec}
+\usepackage{libertinus}
+
+\usepackage{polyglossia}
+\setmainlanguage[variant=uk]{english}
+
+\usepackage[english=british]{csquotes}
+\newcommand\q\enquote
+
+\usepackage{hyperref}
+\hypersetup{breaklinks,hidelinks}
+
+\usepackage{anyfontsize}
+
+\usepackage{indentfirst}
+
+\usepackage{MnSymbol,extarrows,amsthm}
+
+\usepackage[bb=ams]{mathalfa}
+
+\newcounter{coun}
+\counterwithin{coun}{section}
+\theoremstyle{definition}
+\newtheorem{definition} [coun]{Definition}
+\newtheorem{lemma}      [coun]{Lemma}
+\newtheorem{proposition}[coun]{Proposition}
+\newtheorem{corollary}  [coun]{Corollary}
+\newtheorem{remark}     [coun]{Remark}
+\newtheorem{example}    [coun]{Example}
+\newtheorem{exercise}   [coun]{Exercise}
+
+%\renewcommand\theequation{\thechapter.\thesection.\arabic{equation}}
+
+\usepackage{tikz}
+\usetikzlibrary{ calc
+               , babel
+               , cd
+               }
+\tikzcdset{ row sep/normal=.7cm
+          , column sep/normal=.7cm
+          , arrow style=tikz
+          , diagrams={>={To[length=3.5pt,width=4pt]}}
+          , shorten=-2pt
+          , natural/.style={shorten=2pt, Rightarrow}
+          }
+

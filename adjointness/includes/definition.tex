@@ -1,0 +1,51 @@
+% !TEX root = ../adjointness.tex
+% !TEX spellcheck = en_GB
+
+\section{Definition}
+
+\begin{definition}[Adjunction]
+For \(\cat C\) and \(\cat D\) categories and \(\begin{tikzcd} \cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left] \end{tikzcd}\) functors, an {\em adjunction} from \(L\) to \(R\) is a natural isomorphism
+\[\begin{tikzcd}
+\op{\cat C} \times \cat D
+  \ar["{\hom_{\cat C}(-, R(\cdot))}"{name=A}, rr, bend left=35] 
+  \ar["{\hom_{\cat D}(L(-), \cdot)}"{name=B}, rr, bend right=35, swap]
+  & & \Set
+\ar["\alpha", from=A, to=B, natural]
+\end{tikzcd}.\]
+We write such natural isomorphism as \(\alpha : L \dashv R\), and say \(L\) is the {\em left adjoint}, whereas \(R\) is the {\em right} one.
+\end{definition}
+
+\begin{remark}
+Keeping the notation of the definition above, for \(a \in \obj{\cat C}\), \(b \in \obj{\cat D}\) and \(f \in \hom_{\cat C} (a, R(b))\) we write \(\alpha(f)\) for that element of \(\hom_{\cat D} (L(a), b)\) which corresponds to \(f\) via the adjunction \(\alpha\). Since \(\alpha\) is an isomorphism, it has the inverse \(\inv \alpha : \hom_{\cat D} (L(a), b) \to \hom_{\cat C} (a, R(b))\): again, here \(\inv \alpha(g)\) for \(g \in \hom_{\cat D} (L(a), b)\) denotes the corresponding morphism via \(\inv\alpha\). Actually, the point is there is no preferred direction between the twos mentioned. In fact, for the most general purposes, more drastic conventions can be taken, that is using the same symbol for both \(\alpha\) and \(\inv\alpha\):
+\[\bar{a \functo{f} R(b)} = \left( L(a) \functo{\bar f} b \right) \, , \quad \bar{L(a) \functo{g} b} = \left( a \functo{\bar g} R(b) \right) .\]
+Just pay attention about where things come from and where they are to go! Albeit this requires some caution, this notation has the great advantage that
+\[\bar{\bar p} = p \text{ for every } p .\]
+Now, we can explicitly express the naturality of the adjunction:
+\begin{equation}\bar{R(g) p f} = g \bar p L(f) \label{eqn:AdjNat1}\end{equation}
+where \(x, x' \in \obj{\cat C}\), \(y, y' \in \obj{\cat D}\), \(f \in \hom_{\cat C}(x, x')\), \(g \in \hom_{\cat D}(y, y')\) and \(p \in \hom_{\cat C}(x, R(y))\); equivalently,
+\begin{equation}\bar{g q L(f)} = R(g) \bar q f \label{eqn:AdjNat2}\end{equation}
+where here \(q \in \hom_{\cat D}(L(x), y)\).
+\end{remark}
+
+\begin{example}
+We define the category of partial functions, written as \(\Par\). Here objects are sets and morphisms are partial function. For \(A\) and \(B\) sets, a {\em partial function} from \(A\) to \(B\) is relation \(f \subseteq A \times B\) with this property:
+\begin{center}
+for every \(x \in A\) and \(y_1, y_2 \in B\), if \((x, y_1) \in f\) and \((x, y_2) \in f\) then \(y_1 = y_2\).
+\end{center}
+In other words, a partial function is --- as the name says --- something that behaves like a function for a piece of the domain. The composition of partial functions shall be obvious: provided \(f \in \Par(A, B)\) and \(g \in \Par(B, C)\),
+\[gf \coloneq \set{(x, y) \in A \times C \mid (x, z) \in f \text{ and } (z, y) \in g \text{ for some } z \in B} .\]
+It is immediate to verify the categorial axioms now.\newline
+The thing important here is this: a partial function \(f\) for some input \(x\) may output a unique value, that we denote \(f(x)\), or none. This leads us to a reformulation of the concept of partial function and the key that unlocks it is: what if we consider \q{no value} as an admissible output value? Take two sets \(A\) and \(B\), \(A' \subseteq A\) and a function of sets \(f : A' \to B\): this actual function is the same as a partial function from \(A\) to \(B\), where \(A'\) is the set of the elements of \(A\) mapped to something in \(B\). Indicating with the same symbol this partial function, we can construct the function of sets
+\[\bar f : A \to B+1 \,, \ \bar f(x) \coloneq \begin{cases} f(x) & \text{if } x \in A' \\ \ast & \text{otherwise} \end{cases}\]
+where \(1 \coloneq \set{\ast}\) with \(\ast\) designating the absence of output. It is quite simple to show that
+\[\Par(A, B) \to \Set(A, B+1)\,,\ f \to \bar f\]
+is a bijection for every couple of sets \(A\) and \(B\).
+
+Now, let us categorify this. We have the functors
+\[\begin{tikzcd}
+\Set \ar["I", r, shift left] & \Par \ar["J", l, shift left]
+\end{tikzcd},\]
+where \(I\) is the inclusion of \(\Set\) in \(\Par\), \(J(f)\) for \(x \in A\) returns \(f(x)\) if it exists, otherwise \(\ast\) and \(J(f)(\ast) := \ast\). [\dots{}]
+\end{example}
+
+

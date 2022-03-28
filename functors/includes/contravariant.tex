@@ -1,0 +1,20 @@
+% |TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../functors.tex
+
+\section{Contravariant functors}
+
+Traditionally, functors of Definition~\ref{definition:Functors} above are called \q{covariant}, because there are \q{contra}-variant functors too. There is no sensible reason to maintain these two adjectives; at least, almost all agree to not use the first adjective, whilst the second one still survives.
+
+For \(\cat C\) and \(\cat D\) categories, a {\em contravariant functor} from \(\cat C\) to \(\cat D\) is a functor \(\op{\cat C} \to \cat D\). It is best that we say what functors \(F : \op{\cat C} \to \cat D\) do. They map objects to objects, nothing special; they map morphisms \(f : a \to b\) of \(\op{\cat C}\) to morphisms \(F(f) : F(a) \to F(b)\) of \(\cat D\). But, remembering how dual categories are defined, what \(F\) actually does is this: it maps objects of \(\cat C\) to objects of \(\cat D\), and morphisms \(f : b \to a\) of \(\cat C\) to morphisms \(F(f) : F(a) \to F(b)\) of \(\cat D\). Notice how \(a\) and \(b\) have their roles flipped. Now, what about funtoriality axioms? Neither with identities \(F\) does something different. The composite \(gf\) of \(\op{\cat C}\) is mapped to the composite \(F(g)F(f)\) of \(\cat D\); by definition of dual categories, what happens is: the composite \(fg\) of \(\cat C\) is mapped to \(F(g)F(f)\). Notice here how \(f\) and \(g\) have their places switched.
+
+\begin{example}
+The set of natural numbers \(\nats\) has the order relation of divisibility that we denote \(\divides\): regard this poset as a category. By Group Theory we know that for every \(m, n \in \nats\) such that \(m \divides n\) there is a homomorphism
+\[f_{m, n} : \ints/n\ints \to \ints/m\ints\,,\ f_{m, n}(a +n\ints) \coloneq a + m\ints .\]
+In fact, \(\ints/m\ints\) is the kernel of the homomorphism \(\pi_m : \ints \to \ints/m\ints\), \(\pi_m(x) \coloneq x + m\ints\) and, because \(m \divides n\), we have \(n\ints \subseteq m\ints\). In that case, some Isomorphism Theorem\footnote{How theorems are named sometimes varies, so for sake of clarity let us explicit the statement we are referring to: Let \(G\) and \(H\) be two groups, \(f : G \to H\) an homomorphism and \(N\) some normal subgroup of \(G\). Consider also the homomorphism \(p_N : G \to G/N\), \(p_N(x) \coloneq xN\). If \(N \subseteq \ker f\) then there exists one and only one homomorphism \(\bar f : G/N \to H\) such that
+\(f = \bar f p_N\).
+(Moreover, \(\bar f\) is surjective if and only if so is \(f\).)} justifies the existence of \(f_{m, n}\).
+This offers us a nice functor:
+\[F : \op{(\nats, \divides)} \to \Grp\]
+that maps naturals \(n\) to groups \(\ints/n\ints\) and \(m \divides n\) to the homomorphism \(f_{m,n}\) defined above.
+\end{example}

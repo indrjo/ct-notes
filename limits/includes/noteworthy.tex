@@ -1,0 +1,153 @@
+% !TEX program = lualatex
+% !TEX root = ../limits.tex
+% !TEX spellcheck = en_GB
+
+\section{Noteworthy limits and colimits}
+
+Fortunately, there are few shapes that are both ubiquitous and simple. This section is dedicated to them, while in the successive one we will prove (Proposition~\ref{proposition:Completeness}) that if some simple functors have limits, then all the functors do have limits.
+
+%In this section we present some simple limits, whose importance can be further appreciated once we meet Completeness Theorem (Proposition~\ref{proposition:Completeness}).
+
+\subsection{Terminal and initial objects}
+
+\begin{definition}
+For \(\cat C\) category, the limits of the empty functor \(\nil \to \cat C\) are called {\em terminal objects} of \(\cat C\), whereas the colimits {\em initial objects}.
+\end{definition}
+
+Let us expand the definition above so that we can can look inside things. A cone over the empty functor \(\nil \to \cat C\) with vertex \(a \in \obj{\cat C}\) is a natural transformation
+\[\naturaltr{}{\nil}{\cat C}{k_a}{}.\]
+Here, the empty functor is \(k_a\) because there is at most one functor \(\nil \to \cat C\). Again, because there must be a unique one, our natural transformation is the empty transformation, viz the one devoid of morphisms. A similar reasoning leads us to the following explicit definition of terminal and initial object.
+
+\begin{definition}
+Let \(\cat C\) be a category. Then
+\begin{itemize}
+\item a terminal object of \(\cat C\) is an \(a \in \obj{\cat C}\) such that for every \(x \in \obj{\cat C}\) there exists one and only one \(f \in \cat C(x, a)\);
+\item an initial object of \(\cat C\) is an \(a \in \obj{\cat C}\) such that for every \(x \in \obj{\cat C}\) there exists one and only one \(f \in \cat C(a, x)\).
+\end{itemize}
+\end{definition}
+
+Example time.
+
+[\dots{}]
+
+\begin{construction}
+Let us introduce a nice category that allows us to express some nice and simple facts in Mathematics. Let \(\cat C\) and \(\cat J\) two categories, \(a\) one of its objects and take a functor \(F : \cat J \to \cat C\). We have the category \((a \downarrow F)\), this made:
+\begin{itemize}
+\item the objects are the morphisms \(a \to F(x)\) of \(\cat C\), for \(x \in \obj{\cat J}\);
+\item the morphisms from \(f : a \to F(x)\) to \(g : a \to F(y)\) are the morphisms \(h : x \to y\) of \(\cat J\) such that
+\[\begin{tikzcd}[row sep=tiny]
+ & F(x) \ar["{F(h)}", dd] \\
+a \ar["f", ur] \ar["g", dr, swap] \\
+ & F(y)
+\end{tikzcd}\]
+commutes;
+\item the composition is that of \(\cat J\). 
+\end{itemize}
+\end{construction}
+
+\begin{example}
+In Linear Algebra (or when dealing with free modules) we have a nice theorem:
+\begin{quotation}
+Let \(V\) be a vector space over a field \(k\) and \(S \subseteq V\) a base. For every vector space \(W\) over \(k\) and function \(\phi : S \to W\) there exists a unique linear function \(f : V \to W\) such that
+\[\begin{tikzcd}
+S \ar["i", hook, r] \ar["\phi", dr, swap] & V \ar["f", d] \\
+ & W
+\end{tikzcd}\]
+commutes.
+\end{quotation}
+In other words, this statement says that a linear function is completely determined by what it does with the vectors of \(S\). We will consider now two functors
+\[\Set \functo{\angled \cdot} \Vect_k \functo U \Set .\]
+The first one takes a set \(S\) and produces the vector space on \(k\)
+\[\angled S := \set{\left.\sum_{x \in S} \lambda_x x \right\mid \lambda : S \to k,\, \lambda_x \ne 0 \text{ for finitely many times}}\]
+(considered with two obvious operations). Furthermore, a function of sets \(f : S \to T\) induces a linear function \(\angled f : \angled S \to \angled T\) defined by
+\[\angled f \left(\sum_{x \in S} \lambda_x x \right) := \sum_{x \in S} \lambda_x f(x)\]
+where \(\lambda : S \to k\) is almost always null. The functoriality of \(\angled \cdot\) is just a matter of quick controls. {\color{red} [Do we really need all that machinery?]} The functor \(U\) instead takes vector spaces and returns the correspondent set of vectors; we write \(U(V) := V\), but observe that in \(\Set\) we don't care anymore of the vector structure of \(V\). Similarly, it takes linear functions and the return them: but, since \(U\) lands onto \(\Set\), who cares about linearity there? (We may say that \(U\) is the \q{inclusion} of \(\Vect_k\) into \(\Set\).) {\color{red} [Talk about forgetful functors elsewhere\dots{}]}\newline
+All this words allow us restate the aforementioned theorem as:
+\begin{quotation}
+For if \(S\) is a set, the inclusion \(S \hookrightarrow \angled S\) is an initial object of \((S \downarrow U)\).
+%For if \(V\) is a vector space over a field \(k\) and with base \(S\), \(S \hookrightarrow V\) is an initial object of \((S \downarrow U)\).
+\end{quotation}
+\end{example}
+
+\begin{exercise}
+In the previous example some details are omitted: you can be more more talkative, though. However, it is really worth to think about it --- not only because we will meet such pattern later under the vest of adjunctions. You may also look for another examples of similar kind, I'm sure you will find some.
+\end{exercise}
+
+\begin{construction}[Category of cones]
+For \(\cat C\) category, let \(F : \cat I \to \cat C\) be a functor. Then we define the {\em category of cones} over \(F\) as follows.
+\begin{itemize}
+\item The objects are the cones over \(F\).
+\item For \(\alpha := \set{a \functo{\alpha_i} F(i)}_{i \in \obj{\cat I}}\) and \(\beta := \set{b \functo{\beta_i} F(i)}_{i \in \obj{\cat I}}\) two cones, the morphisms from \(\alpha\) to \(\beta\) are the morphisms \(f : a \to b\) of \(\cat C\) such that
+\[\begin{tikzcd}[row sep=tiny]
+a \ar["{\alpha_i}", dr] \ar["f", dd, swap] \\
+& F(i) \\
+b \ar["{\beta_i}", ur, swap]
+\end{tikzcd}\]
+commutes for every \(i \in \obj{\cat I}\).
+\item The composition of morphisms here is the same as that of \(\cat C\).
+\end{itemize}
+We write such category as \(\cn_F\). We define also the {\em category of cocones} over \(F\), written as \(\cocn_F\).
+\begin{itemize}
+\item The objects are the cocones over \(F\).
+\item For \(\alpha := \set{F(i) \functo{\alpha_i} a}_{i \in \obj{\cat I}}\) and \(\beta := \set{F(i) \functo{\beta_i} b}_{i \in \obj{\cat I}}\) cocones, the morphisms from \(\alpha\) to \(\beta\) are the morphisms \(f : a \to b\) of \(\cat C\) such that
+\[\begin{tikzcd}[row sep=tiny]
+& a \ar["{\alpha_i}", dl, swap] \ar["f", dd] \\
+F(i) \\
+& b \ar["{\beta_i}", ul]
+\end{tikzcd}\]
+commutes for every \(i \in \obj{\cat I}\).
+\item The composition of morphisms here is the same as that of \(\cat C\).
+\end{itemize}
+It is quite immediate in either of the cases to show that categorial axioms are verified.
+\end{construction}
+
+\begin{proposition}
+For \(\cat C\)  category and \(F : \cat I \to \cat C\) functor,
+\begin{itemize}
+\item limits of \(F\) are terminal objects of \(\cn_F\) and viceversa.
+\item colimits of \(F\) are initial objects of \(\cocn_F\) and viceversa.
+\end{itemize}
+\end{proposition}
+
+\begin{proof}
+Simple.
+\end{proof}
+
+\subsection{Products and coproducts}
+
+\begin{definition}
+Let \(\cat C\) be a category and \(\cat S\) a discrete category. Then (co)limits of the functors \(X : \cat S \to \cat C\) are called ({\em co}){\em products}.
+\end{definition}
+
+Again, let us put this definition into more explicit terms. First of all, what are cones over \(F : \cat S \to \cat C\)? For \(p \in \obj{\cat C}\) and \(k_p : \cat S \to \cat C\) the functor constant at \(p\), a natural transformation
+\[\naturaltr{\pi}{\cat S}{\cat C}{k_p}{F}\]
+is exactly a collection 
+\[\set{p \functo{\pi_x} F(x)}_{x \in \obj{\cat S}} .\]
+In this fortunate case, in fact, the naturality condition automatically holds because \(\cat S\) has no morphism other than the identities. Similarly, one can easily deduce what cocones are. Thus the explicit definition is:
+
+\begin{definition}[Explicit]
+[\dots{}]
+[Introduce some new locutions\dots{}]
+\end{definition}
+
+\begin{example}[Cartesian product]
+Given a family of sets \(\set{X_i \mid i \in I}\), we have the {\em Cartesian product}
+\[\prod_{i \in I} X_i := \set{\left. f : I \to \bigcup_{i \in I} X_i \right\mid f(i) \in X_i \text{ for every } i \in I} .\]
+with the {\em component functions}, one for each \(j \in I\),
+\[p_j : \prod_{i \in I} X_i \to X_j\,,\ p_j(f) := f(j) .\]
+(In other words, \(p_j\) takes an \(f\) and evaluates it at \(j\).) Taken now any set \(A\) and functions \(f_i : A \to X_i\) for \(i \in I\), we have
+\[\prod_{i \in I} f_i : A \to \prod_{i \in I} X_i\]
+with \(\left(\prod_{i \in I} f_i\right) (a)\) mapping \(k \in I\) to \(f_k(a)\). It is simple to show that
+\[\begin{tikzcd}[row sep=small]
+A \ar["{\prod_{i \in I}} f_i", dd, swap] \ar["{f_\alpha}", dr] \\
+& X_\alpha \\
+\prod_{i \in I} X_i \ar["{p_\alpha}", ur, swap]
+\end{tikzcd}\]
+commutes for every \(\alpha \in I\). Moreover, \(\prod_{i \in I} f_i\) is the only one that does this. Consider any function \(g : A \to \prod_{i \in I} X_i\) with \(f_\alpha = p_\alpha g\) for every \(\alpha \in I\): then for every \(x \in A\) we have
+\[\big(g(x)\big)(\alpha) = p_\alpha \big(g(x)\big) = f_\alpha (x) = p_\alpha\left(\left(\prod_{i \in I} f_i\right)(x)\right) = \left(\left(\prod_{i \in I} f_i\right)(x)\right)(\alpha) .\]
+Hence, we can conclude \(\prod_{i \in I} X_i\) with the collection of functions \(\set{p_i \mid i \in I}\) is a product in \(\Set\).
+\end{example}
+
+\subsection{Equalizers and coequalizers}
+
+\subsection{Pullbacks and pushouts}

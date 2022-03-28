@@ -1,0 +1,42 @@
+% !TEX root = ../adjointness.tex
+% !TEX spellcheck = en_GB
+
+\section{From Adjunctions to units, counits and triangle identities}
+
+\begin{lemma}
+For \(\cat C\) and \(\cat D\) categories and \(\begin{tikzcd} \cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left] \end{tikzcd}\) functors with an adjunction \(L \dashv R\), let us consider the following morphisms
+\begin{align*}
+& \eta_x \coloneq \bar{1_{L(x)}} : x \to RL(x) \quad \text{for } x \in \obj{\cat C} \\
+& \varepsilon_y \coloneq \bar{1_{R(y)}} : LR(y) \to y \quad \text{for } y \in \obj{\cat D} .
+\end{align*}
+Then:
+\begin{enumerate}
+\item for every \(a \in \obj{\cat C}\), \(b \in \obj{\cat D}\) and \(f \in \hom_{\cat D}(L(a), b)\) we have
+\[\bar f = R(f) \eta_a ;\]
+\item for every \(a \in \obj{\cat C}\), \(b \in \obj{\cat D}\) and \(g \in \hom_{\cat C}(a, R(b))\) we have
+\[\bar g = \varepsilon_b L(g) .\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Yet to be \TeX{}-ed\dots{}
+\end{proof}
+
+\begin{proposition}[Unit and counit of an adjunction]
+In the notations of the previous Lemma, the collections
+\begin{align*}
+& \eta \coloneq \set{x \functo{\eta_x} RL(x) \mid x \in \obj{\cat C}} \\
+& \varepsilon \coloneq \set{LR(y) \functo{\varepsilon_y} y \mid y \in \obj{\cat D}}
+\end{align*}
+are natural transformations, \(1_{\cat C} \to RL\) and \(LR \to 1_{\cat D}\) respectively.
+\end{proposition}
+
+We call these natural transformations {\em unit} and {\em counit}, respectively, of the adjunction \(L \dashv R\). 
+
+\begin{proof}
+Yet to be \TeX{}-ed\dots{}
+\end{proof}
+
+%\begin{proposition}
+%For \(\cat C\) and \(\cat D\) categories, \adjoint{\cat C}{F}{\cat D}{G}
+%\end{proposition}
