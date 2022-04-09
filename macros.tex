@@ -46,7 +46,7 @@
       \ar["#4"{name=A}, r, bend left=35]
       \ar["#5"{name=B}, r, bend right=35, swap]
     \& #3
-    \ar["#1", from=A, to=B, natural] 
+    \ar["#1", from=A, to=B, natural]
   \end{tikzcd}
 }
 
@@ -60,3 +60,12 @@
 \DeclareFontFamily{U}{dmjhira}{}
 \DeclareFontShape{U}{dmjhira}{m}{n}{ <-> dmjhira }{}
 \DeclareRobustCommand{\yo}{\text{\usefont{U}{dmjhira}{m}{n}\symbol{"48}}}
+
+%===
+\def\comment#1{\color{red} #1 \color{black}}
+\def\tba{\textbf{\color{blue} TBA}}
+%===
+
+\def\Set{\mathbf{Set}}
+\def\Rel{\mathbf{Rel}}
+\def\op{\text{op}}

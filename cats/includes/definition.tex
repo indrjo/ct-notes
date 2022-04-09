@@ -3,9 +3,35 @@
 % !TEX root = ../cats.tex
 
 \section{Definition}
+\comment{
+	Ho sempre pensato che fosse più razionale, introducendo la categoria degli insiemi e delle funzioni da un pov categoriale, caratterizzarla come una sottocategoria della categoria delle relazioni, introdurre alcune delle proprietà categoriali di quest'ultima (per esempio, il fatto che è autoduale, al contrario di $\Set$), e caratterizzare le funzioni in maniera intrinseca. Questo è molto più vicino alla filosofia categoriale, e $\Rel$ ha delle proprietà istruttive (dando il destro per definire gli aggiunti, la dualità, la co/completezza\dots). Uno stub di proposta è questo.
+}
+We define a \emph{relation} from $A$ to $B$ to be a subset of the cartesian product $A\times B$; a \emph{relation on $X$} is a relation from $X$ to $X$. The set of all relations from $X$ to $Y$ is thus the set $P(X\times Y)$ of all subsets of the cartesian product $X\times Y$.
 
+Yet, observe that every relation $R$ from $A$ to $B$ canonically determines a relation $R^\op$ from $B$ to $A$: one can define a bijection \(\sigma\) between \(P(A\times B)\) and \(P(B\times A)\), induced by a bijection (an involution) \(A\times B \cong B\times A\) sending $(a,b)$ to $(b,a)$.
+
+Given $R$, the \emph{opposite relation} \(R^\op\) is the image of \(R\in P(A\times B)\) under \(\sigma\). Since $\sigma$ is involutive, $(R^\op)^\op = R$ (equality of subsets).
+
+There is a category $\Rel$ of sets and relations, where
+\begin{itemize}
+  \item objects are sets $X,Y,Z,\dots$;
+  \item morphisms $X \to Y$ are relations from $X$ to $Y$.
+\end{itemize}
+The identity relation is\tba
+
+The composition of two relations is defined as follows \tba (avoid pullbacks, too soon).\dots
+
+The above remark shows that the hom set $\Rel(X,Y)$ stands in a in canonical bijection with $\Rel(Y,X) = \Rel^\op(X,Y)$, and thus we get
+\begin{proposition}
+There is an isomorphism $\Rel\cong \Rel^\op$.\tba
+\end{proposition}
+On different representations for the category of relations.\tba
+
+Characterize (sets and) functions as (sets and) particular relations (the total, single-valued ones).\tba
+
+On the properties of the embedding $\Set \to \Rel$.\tba
 \begin{example}[Set Theory]
-Here we have {\em sets} and {\em functions}. Whereas these of set and membership can be taken as primitive, the concept of function can be rigorously defined.
+Here we have {\em sets} and {\em functions}. Whereas the notions of set and membership can be taken as primitive, the concept of function can be rigorously defined.
 \begin{quotation}
 For \(A\) and \(B\) sets, a function from \(A\) to \(B\) is a \(f \subseteq A \times B\) with this property: for every \(x \in A\) there exists one and only one \(y \in B\) such that \((x, y ) \in f\).
 \end{quotation}
@@ -35,7 +61,7 @@ A {\em topological space} is a set where some of its subsets have the status of 
 \end{example}
 
 \begin{exercise}[Topology, again]
-This is a little variation of the previous example. Take topological spaces and {\em open functions}: now, can you stand out some pattern, like that of the previous two examples? Here, for \(X\) and \(Y\) topological spaces, a function \(f : X \to Y\) is said open whenever for every open set \(U \subseteq X\) the set \(f U \subseteq Y\) is open too. 
+This is a little variation of the previous example. Take topological spaces and {\em open functions}: now, can you stand out some pattern, like that of the previous two examples? Here, for \(X\) and \(Y\) topological spaces, a function \(f : X \to Y\) is said open whenever for every open set \(U \subseteq X\) the set \(f U \subseteq Y\) is open too.
 \end{exercise}
 
 \begin{exercise}
