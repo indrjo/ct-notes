@@ -44,21 +44,25 @@ commutes for every \(a\), \(b\), \(f\) and \(g\) in \(\cat C\). Here, the diagra
 
 Cause diagrams are supposed to be drawn, we shall assume some conventions. The spatial placement of nodes and the shape of arrows is a matter of aesthetic: just pursue clarity. Do not burden your diagrams: though arrows can be composed, we usually do not draw them; similarly, neither identities should be drawn.
 
-%\begin{definition}[Diagrams]
-%A {\em diagram} in a category \(\cat C\) amounts of
-%\begin{itemize}
-%\item a category \q{of nodes and arrows} (or \q{index category}) \(\cat I\)
-%\item a function
-%\[x : \obj{\cat I} \to \obj{\cat C}\]
-%that serves the task of labelling the nodes of \(\cat I\)
-%\item for every \(i, j \in \obj{\cat I}\), a function
-%\[f_{i, j} : \cat I (i, j) \to \cat C(x_i, x_j)\]
-%that assigns labels to the arrows of \(\cat I\)
-%\end{itemize}
-%such that
-%\begin{enumerate}
-%\item \(f_{i, i}(\id_i) = \id_{x_i}\) for every \(i \in \obj{\cat I}\)
-%\item for every \(i, j, k \in \obj{\cat I}\), \(\alpha \in \cat I(i, j)\) and \(\beta \in \cat I(j, k)\), then
-%\[f_{j, k}(\beta) f_{i, j}(\alpha) = f_{i, k}(\beta\alpha) .\]
-%\end{enumerate}
-%\end{definition}
+\NotaInterna{Defer this moment?}
+
+\begin{definition}[Diagrams]
+A {\em diagram} in a category \(\cat C\) amounts of
+\begin{itemize}
+\item a category \q{of nodes and arrows} (or \q{index category}) \(\cat I\)
+\item a function
+\[x : \obj{\cat I} \to \obj{\cat C}\]
+that serves the task of labelling the nodes of \(\cat I\)
+\item for every \(i, j \in \obj{\cat I}\), a function
+\[f_{i, j} : \cat I (i, j) \to \cat C(x_i, x_j)\]
+that assigns labels to the arrows of \(\cat I\)
+\end{itemize}
+such that
+\begin{enumerate}
+\item \(f_{i, i}(\id_i) = \id_{x_i}\) for every \(i \in \obj{\cat I}\)
+\item for every \(i, j, k \in \obj{\cat I}\), \(\alpha \in \cat I(i, j)\) and \(\beta \in \cat I(j, k)\), then
+\[f_{j, k}(\beta) f_{i, j}(\alpha) = f_{i, k}(\beta\alpha) .\]
+\end{enumerate}
+\end{definition}
+
+\NotaInterna{The work is not over yet: a finer formalisation of commutativity?}

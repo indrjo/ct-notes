@@ -26,9 +26,66 @@ Let \(\cat C\) be a category. Then
 \end{itemize}
 \end{definition}
 
-Example time.
+Examples time.
 
-[\dots{}]
+\begin{example}[Recursion]
+In Set Theory, there is a nice theorem, the {\em Recursion Theorem}:
+\begin{quotation}
+Let \((\nats, 0, s)\) be a Peano Model, where \(0 \in \nats\) and \(s : \nats \to \nats\) is its successor function. For every pointed set \(X\), \(a \in X\) and \(f : X \to X\) there exists one and only one function \(x : \nats \to X\) such that \(x_0 = a\) and \(x_{s(n)} = f(x_n)\) for every \(n \in \nats\).
+\end{quotation}
+Here, by Peano Model we mean a set \(\nats\) that has one element, we write \(0\), stood out and a function \(s : \nats \to \nats\) such that, all this complying some rules:
+\begin{enumerate}
+\item \(s\) is injective;
+\item \(s(x) \ne 0\) for every \(x \in \nats\);
+\item for if \(A \subseteq \nats\) has \(0\) and \(s(n) \in A\) for every \(n \in A\), then \(A = \nats\).
+\end{enumerate}
+We show now how we can involve Category Theory in this case. First of all, we need a category where to work.\newline
+The statement is about things made as follows:
+\begin{quotation}
+a set \(X\), one distinguished \(x \in X\) and one function \(f : X \to X\).
+\end{quotation}
+\NotaInterna{Is there a name for these things?}
+We may refer to such new things by barely a triple \((X, a, f)\), but we prefer something like this:
+\[1 \functo{x} X \functo{f} X ,\]
+where \(1\) is any singleton, as usual. Peano Models are such things, with some additional properties. It is told about the existence and the uniqueness of a certain function. We do not want mere functions, of course: given
+\[1 \functo x X \functo f X \text{ and } 1 \functo y Y \functo g Y ,\]
+we take the functions \(r : X \to Y\) such that
+\[\begin{tikzcd}[row sep=tiny]
+& X \ar["f", r] \ar["r", dd] & X \ar["r", dd] \\
+1 \ar["x", ur] \ar["y", dr, swap] \\
+& Y \ar["g", r, swap] & Y
+\end{tikzcd}\]
+commutes and nothing else. \NotaInterna{Is there a name for such functions?} These ones are the things we want to be morphisms. Suppose given
+\[\begin{tikzcd}%[row sep=small]
+& X \ar["f", r] \ar["p", d] & X \ar["p", d] \\
+1 \ar["x", ur] \ar["y", r] \ar["z", dr, swap] & Y \ar["g", r] \ar["q", d] & Y \ar["q", d] \\
+& Z \ar["h", r, swap] & Z
+\end{tikzcd}\]
+where all the squares and triangles commute: thus we obtain the commuting
+\[\begin{tikzcd}[row sep=tiny]
+& X \ar["f", r] \ar["qp", dd] & X \ar["qp", dd] \\
+1 \ar["x", ur] \ar["z", dr, swap] \\
+& Z \ar["h", r, swap] & Z
+\end{tikzcd}\] This means that composing two morphisms as functions in \(\Set\) produces a morphism. This is how we want composition to defined in this context. This choice makes the categorial axioms automatically respected. We call this category \(\mathbf{Peano}\). \NotaInterna{Unless there is a better naming, of course.}\newline
+Being the environment set now, the Recursion Theorem becomes more concise:
+\begin{quotation}
+Peano Models are initial objects of \(\mathbf{Peano}\). 
+\end{quotation}
+\end{example}
+
+\begin{exercise}[Induction \(\lrarr\) Recursion]
+In \(\Set\), suppose you have \(1 \functo 0 \nats \functo s \nats\), where \(s\) is injective and \(s(n) \ne 0\) for every \(n \in \nats\). Demonstrate that the following statements are equivalent:
+\begin{enumerate}
+\item for if \(A \subseteq \nats\) has \(0\) and \(s(n) \in A\) for every \(n \in A\), then \(A = \nats\);
+\item \(1 \functo 0 \nats \functo s \nats\) is an initial object of \((\nats, 0, s)\).
+\end{enumerate} 
+(1) \(\tto\) (2) proves the Recursion Theorem, whereas (2) \(\tto\) (1) requires you to codify a proof by induction into a recursion. Try it, it could be nice.
+%\NotaInterna{I should investigate whether (2) can be substituted by this: \(\mathbf{Peano}\) has initial objects. Notice if \(1 \functo{x_0} X \functo f X\) is an initial object implies \(f\) is injective and \(f(x) \ne x_0\) for every \(x \in X\), then we are lucky. This sounds something like: initial objects of \(\mathbf{Peano}\) are isomorphic to some Peano Model. Is this true?}
+\end{exercise}
+
+\begin{remark}
+In general, suppose you have a category \(\cat C\) that has a terminal object, that we denote by \(1\). \NotaInterna{Explain why a terminal object is required.} We have then the category \(\mathbf{Peano}_{\cat C}\), that is \(\mathbf{Peano}\) with objects and morphisms picked from \(\cat C\) and compositions performed in \(\cat C\) --- really, there is nothing special in \(\Set\) that hinders us to do so. A {\em natural number object} of \(\cat C\) is any of the initial objects of \(\mathbf{Peano}_{\cat C}\), that is an assignment of one object \(\nats\), a morphism \(0 : 1 \to \nats\) and a morphism \(f : X \to X\) of \(\cat C\) such that they satisfy the {\em recursion property}, the Recursion Theorem but for \(\cat C\). \(\mathbf{Set}\) has natural number objects, as we have seen in the previous example, but another categories may have none. \NotaInterna{For instance?} \NotaInterna{This is quite interesting\dots{} An \q{arithmetic} for categories, perhaps\dots{}}
+\end{remark}
 
 \begin{construction}
 Let us introduce a nice category that allows us to express some nice and simple facts in Mathematics. Let \(\cat C\) and \(\cat J\) two categories, \(a\) one of its objects and take a functor \(F : \cat J \to \cat C\). We have the category \((a \downarrow F)\), this made:
@@ -70,7 +127,7 @@ For if \(S\) is a set, the inclusion \(S \hookrightarrow \angled S\) is an initi
 \end{example}
 
 \begin{exercise}
-In the previous example some details are omitted: you can be more more talkative, though. However, it is really worth to think about it --- not only because we will meet such pattern later under the vest of adjunctions. You may also look for another examples of similar kind, I'm sure you will find some.
+In the previous example some details are omitted: you can be more talkative, though. However, it is really worth to think about it --- not only because we will meet such pattern later under the vest of adjunctions. You may also look for another examples of similar kind, I'm sure you will find some.
 \end{exercise}
 
 \begin{construction}[Category of cones]
