@@ -1,0 +1,19 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../base.tex
+
+\section{Sandbox \& Exercises}
+
+\begin{sandbox}[Homotopy Categories \NotaInterna{temporary name}]
+Consider a locally small category \NotaInterna{remember to talk about such categories somewhere\dots{}} \(\cat C\). For any pair \(a\) and \(b\) of objects of \(\cat C\) suppose assigned an equivalence relation \(\approx_{a, b}\) on \(\cat C (a, b)\). For convenience, let us drop the subscripts in \(\approx_{a, b}\) since the context immediately suggests where the relation is defined: if \(f\) and \(g\) are both morphisms \(a \to b\), then \(f \approx g\) is to be intended as \(f \approx_{a, b} g\). The expression \(f \approx g\) is not permitted if \(f\) and \(g\) are not parallel morphisms. We write \([f]\) the \(\approx\)-equivalence class of \(f\). Furthermore, we assume these relations are compatible with the compositions, that is
+\begin{quotation}
+for every objects \(a\), \(b\), \(c\), \(f_1, f_2 : a \to b\) and \(g_1, g_2 : a \to b\) in \(\cat C\) we have that if \(f_1 \approx f_2\) and \(g_1 \approx g_2\) then \(g_1f_1 \approx g_2f_2\).
+\end{quotation}
+That being said, we have the {\em homotopy category} \(\mathbf H \cat C\) described as follows:
+\begin{tcbitem}
+\item Objects are those of \(\cat C\).
+\item Morphisms are the equivalence classes \([f]\), with \(f : a \to b\) in \(\cat C\).
+%\item For if \(a, b \in \obj{\cat C}\), the morphisms \(a \to b\) are the \(\approx_{a, b}\)-equivalence classes.
+\item \([g] [f] := [gf]\) for \(f : a \to b\) and \(g : b \to c\).
+\end{tcbitem}
+\end{sandbox}

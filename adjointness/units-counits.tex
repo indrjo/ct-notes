@@ -1,0 +1,105 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../adjointness.tex
+
+\section{Units and counits}
+
+In the first example of the introduction, we isolated the concept of adjunction from that one of initial objects of certain categories: We now isolate and formalize this process. We will do the converse too. As result, we end up having two equivalent ways to work with adjointness.
+
+\begin{proposition}
+Suppose given two locally small categories \(\cat C\) and \(\cat D\), two functors
+\[\begin{tikzcd}[column sep=small]
+\cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
+\end{tikzcd}\]
+and a natural transformation \(\eta : \id_{\cat C} \tto RL\) such that \(\eta_x : x \to RL(x)\) is initial in \(x {\downarrow} R\) \NotaInterna{did we introduce comma categories?} for every \(x \in \obj{\cat C}\).  Then, for \(x \in \obj{\cat C}\) and \(y \in \obj{\cat D}\), the functions
+\begin{align*}
+\cat D(L(x), y) &\to \cat C(x, R(y))\\
+f &\to R(f)\eta_x
+\end{align*}
+form an adjunction \(L \dashv R\).
+\end{proposition}
+
+\begin{proof}
+%For \(x \in \cat C\) and \(y \in \cat D\) we have the functions
+%\[\cat D(Lx, y) \to \cat C(x, Ry)\,, \ f \to R(f)\eta_x .\]
+The fact that \(\eta_x\) is initial object implies that these function are all bijective. Now, we just need to verify the transformation is natural. Take \(x, x' \in \obj{\cat C}\), \(y, y' \in \obj{\cat D}\), \(f \in \cat C(x', x)\) and \(g \in \cat D(y, y')\) and examine the square
+\[\begin{tikzcd}[column sep=large]
+\cat D(L(x), y) \ar["{u \to R(u) \eta_x}", r] \ar["{u \to guL(f)}", d, swap] & \cat C(x, R(y)) \ar["{v \to R(g)v f}", d] \\
+\cat D(L(x'), y') \ar["{v \to R(v) \eta_{x'}}", r, swap] & \cat C(x', R(y'))
+\end{tikzcd}\]
+Taken \(u \in \cat D(L(x), y)\), we perform the following calculations
+%\[
+\begin{align*}
+& R(g) R(u) \eta_x f = R(gu) \eta_x f \\
+& R(guL(f)) \eta_{x'} = R(gu) RL(f) \eta_{x'}
+\end{align*}
+%\]
+By the naturality of \(\eta\), we have \(\eta_x f = RL(f) \eta_{x'}\), and thus the construction ends here.
+\end{proof}
+
+%Consider now one adjoint situation as
+%\[\begin{tikzcd}
+%\cat C \ar["L", r, bend left] \ar["\upvdash" description ,r, phantom] & \cat D \ar["R", l, bend left]
+%\end{tikzcd}\]
+%In this case, we have \(\cat D (L(x), L(x)) \cong \cat D(x, RL(x))\) and in particular, for \(x \in \obj{\cat C}\), to \(\id_{F(x)}\) it is assigned one morphism \(\eta_x : x \to RL(x)\) of \(\cat C\). We shall call the \(\eta_x\)-s {\em units} of the adjunction.
+
+\begin{proposition}
+Suppose now you have locally small categories \(\cat C\) and \(\cat D\), functors
+\[\begin{tikzcd}[column sep=small]
+\cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
+\end{tikzcd}\]
+and an adjunction \(L \dashv R\). For \(x \in \obj{\cat C}\) write \(\eta_x : x \to RL(x)\) the morphism in \(\cat C\) corresponding to \(\id_{L(x)}\) of \(\cat D\).
+Then the morphisms \(\eta_x : x \to RL(x)\) form a natural transformation \(\eta : \id_{\cat C} \tto RL\). Moreover, \(\eta_x\) is initial in \(x {\downarrow} R\).
+\end{proposition}
+
+\begin{proof}
+Let us write the adjunction of the statement above as
+\[\bar\hole : \cat D (L(\hole), \hole) \tto \cat C (\hole, R(\hole)) .\]
+We verify that
+\[\begin{tikzcd}
+x \ar["{\eta_x}", r] \ar["f", d, swap] & RL(x) \ar["RL(f)", d] \\
+y \ar["{\eta_y}", r, swap] & RL(y)
+\end{tikzcd}\]
+commutes for every \(f\) in \(\cat C\). In fact,
+\begin{align*}
+& RL(f) \eta_x = RL(f) \bar{\id_{L(x)}} \id_x = \bar{L(f) \id_{L(x)} \id_{L(x)}} = \bar{L(f)} \\
+& \eta_y f = R(\id_{L(y)}) \bar{\id_{L(y)}} f = \bar{\id_{L(y)} \id_{L(y)} L(f)} = \bar{L(f)} .
+\end{align*}
+It remains to show that the morphisms \(\eta_x : x \to RL(x)\) are initial in \(x {\downarrow} R\). In \(\cat C\) we draw
+\[\begin{tikzcd}
+x \ar["{\eta_x}", r] \ar["g", dr, swap] & RL(x) \\
+& R(y)
+\end{tikzcd}\]
+We know that there is one and only one \(h : L(x) \to y\) such that \(g = \bar{h}\). Then
+\[g = \bar{h \id_{L(x)} L\left(\id_x\right)} = R(h) \bar{\id_{L(x)}} \id_{x} = R(h) \eta_x . \qedhere .\]
+\end{proof}
+
+\NotaInterna{Co-units version.}
+
+\begin{proposition}
+Suppose given two locally small categories \(\cat C\) and \(\cat D\), two functors
+\[\begin{tikzcd}[column sep=small]
+\cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
+\end{tikzcd}\]
+and a natural transformation \(\theta : LR \tto \id_{\cat D}\) such that \(\theta_y : LR(y) \to y\) is terminal in \(L {\downarrow} y\) for every \(y \in \obj{\cat C}\).  Then, for \(x \in \obj{\cat C}\) and \(y \in \obj{\cat D}\), the functions
+\begin{align*}
+\cat C(x, R(y)) & \to \cat D(L(x), y) \\
+f &\to \theta_y L(f)
+\end{align*}
+form an adjunction \(L \dashv R\).
+\end{proposition}
+
+
+\begin{proposition}
+Suppose now you have locally small categories \(\cat C\) and \(\cat D\), functors
+\[\begin{tikzcd}
+\cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
+\end{tikzcd}\]
+and an adjunction \(L \dashv R\). For \(y \in \obj{\cat C}\) write \(\theta_y : LR(y) \to y\) the morphism in \(\cat D\) corresponding to \(\id_{R(y)}\) of \(\cat C\). Then the morphisms \(\theta_y\) form a natural transformation \(\theta : LR \tto \id_{\cat D}\). Moreover, \(\theta_y\) is terminal in \(L {\downarrow} y\).
+\end{proposition}
+
+\begin{exercise}
+Prove the last two theorems.
+\end{exercise}
+
+\NotaInterna{Yet there is something left to say\dots{}}

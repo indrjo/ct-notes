@@ -1,0 +1,117 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../preamble.tex
+
+\section{Functions and equivalences}
+
+If \(X\) is a set and \(\sim\) is an equivalence relation on \(X\), we write \(X{/}{\sim}\) or \(\frac X \sim\) to indicate the set whose members are the sets
+\[[x]_{\sim} := \set{a \in X \mid a \sim x} \quad \text{for } x \in X ,\]
+the equivalence classes under \(\sim\). Sometimes we simply write \([x]\) when the name of the equivalence relation may be dropped without creating ambiguity.
+
+Remember that equivalence classes form a partition, that is they are pairwise disjoint and their union is the entire set.
+
+Annexed to that, there is the {\em canonical projection}
+\[X \to X{/}{\sim}\,,\ x \to [x]_{\sim} .\]
+
+\begin{proposition}[Isomorphism Theorem of Set Theory]\label{proposition:SetIso1}
+Consider two sets \(X\) and \(Y\), a function \(f : X \to Y\) and an equivalence relation \(\sim\) over \(X\). Let also be \(p : X \to X{/}{\sim}\) the canonical projection. If for every \(a, b \in X\) such that \(a \sim b\) we have \(f(a) = f(b)\),
+%\[a \sim b \Rightarrow f(a) = f(b) \quad\text{for every } a, b \in X ,\]
+then there exists one and only one function \(\bar f : X{/}{\sim} \to Y\) such that
+\[\begin{tikzcd}[column sep=tiny]
+X \ar["f", rr] \ar["p", swap, dr] & & Y \\
+& X{/}{\sim} \ar["{\bar f}", swap, ur]
+\end{tikzcd}\]
+commutes. Moreover: 
+\begin{tcbenum}
+\item \(\bar f\) is surjective if and only if so is \(f\);
+\item if also \(a \sim b\) for every \(a, b \in X\) such that \(f(a) = f(b)\),
+%\[f(a) = f(b) \Rightarrow a \sim b \quad\text{for every } a, b \in X ,\]
+then \(\bar f\) is injective.
+\end{tcbenum}
+\end{proposition}
+
+The name of this theorem will make you remember other isomorphism theorems. In Algebra, the {\em First Isomorphism Theorem} can be derived from this one. Consider, for example\footnote{There are other First Isomorphism Theorems, one for rings and another one for modules.}, two groups \(G\) and \(H\) a group homomorphism \(f : G \to H\) and a normal subgroup \(N\) of \(G\) contained in \(\ker f\). In that case, we have the equivalence relation \(\sim_N\) on \(G\) defined by
+\[x \sim_N y \quad \text{if and only if} \quad xa = y \text{ for some } a \in N\]
+for \(x, y \in G\). Further, being \(N\) normal in \(G\), the set \(G/N := G{/}{\sim_N}\) has as equivalence classes the lateral classes \(xN\) and has a group structure where the identity is \(N\) and the product of two lateral classes \(xN\) and \(yN\) is the lateral class \((xy) N\). In this case we have, if \(x \sim_N y\), that is \(xa = y\) for some \(a \in N\),
+\[f(y) = f(xa) = \underbrace{f(x) f(a) = f(x)}_{a \in N \subseteq \ker f} .\]
+Hence, there is a unique function \(\bar f : G/N \to H\) for which
+\[\begin{tikzcd}[column sep=tiny]
+G \ar["f", rr] \ar["p", dr, swap] & & H \\
+& G/N \ar["{\bar f}", ur, swap]
+\end{tikzcd}\]
+commutes. The function \(\bar f\) is a group homomorphism and there are some other facts, but that takes us a bit away from the main topic of the section.
+
+\begin{exercise}
+Con you state something like that but for topological spaces and continuous functions? Remember the canonical projection \(p : X \to X{/}{\sim}\) defines the topology for \(X{/}{\sim}\) in which \(U \subseteq X{/}{\sim}\) is open whenever so is \(\inv p U\). (Here, \(\inv p U\) is just the union of the equivalence classes in \(U\).)
+\end{exercise}
+
+\begin{proof}[Proof of Proposition~\ref{proposition:SetIso1}]
+Consider the relation
+\[\bar f \coloneq \set{(u, v) \in (X{/}{\sim}) \times Y \mid p(x) = u \text{ and } f(x) = v \text{ for some } x \in X} :\]
+we will show that it is actually a function from \(X{/}{\sim}\) to \(Y\). Picked any \(u \in X{/}{\sim}\) (it is not empty), there is some \(x \in u\) and then we have the element \(f(x) \in Y\); in this case, \((u, f(x)) \in \bar f\). Now, let \((u, v)\) and \((u, v')\) be two any pairs of \(\bar f\). Then \(u = p(x)\) and \(v = f(x) = v'\) for some \(x \in u\), and so we conclude \(v = v'\). This function satisfies \(\bar f p = f\), cause of its own definition.\newline
+Now, the uniqueness part comes. Assume you have a function \(g : X{/}{\sim} \to Y\) such that \(gp = f\): then for every \(u \in X{/}{\sim}\) we have some \(x \in u\) and
+\[g(u) = g(p(x)) = f(x) = \bar f (p(x)) = \bar f(u) ,\]
+that is \(g = \bar f\). The most of the work is done now, whereas points (1) and (2) are immediate.
+\end{proof}
+
+\begin{corollary}\label{cor:SetIso2}
+For \(X\) and \(Y\) sets, let \(\sim_X\) and \(\sim_Y\) be two equivalence relations on \(X\) and \(Y\) respectively and let \(f : X \to Y\) be a function such that for every \(a, b \in X\) such that \(a \sim_X b\) we have \(f(a) \sim_Y f(b)\).
+%\[a \sim_X b \Rightarrow f(a) \sim_Y f(b) \quad\text{for every } a, b \in X .\]
+Then there exists one and only one function \(\bar f : X{/}{\sim_X} \to {Y}{/}{\sim_Y}\) such that
+\[\begin{tikzcd}
+X \ar["{p_X}", d, swap] \ar["f", r] & Y \ar["{p_Y}", d] \\
+X{/}{\sim_X} \ar["{\bar f}", r, swap]   & {Y}{/}{\sim_Y}
+\end{tikzcd}\]
+commutes, where \(p_X\) and \(p_Y\) are the canonical projections. Moreover:
+\begin{tcbenum}
+\item \(\bar f\) is surjective if and only if so is \(f\);
+\item if also \(a \sim_X b\) for every \(a, b \in X\) such that \(f(a) \sim_Y f(b)\),
+%\[f(a) \sim_Y f(b) \Rightarrow a \sim_X b \text{ for every } a, b \in X ,\]
+then \(\bar f\) is injective.
+\end{tcbenum}
+\end{corollary}
+
+\begin{proof}
+Take the sets \(X\) and \({Y}{/}{\sim_Y}\) with the function \(p_Y f : X \to {Y}{/}{\sim_Y}\) and use Proposition~\ref{proposition:SetIso1}.
+\end{proof}
+
+\NotaInterna{Functoriality here\dots{}}
+
+Sometimes in Mathematics, generated equivalence relations are involved. Speaking in plain Set Theory terms: if you are given a set \(X\) and some \(S \subseteq X \times X\), we define the equivalence relation {\em generated} by \(S\) as the smallest among the equivalence relations of \(X\) containing \(S\). One can easily verify that such equivalence relation is the intersection of all the equivalence relations on \(X\) containing \(S\). We write \(X{/}{S}\) or \(\frac X S\) to mean the set \(X\) quotiented by the equivalence relation generated by \(R\). One can use expressions like:
+\begin{quotation}
+On \(X\) consider the equivalence relation \(\sim\) generated by (the family of statements)
+\[a_\lambda \sim b_\lambda \quad \text{for } \lambda \in I .\]
+(Of course, the \(a_\lambda\)-s the \(b_\lambda\)-s are elements of \(X\).)
+\end{quotation}
+to say that:
+\begin{quotation}
+On \(X\) consider the equivalence relation \(\sim\) generated by the set
+\[\set{(a_\lambda, b_\lambda) \mid \lambda \in I} .\]
+\end{quotation}
+That being said, it would be clear what we mean by writing
+\[\frac{X}{a_\lambda \sim b_\lambda \ \text{for } \lambda \in I} .\]
+We will discuss about these constructions again in the chapter of limits and colimits.
+
+\begin{proposition}
+Let \(X\) and \(Y\) be two sets, \(\sim\) an equivalence relation on \(X\) generated by \(S \subseteq X \times X\) and \(f : X \to Y\) any function. Then the following statements are equivalent:
+%
+\begin{tcbenum}
+\item for every \(a, b \in X\), if \(a \sim b\) then \(f(a) = f(b)\)
+\item for every \(a, b \in X\), if \((a, b) \in S\) then \(f(a) = f(b)\).
+\end{tcbenum}
+\end{proposition}
+
+\begin{proof}
+The implication \((1) \Rightarrow (2)\) is trivially true. Consider on \(X\) the equivalence relation \(\simeq\) define as: for all \(a, b \in X\), \(a \simeq b\) if and only if \(f(a) = f(b)\). Here, \(S \subseteq \simeq\), thus \(\sim \subseteq \simeq\).
+\end{proof}
+
+The proposition just proved permits to rewrite Proposition~\ref{proposition:SetIso1} for generated equivalence relations.
+
+\begin{corollary}\label{corollary:SetIsoGenEqRel}
+Consider two sets \(X\) and \(Y\), a function \(f : X \to Y\) and an equivalence relation over \(X\) generated by \(S \subseteq X \times X\). If for every \((a, b) \in S\) we have \(f(a) = f(b)\), then there exists one and only one function \(\bar f : {X}{/}{S} \to Y\) such that
+\[\begin{tikzcd}[column sep=tiny]
+X \ar["f", rr] \ar["p", swap, dr] & & Y \\
+& {X}{/}{S} \ar["{\bar f}", swap, ur]
+\end{tikzcd}\]
+commutes. Here, \(p : X \to {X}{/}{S}\) is the canonical projection.
+\end{corollary}

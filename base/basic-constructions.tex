@@ -1,0 +1,150 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../base.tex
+
+\section{Basic constructions}
+
+In this section, we will present the first and most basic constructions involving categories.
+
+For \(\cat C\) a category, its {\em dual} (or {\em opposite}) category is denoted \(\op{\cat C}\) and is described as follows. Here, the objects are the same of \(\cat C\) and \q{being a morphism \(a \to b\)} exactly means \q{being a morphism \(b \to a\) in \(\cat C\)}. In other words, passing from a category to its dual leaves the objects unchanged, whereas the morphisms have their verses reversed. To dispel any ambiguity, by \q{reversing} the morphisms we mean that morphisms \(f : a \to b\) of \(\cat C\) can be found among the morphisms \(b \to a\) of \(\op{\cat C}\) and, vice versa, morphisms \(a \to b\) of \(\op{\cat C}\) among the morphisms \(b \to a\) of \(\cat C\). Nothing is actually constructed out of the blue. Some authors suggest to write \(\op f\) to indicate that one \(f\) once it has domain and codomain interchanged, but we do not do that here, because they really are the same thing but in different places. So, if \(f\) is the name of a morphism of \(\cat C\), the name \(f\) is kept to indicate that morphism as a morphism of \(\op{\cat C}\); obviously, the same convention applies in the opposite direction. It may seem we are going to nowhere, but it makes sense when it comes to define the compositions in \(\op{\cat C}\): for \(f : a \to b\) and \(g : b \to c\) morphsisms of \(\op{\cat C}\) the composite arrow is so defined
+\[gf := fg .\label{defeqn:DualComp}\]
+This is not a commutative property, though. Such definition is to be read as follows. At the left side, \(f\) and \(g\) are to be intended as morphisms of \(\op{\cat C}\) that are to be composed therein. Then the composite \(gf\) is calculated as follows:
+\begin{tcbenum}
+\item look at \(f\) and \(g\) as morphisms of \(\cat C\) and compose them as such: so \(f : b \to a\) and \(g : c \to b\) and \(fg : c \to a\) according to \(\cat C\);
+\item now regard \(fg\) as a morphism of \(\op{\cat C}\): this is the value \(gf\) is bound to.
+\end{tcbenum}
+Let us see now whether the categorial axioms are respected. For \(x\) object of \(\op {\cat C}\) there is \(\id_x\), which is a morphism \(x \to x\) in either of \(\cat C\) and \(\op{\cat C}\). For every object \(y\) and morphism \(f : y \to x\) of \(\op{\cat C}\) we have
+\[\id_x f = f \id_x = f .\]
+Similarly, we have that
+\[g \id_x  = g\]
+for every object \(z\) and morphism \(g : x \to z\) of \(\op{\cat C}\). Hence, \(\id_x\) is an identity morphism in \(\op{\cat C}\) too. Consider now four objects and morphisms of \(\op{\cat C}\)
+\[a \functo f b \functo g c \functo h d\]
+and let us parse the composition
+\[h(gf) .\]
+In \(h(gf)\) regard both \(h\) and \(gf\) as morphisms of \(\cat C\). In that case, \(h(gf)\) is exactly \((gf)h\), where \(gf\) is \(fg\) once \(f\) and \(g\) are taken as morphisms of \(\cat C\) and composed there. So \(h(gf) = (fg)h\), where at left hand side compositions are performed in \(\cat C\): being the composition is associative, \(h(gf) = (fg)h = f(gh)\). We go back to \(\op{\cat C}\), namely \(f(gh)\) becomes \((gh)f\) and \(gh\) becomes \(hg\), so that we eventually get the associativity
+\[h(gf) = (hg) f .\]
+
+It may seem hard to believe, but duality is one of the biggest conquest of Category Theory. \NotaInterna{Talk more about duality here\dots{}} This construction may seem a useless sophistication for now, but later we will discover how this serves the scope to make functors encompass a broader class of constructions. However, as for now, let us see all this under a new light: what does duality mean for diagrammatic reasoning? Commuting triangles
+\[\begin{tikzcd}[row sep=small]
+& b \ar["g", dd] \\
+a \ar["f", ur] \ar["h", dr, swap] \\
+& c
+\end{tikzcd}\]
+of \(\cat C\) are exactly commuting triangles
+\[\begin{tikzcd}[row sep=small]
+& b \ar["f", dl, swap] \\
+a \\
+& c \ar["h", ul] \ar["g", uu, swap]
+\end{tikzcd}\]
+in \(\opcat C\).
+
+\begin{exercise}
+In this way, it should be even more immediate to prove the two categorial axioms. Give it a try. Observe this approach is the mere translation of what we have conveyed with words above.
+\end{exercise}
+
+\begin{example}[Dual prosets]
+We already know how prosets are categories; let \((P, \leqslant)\) be one of them. Here the morphisms are exactly the pairs \((b, a)\) such that \((a, b) \in \leqslant\). If we rephrase all this, we can introduce the dual relation \(\geqslant\) defined by: \(b \geqslant a\) if and only if \(a \geqslant b\).
+\end{example}
+
+\begin{exercise}
+Consider a single object category \(\cat G\) --- what is called moonid ---. What is \(\opcat G\)? What is \(\opcat G\) if \(\cat G\) is a group?
+\end{exercise}
+
+The concept of duality for categories has one important consequence on statements  written in a \q{categorial language}. We do not need to be fully precise here: they are statements written in a sensible way using the usual logical connectives, names for objects, names for morphisms and quantifiers acting on such names. 
+
+\begin{example}
+If we have a morphism \(f : a \to b\) in some category \(\cat C\), consider the statement
+\begin{quotation}
+For every {\color{red!65!black} object \(c\) of \(\cat C\)} and {\color{blue!65!black} morphisms \(g_1, g_2 : c \to a\) in \(\cat C\)}, if {\color{green!65!black} \(f g_1 = f g_2\)} then {\color{orange!65!black}\(g_1 = g_2\)}.
+\end{quotation}
+If you remember, it is just said that \(f\) is a monomorphism. We operate a translation that doesn't modify the truth of the sentence: that is, if it is true, it remains so; it is false, it remains false.
+\begin{quotation}
+For every {\color{red!65!black} object \(c\) of \(\opcat C\)} and {\color{blue!65!black} morphisms \(g_1, g_2 : a \to c\) in \(\opcat C\)}, if {\color{green!65!black} \(g_1 f = g_2 f\)} then {\color{orange!65!black}\(g_1 = g_2\)}.
+\end{quotation}
+If we regard \(f\) as a morphism \(b \to a\) of \(\opcat C\), then \(f\) is an epimorphism in \(\opcat C\).
+\end{example}
+
+Let us try to settle this explicitly: if we have a categorial statement \(p\), the dual of \(p\) --- we may call \(\op{p}\) --- is the statement obtained from \(p\) keeping the connectives and the quantifiers of \(p\), whereas the other parts are replaced by their dual counterparts.
+
+\begin{example}
+\NotaInterna{Anticipate products and co-products\dots{}}
+\end{example}
+
+Another useful construction is that of product of categories. Assuming we have two categories \(\cat C_1\) and \(\cat C_2\), the product \(\cat C_1 \times \cat C_2\) is the category in which
+\begin{tcbitem}
+\item The objects are the pairs \((a, b) \in \obj{\cat C_1} \times \obj{\cat C_2}\).
+\item Being a morphism \((a_1, a_2) \to (b_1, b_2)\) means being a pair of two morphisms
+\[\left(\begin{tikzcd}[row sep=small] a_1 \ar["{f_1}", d, swap] \\ b_1 \end{tikzcd}, \begin{tikzcd}[row sep=small] a_2 \ar["{f_2}", d] \\ b_2 \end{tikzcd}\right)\]
+where \(f_1\) is in \(\cat C_1\) and \(f_2\) in \(\cat C_2\); we write such morphism as \(\left(f_1, f_2\right)\).
+\item The composition is defined component-wise
+\[\left(\begin{tikzcd}[row sep=small] b_1 \ar["{g_1}", d, swap] \\ c_1 \end{tikzcd}, \begin{tikzcd}[row sep=small] b_2 \ar["{g_2}", d] \\ c_2 \end{tikzcd}\right) \left(\begin{tikzcd}[row sep=small] a_1 \ar["{f_1}", d, swap] \\ b_1 \end{tikzcd}, \begin{tikzcd}[row sep=small] a_2 \ar["{f_2}", d] \\ b_2 \end{tikzcd}\right) := (g_1 f_1, g_2 f_2) .\]
+\end{tcbitem}
+
+\begin{exercise}
+Verify categorial axioms hold for the product of two categories.
+\end{exercise}
+
+In future, we will need to consider product categories of the form \(\opcat C \times \cat D\). For objects, there is nothing weird to say; about morphism, observe that a morphism
+\[\begin{tikzcd} (a, b) \ar["{(f, g)}", d] \\ (a', b')\end{tikzcd}\]
+is precisely the pair
+\[\left(\begin{tikzcd}[row sep=small] a \\ a' \ar["f", u] \end{tikzcd}, \begin{tikzcd}[row sep=small] b \ar["g", d] \\ b \end{tikzcd}\right)\]
+whose first component comes from \(\cat C\) while the second one from \(\cat D\).
+
+Let as now talk about comma categories.
+
+\begin{example}
+Words are labels humans attach to things to refer to them. Different groups of speakers have developed different names for the surrounding world, which resulted in different languages. We can use sets to gather the words present in any language. Now, if we are given a set \(\Omega\) of things and a set \(L\) of the words of a chosen language, then a function \(\lambda : \Omega \to L\) can be seen as the act of labelling things with names.\footnote{Of course, our discourse is rather simplified here: everything in \(\Omega\) has one and only one dedicated word, which is not always the case. In fact, the existence of synonyms within a language undermines the requirement of uniqueness. Further, a language might not have words for everything: for instance, German has the word \textgerman{Schilderwald}, which has not a corresponding single word in English --- if you want to explain the meaning it bears, you can say it is \q{a street that is so overcrowded and rammed with so many street signs that you are getting lost rather than finding your way.}} We will call such functions as {\em vocabularies} for \(\Omega\), although this might not be the official name.\newline
+Languages do not live in isolation with others: if we know how to translate words, we can understand what speakers of other languages are saying. Imagine now you have two vocabularies
+\[\begin{tikzcd}[column sep=small]
+A & & B \\
+& \Omega \ar["\alpha", ul] \ar["\beta", ur, swap]
+\end{tikzcd}\]
+To illustrate concept, think some \(\omega \in \Omega\): if \(\omega \in \Omega\) has the name \(\alpha(\omega)\) under the vocabulary \(\alpha\) and \(\omega\) is called \(\beta(\omega)\) according to \(\beta\), then a translation would be a correspondence between \(\alpha(\omega)\) and \(\beta(\omega)\). We could say, a {\em translation} from \(\alpha\) to \(\beta\) is a function \(\tau : A \to B\) such that
+\[\begin{tikzcd}[column sep=small]
+A \ar["\tau", rr] & & B \\
+& \Omega \ar["\alpha", ul] \ar["\beta", ur, swap]
+\end{tikzcd}\]
+commutes. As you may expect, translations can be composed to obtain translations: if we have two translations \(\eta\) and \(\theta\) as in the diagram
+\[\begin{tikzcd}
+& B \ar["\theta", dr] & \\
+A \ar["\eta", ur] & \Omega \ar["\alpha", l] \ar["\beta", u] \ar["\gamma", r, swap] & C
+\end{tikzcd}\]
+with the two triangles commuting, we have also the commuting
+\[\begin{tikzcd}[column sep=small]
+A \ar["\theta\eta", rr] & & C \\
+& \Omega \ar["\alpha", ul] \ar["\gamma", ur, swap]
+\end{tikzcd}\]
+This is interesting if we look at things with categories: objects are functions that have a domain in common, and we have selected as morphisms the functions between the codomains that make certain triangles commute. Other examples in such spirit follow.
+\end{example}
+
+%\begin{example}
+%Consider the set of the of the subsets of a given set \(X\), what is commonly named \q{set of the parts} of \(X\) and denoted \(2^X\). That set is (more than) a proset, in which case we have relations \(A \subseteq X\) for \(A \in 2^X\). If we regard all this categorially, we have morphisms \(A \to X\), one for each \(A \in 2^X\). Observe the expression
+%\begin{quotation}
+%\(A, B \subseteq X\) and \(A \subseteq B\)
+%\end{quotation}
+%can be be rephrased as the commutativity of the triangle
+%\[\begin{tikzcd}[column sep=small]
+%A \ar[dr] \ar[rr] & & B \ar[dl] \\
+%& X
+%\end{tikzcd}\]
+%(By the way, in prosets triangles always commute.) Now if we have two commuting triangles
+%\[\begin{tikzcd}
+%& B \ar[d] \ar[dr, blue] \\
+%A \ar[r] \ar[ur, red] & X & C \ar[l]
+%\end{tikzcd}\]
+%we obtain a commuting triangle
+%\[\begin{tikzcd}[column sep=small]
+%A \ar[dr, purple] \ar[rr] & & C \ar[dl] \\
+%& X
+%\end{tikzcd}\]
+%composing the coloured morphisms. Indeed, there is category in which morphisms are inclusions \(A \to X\), morphisms from \(A \to X\) to \(B \to X\) are morphisms \(A \to B\) (in this case, there is only one of such) giving commuting triangles and compositions happen as just illustrated.
+%\end{example}
+
+\begin{example}[Covering spaces]
+Probably you have heard of covering spaces when you had to calculate the first homotopy group of \(\mathbb S^1\). More generally, a {\em covering space} of a topological space \(X\) is continuous function \(p : \tilde X \to X\) with the following property: there is a open cover \(\set{U_i \mid i \in I}\) of \(X\) such that every \(\inv p U_i\) is the disjoint union of a family \(\set{V_j^i \mid j \in J}\) of open subsets of \(\tilde X\) and the restriction of \(p\) to \(V_j^i\) is a homeomorphism \(V_j^i \to U_i\) for every \(i \in I\) and \(j \in J\). \NotaInterna{To be continued\dots{}}
+\end{example}
+
+\begin{example}[Field extensions]
+\NotaInterna{Yet to be \TeX{}-ed\dots{}}
+\end{example}
+

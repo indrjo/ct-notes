@@ -1,0 +1,44 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../preamble.tex
+
+\section{Symbolism for functions}
+
+If \(f\) is the name of a function, we write \(f(x)\) the image of \(x\). However, we may find ourselves writing \(fx\) or \(f_x\) to avoid an overwhelming use of brackets. The expression \(f : X \to Y\) means that \(f\) is a function from the domain \(X\) to the codomain \(Y\).
+
+A literary device we will quite often take advantage is that of {\em currying}: from a function out of a product
+\[f : A \times B \to C\]
+we have, for \(x \in A\), the functions
+\[f(x, \hole) : B \to C\,, \ f(x,\hole) (y) := f(x, y) .\]
+The idea is to \q{hold} the first variable at some value and let the second one vary: this is done by leaving a blank space to be filled with values from \(B\). Of course, for \(y \in B\), we introduce the functions
+\[f(\hole, y) : A \to C\,, \ f(\hole,y) (x) := f(x, y) .\]
+
+Symbols like \(\bullet\), \(\cdot\) and \(-\) can be employed instead of leaving an empty space: in fact, you may find written \(f(x, \bullet)\), \(f(x, \cdot)\) or \(f(x, -)\) for example.
+
+While leaving blank spaces or using placeholders may be acceptable in prefix notation, it may be a pain if used in combination with infix notation: consider, for example, the function \(\naturals \to \naturals\) that takes each natural number to the corresponding successor and writing it as follows
+\[\bullet + 1 \,,\ \cdot + 1 \,,\ - + 1 \,,\ \dots{}\]
+or even
+\[\underbrace{\hole}_{\mathclap{\text{blank space here, see?}}} + 1 .\]
+In all those situations, we may forget placeholders and use parentheses as in
+\[(+1)\]
+and \((+1)(n)\) would be a synonym of \(n+1\).
+
+Another way to introduce functions comes from Lambda Calculus. Suppose you are given some well-formed formula\footnote{Written in a sensible way, that is following some syntactic rules. \NotaInterna{More precision?}} \(\Gamma\) and some variable \(x\): the symbol \(x\) may occur or not in \(\Gamma\). Then we have
+\[\lam x . \Gamma\]
+called {\em lambda abstraction}. When we write an expression like this one, \(x\) is a {\em dummy} or a {\em bound} variable; in contrast, the other variables in \(\Gamma\) are said to be {\em free}. It works like the more familiar expressions
+\[\forall x : \phi\,,\ \exists x : \phi\,,\ \displaystyle \lim_{x \to c} f(x)\ \text{and} \ \displaystyle \int_\Omega f(x) \mathrm d x :\]
+instead of the symbol \(x\) you may use another symbol that does not occur freely \(\Gamma\) without changing the meaning of the expression.
+
+For example, we all agree that \(\lambda x . x+k\) and \(\lambda y . y+k\) have the same exact meaning, thus they are equivalent. But, what if instead of \(x\) we use \(k\)? In the formula \(\lambda x . x+k\) the letter \(k\) already appears free, and we would have \(\lambda k : k+k\), which is not the same.
+
+In fact, the most basic operation you can perform with formulas involving variables is {\em substitution}: if you are given a formula \(\Gamma\) and a variable \(x\) that occurs freely in \(\Gamma\), then we write \(\Gamma[x/a]\) the formula \(\Gamma\) with the occurrences of \(x\) replaced by \(a\), after eventually renaming all the dummy occurrences of \(a\) throughout the formula to avoid the issues illustrated before.
+
+The operation of substitution is the way you can \q{pass values} to such things and have returned another values:
+\[(\lam x . \Gamma) (a) := \Gamma[x/a] .\]
+It is clear the practical use of this formal device: if \(a\) is an element of set \(X\) and \(\left( \lambda x . \Gamma \right)(a)\) is a member of another set \(Y\), then we could write the function doing that assignment as \(\lambda x . \Gamma\).
+
+If you want, instead of \(\lam x . \Gamma\) you may write
+\[x \mapsto \Gamma .\]
+
+Observe that, in general, lambda abstractions do not have incorporated the information of domain and codomain, or in general it might not be inferred without doubt from the context. For example, what is \(\lam x . x+1\)? Without a hint from the context, it can be a function \(\reals \to \reals\) or the successor function \(\naturals \to \naturals\), and so on\dots{} To dispel any ambiguity, you can write explicitly something like this:
+\[(\lam n . n+1) : \naturals \to \naturals .\]

@@ -1,0 +1,96 @@
+% !TEX program = lualatex
+% !TEX root = ../topoi.tex
+% !TEX spellcheck = en_GB
+
+\section{Subobject classifiers}
+
+Throughout the current section, we assume \(\cat E\) is a category with initial object \(1\). That being the setting, we can give the following definition.
+
+\begin{definition}
+A {\em subobject classifier} for \(\cat E\) is any morphism \(t : 1 \to \Omega\) such that:
+%\begin{quotation}
+for every monomorphism \(f : a \to b\) of \(\cat E\) there is one and only one morphism \(\chi_f : b \to \Omega\) in \(\cat E\) for which there is a pullback square
+\begin{equation}\begin{tikzcd}
+a \ar["{!}", d, swap] \ar["f", r] & b \ar["{\chi_f}", d] \\
+1 \ar["t", r, swap] & \Omega
+\end{tikzcd}\label{diagram:OmegaAxiom}\end{equation}
+%\end{quotation} 
+\end{definition}
+
+That is we can assign to every monomorphism \(f : a \to b\) the morphism \(\chi_f : b \to \Omega\) satisfying the property of the definition. Let us introduce then some symbolism: for \(b \in \obj{\cat E}\) we write \(\subobjs_{\cat E} b\) for the class of all the monomorphisms of \(\cat E\) with codomain \(b\). Hence we can introduce the function
+\[\chi : \subobjs_{\cat E} b \to \cat E (b, \Omega)\]
+with \(\chi_f\) defined to be that morphism \(b \to \Omega\) for which there is a pullback square as the diagram~\eqref{diagram:OmegaAxiom}.
+
+It is worth to observe \(\subobjs_{\cat E} (b)\) has a natural structure of preorder: for
+\[\begin{tikzcd}[row sep=tiny, column sep=small]
+a_1 \ar["{f_1}", dr, swap] & & a_2 \ar["{f_2}", dl] \\
+& b 
+\end{tikzcd}\]
+monomorphisms of \(\cat E\), write \(f_1 \le f_2\) to say there is some \(h : a_1 \to a_2\) in \(\cat E\) for which
+\[\begin{tikzcd}[column sep=small]
+a_1 \ar["{f_1}", dr, swap] \ar["h", rr] & & a_2 \ar["{f_2}", dl] \\
+& b 
+\end{tikzcd}\]
+commutes. Note that, being here \(f_1\) and \(f_2\) monomorphisms, there is at most one \(h\) as such and it is a monomorphism as well.
+
+We show now the relation \(\simeq\) on \(\subobjs_{\cat E} b\) defined by
+\[f_1 \simeq f_2 \text{ if and only if } f_1 \le f_2 \text{ and } f_2 \le f_1\]
+for \(f_1, f_2 \in \subobjs_{\cat E} b\) is an equivalence relation. \NotaInterna{\dots{}}
+
+Yes, \(\subobjs_{\cat E} b\) is the full subcategory of \(\cat E \downarrow b\) whose objects are all the monomorphisms of \(\cat E\) with codomain \(b\), and whose isomorphism relation is \(\simeq\).
+
+\begin{proposition}
+Let
+\[\begin{tikzcd}[row sep=tiny,column sep=small]
+a_1 \ar["{f_1}", dr, swap] & & a_2 \ar["{f_2}", dl] \\
+& b 
+\end{tikzcd}\]
+be monomorphisms. \(\chi_{f_1} = \chi_{f_2}\) if and only if \(f_1 \simeq f_2\).
+\end{proposition}
+
+\begin{proof}
+Assume \(\chi_{f_1} = \chi_{f_2}\). By definition of subobject classifiers, \(\chi_{f_1}\) is the morphism for which
+\[\begin{tikzcd}
+a_1 \ar["{!}", d, swap] \ar["{f_1}", r] & b \ar["{\chi_{f_1}}", d] \\
+1 \ar["t", r, swap] & \Omega
+\end{tikzcd} \quad \begin{tikzcd}
+a_2 \ar["{!}", d, swap] \ar["{f_2}", r] & b \ar["{\chi_{f_1}}", d] \\
+1 \ar["t", r, swap] & \Omega
+\end{tikzcd}\]
+are pullback squares. Consequently, we must infer that there is one isomorphism \(h : a_1 \to a_2\) such that \(f_1 = f_2 h\). Hence \(f_1 \le f_2\), and \(f_2 \le f_1\) too, because \(f_1 \inv h = f_2\).\newline
+For the remaining part of the proof, let us write \(!_1\) the unique morphism \(a_1 \to 1\) and \(!_2\) the unique morphism \(a_2 \to 1\). Also remember that triangles
+\[\begin{tikzcd}[column sep=small]
+a_1 \ar["{!_1}", dr, swap] \ar[rr] & & a_2 \ar["{!_2}", dl] \\
+& 1
+\end{tikzcd} \quad \begin{tikzcd}[column sep=small]
+a_1 \ar["{!_1}", dr, swap] & & a_2 \ar["{!_2}", dl] \ar[ll] \\
+& 1
+\end{tikzcd}\]
+always commute.\newline
+Now we suppose \(f_1 \simeq f_2\). The plan for the proof is: if we show that
+\[\begin{tikzcd}
+a_1 \ar["{!_1}", d, swap] \ar["{f_1}", r] & b \ar["{\chi_{f_2}}", d] \\
+1 \ar["t", r, swap] & \Omega
+\end{tikzcd}\]
+is a pullback square, then, being \(\chi_{f_1} : b \to \Omega\) the one for which there is a pullback square like this, we can conclude \(\chi_{f_1} = \chi_{f_2}\). First of all such square commutes: if we call \(h\) the morphism \(a_1 \to a_2\) such that \(f_1 = f_2 h\), then
+\[\chi_{f_2} f_1 = \chi_{f_2} f_2 h = t !_2 h = t !_1 .\]
+Consider
+\[\begin{tikzcd}
+\bullet \ar["u", drr, bend left] \ar["v", ddr, swap, bend right] \\
+& a_1 \ar["{!_1}", d, swap] \ar["{f_1}", r] & b \ar["{\chi_{f_2}}", d] \\
+& 1 \ar["t", r, swap] & \Omega
+\end{tikzcd}\]
+where \(\chi_{f_2} u = t v\). Being
+\[\begin{tikzcd}
+a_2 \ar["{!_2}", d, swap] \ar["{f_2}", r] & b \ar["{\chi_{f_2}}", d] \\
+1 \ar["t", r, swap] & \Omega
+\end{tikzcd}\]
+a pullback square we have one \(z : \bullet \to a_2\) for which \(f_2 z = u\) and \(!_2 z = v\). From the assumption \(f_1 \simeq f_2\), we have \(f_2 \le f_1\), that is \(f_2 = f_1 q\) for some \(q : a_2 \to a_1\). Then \(u = f_1 q z\) and \(v = !_1 q z\). Let us see if \(qz\) is what we are looking for.
+\[\begin{tikzcd}
+\bullet \ar["u", drr, bend left] \ar["{qz}", dr, shift left] \ar["r", dr, swap, shift right] \ar["v", ddr, swap, bend right] \\
+& a_1 \ar["{!_1}", d, swap] \ar["{f_1}", r] & b \ar["{\chi_{f_2}}", d] \\
+& 1 \ar["t", r, swap] & \Omega
+\end{tikzcd}\]
+where we suppose \(!_1 r = v\) and \(f_1 r = u\). Being \(f_1\) a monomorphism, the sole second identity is enough to conclude \(r = qz\).
+\end{proof}
+

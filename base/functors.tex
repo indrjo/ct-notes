@@ -1,0 +1,246 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../base.tex
+
+\section{Functors}
+
+\begin{definition}[Functors]\label{definition:Functors}
+A functor \(F\) from a category \(\cat C\) to a category \(\cat D\) is having the following functions, all indicated by \(F\):
+\begin{tcbitem}
+\item one \q{function on objects}
+\[F : \obj{\cat C} \to \obj{\cat D}\,,\ x \to F(x)\]
+\item for every objects \(a\) and  \(b\), one \q{function on morphisms}
+\[F : \cat C(a, b) \to \cat D(F(a), F(b))\,,\ f \to F(f)\]
+\end{tcbitem}
+such that
+\begin{tcbenum}
+\item for every object \(x\) of \(\cat C\) we have \(F(\id_x) = \id_{F(x)}\);
+\item for every objects \(x, y, z\) and morphisms \(f : x \to y\) and \(g : y \to z\) of \(\cat C\) we have \(F(g) F(f) = F(gf)\).
+\end{tcbenum}
+To say that \(F\) is a functor from \(\cat C\) to \(\cat D\) we use \(F : \cat C \to \cat D\), a symbolism that recalls that one of morphism in categories.
+\end{definition}
+
+A first straightforward consequence of functoriality is contained in the following proposition.
+
+\begin{proposition}
+Let \(F : \cat C \to \cat D\) be a functor. If \(f\) is an isomorphism of \(\cat C\), then so is \(F(f)\).
+\end{proposition}
+
+\begin{proof}
+\inlinethm{Exercise}.
+\end{proof}
+
+As often happens, let us start with simple exmaples: in this context, the simplest ones can be obtained by choosing very simple categories.
+
+\begin{example}[Functors from sets]\label{example:CollectionsAreCats}
+Classes can be regarded as categories with no morphisms apart identities: in any category, every object carries its own identity, but if these are the only morphisms, they become redundant information. We will restrict our attention to classes that are actual sets.\newline
+So, what is a functor \(F : \cat S \to \cat C\) out of a set \(\cat S\)? As functors do by definition, it maps objects to objects and morphisms to morphisms; but the only morphisms of \(\cat S\) are identities, which are taken to identities of \(\cat C\). Since \(F\) involves only objects and identities, \(F\) is just a families of objects of \(\cat C\).\footnote{You probably are used to write \(\set{X_\alpha \mid \alpha \in I}\) to indicate a family of sets. Actually, \(\set{X_\alpha \mid \alpha \in I}\) is a function from the set of indexes \(I\) to some set the \(X_i\)'s are picked from.} In particular, functors from sets to sets are just functions!
+\end{example}
+
+\begin{example}[Functors from prosets]
+Consider a functor \(F : (A, \le) \to \cat C\) out of a proset. We know that \((A, \le)\) regarded as a category has at most one morphism for each ordered couple in \(A \times A\). For that reason, let us adopt this notation: for every \(i, j \in A\) such that \(i \le j\) indicate by \(F_{i,j}\) the image of the unique morphism \(i \to j\) of \((A, \le)\) via \(F\). That being said, our functor \(F\) is just a collection \(\set{F_i \mid i \in A}\) with the morphisms \(F_{i,j}\)'s for \(i, j \in A\) with \(i \le j\).\newline
+As a particular instance of this, let us examine functors
+\[H : (\naturals, \le) \to \cat C\]
+with \(\le\) being the usual ordering of \(\naturals\). For \(i, j \in \naturals\) with \(i \le j\), the morphism \(i \to j\) can be factored into consecutive morphisms
+\[i \to j = (j-1 \to j) \cdots{} (i+1 \to i+2) (i \to i+1) .\]
+For that reason, our \(H\) \q{is} just a sequence
+\[H_0 \functo{\partial_0} H_1 \functo{\partial_1} \cdots{} \functo{\partial_{n+1}} H_n \functo{\partial_n} \cdots{}\]
+of objects and morphisms in \(\cat C\), where we have written \(\partial_j\) for \(H_{j, j+1}\).
+\end{example}
+
+\begin{exercise}
+Yes, diagrams are functors!
+\end{exercise}
+
+\begin{example}[Monotonic functions]
+We have met before, how a preordered set is a category; recall also the pure set-theoretic definition of this notion. For \((A, \le_A)\) and \((B, \le_B)\) preordered sets, a function \(f : A \to B\) is said {\em monotonic} whenever for every \(x, y \in A\) we have \(f(x) \le_B f(y)\) provided that \(x \le_A y\). In bare set-theoretic terms, this can be rewritten as follows: for every \(x, y \in A\) such that \((x, y) \in \le_A\), then \((f(x), f(y)) \in \le_B\), where  we make explicit the pairs, that are morphisms of the preordered sets seen as categories.
+\end{example}
+
+\begin{example}[Monoid homomorphsisms]
+We have previously seen that a monoid \q{is} a single-object category. Consider now two such categories, say \(\cat G\) and \(\cat H\), and a functor \(f : \cat G \to \cat H\) is. Denoting by \(\bullet_{\cat G}\) and \(\bullet_{\cat H}\) the object of \(\cat G\) and \(\cat H\) respectively, there is a unique possibility: mapping \(\bullet_{\cat G}\) to \(\bullet_{\cat H}\). The functorial axioms in that case are:
+\[f(xy) = f(x)f(y)\]
+for every morphisms \(x\) and \(y\) of \(\cat G\) and
+\[f(1_{\cat G}) = 1_{\cat H} ,\]
+with \(1_{\cat G}\) and \(1_{\cat H}\) being the identities of \(\cat G\) and \(\cat H\) respectively. These two properties say that \(f\) is a monoid homomorphism; in this case there is also an equation that about objects but these two are a mere subtlety that adds nothing. It is easy to do the converse: a monoid homomorphism is a functor.
+\end{example}
+
+\begin{figure}
+\centering
+\input{./base/group-actions.qtikz}
+\caption{A group action as functor}
+\end{figure}
+
+Let us remain to Algebra. What happens if the domain of a functor is a group and the codomain is \(\Set\)? (Recall that \q{group} is just a fancier abbreviation of \q{single object groupoid}.) The answer is contained in the following example.
+
+\begin{example}[Group actions]
+If \(\cat G\) is a group, what is a functor \(\delta : \cat G \to \Set\)? Let us write \(G\) the set of its morphisms. The single object of \(\cat G\) is mapped to one set \(X\). Since all the morphisms of \(\cat G\) are isomorphisms, then \(\delta\) takes each of them to bijections from \(X\) to \(X\). Thus we can say \(\delta\) is the assignment of a certain set \(X\) and, for every \(g\) element of the group, of one isomorphism \(\delta_g : X \to X\). Does this sound familiar? What we have described is a group {\em action} over the set \(X\), that is a group isomorphism from \(G\) to the symmetric group of \(X\).
+\end{example}
+
+\begin{example}[The category \(\Eqv\)]\label{example:CategoryEqv}
+A {\em setoid} \NotaInterna{nlab uses this term\dots{}} is having a set and an equivalence relation defined on it. If \(X\) is a set and \(\sim\) an equivalence relation over \(X\), the setoid amounting of these data is written as \((X, \sim)\). Any set \(X\) has of course its own equality, that we denote by \(=_X\).\footnote{In Set Theory, \(=_X\) is the set \(\set{(a, a) \mid a \in X}\).}\newline
+For if \(X\) and \(Y\) sets, a function \(f : X \to Y\) respects this rule by definition:
+\begin{quotation}
+for every \(a, b \in X\), if \(a =_X b\) then \(f(a) =_Y b\).
+\end{quotation}
+We would like to replace the equalities above with equivalence relations: for if \((X, \sim_X)\) and \((Y, \sim_Y)\) are setoids, a {\em functoid} \NotaInterna{ok, let me find/craft a nicer name\dots{}} from \((X, \sim_X)\) to \((Y, \sim_Y)\) is any function \(f : X \to Y\) such that
+\begin{quotation}
+for every \(a, b \in X\), if \(a \sim_X b\) then \(f(a) \sim_Y f(b)\).
+\end{quotation}
+Functoids are certain type of functions, and composing two of them as such returns a funtoid. Categorial axioms hold almost for free, so we really have a {\em category of setoids and functoids}, \(\Eqv\).\newline
+Let us now involve functoriality. There is a nice theorem:
+\begin{quotation}
+Let \(X\) and \(Y\) be two sets with \(\sim_X\) and \(\sim_Y\) equivalence relations on \(X\) and \(Y\) respectively. Then for every \(f : X \to Y\) such that \(f(a) \sim_Y f(b)\) for every \(a, b \in X\) such that \(a \sim_X b\), there exists one and only one \(\phi : X{/}{\sim_X} \to Y{/}{\sim_Y}\) that makes
+\[\begin{tikzcd}[column sep=small]
+X \ar["f", r] \ar["{\lambda a.[a]_X}", d, swap] & Y \ar["{\lambda b.[b]_Y}", d] \\
+X{/}{\sim_X} \ar["\phi", r, swap] & Y{/}{\sim_Y}
+\end{tikzcd}\]
+commute. (The vertical functions are the canonical projections.)
+\end{quotation}
+This underpins the functor
+\[\pi : \Eqv \to \Set\]
+that maps setoids \((X, \sim)\) to sets \(X{/}{\sim}\) and functoids \(f : (X, \sim_X) \to (Y, \sim_Y)\) to functions
+\[\begin{aligned}
+& \pi_f : X{/}{\sim_X} \to Y{/}{\sim_Y} \\
+& \pi_f \left([a]_X\right) := \left[f(a)\right]_Y ,
+\end{aligned}\]
+whose existence and uniqueness is claimed by the just mentioned Proposition.
+\end{example}
+
+\begin{example}[Free groups]\label{example:FreeGroup}
+Suppose given a {\em group alphabet} \(S\), which is a set of things we decide to name \q{letters}. Then a {\em group word} with system \(S\) is a string obtained by juxtaposition of a finite amount of \q{\(x^1\)} and \q{\(x^{-1}\)}, where \(x \in S\). The {\em empty word} is obtained by writing no letter, and we shall denote it by something, say \(e\); instead, the other words appear as
+\[x_1^{\phi_1} \cdots{} x_n^{\phi_n},\]
+with \(x_1, \dots{}, x_n \in S\) and \(\phi_1, \dots{}, \phi_n \in \set{-1, 1}\).
+%\footnote{More formally, you can say a group word is a pair of two functions: \[x : \set{1, \dots{}, n} \to S \text{ and } \phi : \set{1, \dots{}, n} \to \set{-1, 1}\] with \(n \in \naturals\). The first one determines the order the letter are placed, while the latter tells the exponents to be attached to each letter. We simply choose to write all this stuff as we have just done. Observe that the empty word is the one obtained with \(n = 0\).}
+\footnote{Something that may irk you is that our words can be redundant, being consecutive repetitions of the same letter allowed. If you want, you can let exponents range over all the integers, but this needs you to modify what comes after.}
+\footnote{Here, we can choose any pair of distinct symbols instead of \(-1\) and \(1\). If we do so, we need a function that maps each of them into the other one. In this presentation we employ the function that takes one integer and returns its opposite.}
+\newline
+%By convention, \(e\) has length \(0\), whereas \(x_1^{\phi_1} \cdots{} x_n^{\phi_n}\) has length \(n\).
+The length of a word is the number of letters it is made of. We define equality only on words having the same length: we say \(x_1^{\alpha_1} \cdots{} x_n^{\alpha_n}\) is equal to \(y_1^{\beta_1} \cdots{} y_n^{\beta_n}\) whenever \(x_i = y_i\) and \(\alpha_i = \beta_i\) for every \(i \in \set{1, \dots{}, n}\).\newline
+A group word \(x_1^{\phi_1} \cdots{} x_n^{\phi_n}\) is said {\em irreducible} whenever \(x_i^{\phi_i} \ne x_{i+1}^{-\phi_{i+1}}\) for every \(i \in \set{1, \dots{}, n-1}\); the empty word is irreducible by convention. Let us write \(\angled S\) the set of all irreducible words written using the alphabet \(S\). It is natural to join two words by bare juxtaposition, but the resulting word may not be irreducible; this issue has to be fixed:
+\[\begin{aligned}
+& \cdot : \angled S \times \angled S \to \angled S \\
+& e \cdot w := w \,, \ w \cdot e := w \\
+& (x_1^{\lambda_1} \cdots{} x_m^{\lambda_m}) \cdot (y_1^{\mu_1} \cdots{} y_n^{\mu_n}) :=
+\begin{cases} (x_1^{\lambda_1} \cdots{} x_{m-1}^{\lambda_{m-1}}) \cdot (y_2^{\mu_2} \cdots{} y_n^{\mu_n}) & \text{if } x_{m}^{\lambda_m} = y_1^{-\mu_1} \\ x_1^{\lambda_1} \cdots{} x_m^{\lambda_m} y_1^{\mu_1} \cdots{} y_n^{\mu_n} & \text{otherwise.} \end{cases}
+\end{aligned}\]
+Let us define a function that either reverses the order of the letters and changes each exponent to the other one:
+\[i : \angled S \to \angled S \,, \ i\left( x_1^{\xi_1} \cdots{} x_i^{\xi_i} x_{i+1}^{\xi_{i+1}} \cdots{} x_n^{\xi_n} \right) := x_n^{-\xi_n} \cdots{} x_{i+1}^{-\xi_{i+1}} x_i^{-\xi_i} \cdots{} x_1^{-\xi_1} .\]
+It is immediate to show that \(w \cdot i(w) = i(w) \cdot x = e\) for every \(w \in \angled S\). Only the associativity of \(\cdot\) is a a bit tricky to prove. At this point we have endowed \(\angled S\) with a group structure.\newline
+Thus from a set \(S\) we are able to build a group \(\angled S\), that is called {\em free group} with base \(S\), or group generated by \(S\). Now, if take two sets \(S\) and \(T\) and a function \(f : S \to T\), we have the group homomorphism
+\[\angled f : \angled S \to \angled T \,, \ \angled f (x_1^{\delta_1} \cdots{} x_n^{\delta_n}) := \big(f(x_1)\big)^{\delta_i} \cdots{} \big(f(x_n)\big)^{\delta_n} .\]
+It is immediate to demonstrate that we ended up with having a functor
+\[\angled{\phantom\square} : \Set \to \Grp .\]
+\end{example}
+
+In future we will provide other examples involving free modules.
+
+\begin{example}[Free modules]
+The explicit construction of the free {\em abelian} group given a set is simpler than that of free group in general. Since an abelian group is a \(\integers\)-module, let us show how to build a free module.\newline
+Let \(R\) be a ring and \(S\) be a set, as in the previous example. Intuitively, the module generated by \(S\) are linear combination of a finite amount of elements of \(S\), that is expressions of the form
+\[\sum_{i = 1}^n \lambda_i x_i\]
+for \(n \in \naturals\), \(\lambda_1, \dots{}, \lambda_n \in R\) and \(x_1, \dots{}, x_n \in S\). Observe, however that the \q{sum} here is just a formal expression: there is no link to the an operation of sum yet. We can rethink this linear combination as something more manageable during computations:
+\[\sum_{x \in S} \lambda_x x\]
+where \(\lambda : S \to R\) is non zero for a finite amount of elements of \(S\). Observe that it is just formalism: \(S\) may be an infinite set, but the sum \(\sum_{x \in S} \lambda_x x\) is not to be understood as a series in Analysis; consider also \(\lambda_x \ne 0\) for finitely many \(x\), so if \(S\) is infinite, the most of the terms are useless. %\newline
+\NotaInterna{Instead of using the device of \q{formal expressions}, we can define the module words as functions \(\lambda : S \to R\) that assume non-zero values for a finite amount of elements. Isn't that the same stuff of a formal sum?}\newline
+Thus, let us write the explicit definition:
+\[\angled S := \set{\left.\sum_{x \in S} \lambda_x x \right\mid \lambda : S \to R\,,\, \lambda_x \ne 0 \text{ for finitely many times}} .\]
+This is only the first step to make a module with such set. We give a sum
+\begin{align*}
+& + : \angled S \times \angled S \to \angled S \\
+& \left( \sum_{x \in S} \alpha_x x \right) + \left( \sum_{x \in S} \beta_x x \right) : = \sum_{x \in S} (\alpha_x + \beta_x) x
+\end{align*}
+and an external product
+\begin{align*}
+& \cdot : R \times \angled S \to \angled S \\
+& \eta \cdot \left( \sum_{x \in S} \alpha_x x \right) : = \sum_{x \in S} (\eta \alpha_x) x
+\end{align*}
+It is simple to verify that \(\angled S\) is a \(R\)-module now.\newline
+So far, we only have an process that takes sets and emits \(R\)-modules: to make a functor, we also need to instruct how to construct a linear function from a simple function of sets. For \(f : S \to T\), we give
+\begin{align*}
+& \angled f : \angled S \to \angled T \\
+& \angled f \left(\sum_{x \in S} \lambda_x x \right) := \sum_{x \in S} \lambda_x f(x) .
+\end{align*}
+It is simple to verify we have a functor
+\[\angled\hole : \Set \to \Modu_R .\]
+\end{example}
+
+\begin{exercise}
+There is a plenty of \q{free stuff} around that can give arise to functors like the one above. Find and illustrate some of them.
+\end{exercise}
+
+\begin{example}[The First Homotopy Group]
+A {\em pointed topological space} is a topological space \(X\) with one point \(x_0 \in X\); we write it as \((X, x_0)\). We define a {\em pointed continuous function} \((X, x_0) \to (Y, y_0)\) to be a continuous functions \(X \to Y\) taking \(x_0\) to \(y_0\). Furthermore, composing such functions yields a pointed continuous function. So, really we have the category of pointed topological spaces, we denote by \(\Top_\ast\).%\newline
+%A loop based at \(x_0\) is a continuous function \(\phi : [0, 1] \to X\) such that \(\phi(0) = \phi(1) = x_0\). Denote by \(\Omega(X, x_0)\) the set of all the loops of \(X\) based at \(x_0\).
+%Consider the set of loops of \(X\) based at \(x_0\),
+\[\Omega(X, x_0) := \set{\text{continuous } \phi : [0,1] \to X \mid \phi(0) = \phi(1) = x_0}\]
+and call its elements {\em loops} of \(X\) based at \(x_0\). %That being said, any pointed continuous function \(f : (X, x_0) \to (Y, y_0)\) induces the function
+%\[\Omega (f) : \Omega(X, x_0) \to \Omega(Y, y_0)\,,\ \Omega(f)(\phi) := f\phi .\]
+%That is, we have a functor
+%\[\Omega : \Top_\ast \to \Set .\]
+%To construct a certain functor \(\Set \to \Grp\), we need develop some machinery before.\newline
+Two loops can be joined, that is traversing one loop after another one: for if \(\phi, \psi \in \Omega(X, x_0)\) we introduce the loop \(\phi \ast \psi : [0,1] \to X\) with
+\[(\phi \ast \psi) (t) := \begin{cases} \phi(2t) & \text{if } t \le \frac12 \\ \psi(2t-1) & \text{otherwise.} \end{cases}\]
+This gives us the operation of {\em junction} of loops
+\[\ast : \Omega(X, x_0) \times \Omega(X, x_0) \to \Omega(X, x_0) .\]
+Now it's time to find a suitable equivalence relation that is compatible with this operation. For if \(\phi, \psi \in \Omega(X, x_0)\), we say \(\phi\) is {\em homotopic} to \(\psi\) whenever there exists a {\em homotopy} from \(\phi\) to \(\psi\), viz a continuous function
+\[H : [0,1] \times [0,1] \to X\]
+such that \(H(\phantom{s}, 0) = \phi\), \(H(\phantom{s}, 1) = \psi\), \(H(s, 0) = H(s, 1) = x_0\) for every \(s \in [0, 1]\). This relation is an equivalence one and it is compatible with \(\ast\). It remains to verify some properties to define a group structure:
+\begin{tcbitem}
+\item \((\alpha \ast \beta) \ast \gamma\) is homotopic to \(\alpha \ast (\beta \ast \gamma)\) for every \(\alpha, \beta, \gamma \in \Omega(X, x_0)\).
+\item the paths \(\alpha \ast c_{x_0}\), \(c_{x_0} \ast \alpha\) and \(\alpha\) are homotpic for every \(\alpha \in \Omega(X, x_0)\); here, \(c_{x_0}\) is the loop defined by \(c_{x_0}(t) = x_0\).
+\item \(\alpha \ast \inv\alpha\), \(\inv \alpha \ast \alpha\) and \(c_{x_0}\) are homotopic for every \(\alpha \in \Omega(X, x_0)\); here, \(\inv \alpha\) is the loop with \(\inv \alpha (t) := \alpha (1-t)\).
+\end{tcbitem}
+%In conclusion of these observations, we have the group
+We have now all the ingredients to introduce a group: define \(\pi_1(X, x_0)\) to be the set obtained identifying homotopic elements of \(\Omega(X, x_0)\); this set is a group once you consider the operation
+\[\begin{aligned}
+\pi_1(X, x_0) \times \pi_1(X, x_0) &\to \pi_1(X, x_0) \\
+([\alpha], [\beta]) &\to [\alpha][\beta] := [\alpha \ast \beta] .
+\end{aligned}\]
+Here, we have written \([\phi]\) for the set of loops homotopic to \(\phi\). Sometimes --- especially if we are considering more topological spaces ---, we need to specify the topological space we are taking loops, for example writing \([\phi]_X\). Now, it is the turn to define induced homomorphisms: for a pointed continuous function \(f : (X, x_0) \to (Y, y_0)\) we have the group homomorphism
+\[\pi_1 (f) : \pi_1(X, x_0) \to \pi_1(Y, y_0)\,, \ \pi_1(f)[\phi]_X := [f \phi]_Y  .\]
+(You may have a look at Example~\ref{example:CategoryEqv}.) Instead of \(\pi_1(f)\), you may have been get used to \(f_\ast\). In conclusion, we have just defined one functor
+\[\pi_1 : \Top_\ast \to \Grp .\]
+The {\em first fundamental group} is not just a group, and that the actual group is just a piece of larger picture.
+\end{example}
+
+Traditionally, functors of Definition~\ref{definition:Functors} above are called \q{covariant}, because there are {\em contra}variant functors too. However, there is no sensible reason to maintain these two adjectives; at least, almost everyone agrees to not use the first adjective, whilst the second one still survives.
+
+For if \(\cat C\) and \(\cat D\) are categories, a {\em contravariant functor} from \(\cat C\) to \(\cat D\) is just a functor \(\op{\cat C} \to \cat D\). It is best that we say what functors \(F : \op{\cat C} \to \cat D\) do. They map objects to objects and morphisms \(f : a \to b\) of \(\op{\cat C}\) to morphisms \(F(f) : F(a) \to F(b)\) of \(\cat D\). But, remembering how dual categories are defined, what \(F\) actually does is this:
+\begin{quotation}
+it maps objects of \(\cat C\) to objects of \(\cat D\), and morphisms \(f : b \to a\) of \(\cat C\) to morphisms \(F(f) : F(a) \to F(b)\) of \(\cat D\) (mind that \(a\) and \(b\) have their roles flipped).
+\end{quotation}
+Now, what about functoriality axioms? Neither with identities \(F\) does something different and the composite \(gf\) of \(\op{\cat C}\) is mapped to the composite \(F(g)F(f)\) of \(\cat D\). Again by definition of dual categories, this can be translated as follows:
+\begin{quotation}
+the composite \(fg\) of \(\cat C\) is mapped to \(F(g)F(f)\) (notice here how \(f\) and \(g\) have their places switched).
+\end{quotation}
+You can think of contravariant functors as a trick to do what we want.
+
+\begin{example}
+The set of natural numbers \(\naturals\) has the order relation of divisibility, that we denote \(\divides\): regard this poset as a category. From Group Theory, we know that for every \(m, n \in \naturals\) such that \(m \divides n\) there is a homomorphism
+\[f_{m, n} : \integers/n\integers \to \integers/m\integers\,,\ f_{m, n}(a +n\integers) \coloneq a + m\integers .\]
+In fact, \(\integers/m\integers\) is the kernel of the homomorphism
+\[\pi_m : \integers \to \integers/m\integers\,, \ \pi_m(x) \coloneq x + m\integers\]
+and, because \(m \divides n\), we have \(n\integers \subseteq m\integers\). In that case, some Isomorphism Theorem\footnote{How theorems are named sometimes varies, so for sake of clarity let us explicit the statement we are referring to: Let \(G\) and \(H\) be two groups, \(f : G \to H\) an homomorphism and \(N\) some normal subgroup of \(G\). Consider also the homomorphism \(p_N : G \to G/N\), \(p_N(x) \coloneq xN\). If \(N \subseteq \ker f\) then there exists one and only one homomorphism \(\bar f : G/N \to H\) such that
+\(f = \bar f p_N\).
+(Moreover, \(\bar f\) is surjective if and only if so is \(f\).)} justifies the existence of \(f_{m, n}\).
+This offers us a nice functor:
+\[F : \op{(\naturals, \divides)} \to \Grp\]
+that maps naturals \(n\) to groups \(\integers/n\integers\) and \(m \divides n\) to the homomorphism \(f_{m,n}\) defined above.
+\end{example}
+
+%\begin{example}[Antitonic functions]
+%\end{example}
+
+\NotaInterna{Clearly, this section needs more work\dots{}}
+
+Functors can be composed --- and I think at this point it is not a secret. Take \(\cat C\), \(\cat D\) and \(\cat E\) categories and functors
+\[\cat C \functo F \cat D \functo G \cat E .\]
+The sensible way to define the composite functor \(GF : \cat C \to \cat E\) is mapping the objects \(x\) of \(\cat C\) to the objects \(GF(x)\) of \(\cat E\), and the morphisms \(f : x \to y\) of \(\cat C\) to the morphisms \(GF(f) : GF(x) \to GF(y)\) of \(\cat E\). That being set, the composition is associative and there is an identity functor too.
+
+There are all the conditions, so what prevents us to consider a category --- we can call \(\bf Cat\) --- that has categories as objects and functors as morphisms?
+
+If we work upon NBG, we can think of any proper class as a category, for this statement have a closer look at Example~\ref{example:CollectionsAreCats}. What happens now is that the class of objects of \(\bf Cat\) has an element that is a proper class, which isn't legal in NBG.
+
+Is a category of {\em locally small} categories and functors problematic? Take \(\cat C\) such that \(\cat C(a, b)\) is a proper class for some \(a\) and \(b\) objects: consider \(\cat C{/}{b}\). In this case \(\obj{\cat C/b}\) is a proper class too, and here we go again.
+
+Now what? If we stick to NBG, this is a limit we have to take into account. From now on, \(\bf Cat\) is the category of {\em small} categories and functors between small categories.

@@ -1,0 +1,334 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../limits.tex
+
+\section{Products and coproducts}
+
+%\begin{definition}[Product \& coproducts]
+Let \(\cat C\) be a category and \(I\) a discrete category (that is a class). We have seen how functors \(x : I \to \cat C\) are exactly families \(\set{x_i \mid i \in I}\) of objects of \(\cat C\). We call ({\em co}){\em products} of \(\set{x_i \mid i \in I}\) the (co)limits of \(\set{x_i \mid i \in I}\).
+%\end{definition}
+%
+Let us put this definition into more explicit terms.
+
+First of all, let us make clear what cones over a collection \(\set{x_i \mid i \in I}\) are. For \(p \in \obj{\cat C}\) and \(k_p : I \to \cat C\) the functor constant at \(p\), a natural transformation
+\[\naturaltr{}{I}{\cat C}{k_p}{x}\]
+is just a family \(\set{p \to x_i \mid i \in I}\) of morphisms of \(\cat C\). In this fortunate case, the naturality condition automatically holds because \(I\) has no morphisms other than identities. Similarly, one can easily make explicit what cocones are.
+
+\begin{definition}[Products \& coproducts]
+Let \(\cat C\) be a category. A {\em product} of a family \(\set{x_i \mid i \in I}\) of objects in \(\cat C\) is any family \(\set{\proj_i : p \to x_i \mid i \in I}\) of morphisms of \(\cat C\), usually called {\em projections}, respecting the following property:
+%\begin{quotation}
+for every family \(\set{f_i : a \to x_i \mid i \in I}\) of morphisms of \(\cat C\) there exists one and only one \(h : a \to p\) of \(\cat C\) such that
+\[\begin{tikzcd}[row sep=tiny]
+a \ar["h", dd, swap] \ar["{f_i}", dr] \\
+ & x_i \\
+p \ar["{\proj_i}", ur, swap]
+%p \ar["{\proj_i}", r, swap] & x_i
+\end{tikzcd}\]
+commutes for every \(i \in I\).
+%\end{quotation}
+A {\em coproduct} of \(\set{x_i \mid i \in I}\) of objects of \(\cat C\) is any family \(\set{\inj_i : x_i \to q \mid i \in I}\) of morphisms of \(\cat C\), often referred to as {\em injections}, having the property:
+%\begin{quotation}
+for every family \(\set{g_i : x_i \to b \mid i \in I}\) of morphisms of \(\cat C\) there exists one and only one \(k : q \to b\) of \(\cat C\) such that
+\[\begin{tikzcd}[row sep=tiny]
+b \\
+ & x_i \ar["{\inj_i}", dl] \ar["{g_i}", ul, swap] \\
+q \ar["k", uu]
+\end{tikzcd}\]
+commutes for every \(i \in I\).
+%\end{quotation}
+\end{definition}
+
+\begin{example}[Infima and suprema in prosets]
+Consider a proset \((\mathbb P, \le)\) and a subset \(S\) of \(\mathbb P\). In this instance, a product of \(S\) is some \(p \in \mathbb P\) such that:
+\begin{tcbenum}
+\item \(p \le x\) for every \(x \in S\);
+\item for every \(p' \in \mathbb P\) such that \(p' \le x\) for every \(x \in S\) we have \(p' \le p\). 
+\end{tcbenum}
+If we have  quick look to some existing mathematics, cones over \(S\) are what are called {\em lower bounds} of \(S\). An {\em infimum} of \(S\) is any of the greatest lower bounds for \(S\).\newline
+On the other hand, a coproduct of \(S\) is some \(q \in \mathbb P\) such that:
+\begin{tcbenum}
+\item \(x \le q\) for every \(x \in S\);
+\item for every \(q' \in \mathbb P\) such that \(x \le q'\) for every \(x \in S\) we have \(q \le q'\). 
+\end{tcbenum}
+In other words, the cones over \(S\) are precisely the {\em upper bounds} of \(S\). A {\em supremum} of \(S\) is any of the lowest upper bounds for \(S\).\newline
+There is a dedicated notations for such elements, if \((\mathbb P, \le)\) is a poset: the infimum of \(S\) is written as \(\inf S\), whereas \(\sup S\) is the supremum of \(S\). If the elements of \(S\) are indexed, that is \(S = \set{x_i \mid i \in I}\), then it is customary to write \(\inf_{i \in I} x_i\) and \(\sup_{i \in I} x_i\).
+\end{example}
+
+\begin{exercise}
+Prosets provide some examples in which some subsets does not have infima or suprema. 
+\end{exercise}
+
+Now let us turn our attention to a pair of quite ubiquitous constructs.
+
+\begin{example}[Cartesian product]\label{example:ProdOfSets}
+Given a family of sets \(\set{X_\alpha \mid \alpha \in \Gamma}\), we have the corresponding {\em Cartesian product}
+\[\prod_{\alpha \in \Gamma} X_\alpha := \set{\left. f : \Gamma \to \bigcup_{\alpha \in \Gamma} X_\alpha \right\mid f(\lambda) \in X_\lambda \text{ for every } \lambda \in \Gamma} ,\]
+whose elements are the {\em choices} from \(\set{X_\alpha \mid \alpha \in \Gamma}\). As the name indicates, a choice \(f\) for every \(\lambda \in \Gamma\) indicates one element of \(X_\lambda\). Our product comes with the {\em projections}, one for each \(\mu \in \Gamma\),
+\begin{align*}
+& \proj_\mu : \prod_{\alpha \in \Gamma} X_\alpha \to X_\mu \\
+& \proj_\mu(f) := f(\mu) .
+\end{align*}
+Now, any family of functions \(\set{f : A \to X_\alpha \mid \alpha}\) ca be compressed into one function
+\[\prod_{\alpha \in \Gamma} f_\alpha : A \to \prod_{\alpha \in I} X_\alpha .\]
+%Taken now any set \(A\) and functions \(f_\alpha : A \to X_\alpha\), one for each \(\alpha \in \Gamma\), we have
+%\[\prod_{\alpha \in \Gamma} f_\alpha : A \to \prod_{\alpha \in \Gamma} X_\alpha\]
+by defining \(\left(\prod_{\alpha \in \Gamma} f_\alpha\right) (a)\) to be the function \(\Gamma \to \bigcup_{\alpha \in \Gamma} X_\alpha\) mapping \(\mu \in \Gamma\) to \(f_\mu(a)\).
+%\NotaInterna{Ok, the notation here is becoming cumbersome\dots{} Using \(f_\bullet\) instead of \(\prod_{i \in I} f_i\)? The idea is: \(f_\bullet (a)\) takes \(i\) as input by putting it in place of \(\bullet\).} 
+It is simple to show that
+\[\begin{tikzcd}[row sep=small]
+A \ar["{{\prod_{\alpha \in \Gamma}} f_\alpha}", dd, swap] \ar["{f_\mu}", dr] \\
+& X_\mu \\
+\prod_{\alpha \in \Gamma} X_\alpha \ar["{\proj_\mu}", ur, swap]
+\end{tikzcd}\]
+commutes for every \(\mu \in \Gamma\). Moreover, \(\prod_{\alpha \in \Gamma} f_\alpha\) is the only one that does this. Consider any function \(g : A \to \prod_{\alpha \in \Gamma} X_\alpha\) with \(f_\mu = \proj_\mu g\) for every \(\mu \in \Gamma\): then for every \(x \in A\) we have
+\[\begin{aligned}
+\big(g(x)\big)(\mu) &= \proj_\mu \big(g(x)\big) = f_\mu (x) = \\
+&= p_\mu\left(\left(\prod_{\alpha \in \Gamma} f_\alpha\right)(x)\right) = \left(\left(\prod_{\alpha \in \Gamma} f_\alpha\right)(x)\right)(\mu) ,
+\end{aligned}\]
+that is \(g = \prod_{\alpha \in \Gamma} f_\alpha\).
+\end{example}
+
+\begin{exercise}
+It may be simple to reason about the Cartesian product of only two sets \(X_1\) and \(X_2\). In this case, the product is written as \(X_1 \times X_2\) and its elements are represented as pairs \((a, b) \in X_1 \times X_2\) rather than functions \(f : \set{1, 2} \to X_1 \cup X_2\) with \(f(i) \in X_i\) for \(i \in \set{1, 2}\). By setting things like this, the \q{compression} of two functions \(f_1 : A \to X_1\) and \(f_2 : A \to X_2\) into a function \(A \to X_1 \times X_2\) becomes more obvious.
+\end{exercise}
+
+\begin{example}[Coproduct of sets]\label{example:CoprodOfSets}
+For if \(\set{X_\alpha \mid \alpha \in \Lambda}\) is a family of sets, we introduce the {\em disjoint union}
+\[\sum_{\alpha \in \Lambda} X_\alpha := \bigcup_{\alpha \in \Lambda} X_\alpha \times \set{\alpha} = \set{(x, \alpha) \mid \alpha \in \Lambda\,, \ x \in X_\alpha} .\]
+While the elements of every member of \(\set{X_\alpha \mid \alpha \in \Lambda}\) are amalgamated in \(\bigcup_{\alpha \in \Lambda} X_\alpha\), in the disjoint union \(\sum_{\alpha \in \Lambda} X_\alpha\) the elements have attached a record of their provenience --- in this case, the index of the set they come from. Because of this feature, the elements of \(\sum_{\alpha \in \Lambda} X_\alpha\) are called {\em dependent pairs}. The disjoint union of \(\set{X_\alpha \mid \alpha \in \Lambda}\) has one {\em injection} for each \(\alpha \in \Lambda\):
+\[\inj_\mu : X_\mu \to \sum_{\alpha \in \Lambda} X_\alpha\,, \ \inj_\mu(x) := (x, \mu) .\]
+Similarly to what we have done in the previous example, a family of functions \(\set{f_\alpha : X_\alpha \to A \mid \alpha \in \Lambda}\) can be compressed into this one
+\begin{align*}
+& \sum_{\alpha \in \Lambda} f_\alpha : \sum_{\alpha \in \Lambda} X_\alpha \to A \\
+& \left(\sum_{\alpha \in \Lambda} f_\alpha\right) (x, \mu) := f_\mu(x) ,
+\end{align*}
+which, in other words, checks the provenience of an element and give it to an appropriate function \(f_\alpha\). This new function makes the diagram
+\[\begin{tikzcd}[row sep=small]
+A \\
+& X_\mu \ar["{\inj_\mu}", dl] \ar["{f_\mu}", ul, swap] \\
+\sum_{\alpha \in \Lambda} X_\alpha \ar["{\sum_{\alpha \in \Lambda} f_\alpha}", uu]
+\end{tikzcd}\]
+commute for every \(\mu \in \Lambda\), and it is the unique to do this.%\newline
+%Sometimes, you will see written \(\coprod\) instead of \(\sum\), but this does not shift the discourse.
+\end{example}
+
+\begin{exercise}
+Prove \(\bigcup_{\alpha \in \Lambda} X_\alpha\) is a coproduct if the \(X_\alpha\)-s are pairwise disjoint. By the way, \(\bigcup_{\alpha \in \Lambda} X_\alpha\) is isomorphic to an appropriate quotient of \(\sum_{\alpha \in \Lambda} X_\alpha\). Part of the exercise is to find an equivalence relation \(\sim\) on \(\sum_{\alpha \in \Lambda} X_\alpha\) and a function
+\[\sum_{\alpha \in \Lambda} X_\alpha \to \bigcup_{\alpha \in \Lambda} X_\alpha\] 
+which maps \(\sim\)-equivalent elements to the same element.
+\end{exercise}
+
+\begin{exercise}
+Haskell natively offers the function
+\begin{center}
+{\tt either :: (a -> c) -> (b -> c) -> Either a b -> c}
+\end{center}
+How do {\tt Either a b} and this function fit in the current topic? If you accept this little exercise, remember {\tt Either a b} is defined to be either {\tt Left a} or {\tt Right b}. We haven't talked about the category of types, but it is not be that unseen.
+\end{exercise}
+
+\begin{example}[Product of topological spaces]
+Consider now a family of topological spaces \(\set{X_i \mid i \in I}\) and let us see if we can have a product of topological space in the sense of the Definition above.\newline
+In order to talk about product topological space we shall determine a topology over the set \(\prod_{i \in I} X_i\). From the Example~\ref{example:ProdOfSets}, we have a nice machinery, but it is all about sets and functions! We define the {\em product topology} --- sometimes called \q{Tychonoff topology} --- as the smallest among the topologies for \(\prod_{i \in I} X_i\) for which all the projections \(\proj_j : \prod_{i \in I} X_i \to X_j\) of the Example~\ref{example:ProdOfSets} are continuous.\newline
+The question is now: do these continuous functions form a product in \(\Top\)? Taking a family of continuous functions \(\set{f_i : A \to X_i \mid i \in I}\) and looking at the \q{underground} \(\Set\), there does exist one function \(\hat f : A \to \prod_{i \in I} X_i\) such that \(f_i = \proj_i \hat f\) for every \(i \in I\), but we do not know if it is continuous! To give an answer, let us consider the family
+\[\mathcal T := \set{\left. U \subseteq \prod_{i \in I} X_i \text{ open} \right\mid \inv{\hat f} U \text{ is open in } A} :\]
+the idea is that if we demonstrate \(\mathcal T\) is a topology for \(\prod_{i \in I} X_i\) and \(\mathcal T\) makes all the \(\proj_i\)'s continuous, then we can conclude the continuity of \(\hat f\). The first part is immediate, so let us focus on the remaining part. If we take an open subset \(V\) of \(X_j\), the open subset \(\inv{\proj_j} V\) of the product is in \(\mathcal T\), because \(\inv{f_j} V = \inv{\hat f} \left(\inv{\proj_j} V\right)\) is open in \(A\).
+\end{example}
+
+\begin{example}[Coproduct of topological spaces]
+As in the previous example, we move from Example~\ref{example:CoprodOfSets}. In Topology, it is maybe more customary to use
+\[\coprod_{i \in I} X_i \text{ instead of } \sum_{i \in I} X_i\]
+when \(\set{X_i \mid i \in I}\) is a family of topological spaces. However, if we do not give a topology to \(\coprod_{i \in I} X_i\), this object remains a bare set. In analogy to what happened with the Cartesian product, we prescribe the open subsets of \(\coprod_{i \in I} X_i\) by making reference to the injections \(\inj_j : X_j \to \coprod_{i \in I} X_i\):
+\begin{quotation}
+we define a subset \(A\) of \(\coprod_{i \in I} X_i\) to be open if and only if \(\inv{\inj_j} A\) is an open subset of \(X_j\) for every \(j \in I\).
+\end{quotation}
+Let us recycle the universal property enjoyed by the family of the injections, that is for every family \(\set{g_i : X_i \to A \mid i \in I}\) of continuous functions there exists one function \(\tilde g : \coprod_{i \in I} X_i \to A\) such that \(g_j = \tilde g \inj_j\) for every \(j \in I\). Furthermore, \(\tilde g\) is continuous: if \(U \subseteq A\) is open, then so are the subsets \(\inv{g_j} U \subseteq X_j\); consequently \(\inv{g_j} U = \inv{\inj_j} \left(\inv{\tilde g} U\right)\) for every \(j \in I\), which implies \(\inv{\tilde g} U\) is open.
+\end{example}
+
+Sometimes, products and coproducts can be isomorphic, as in the following example.
+
+\begin{example}[Product and coproduct of modules]
+\NotaInterna{Yet to be \TeX{}-ed\dots{}}
+\end{example}
+
+Let us talk about {\em finite} products, that is products of a finite set of
+objects. The following arguments will be useful when we will deal with finite completeness of categories. Keep an eye on Figure~\ref{figure:ProductsReductions}.
+
+\begin{figure}
+\centering
+\begin{tabular}{c}
+\toprule
+reduction from left (Proposition~\ref{proposition:FiniteProdLeftCons}) \\
+\midrule
+\begin{tikzcd}[ampersand replacement=\&]
+\& \& \& \& \& p_n \ar["{l_n}", dl, swap] \ar["{r_n}", dr] \\
+\& \& \& \& p_{n-1} \ar["{l_{n-1}}", dl, swap] \ar["{r_{n-1}}", dr] \& \& x_n \\
+\& \& \& \cdots{} \ar["{l_4}", dl, swap] \ar["{\cdots{}}", dr] \& \& x_{n-1} \\
+\& \& p_3 \ar["{l_3}", dl, swap] \ar["{r_3}", dr] \& \& \cdots{} \\
+\& p_2 \ar["{l_2}", dl, swap] \ar["{r_2}", dr] \& \& x_3 \\
+x_1 \& \& x_2
+\end{tikzcd}
+\\
+\toprule
+reduction from right (Proposition~\ref{proposition:FiniteProdRightCons}) \\
+\midrule
+\begin{tikzcd}[ampersand replacement=\&]
+\& p_n \ar["{l_n}", dl, swap] \ar["{r_n}", dr] \& \\
+x_1 \& \& p_{n-1} \ar["{l_{n-1}}", dl, swap] \ar["{r_{n-1}}", dr] \\
+\& x_2 \& \& \cdots{} \ar["{\cdots{}}", dl, swap] \ar["{r_4}", dr] \\
+\& \& \cdots{} \& \& p_3 \ar["{l_3}", dl, swap] \ar["{r_3}", dr] \\
+\& \& \& x_{n-2} \& \& p_2 \ar["{l_2}", dl, swap] \ar["{r_2}", dr] \\
+\& \& \& \& x_{n-1} \& \& x_n 
+\end{tikzcd} \\
+\bottomrule
+\end{tabular}
+\caption{Finite products recursively constructed}
+\label{figure:ProductsReductions}
+\end{figure}
+
+\begin{proposition}[Finite products, reduction from left]\label{proposition:FiniteProdLeftCons}
+Let \(\cat C\) be a category a finite set \(\set{x_1, \dots{}, x_n}\), with \(n \ge 2\), of objects of \(\cat C\). Let
+\begin{tikzcd}[cramped, row sep=tiny, column sep=small]
+& p_2 \ar["{l_2}", dl, swap] \ar["{r_2}", dr] \\
+x_1 & & x_2 \end{tikzcd}
+be one of the products of \(\set{x_1, x_2}\) and let
+\begin{tikzcd}[cramped, row sep=tiny, column sep=small]
+& p_{i+1} \ar["{l_{i+1}}", dl, swap] \ar["{r_{n+1}}", dr] \\
+p_i & & x_{i+1}
+\end{tikzcd}
+be one of the products of \(\set{p_i, x_{i+1}}\).
+%
+%\[\begin{tikzcd}[sep=small]
+%& & & & & p_n \ar["{l_n}", dl, swap] \ar["{r_n}", dr] \\
+%& & & & p_{n-1} \ar["{l_{n-1}}", dl, swap] \ar["{r_{n-1}}", dr] & & x_n \\
+%& & & \cdots{} \ar["{l_4}", dl, swap] \ar["{\cdots{}}", dr] & & x_{n-1} \\
+%& & p_3 \ar["{l_3}", dl, swap] \ar["{r_3}", dr] & & \cdots{} \\
+%& p_2 \ar["{l_2}", dl, swap] \ar["{r_2}", dr] & & x_3 \\
+%x_1 & & x_2
+%\end{tikzcd}\]
+%
+Then the morphisms
+\[\begin{aligned}
+l_2 \cdots{} l_n &: p_n \to x_1 \\
+r_j l_{j+1} \cdots{} l_n &: p_n \to x_j \quad \text{for } j \in \set{2, \dots{}, n-1} \\
+r_n &: p_n \to x_n
+\end{aligned}\]
+of \(\cat C\) do form a product of \(\set{x_1, \dots{}, x_n}\).
+\end{proposition}
+
+\begin{proof}
+The proof is conducted by induction on \(n \ge 2\). The case \(n=2\) is the base case of our recursive definition. To proceed with the inductive step, let us picture the situation:
+\[\begin{tikzcd}
+& & & & p_{n+1} \ar["{l_{n+1}}", dll, swap] \ar["{r_{n+1}}", drr] \\
+& & p_n \ar["{l_2\cdots{}l_n}", dll, swap] \ar["{r_jl_{j+1}\cdots{}l_n}" description, d] \ar["{r_n}", drr] & & & & x_{n+1} \\
+x_1 & & x_j & & x_n \\
+\\
+& & & & & a
+  \ar["{f_1}" description, uulllll]
+  \ar["{f_j}" description, uulll]
+  \ar["h" description, uuulll, dotted]
+  \ar["{f_n}" description, uul]
+  \ar["k" description, uuuul, dotted]
+  \ar["{f_{n+1}}" description, uuur]
+\end{tikzcd}\]
+where \(j \in \set{2, \dots{}, n-1}\), \(a\) is an arbitrary object with morphisms \(f_1, \dots{}, f_n, f_{n+1}\). By the universal property of product, we have
+\[\begin{aligned}
+f_1 &= l_1 \cdots{} l_n h \\
+f_j &= r_jl_{j+1} \cdots{} l_n h \\
+f_n &= r_n h
+\end{aligned}\]
+for one and only one \(h : a \to p_n\). Again by the universal property of product.
+\[\begin{aligned}
+h &= l_{n+1} k \\
+f_{n+1} &= r_{n+1} k
+\end{aligned}\]
+for a unique \(k : a \to p_{n+1}\). Thus
+\[\begin{aligned}
+f_1 &= l_1 \cdots{} l_n l_{n+1} k \\
+f_j &= r_jl_{j+1} \cdots{} l_n l_{n+1} k \\
+f_n &= r_n l_{n+1} k \\
+f_{n+1} &= r_{n+1} k
+\end{aligned}\]
+and we have concluded.
+\end{proof}
+
+\begin{proposition}[Finite products, reduction from right]\label{proposition:FiniteProdRightCons}
+Let \(\cat C\) be a category a finite set \(\set{x_1, \dots{}, x_n}\), with \(n \ge 2\), of objects of \(\cat C\). Let
+\begin{tikzcd}[cramped, row sep=tiny, column sep=small]
+& p_2 \ar["{l_2}", dl, swap] \ar["{r_2}", dr] \\
+x_{n-1} & & x_n
+\end{tikzcd}
+be one of the products of \(\set{x_{n-1}, x_n}\) and let
+\begin{tikzcd}[cramped, row sep=tiny, column sep=small]
+& p_{i+1} \ar["{l_{i+1}}", dl, swap] \ar["{r_{n+1}}", dr] \\
+x_{n-i} & & p_i
+\end{tikzcd}
+be one of the products of \(\set{x_{n-i}, p_i}\).
+%
+%\[\begin{tikzcd}[sep=small]
+%& p_n \ar["{l_n}", dl, swap] \ar["{r_n}", dr] & \\
+%x_1 & & p_{n-1} \ar["{l_{n-1}}", dl, swap] \ar["{r_{n-1}}", dr] \\
+%& x_2 & & \cdots{} \ar["{\cdots{}}", dl, swap] \ar["{r_4}", dr] \\
+%%    &     & \cdots{} &          & \cdots{} \\
+%& & \cdots{} & & p_3 \ar["{l_3}", dl, swap] \ar["{r_3}", dr] \\
+%& & & x_{n-2} & & p_2 \ar["{l_2}", dl, swap] \ar["{r_2}", dr] \\
+%& & & & x_{n-1} & & x_n 
+%\end{tikzcd}\]
+%
+Then the morphisms
+\[\begin{aligned}
+r_2 \cdots{} r_n &: p_n \to x_n \\
+l_j r_{j+1} \cdots{} r_n &: p_n \to x_{n-j+1} \quad \text{for } j \in \set{2, \dots{}, n-1} \\
+r_n &: p_n \to x_1
+\end{aligned}\]
+of \(\cat C\) do form a product of \(\set{x_1, \dots{}, x_n}\).
+\end{proposition}
+
+\begin{proof}
+This is \inlinethm{exercise}. You should expect some work like in the proof of Proposition~\ref{proposition:FiniteProdLeftCons}.
+\end{proof}
+
+\begin{corollary}[Associativity of product]\label{corollary:ProdAssoc}
+In a category \(\cat C\), let
+\[\begin{tikzcd}[sep=small]
+x_1 & x_1 \times x_2 \ar["{p_1}", l, swap] \ar["{p_2}", r] & x_2
+\end{tikzcd}\]
+a product of \(\set{x_1, x_2}\),
+\[\begin{tikzcd}[sep=small]
+x_1 \times x_2 & (x_1 \times x_2) \times x_3 \ar["{p_{1,2}}", l, swap] \ar["{p_3}", r] & x_3
+\end{tikzcd}\]
+a product of \(\set{x_1 \times x_2, x_3}\),
+\[\begin{tikzcd}[sep=small]
+x_2 & x_2 \times x_3 \ar["{q_2}", l, swap] \ar["{q_3}", r] & x_3
+\end{tikzcd}\]
+a product of \(\set{x_2, x_3}\),
+\[\begin{tikzcd}[sep=small]
+x_1 & x_1 \times (x_2 \times x_3) \ar["{q_1}", l, swap] \ar["{q_{2,3}}", r] & x_2 \times x_3
+\end{tikzcd}\]
+a product of \(\set{x_1, x_2 \times x_3}\).
+\[\begin{tikzcd}[sep=small,cramped]
+& & (x_1 \times x_2) \times x_3 \ar["{p_{1,2}}", dl, swap] \ar["{p_3}", ddrr] \\
+& x_1 \times x_2 \ar["{p_1}", dl, swap] \ar["{p_2}", dr] \\
+x_1 & & x_2 & & x_3 \\
+& & & x_2 \times x_3 \ar["{q_2}", ul] \ar["{q_3}", ur, swap] \\
+& & x_1 \times (x_2 \times x_3) \ar["{q_1}", uull] \ar["{q_{2, 3}}", ur, swap]
+\end{tikzcd}\]
+Then
+\[(x_1 \times x_2) \times x_3 \cong x_1 \times (x_2 \times x_3) .\]
+\end{corollary}
+
+\begin{proof}
+It follows from Proposition~\ref{proposition:FiniteProdLeftCons} and Proposition~\ref{proposition:FiniteProdRightCons}.
+\end{proof}
+
+\begin{corollary}\label{corollary:FiniteProductsIffTerminalAndBinaryProducts}
+A category has all finite products if and only if has a terminal object and all binary products.
+\end{corollary}
+
+\begin{proof}
+One implication is easy. For the opposite one: terminal objects are empty products; an object with identity is a product of itself; if you are given at least two objects, either of Proposition~\ref{proposition:FiniteProdLeftCons} and Proposition~\ref{proposition:FiniteProdRightCons} tell you finite product are consecutive binary products.
+\end{proof}
+
+\begin{exercise}
+In a category with terminal object \(1\), we have \(a \times 1 \cong 1 \times a \cong a\).
+\end{exercise}
+

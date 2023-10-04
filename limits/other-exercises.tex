@@ -1,0 +1,95 @@
+% !TEX program = lualatex
+% !TEX root = ../limits.tex
+% !TEX spellcheck = en_GB
+
+\section{Other exercises}
+
+Here is a collection of exercises that do have a precise placement in the the previous sections, for they deal with the interplay between different kinds of limits and with the previous chapters in a manner that would burden the flow of  the discourse.
+
+\begin{exercise}[Elements of objects]\NotaInterna{This part needs a heavy rewrite.}
+Let us take advantage of a basic fact about sets:
+\[X \cong \Set(1, X) \text{ for every set } X .\]
+In general, the isomorphism relation above is not made possible by a unique bijection, but there is one really meaningful for us: the function that takes \(x \in X\) to the function \(\hat x : 1 \to X\) mapping the unique element of \(1\) into \(x\). The great deal here is that functions \(1 \to X\) inspect \(X\) and this isomorphism just outlined identifies every \(x\) to \(\hat x\).\newline
+Let us step back for a moment and turn our attention to the act of defining functions. To define a function \(f : X \to Y\), one writes an expression like
+\begin{equation}
+f(x) := \Gamma \label{equation:DefiningAFunction}
+\end{equation}
+with \(\Gamma\) being a formula that may contain the symbol \(x\) or not. By writing something like~\eqref{equation:DefiningAFunction}, you are prescribing the images of each element of the domain. This deeply relies on these two facts:
+\begin{tcbenum}
+\item Sets are things you can look inside.
+\item We have a principle that guarantees the function we are defining in such manner is uniquely determined:
+\begin{quotation}
+Given two functions \(f_1, f_2 : X \to Y\), if we have \(f_1(a) = f_2(a)\) for every \(a \in X\), then it must be \(f_1 = f_2\).
+\end{quotation}
+This is crucial, since once you have assigned a function as in~\eqref{equation:DefiningAFunction}, it cannot behave any different from what prescribed.
+\end{tcbenum}
+How this can be interesting to us at this point? First of all, \(1\) is a terminal object. We have showed earlier how elements of \(X\) can be thought as functions \(1 \to X\). In this case, the application of \(f\) to \(x\) is the mere composition
+\[f x : 1 \functo x X \functo f Y .\]
+The principle aforementioned can be restated as:
+\begin{quotation}
+If the diagram
+\[\begin{tikzcd}
+1 \ar["x", r] & X \ar["{f_1}", r, bend left] \ar["{f_2}", r, bend right, swap] & Y
+\end{tikzcd}\]
+commutes for every \(x : 1 \to X\), then \(f_1 = f_2\).
+\end{quotation}
+\NotaInterna{To be continued\dots{}}
+\end{exercise}
+
+\begin{exercise}[Natural number objects]
+Assume you have a category \(\cat C\) with terminal object \(1\) and with {\em natural number object}
+\[\begin{tikzcd}
+1 \ar["0", r] & \naturals \ar["s", r] & \naturals
+\end{tikzcd}\]
+\NotaInterna{I should spend more words for natural number objects.}
+It is not necessarily the \(\naturals\) in \(\Set\) you are used too. Prove the {\em primitive recursion theorem}:
+\begin{quotation}
+If
+\[\begin{tikzcd}
+\naturals & \naturals \times X \ar["{p_\naturals}", l, swap] \ar["{p_X}", r] & X
+\end{tikzcd}\]
+is a product of \(\cat C\), then for every \(x_0 : 1 \to X\) and \(f : \naturals \times X \to X\) in \(\cat C\) there is one and only one \(x : \naturals \to X\) such that
+\[\begin{tikzcd}[row sep=small]
+& \naturals \ar["s", r] \ar["{\angled{\id_\naturals, x}}", dd] & \naturals \ar["x", dd] \\
+1 \ar["0", ur] \ar["{\angled{0, x_0}}", dr, swap] \\
+& \naturals \times X \ar["f", r, swap] & X
+\end{tikzcd}\]
+\NotaInterna{We just used some notation we have never used before here.}
+\end{quotation}
+Indeed, in a category with a terminal object and binary products, {\em recursion theorem} is equivalent to {\em primitive recursion theorem}. \NotaInterna{Prepare a hint.}
+\end{exercise}
+
+\begin{exercise}[Epic-monic factorization]
+Consider in category \(\cat C\) one pullback square
+\[\begin{tikzcd}
+r \ar["s", r] \ar["t", d, swap] & a \ar["f", d] \\
+a \ar["f", r, swap] & b
+\end{tikzcd}\]
+and let \(p : a \to {a}{/}{r}\) be a coequalizer of \(s\) and \(t\).
+\begin{tcbenum}
+\item Thanks to the universal property of coequalizers, there is exactly one \(\bar f : {a}{/}{r} \to b\) in \(\cat C\) that satisfies \(f = \bar f p\). Show that \(\bar f\) is monic.
+\item The factorization \(\bar f p\) is an {\em epic-monic factorization} of \(f\). Consider now \(q : a \to c\) epic and \(g : c \to b\) monic in \(\cat C\) such that \(f = gq\), that is another epic-monic factorization of \(f\). Show that there exists one and only one \(h : {a}{/}{r} \to c\) such that
+\[\begin{tikzcd}[row sep=small]
+& {a}{/}{r} \ar["h" description, dd] \ar["{\bar f}", dr] & \\
+a \ar["p", ur] \ar["q", dr, swap] & & b \\
+& c \ar["g", ur, swap]
+\end{tikzcd}\]
+commutes. Show that moreover \(h\) is an isomorphism.
+\item Explore by yourself: \(f\) is monic if and only if \dots{}.
+\item Apply all that above to some concrete example. Does this sound familiar now?
+\end{tcbenum}
+Consider in category \(\cat C\) one pushout square
+\[\begin{tikzcd}
+a \ar["f", r] \ar["f", d, swap] & b \ar["u", d] \\
+b \ar["v", r, swap] & z 
+\end{tikzcd}\]
+and let \(\im f : f(a) \to b\) be an equalizer of \(u\) and \(v\). Make the dual of above. (Spoiler: again about epic-monic factorizations.)
+\end{exercise}
+
+\begin{exercise}[Equivalence relations]
+\YetToBeTeXed
+\end{exercise}
+
+\begin{exercise}[Subobject classifiers and some properties]
+\YetToBeTeXed
+\end{exercise}

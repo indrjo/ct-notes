@@ -1,0 +1,139 @@
+% !TEX program = lualatex
+% !TEX root = ./CT.tex 
+
+\documentclass[ structure      = book
+              , maketitlestyle = standard
+              , partfont       = smallcaps
+              , partstyle      = parright 
+              , chapstyle      = parcenter
+              , secstyle       = center
+              , secfont        = roman
+              , subsecstyle    = center
+              , subsecfont     = roman
+              , twocolcontents = toc
+              , liststyle      = aligned
+              , quotesize      = normalsize
+              , headerstyle    = center
+              , footnotestyle  = dotted
+              ]{suftesi}
+
+\captionsetup{ width=.8\textwidth
+             , labelfont=bf
+             }
+
+\newenvironment{tcbenum}
+  {\begin{enumerate}[leftmargin=*]}
+  {\end{enumerate}}
+
+\newenvironment{tcbitem}
+  {\begin{itemize}[leftmargin=*]}
+  {\end{itemize}}
+
+\usepackage[no-math]{fontspec}
+\usepackage[rm,tt=false]{libertine}
+\usepackage[scale=.85]{sourcecodepro}
+
+\usepackage{polyglossia}
+\setmainlanguage[variant=uk]{english}
+\setotherlanguage{german}
+
+\usepackage[english=british]{csquotes}
+\newcommand\q\enquote
+
+\usepackage{hyperref}
+\hypersetup{breaklinks,hidelinks}
+
+\usepackage{anyfontsize}
+
+\usepackage{indentfirst}
+
+\usepackage{booktabs}
+
+\usepackage[
+           %  bibstyle=authoryear
+           %, citestyle=authortitle-icomp
+             bibstyle = alphabetic
+           , citestyle = alphabetic
+           , pluralothers=true
+           , autolang=langname
+           ]{biblatex}
+\addbibresource{biblio.bib}
+\nocite{*} % temporary
+
+\usepackage{libertinust1math}
+\usepackage{MnSymbol}
+\usepackage{mathtools}
+\let\underbrace\LaTeXunderbrace
+\let\overbrace\LaTeXoverbrace
+\usepackage[bb=stix]{mathalfa}
+
+\usepackage{amsthm}
+\newcounter{coun} % Find a nicer name for the counter...
+\counterwithin{coun}{section}
+\theoremstyle{definition}
+\newtheorem{definition}  [coun]{Definition}
+\newtheorem{construction}[coun]{Construction}
+\newtheorem{lemma}       [coun]{Lemma}
+\newtheorem{proposition} [coun]{Proposition}
+\newtheorem{corollary}   [coun]{Corollary}
+\newtheorem{remark}      [coun]{Remark}
+\newtheorem{sandbox}     [coun]{Sandbox}
+\newtheorem{example}     [coun]{Example}
+\newtheorem{exercise}    [coun]{Exercise}
+
+\renewcommand\theequation{\thesection.\arabic{equation}}
+
+\newcommand\inlinethm[1]{\stepcounter{coun}{\bf #1~\thecoun}}
+
+%\usepackage[skins,theorems,breakable]{tcolorbox}
+%\tcbset{ enhanced
+%       , breakable
+%       , blanker
+%       }
+%
+%\tcolorboxenvironment{definition}
+%  { tile
+%  , top=6pt
+%  , bottom=6pt
+%  , left=6pt
+%  , right=6pt
+%  , borderline={1pt}{0pt}{gray!65!black}
+%  , colback=gray!15!white
+%  }
+%\tcolorboxenvironment{lemma}
+%  { left=6pt
+%  , borderline west={.75mm}{0mm}{blue!65!black}
+%  }
+%\tcolorboxenvironment{proposition}
+%  { left=6pt
+%  , borderline west={.75mm}{0mm}{blue!65!black}
+%  }
+%\tcolorboxenvironment{corollary}
+%  { left=6pt
+%  , borderline west={.75mm}{0mm}{blue!65!black}
+%  }
+%  
+%\tcolorboxenvironment{example}
+%  { top=6pt
+%  , bottom=6pt
+%  , borderline north={1pt}{0mm}{gray!65!black}
+%  , borderline south={1pt}{0mm}{gray!65!black}
+%  }
+
+\usepackage{adjustbox}
+
+\usepackage{tikz}
+\usetikzlibrary{calc,babel,arrows.meta}
+\tikzset{>={To[length=3pt,width=3pt]}}
+\usepackage{tikz-cd}
+\tikzcdset{
+          , arrow style=tikz
+          , diagrams={>={To[length=3pt,width=3pt]}}
+          , shorten=-2pt
+          , natural/.style={shorten=2pt,Rightarrow}
+          %, cramped
+          }
+
+% The first chapter is the zeroth chapter.
+\setcounter{chapter}{-1}
+
