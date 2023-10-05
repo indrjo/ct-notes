@@ -6,6 +6,26 @@
 
 Here is a collection of exercises that do have a precise placement in the the previous sections, for they deal with the interplay between different kinds of limits and with the previous chapters in a manner that would burden the flow of  the discourse.
 
+\begin{exercise}
+Consider a category with binary products, and for \(a, b \in \obj{\cat C}\) write the corresponding products as
+\[\begin{tikzcd}[column sep=small]
+a & a \times b \ar["{p_{a,b}}", l, swap] \ar["{q_{a,b}}", r] & b
+\end{tikzcd}\]
+\begin{tcbenum}
+\item Construct the functor \((c \times) : \cat C \to \cat C\). Without much other effort, you can define functors \((\times c) : \cat C \to \cat C\) as well.
+\item Can you construct natural transformations \((a \times) \tto (b \times)\) and \((\times a) \tto (\times b)\)?
+\end{tcbenum}
+Dually, if in a category \(\cat C\) with binary coproducts you have coproducts
+\[\begin{tikzcd}[column sep=small]
+a \ar["{l_{a,b}}", r] & a+b & b \ar["{r_{a,b}}", l, swap]
+\end{tikzcd}\]
+you can:
+\begin{tcbenum}
+\item Construct functors \((c +)\) and \((+ c)\) from \(\cat C\) to \(\cat C\).
+\item Construct natural transformations \((a +) \tto (b +)\) and \((+ a) \tto (+ b)\).
+\end{tcbenum}
+\end{exercise}
+
 \begin{exercise}[Elements of objects]\NotaInterna{This part needs a heavy rewrite.}
 Let us take advantage of a basic fact about sets:
 \[X \cong \Set(1, X) \text{ for every set } X .\]
