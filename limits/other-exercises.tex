@@ -4,7 +4,15 @@
 
 \section{Other exercises}
 
-Here is a collection of exercises that do have a precise placement in the the previous sections, for they deal with the interplay between different kinds of limits and with the previous chapters in a manner that would burden the flow of  the discourse.
+%Here is a collection of exercises that do have a precise placement in the the previous sections, for they deal with the interplay between different kinds of limits and with the previous chapters in a manner that would burden the flow of  the discourse.
+
+\begin{exercise}
+Consider a category \(\cat C\) with the property such that every functor \(X : \cat I \to \cat C\) has a limit, that is \(\cat C\) is complete. It is customary to denote by \(\lim X\) the vertex of any of the limits of \(X\). Limits of a given diagram are all the same, aren't they? Such assignment is not {\em canonical}, but is a legit construction. Hence a typical limit is presented as a family
+\[\set{\left.\lim X \functo{\lambda_i} X_i \right\mid i \in \obj{\cat I}}\]
+Indeed, here there is a functor
+\[\lim : [\cat I, \cat C] \to \cat C .\]
+The exercise requires you to work on the definition of limit and find some way to make things work. You may have already inferred by yourself how \(\lim\) is defined on objects, but what about morphisms? If I have a natural transformation \(\eta : X \tto Y\), is there a way to make one \(\lim\eta\) in \(\cat C\)? In this section, limits of simple diagrams are presented and provided with concrete examples: if it difficult to reason in the most general framework, describe the \(\lim\) construction for the diagrams have occurred so far. We will meet this functor later, but we think it would be nice if you can anticipate some things by yourself.
+\end{exercise}
 
 \begin{exercise}
 Consider a category with binary products, and for \(a, b \in \obj{\cat C}\) write the corresponding products as
