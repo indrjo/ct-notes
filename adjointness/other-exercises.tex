@@ -1,0 +1,43 @@
+% !TEX program = lualatex
+% !TEX spellcheck = en_GB
+% !TEX root = ../adjointness.tex
+
+\section{Other exercises}
+
+\begin{remark}[About the next exercise]
+Let \(\cat C\) be a category with binary products and consider one object \(c\) of \(\cat C\). For \(a\) object in \(\cat C\) choose a product of \(a\) and \(c\)
+\[\begin{tikzcd}[row sep=tiny]
+& a \times c \ar["{p_a}", dl, swap] \ar["{q_a}", dr] & \\
+a & & c
+\end{tikzcd}\]
+in \(\cat C\). In that context, there is a sensible way to define the functor
+\[(\times c) : \cat C \to \cat C .\]
+(If you have not done the exercise of the chapter of limits that about this construction, do it now.)
+\end{remark}
+
+\begin{exercise}[Exponential objects]
+In the category \(\cat C\) that has binary products, the {\em exponential object} of two objects \(a\) and \(b\) of  \(\cat C\) is any
+\begin{tcbitem}
+\item object of \(\cat C\), that we choose label as \(b^a\)
+\item a morphism \(\ev : b^a \times a \to b\), that we call {\em evaluation map}
+\end{tcbitem}
+such that \(\ev\) is a terminal object of \((\times a) \downarrow b\). A category \(\cat C\) is said to \q{have exponentials} whenever for every \(a, b \in \obj{\cat C}\) there is in \(\cat C\) the corresponding exponential object.
+
+\begin{tcbenum}
+\item Find an adjunction
+\[\begin{tikzcd}
+\cat C \ar["{(\times c)}"{name=L}, r, bend left] & \cat C \ar["{\square^c}"{name=R}, l, bend left]
+\ar["\perp"{description}, phantom, from=L, to=R]
+\end{tikzcd}\]
+This boils down to introducing an appropriate functor \(\square^c\) using uniquely the definition of exponential object.
+\item Assume \(\cat C\) has also an initial object \(0\) and terminal object \(1\). Prove the following statements.
+\begin{enumerate}[leftmargin=*,label=(\roman*)]
+\item \(a \times 0 \cong 0 \times a \cong a\) for every object \(a\) of \(\cat C\).
+\item For every \(a \in \obj{\cat C}\), if there is some morphism \(a \to 0\), then \(a \cong 0\).
+\item Any morphism \(0 \to a\) is monic for \(a \in \obj{\cat C}\).
+\item If \(0 \cong 1\), then all the objects of \(\cat C\) are isomorphic.
+\item \(a^1 \cong a\), \(a^0 \cong 0\) and \(1^a \cong 1\) for every \(a \in \obj{\cat C}\).
+\end{enumerate}
+\end{tcbenum}
+
+\end{exercise}
