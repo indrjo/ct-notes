@@ -37,67 +37,6 @@ Now let us look for terminal objects in \(\Set\). Take an arbitrary set \(X\): t
 Trivial groups --- there is a unique way a singleton can be a group --- are either terminal and initial objects of \(\Grp\).
 \end{exercise}
 
-\begin{construction}
-Let us introduce a nice category that allows us to express some nice and simple facts in Mathematics. Let \(\cat C\) and \(\cat J\) two categories, \(a\) one of its objects and take a functor \(F : \cat J \to \cat C\). We have the category \((a \downarrow F)\), this made:
-\begin{tcbitem}
-\item the objects are the morphisms \(a \to F(x)\) of \(\cat C\), with \(x\) being an object of \(\cat J\);
-\item the morphisms from \(f : a \to F(x)\) to \(g : a \to F(y)\) are the morphisms \(h : x \to y\) of \(\cat J\) such that
-\[\begin{tikzcd}[row sep=tiny]
- & F(x) \ar["{F(h)}", dd] \\
-a \ar["f", ur] \ar["g", dr, swap] \\
- & F(y)
-\end{tikzcd}\]
-commutes;
-\item the composition is that of \(\cat J\). 
-\end{tcbitem}
-\end{construction}
-
-\begin{example}
-\NotaInterna{Rewrite this example in \(\Modu_R\), for \(R\) ring? Yes\dots{}} In Linear Algebra we have a nice theorem:
-\begin{quotation}
-Let \(V\) be a vector space over a field \(k\) and \(S \subseteq V\) a base. For every vector space \(W\) over \(k\) and function \(\phi : S \to W\) there exists a unique linear function \(f : V \to W\) such that
-\[\begin{tikzcd}
-S \ar["i", hook, r] \ar["\phi", dr, swap] & V \ar["f", d] \\
- & W
-\end{tikzcd}\]
-commutes.
-\end{quotation}
-In other words, this statement says that a linear function is completely determined by what it does with the vectors of \(S\). We will consider now two functors
-\[\Set \functo{\angled \cdot} \Vect_k \functo U \Set .\]
-The first one takes a set \(S\) and produces the vector space on \(k\)
-\[\angled S := \set{\left.\sum_{x \in S} \lambda_x x \right\mid \lambda : S \to k,\, \lambda_x \ne 0 \text{ for finitely many times}}\]
-(considered with two obvious operations). Furthermore, a function of sets \(f : S \to T\) induces a linear function \(\angled f : \angled S \to \angled T\) defined by
-\[\angled f \left(\sum_{x \in S} \lambda_x x \right) := \sum_{x \in S} \lambda_x f(x)\]
-where \(\lambda : S \to k\) is almost always null. The functoriality of \(\angled \cdot\) is just a matter of quick controls. {\color{red} [Do we really need all that machinery?]} The functor \(U\) instead takes vector spaces and returns the correspondent set of vectors; we write \(U(V) := V\), but observe that in \(\Set\) we don't care anymore of the vector structure of \(V\). Similarly, it takes linear functions and the return them: but, since \(U\) lands onto \(\Set\), who cares about linearity there? (We may say that \(U\) is the \q{inclusion} of \(\Vect_k\) into \(\Set\).) {\color{red} [Talk about forgetful functors elsewhere\dots{}]}\newline
-All this words allow us restate the aforementioned theorem as:
-\begin{quotation}
-For if \(S\) is a set, the inclusion \(S \hookrightarrow \angled S\) is an initial object of \((S \downarrow U)\).
-%For if \(V\) is a vector space over a field \(k\) and with base \(S\), \(S \hookrightarrow V\) is an initial object of \((S \downarrow U)\).
-\end{quotation}
-\end{example}
-
-\begin{exercise}
-In the previous example some details are omitted: you can be more talkative, though. However, it is really worth to think about such examples --- not only because we will meet such pattern later under the vest of adjunctions. You may also look for another examples of similar kind, I'm sure you will find some.
-\end{exercise}
-
-\begin{example}[Isomorphism Theorem for Set Theory]
-We have defined \(\Eqv\) earlier, recall it here. We have the functor
-\[j : \Set \to \Eqv\]
-that maps sets \(X\) to setoids \(X\) together with the equality relation, and functions \(f : X \to Y\) to themselves. To get the mood for this example, sets {\em are} setoids where the equivalence relation is equality and functions {\em are} functoids between such setoids. In this case, the classical theorem
-\begin{quotation}
-Let \(X\) and \(Y\) be two sets and \(\sim\) an equivalence relation on \(X\). For every function \(f : X \to Y\) such that \(f(a) = f(b)\) for every \(a, b \in X\) with \(a \sim b\), there exists one and only one function \(\bar f : X{/}{\sim} \to Y\) such that
-\[\begin{tikzcd}[column sep=tiny]
-X \ar["f", rr] \ar["p", swap, dr] & & Y \\
-& X{/}{\sim} \ar["{\bar f}", swap, ur]
-\end{tikzcd}\]
-commutes, where \(p : X \to X{/}{\sim}\) is the canonical projection.
-\end{quotation}
-can be restated as follows
-\begin{quotation}
-the canonical projection \(p : (X, \sim) \to X{/}{\sim}\) is initial in \((X, \sim) \downarrow j\).
-\end{quotation}
-\end{example}
-
 \begin{example}[Recursion]\label{example:Recursion}
 In Set Theory, there is a nice theorem, the {\em Recursion Theorem}:
 \begin{quotation}
@@ -153,10 +92,6 @@ In \(\Set\), suppose you have \(1 \functo 0 \naturals \functo s \naturals\), whe
 (1) \(\tto\) (2) proves the Recursion Theorem, whereas (2) \(\tto\) (1) requires you to codify a proof by induction into a recursion. Try it, it could be nice. \NotaInterna{Prepare hints\dots{}}
 \end{exercise}
 
-%\begin{remark}
-%In general, suppose you have a category \(\cat C\) that has a terminal object, that we denote by \(1\). \NotaInterna{Explain why a terminal object is required.} We have then the category \(\mathbf{Peano}_{\cat C}\), that is \(\mathbf{Peano}\) with objects and morphisms picked from \(\cat C\) and compositions performed in \(\cat C\) --- really, there is nothing special in \(\Set\) that hinders us to do so. A {\em natural number object} of \(\cat C\) is any of the initial objects of \(\mathbf{Peano}_{\cat C}\), that is an assignment of one object \(\naturals\), a morphism \(0 : 1 \to \naturals\) and a morphism \(f : X \to X\) of \(\cat C\) such that they satisfy the {\em recursion property}, the Recursion Theorem but for \(\cat C\). \(\mathbf{Set}\) has natural number objects, as we have seen in the previous example, but another categories may have none. \NotaInterna{For instance?} \NotaInterna{This is quite interesting\dots{} An \q{arithmetic} for categories, perhaps\dots{}}
-%\end{remark}
-
 Limits (colimits) are terminal (initial) objects of appropriate categories. Definition~\ref{definition:TerminalAndInitialExplicit} does not make reference to limits and colimits as stated in Definition~\ref{definition:LimitsAndColimits}: thus, you can say what terminal and initial objects are and then tell what limits and colimits are in terms of terminal and initial objects.
 
 \begin{construction}[Category of cones]
@@ -198,35 +133,3 @@ For \(\cat C\)  category and \(F : \cat I \to \cat C\) functor,
 \begin{proof}
 This is \inlinethm{exercise}.
 \end{proof}
-
-%\begin{example}[\NotaInterna{Title wanted!}]
-%A set is an objects made of elements: if \(X\) denotes a set and \(x\) some thing, we can formulate the sentence \(x \in X\). However, we have seen cases --- like \(\Mat_k\) --- where objects are \q{atoms}, that is do not have an internal structure as sets do. In some categories, objects have elements, in others the objects do not.\newline
-%Let us take advantage of a basic fact about sets:
-%\[X \cong \Set(1, X) \text{ for every set } X .\]
-%In general, the isomorphism relation above is not made possible by a unique bijection, but there is one really meaningful for us: the function that takes \(x \in X\) to the function \(\hat x : 1 \to X\) mapping the unique element of \(1\) into \(x\). The great deal here is that functions \(1 \to X\) inspect \(X\) and this isomorphism just outlined identifies every \(x\) to \(\hat x\).\newline
-%Let us step back for a moment and turn our attention to the act of defining functions. To define a function \(f : X \to Y\), one write an expression like
-%\begin{equation}
-%f(x) := \Gamma \label{equation:DefiningAFunction}
-%\end{equation}
-%with \(\Gamma\) being a formula that may contain the symbol \(x\) or not. By writing something like~\eqref{equation:DefiningAFunction}, you are prescribing the images of each element of the domain. This deeply relies on these two facts:
-%\begin{tcbenum}
-%\item Sets are things you can look inside.
-%\item We have a principle that guarantees the function we are defining in such manner is uniquely determined:
-%\begin{quotation}
-%Given two functions \(f_1, f_2 : X \to Y\), if we have \(f_1(a) = f_2(a)\) for every \(a \in X\), then it must be \(f_1 = f_2\).
-%\end{quotation}
-%This is crucial, since once you have assigned a function as in~\eqref{equation:DefiningAFunction}, it cannot behave any different from what prescribed.
-%\end{tcbenum}
-%How this can be interesting to us at this point? First of all, \(1\) is a terminal object. We have showed earlier how elements of \(X\) can be thought as functions \(1 \to X\). In this case, the application of \(f\) to \(x\) is the mere composition
-%\[f x : 1 \functo x X \functo f Y .\]
-%The principle aforementioned can be restated as:
-%\begin{quotation}
-%If the diagram
-%\[\begin{tikzcd}
-%1 \ar["x", r] & X \ar["{f_1}", r, bend left] \ar["{f_2}", r, bend right, swap] & Y
-%\end{tikzcd}\]
-%commutes for every \(x : 1 \to X\), then \(f_1 = f_2\).
-%%the functions \(1 \to X\) are epimorphisms. % false!!!
-%\end{quotation}
-%\NotaInterna{Continue. Do not forget!}
-%\end{example}
