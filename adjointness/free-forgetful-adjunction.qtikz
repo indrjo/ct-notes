@@ -1,20 +1,29 @@
 ﻿
 \begin{tikzpicture}
-\def\a{55}
-\def\r{1.6}
-\draw [rounded corners=2pt, fill=gray!15!white] (\a:\r cm) rectangle (\a+180:\r cm);
+  [ category/.style={ draw
+                    , rectangle
+                    , minimum width=2cm
+                    , minimum height=3cm
+                    , rounded corners=2pt
+                    , fill=gray!15!white
+                    }
+  ]
+\def\d{3}
 \def\l{1.2}
+% category C
+\node [category, label=below:\(\Set\)] at (0,0) {};
 \node (S)  at (0,.5*\l cm)  {\(S\)};
 \node (UW) at (0,-.5*\l cm) {\(U(W)\)};
 \draw [->] (S) to (UW);
-\def\d{3}
-\draw [rounded corners=2pt, fill=gray!15!white] ($(\d,0) + (\a:\r cm)$) rectangle ($(\d,0) + (\a+180:\r cm)$);
+% category D
+\begin{scope}[xshift=\d cm]
+\node [category, label=below:\(\Vect_k\)] at (0,0) {};
 \def\l{1.2}
-\node (FS) at ($(\d,0) + (0,.5*\l cm)$)  {\(F(S)\)};
-\node (W)  at ($(\d,0) + (0,-.5*\l cm)$) {\(W\)};
+\node (FS) at (0,.5*\l cm)  {\(F(S)\)};
+\node (W)  at (0,-.5*\l cm) {\(W\)};
 \draw [->] (FS) to (W);
+\end{scope}
+% functors
 \draw [->, thick] (S) to node[auto]{\(F\)} (FS);
 \draw [->, thick] (W) to node[auto]{\(U\)} (UW);
-\node at (-90:\r cm) {\(\Set\)};
-\node at ($(\d,0) + (-90:\r cm)$) {\(\Vect_k\)};
 \end{tikzpicture}
