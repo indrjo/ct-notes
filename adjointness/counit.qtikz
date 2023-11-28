@@ -1,0 +1,39 @@
+﻿
+% \newcommand\cat\mathcal
+% \newcommand\id{\mathtt 1}
+
+\begin{tikzpicture}
+  [ category/.style={ draw
+                    , rectangle
+                    , minimum width=2cm
+                    , minimum height=3cm
+                    , rounded corners=2pt
+                    , fill=gray!15!white
+                    }
+  ]
+\def\l{1.2}
+
+% category C
+\def\loopradius{1}
+\def\loopangle{260}
+\def\loopdiff{25}
+\node [category, label=below:\(\cat C\)] at (0,0) {};
+\node (Rb) at (0,0)  {\(R(b)\)};
+\draw [->]
+  (Rb) 
+  .. controls (\loopangle-\loopdiff:\loopradius) and (\loopangle+\loopdiff:\loopradius) ..
+  node[auto, swap]{\(\id_{R(b)}\)}
+  (Rb);
+
+% category D
+\begin{scope}[xshift=3 cm]
+\node [category, label=below:\(\cat D\)] at (0,0) {};
+\node (LRb) at (0,.5*\l cm)  {\(L(R(b))\)};
+\node (b)   at (0,-.5*\l cm) {\(b\)};
+\draw [->] (LRb) to node[auto]{\(\theta_b\)} (b);
+\end{scope}
+
+% functors
+\draw [->, thick] (Rb) to node[auto]{\(L\)} (LRb);
+\draw [->, thick] (b)  to node[auto]{\(R\)} (Rb);
+\end{tikzpicture}
