@@ -15,19 +15,16 @@
 #
 # *************************************************************************
 
-
 set -e
 
-past=""
-for f in preamble base limits adjointness topoi
-do
-  sed "s,DIRECTORY,$f," article-template.tex > $f.tex
-  if [ -z $past ]
-    then
-      echo "% external refs for $f.tex..." > $f-xr.tex
-    else
-      cp -u {$past,$f}-xr.tex
-      echo '\externaldocument{'$past'}' >> $f-xr.tex
+for f in preamble base limits adjointness topoi; do
+  t=${f^}
+  sed "s,TITLE,$t,;s,DIRECTORY,$f," article-template.tex > $f.tex
+  if [ -z $past ]; then
+    echo "% external refs for $f.tex..." > $f-xr.tex
+  else
+    cp -u {$past,$f}-xr.tex
+    echo '\externaldocument{'$past'}' >> $f-xr.tex
   fi
   latexmk -lualatex $f.tex
   past=$f
