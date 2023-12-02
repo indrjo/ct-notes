@@ -4,85 +4,6 @@
 
 \section{Definition, units and counits}
 
-%Example~\ref{example:DefineLinearFunctionsI} and~\ref{example:DefineLinearFunctionsII} of the introduction should have triggered your attention. If not, look at them closely now: after the initial restyling of one result of Linear Algebra, it is just a matter of categories and functors. 
-%
-%\begin{construction}
-%Let \(\cat C\) and \(\cat J\) two categories, \(a\) one of its objects and take a functor \(F : \cat J \to \cat C\). We have the category \(a {\downarrow} F\) made as follows:
-%\begin{tcbitem}
-%\item the objects are the morphisms \(a \to F(x)\) of \(\cat C\), with \(x\) being an object of \(\cat J\);
-%\item the morphisms from \(f : a \to F(x)\) to \(g : a \to F(y)\) are the morphisms \(h : x \to y\) of \(\cat J\) such that
-%\[\begin{tikzcd}[row sep=small]
-% & F(x) \ar["{F(h)}", dd] \\
-%a \ar["f", ur] \ar["g", dr, swap] \\
-% & F(y)
-%\end{tikzcd}\]
-%commutes;
-%\item the composition is that of \(\cat J\). 
-%\end{tcbitem}
-%\end{construction}
-%
-%\begin{proposition}\label{proposition:AdjunctionAsInitialInCommaCategory}
-%Suppose given two locally small categories \(\cat C\) and \(\cat D\), two functors
-%\[\begin{tikzcd}[column sep=small]
-%\cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
-%\end{tikzcd}\]
-%and a natural transformation \(\eta : \id_{\cat C} \tto RL\) such that \(\eta_x : x \to RL(x)\) is initial in \(x {\downarrow} R\) \NotaInterna{did we introduce comma categories?} for every \(x \in \obj{\cat C}\).  Then, for \(x \in \obj{\cat C}\) and \(y \in \obj{\cat D}\), the functions
-%\[\alpha_{x,y} : \cat D(L(x), y) \to \cat C(x, R(y)) \,,\ \alpha_{x,y}(f) := R(f)\eta_x\]
-%form an adjunction \(\alpha : L \dashv R\).
-%\end{proposition}
-%
-%\begin{exercise}
-%Look at Example~\ref{example:DefineLinearFunctionsI} and~\ref{example:DefineLinearFunctionsII}: isolate what in the proposition is the natural transformation \(\eta\). Can you prove the theorem by yourself?
-%\end{exercise}
-%
-%\begin{proof}[Proof of Proposition~\ref{proposition:AdjunctionAsInitialInCommaCategory}]
-%The fact that \(\eta_x\) is initial object implies that these function are all bijective. Now, we just need to verify the transformation is natural. Take \(x, x' \in \obj{\cat C}\), \(y, y' \in \obj{\cat D}\), \(f \in \cat C(x', x)\) and \(g \in \cat D(y, y')\) and examine the square
-%\[\begin{tikzcd}[column sep=large]
-%\cat D(L(x), y) \ar["{\cat D(L(f), g)}", d, swap] \ar["{\alpha_{x,y}}", r] & \cat C(x, R(y)) \ar["{\cat C(f, R(g))}", d] \\
-%\cat C(x', R\left(y'\right)) \ar["{\alpha_{x',y'}}", r, swap] & \cat C(x', R(y'))
-%\end{tikzcd}\]
-%For \(h \in \cat D(L(x), y)\), we have
-%\begin{align*}
-%& \cat C(f, R(g)) (\alpha_{x,y} (h)) = R(g) R(h) \eta_x f = R(gh) \eta_x f \\
-%& \alpha_{x',y'} (\cat D (L(f), g)(h)) = R(guL(f)) \eta_{x'} = R(gu) RL(f) \eta_{x'}
-%\end{align*}
-%By the naturality of \(\eta\), we have \(\eta_x f = RL(f) \eta_{x'}\), and the proof ends here.
-%\end{proof}
-%
-%Here is another example in the spirit of the initial example about vector spaces and of the proposition just proved here.
-%
-%\begin{example}[Isomorphism Theorem for Set Theory]
-%We have defined \(\Eqv\) earlier, recall it here. Let us introduce the functor
-%\[E : \Set \to \Eqv\]
-%that maps a set \(X\) to a setoid \((X, =_X)\), where \(=_X\) is the equality relation over \(X\), and a function \(f : X \to Y\) to itself regarded as morphisms of setoids. Besides, Corollary~\ref{cor:SetIso2} gives a functor
-%\[P : \Eqv \to \Set .\]
-%Consequently, Proposition~\ref{proposition:SetIso1} can be easily rephrased more concisely as:
-%\begin{quotation}
-%the canonical projection \((X, \sim) \to E(P(X, \sim))\) is initial in \((X, \sim) \downarrow E\).
-%\end{quotation}
-%\end{example}
-%
-%There is the dual of Proposition~\ref{proposition:AdjunctionAsInitialInCommaCategory} as well.
-%
-%\begin{proposition}\label{proposition:AdjunctionAsTerminalInCommaCategory}
-%Suppose given two locally small categories \(\cat C\) and \(\cat D\), two functors
-%\[\begin{tikzcd}[column sep=small]
-%\cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
-%\end{tikzcd}\]
-%and a natural transformation \(\theta : LR \tto \id_{\cat D}\) such that \(\theta_y : LR(y) \to y\) is terminal in \(L {\downarrow} y\) for every \(y \in \obj{\cat C}\).  Then, for \(x \in \obj{\cat C}\) and \(y \in \obj{\cat D}\), the functions
-%\begin{align*}
-%\cat C(x, R(y)) & \to \cat D(L(x), y) \\
-%f &\to \theta_y L(f)
-%\end{align*}
-%form an adjunction \(L \dashv R\).
-%\end{proposition}
-%
-%\begin{exercise}
-%The proof is left to you.
-%\end{exercise}
-
-%The natural isomorphism \(\xi\) of the is what we have been striving for along the whole example. The phenomenon has a name.
-
 \begin{definition}[Adjunctions]
 Consider two locally small categories and two functors as in
 \[\begin{tikzcd}[column sep=small]
@@ -159,8 +80,8 @@ is a bijection for every couple of sets \(A\) and \(B\). Now it's up to you to c
 \begin{figure}
 \centering
 \begin{tabular}{c}
-\input{adjointness/unit.qtikz} \\
-\midrule \\
+\input{adjointness/unit.qtikz} \\ 
+\midrule
 \input{adjointness/counit.qtikz}
 \end{tabular}
 \caption{Units and co-units of an adjunction}
@@ -206,20 +127,8 @@ We know that there is one and only one \(h : L(x) \to y\) such that \(g = \bar{h
 \[g = \bar{h \id_{L(x)} L\left(\id_x\right)} = R(h) \bar{\id_{L(x)}} \id_{x} = R(h) \eta_x . \qedhere .\]
 \end{proof}
 
-%\begin{proposition}
-%Suppose now you have locally small categories \(\cat C\) and \(\cat D\), functors
-%\[\begin{tikzcd}
-%\cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
-%\end{tikzcd}\]
-%and an adjunction \(L \dashv R\). For \(y \in \obj{\cat C}\) write \(\theta_y : LR(y) \to y\) the morphism in \(\cat D\) corresponding to \(\id_{R(y)}\) of \(\cat C\). Then the morphisms \(\theta_y\) form a natural transformation \(\theta : LR \tto \id_{\cat D}\). Moreover, \(\theta_y\) is terminal in \(L {\downarrow} y\).
-%\end{proposition}
-%
-%\begin{exercise}
-%Prove the last two theorems.
-%\end{exercise}
-
 \begin{example}[Prescribing functions via currying]
 \YetToBeTeXed
 \end{example}
 
-\NotaInterna{Yet there is something left to say\dots{}}
+\NotaInterna{More examples of units and counits here\dots{}}
