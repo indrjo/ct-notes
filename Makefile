@@ -17,4 +17,7 @@ CT.pdf: $(BOOK_DEPENDS)
 > @latexmk -lualatex $<
 
 clean:
-#> latexmk -c
+> @latexmk -c
+> @rm -v *-xr.tex
+> @find . -name 'thechapter.tex' -exec sh -c 'rm `dirname "{}"`.tex' \;
+
