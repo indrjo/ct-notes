@@ -113,9 +113,12 @@ commute for every \(\mu \in \Lambda\), and it is the unique to do this.%\newline
 \end{example}
 
 \begin{exercise}
-Prove \(\bigcup_{\alpha \in \Lambda} X_\alpha\) is a coproduct if the \(X_\alpha\)-s are pairwise disjoint. By the way, \(\bigcup_{\alpha \in \Lambda} X_\alpha\) is isomorphic to an appropriate quotient of \(\sum_{\alpha \in \Lambda} X_\alpha\). Part of the exercise is to find an equivalence relation \(\sim\) on \(\sum_{\alpha \in \Lambda} X_\alpha\) and a function
-\[\sum_{\alpha \in \Lambda} X_\alpha \to \bigcup_{\alpha \in \Lambda} X_\alpha\] 
-which maps \(\sim\)-equivalent elements to the same element.
+Prove \(\bigcup_{\alpha \in \Lambda} X_\alpha\) along with appropriate functions
+\[X_\mu \to \bigcup_{\alpha \in \Lambda} X_\alpha\]
+one for each \(\mu \in \Lambda\), is a coproduct if the \(X_\alpha\)-s are pairwise disjoint. If some of them are not disjoint, what could go wrong?
+% By the way, \(\bigcup_{\alpha \in \Lambda} X_\alpha\) is isomorphic to an appropriate quotient of \(\sum_{\alpha \in \Lambda} X_\alpha\). Part of the exercise is to find an equivalence relation \(\sim\) on \(\sum_{\alpha \in \Lambda} X_\alpha\) and a function
+%\[\sum_{\alpha \in \Lambda} X_\alpha \to \bigcup_{\alpha \in \Lambda} X_\alpha\] 
+%which maps \(\sim\)-equivalent elements to the same element.
 \end{exercise}
 
 \begin{exercise}
@@ -156,9 +159,9 @@ objects. The following arguments will be useful when we will deal with finite co
 \begin{figure}
 \centering
 \begin{tabular}{c}
-\toprule
+%\toprule
 reduction from left (Proposition~\ref{proposition:FiniteProdLeftCons}) \\
-\midrule
+%\midrule
 \begin{tikzcd}[ampersand replacement=\&]
 \& \& \& \& \& p_n \ar["{l_n}", dl, swap] \ar["{r_n}", dr] \\
 \& \& \& \& p_{n-1} \ar["{l_{n-1}}", dl, swap] \ar["{r_{n-1}}", dr] \& \& x_n \\
@@ -168,9 +171,9 @@ reduction from left (Proposition~\ref{proposition:FiniteProdLeftCons}) \\
 x_1 \& \& x_2
 \end{tikzcd}
 \\
-\toprule
+\midrule %\toprule
 reduction from right (Proposition~\ref{proposition:FiniteProdRightCons}) \\
-\midrule
+%\midrule
 \begin{tikzcd}[ampersand replacement=\&]
 \& p_n \ar["{l_n}", dl, swap] \ar["{r_n}", dr] \& \\
 x_1 \& \& p_{n-1} \ar["{l_{n-1}}", dl, swap] \ar["{r_{n-1}}", dr] \\
@@ -179,7 +182,7 @@ x_1 \& \& p_{n-1} \ar["{l_{n-1}}", dl, swap] \ar["{r_{n-1}}", dr] \\
 \& \& \& x_{n-2} \& \& p_2 \ar["{l_2}", dl, swap] \ar["{r_2}", dr] \\
 \& \& \& \& x_{n-1} \& \& x_n 
 \end{tikzcd} \\
-\bottomrule
+%\bottomrule
 \end{tabular}
 \caption{Finite products recursively constructed}
 \label{figure:ProductsReductions}
@@ -187,14 +190,14 @@ x_1 \& \& p_{n-1} \ar["{l_{n-1}}", dl, swap] \ar["{r_{n-1}}", dr] \\
 
 \begin{proposition}[Finite products, reduction from left]\label{proposition:FiniteProdLeftCons}
 Let \(\cat C\) be a category a finite set \(\set{x_1, \dots{}, x_n}\), with \(n \ge 2\), of objects of \(\cat C\). Let
-\begin{tikzcd}[cramped, row sep=tiny, column sep=small]
+\[\begin{tikzcd}[row sep=tiny, column sep=small]
 & p_2 \ar["{l_2}", dl, swap] \ar["{r_2}", dr] \\
-x_1 & & x_2 \end{tikzcd}
+x_1 & & x_2 \end{tikzcd}\]
 be one of the products of \(\set{x_1, x_2}\) and let
-\begin{tikzcd}[cramped, row sep=tiny, column sep=small]
+\[\begin{tikzcd}[row sep=tiny, column sep=small]
 & p_{i+1} \ar["{l_{i+1}}", dl, swap] \ar["{r_{n+1}}", dr] \\
 p_i & & x_{i+1}
-\end{tikzcd}
+\end{tikzcd}\]
 be one of the products of \(\set{p_i, x_{i+1}}\).
 %
 %\[\begin{tikzcd}[sep=small]
@@ -253,15 +256,15 @@ and we have concluded.
 
 \begin{proposition}[Finite products, reduction from right]\label{proposition:FiniteProdRightCons}
 Let \(\cat C\) be a category a finite set \(\set{x_1, \dots{}, x_n}\), with \(n \ge 2\), of objects of \(\cat C\). Let
-\begin{tikzcd}[cramped, row sep=tiny, column sep=small]
+\[\begin{tikzcd}[row sep=tiny, column sep=small]
 & p_2 \ar["{l_2}", dl, swap] \ar["{r_2}", dr] \\
 x_{n-1} & & x_n
-\end{tikzcd}
+\end{tikzcd}\]
 be one of the products of \(\set{x_{n-1}, x_n}\) and let
-\begin{tikzcd}[cramped, row sep=tiny, column sep=small]
+\[\begin{tikzcd}[row sep=tiny, column sep=small]
 & p_{i+1} \ar["{l_{i+1}}", dl, swap] \ar["{r_{n+1}}", dr] \\
 x_{n-i} & & p_i
-\end{tikzcd}
+\end{tikzcd}\]
 be one of the products of \(\set{x_{n-i}, p_i}\).
 %
 %\[\begin{tikzcd}[sep=small]
