@@ -34,6 +34,30 @@ you can:
 \end{tcbenum}
 \end{exercise}
 
+In Category Theory we have injective and surjective morphisms as well: their formulation is the same as in \(\Set\), but in general fails to be like in \(\Set\). 
+
+\begin{definition}
+Let \(\cat C\) be a category with terminal object \(1\). A morphism \(f : a \to b\) of \(\cat C\) is said to be {\em surjective} whenever for every \(y : 1 \to b\) there is some \(x : 1 \to a\) for which \(f x = y\). A morphism \(f : a \to b\) of \(\cat C\) is said to be {\em injective} whenever for every \(y : 1 \to b\) there is up to one \(x : 1 \to a\) for which \(f x = y\).
+\end{definition}
+
+Aim of this exercise is to find additional conditions within which epic is equivalent to surjective and monic is equivalent to injective.
+
+\begin{exercise}[Injective \& surjective morphisms]
+For the following exercises, assume \(\cat C\) has terminal object \(1\) and in addition satisfies the following property:
+\begin{quotation}
+{\sc Extensionality principle}: for every pair of morphisms \(f_1, f_2 : a \to b\) of \(\cat C\), if the diagram
+\[\begin{tikzcd}
+1 \ar["x", r] & X \ar["{f_1}", r, bend left] \ar["{f_2}", r, bend right, swap] & Y
+\end{tikzcd}\]
+commutes for every \(x : 1 \to X\), then \(f_1 = f_2\).
+\end{quotation}
+\begin{tcbenum}
+\item Prove that surjective morphisms are epic. [Hint. Think about \(\Set\): how would you proceed? Draw analogies and observe where the principle enters.]
+%
+\item \NotaInterna{The converse, epic \(\tto\) surjective, under additional assumptions about \(\cat C\) requires some work which is not trivial. Decompose in smaller part and let the reader draw the conclusion.}
+\end{tcbenum}
+\end{exercise}
+
 \begin{exercise}[Natural number objects]
 Assume you have a category \(\cat C\) with terminal object \(1\) and with {\em natural number object}
 \[\begin{tikzcd}
