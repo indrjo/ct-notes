@@ -37,6 +37,14 @@ Now let us look for terminal objects in \(\Set\). Take an arbitrary set \(X\): t
 Trivial groups --- there is a unique way a singleton can be a group --- are either terminal and initial objects of \(\Grp\).
 \end{exercise}
 
+\begin{example}[The ring \(\integers\)]
+For if \(R\) is a ring, we write \(1_R\) to write the multiplicative identity of \(R\). A simple ring homomorphism is
+\[\phi : \integers \to R \,,\ \phi(r) := r 1_R .\]
+Assume now, \(\psi : \integers \to R\) is another ring homomorphism: then for every \(r \in \integers\) we have
+\[\psi(r) = r \psi\left(1_R\right) = r \phi\left(1_R\right) = \phi(r) .\]
+Thus we can conclude \(\integers\) is initial in \(\Ring\).
+\end{example}
+
 \begin{example}[Recursion]\label{example:Recursion}
 In Set Theory, there is a nice theorem, the {\em Recursion Theorem}:
 \begin{quotation}
