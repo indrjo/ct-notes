@@ -1,115 +1,171 @@
-% !TEX program = lualatex
-% !TEX root = ../limits.tex
-% !TEX spellcheck = en_GB
 
 \section{Other exercises}
 
-%Here is a collection of exercises that do have a precise placement in the the previous sections, for they deal with the interplay between different kinds of limits and with the previous chapters in a manner that would burden the flow of  the discourse.
+% Here is a collection of exercises that do have a precise placement
+% in the the previous sections, for they deal with the interplay
+% between different kinds of limits and with the previous chapters in
+% a manner that would burden the flow of the discourse.
 
 \begin{exercise}
-Consider a category \(\cat C\) with the property such that every functor \(X : \cat I \to \cat C\) has a limit, that is \(\cat C\) is complete. It is customary to denote by \(\lim X\) the vertex of any of the limits of \(X\). Limits of a given diagram are all the same, aren't they? Such assignment is not {\em canonical}, but is a legit construction. Hence a typical limit is presented as a family
-\[\set{\left.\lim X \functo{\lambda_i} X_i \right\mid i \in \obj{\cat I}}\]
-Indeed, here there is a functor
-\[\lim : [\cat I, \cat C] \to \cat C .\]
-The exercise requires you to work on the definition of limit and find some way to make things work. You may have already inferred by yourself how \(\lim\) is defined on objects, but what about morphisms? If I have a natural transformation \(\eta : X \tto Y\), is there a way to make one \(\lim\eta\) in \(\cat C\)? In this section, limits of simple diagrams are presented and provided with concrete examples: if it difficult to reason in the most general framework, describe the \(\lim\) construction for the diagrams have occurred so far. We will meet this functor later, but we think it would be nice if you can anticipate some things by yourself.
+  Consider a category \(\cat C\) with the property such that every
+  functor \(X : \cat I \to \cat C\) has a limit, that is \(\cat C\) is
+  complete. It is customary to denote by \(\lim X\) the vertex of any
+  of the limits of \(X\). Limits of a given diagram are all the same,
+  aren't they? Such assignment is not {\em canonical}, but is a legit
+  construction. Hence a typical limit is presented as a family
+  \[\set{\left.\lim X \functo{\lambda_i} X_i \right\mid i \in \obj{\cat I}}\]
+  Indeed, here there is a functor
+  \[\lim : [\cat I, \cat C] \to \cat C .\]
+  The exercise requires you to work on the definition of limit and
+  find some way to make things work. You may have already inferred by
+  yourself how \(\lim\) is defined on objects, but what about
+  morphisms? If I have a natural transformation \(\eta : X \tto Y\), is
+  there a way to make one \(\lim\eta\) in \(\cat C\)? In this section,
+  limits of simple diagrams are presented and provided with concrete
+  examples: if it difficult to reason in the most general framework,
+  describe the \(\lim\) construction for the diagrams have occurred so
+  far. We will meet this functor later, but we think it would be nice
+  if you can anticipate some things by yourself.
 \end{exercise}
 
 \begin{exercise}
-Consider a category with binary products, and for \(a, b \in \obj{\cat C}\) write the corresponding products as
-\[\begin{tikzcd}[column sep=small]
-a & a \times b \ar["{p_{a,b}}", l, swap] \ar["{q_{a,b}}", r] & b
-\end{tikzcd}\]
-\begin{tcbenum}
-\item Construct the functor \((c \times) : \cat C \to \cat C\). Without much other effort, you can define functors \((\times c) : \cat C \to \cat C\) as well.
-\item Can you construct natural transformations \((a \times) \tto (b \times)\) and \((\times a) \tto (\times b)\)?
-\end{tcbenum}
-Dually, if in a category \(\cat C\) with binary coproducts you have coproducts
-\[\begin{tikzcd}[column sep=small]
-a \ar["{l_{a,b}}", r] & a+b & b \ar["{r_{a,b}}", l, swap]
-\end{tikzcd}\]
-you can:
-\begin{tcbenum}
-\item Construct functors \((c +)\) and \((+ c)\) from \(\cat C\) to \(\cat C\).
-\item Construct natural transformations \((a +) \tto (b +)\) and \((+ a) \tto (+ b)\).
-\end{tcbenum}
+  Consider a category with binary products, and for
+  \(a, b \in \obj{\cat C}\) write the corresponding products as
+  \[\begin{tikzcd}[column sep=small]
+      a & a \times b \ar["{p_{a,b}}", l, swap] \ar["{q_{a,b}}", r] & b
+    \end{tikzcd}\]
+  \begin{tcbenum}
+  \item Construct the functor \((c \times) : \cat C \to \cat C\). Without
+    much other effort, you can define functors
+    \((\times c) : \cat C \to \cat C\) as well.
+  \item Can you construct natural transformations
+    \((a \times) \tto (b \times)\) and \((\times a) \tto (\times b)\)?
+  \end{tcbenum}
+  Dually, if in a category \(\cat C\) with binary coproducts you have
+  coproducts
+  \[\begin{tikzcd}[column sep=small]
+      a \ar["{l_{a,b}}", r] & a+b & b \ar["{r_{a,b}}", l, swap]
+    \end{tikzcd}\] you can:
+  \begin{tcbenum}
+  \item Construct functors \((c +)\) and \((+ c)\) from \(\cat C\) to
+    \(\cat C\).
+  \item Construct natural transformations \((a +) \tto (b +)\) and
+    \((+ a) \tto (+ b)\).
+  \end{tcbenum}
 \end{exercise}
 
-In Category Theory we have injective and surjective morphisms as well: their formulation is the same as in \(\Set\), but in general fails to be like in \(\Set\). 
+In Category Theory we have injective and surjective morphisms as well:
+their formulation is the same as in \(\Set\), but in general fails to
+be like in \(\Set\).
 
 \begin{definition}
-Let \(\cat C\) be a category with terminal object \(1\). A morphism \(f : a \to b\) of \(\cat C\) is said to be {\em surjective} whenever for every \(y : 1 \to b\) there is some \(x : 1 \to a\) for which \(f x = y\). A morphism \(f : a \to b\) of \(\cat C\) is said to be {\em injective} whenever for every \(y : 1 \to b\) there is up to one \(x : 1 \to a\) for which \(f x = y\).
+  Let \(\cat C\) be a category with terminal object \(1\). A morphism
+  \(f : a \to b\) of \(\cat C\) is said to be {\em surjective} whenever
+  for every \(y : 1 \to b\) there is some \(x : 1 \to a\) for which
+  \(f x = y\). A morphism \(f : a \to b\) of \(\cat C\) is said to be
+  {\em injective} whenever for every \(y : 1 \to b\) there is up to one
+  \(x : 1 \to a\) for which \(f x = y\).
 \end{definition}
 
-Aim of this exercise is to find additional conditions within which epic is equivalent to surjective and monic is equivalent to injective.
+Aim of this exercise is to find additional conditions within which
+epic is equivalent to surjective and monic is equivalent to injective.
 
 \begin{exercise}[Injective \& surjective morphisms]
-For the following exercises, assume \(\cat C\) has terminal object \(1\) and in addition satisfies the following property:
-\begin{quotation}
-{\sc Extensionality principle}: for every pair of morphisms \(f_1, f_2 : a \to b\) of \(\cat C\), if the diagram
-\[\begin{tikzcd}
-1 \ar["x", r] & X \ar["{f_1}", r, bend left] \ar["{f_2}", r, bend right, swap] & Y
-\end{tikzcd}\]
-commutes for every \(x : 1 \to X\), then \(f_1 = f_2\).
-\end{quotation}
-\begin{tcbenum}
-\item Prove that surjective morphisms are epic. [Hint. Think about \(\Set\): how would you proceed? Draw analogies and observe where the principle enters.]
+  For the following exercises, assume \(\cat C\) has terminal object
+  \(1\) and in addition satisfies the following property:
+  \begin{quotation} {\sc Extensionality principle}: for every pair of
+    morphisms \(f_1, f_2 : a \to b\) of \(\cat C\), if the diagram
+    \[\begin{tikzcd}
+        1 \ar["x", r] & X \ar["{f_1}", r, bend left] \ar["{f_2}", r,
+        bend right, swap] & Y
+      \end{tikzcd}\] commutes for every \(x : 1 \to X\), then
+    \(f_1 = f_2\).
+  \end{quotation}
+  \begin{tcbenum}
+  \item Prove that surjective morphisms are epic. [Hint. Think about
+    \(\Set\): how would you proceed? Draw analogies and observe where
+    the principle enters.]
 %
-\item \NotaInterna{The converse, epic \(\tto\) surjective, under additional assumptions about \(\cat C\) requires some work which is not trivial. Decompose in smaller part and let the reader draw the conclusion.}
-\end{tcbenum}
+  \item \NotaInterna{The converse, epic \(\tto\) surjective, under
+      additional assumptions about \(\cat C\) requires some work which
+      is not trivial. Decompose in smaller part and let the reader
+      draw the conclusion.}
+  \end{tcbenum}
 \end{exercise}
 
 \begin{exercise}[Natural number objects]
-Assume you have a category \(\cat C\) with terminal object \(1\) and with {\em natural number object}
-\[\begin{tikzcd}
-1 \ar["0", r] & \naturals \ar["s", r] & \naturals
-\end{tikzcd}\]
-\NotaInterna{I should spend more words for natural number objects.}
-It is not necessarily the \(\naturals\) in \(\Set\) you are used too. Prove the {\em primitive recursion theorem}:
-\begin{quotation}
-If
-\[\begin{tikzcd}
-\naturals & \naturals \times X \ar["{p_\naturals}", l, swap] \ar["{p_X}", r] & X
-\end{tikzcd}\]
-is a product of \(\cat C\), then for every \(x_0 : 1 \to X\) and \(f : \naturals \times X \to X\) in \(\cat C\) there is one and only one \(x : \naturals \to X\) such that
-\[\begin{tikzcd}[row sep=small]
-& \naturals \ar["s", r] \ar["{\angled{\id_\naturals, x}}", dd] & \naturals \ar["x", dd] \\
-1 \ar["0", ur] \ar["{\angled{0, x_0}}", dr, swap] \\
-& \naturals \times X \ar["f", r, swap] & X
-\end{tikzcd}\]
-\NotaInterna{We just used some notation we have never used before here.}
-\end{quotation}
-Indeed, in a category with a terminal object and binary products, {\em recursion theorem} is equivalent to {\em primitive recursion theorem}. \NotaInterna{Prepare a hint.}
+  Assume you have a category \(\cat C\) with terminal object \(1\) and
+  with {\em natural number object}
+  \[\begin{tikzcd}
+      1 \ar["0", r] & \naturals \ar["s", r] & \naturals
+    \end{tikzcd}\] \NotaInterna{I should spend more words for natural
+    number objects.}  It is not necessarily the \(\naturals\) in
+  \(\Set\) you are used too. Prove the {\em primitive recursion
+    theorem}:
+  \begin{quotation}
+    If
+    \[\begin{tikzcd}
+        \naturals & \naturals \times X \ar["{p_\naturals}", l, swap]
+        \ar["{p_X}", r] & X
+      \end{tikzcd}\] is a product of \(\cat C\), then for every
+    \(x_0 : 1 \to X\) and \(f : \naturals \times X \to X\) in
+    \(\cat C\) there is one and only one \(x : \naturals \to X\) such
+    that
+    \[\begin{tikzcd}[row sep=small]
+        & \naturals \ar["s", r] \ar["{\angled{\id_\naturals, x}}", dd] & \naturals \ar["x", dd] \\
+        1 \ar["0", ur] \ar["{\angled{0, x_0}}", dr, swap] \\
+        & \naturals \times X \ar["f", r, swap] & X
+      \end{tikzcd}\] \NotaInterna{We just used some notation we have
+      never used before here.}
+  \end{quotation}
+  Indeed, in a category with a terminal object and binary products,
+  {\em recursion theorem} is equivalent to {\em primitive recursion
+    theorem}. \NotaInterna{Prepare a hint.}
 \end{exercise}
 
 \NotaInterna{Indulge more in natural number objects\dots{}}
 
 \begin{exercise}[Epic-monic factorization]
-Consider in category \(\cat C\) one pullback square
-\[\begin{tikzcd}
-r \ar["s", r] \ar["t", d, swap] & a \ar["f", d] \\
-a \ar["f", r, swap] & b
-\end{tikzcd}\]
-and let \(p : a \to {a}{/}{r}\) be a coequalizer of \(s\) and \(t\).
-\begin{tcbenum}
-\item Thanks to the universal property of coequalizers, there is exactly one \(\bar f : {a}{/}{r} \to b\) in \(\cat C\) that satisfies \(f = \bar f p\). Show that \(\bar f\) is monic.
-\item The factorization \(\bar f p\) is an {\em epic-monic factorization} of \(f\). Consider now \(q : a \to c\) epic and \(g : c \to b\) monic in \(\cat C\) such that \(f = gq\), that is another epic-monic factorization of \(f\). Show that there exists one and only one \(h : {a}{/}{r} \to c\) such that
-\[\begin{tikzcd}[row sep=small]
-& {a}{/}{r} \ar["h" description, dd] \ar["{\bar f}", dr] & \\
-a \ar["p", ur] \ar["q", dr, swap] & & b \\
-& c \ar["g", ur, swap]
-\end{tikzcd}\]
-commutes. Show that moreover \(h\) is an isomorphism.
-\item Explore by yourself: \(f\) is monic if and only if \dots{}
-\item Apply all that above to some concrete example. Does this sound familiar now?
-\end{tcbenum}
-Consider in category \(\cat C\) one pushout square
-\[\begin{tikzcd}
-a \ar["f", r] \ar["f", d, swap] & b \ar["u", d] \\
-b \ar["v", r, swap] & z 
-\end{tikzcd}\]
-and let \(\im f : f(a) \to b\) be an equalizer of \(u\) and \(v\). Make the dual of above. [Spoiler: again about epic-monic factorizations.]
+  Consider in category \(\cat C\) one pullback square
+  \[\begin{tikzcd}
+      r \ar["s", r] \ar["t", d, swap] & a \ar["f", d] \\
+      a \ar["f", r, swap] & b
+    \end{tikzcd}\] and let \(p : a \to {a}{/}{r}\) be a coequalizer of
+  \(s\) and \(t\).
+  \begin{tcbenum}
+  \item Thanks to the universal property of coequalizers, there is
+    exactly one \(\bar f : {a}{/}{r} \to b\) in \(\cat C\) that
+    satisfies \(f = \bar f p\). Show that \(\bar f\) is monic.
+  \item The factorization \(\bar f p\) is an {\em epic-monic
+      factorization} of \(f\). Consider now \(q : a \to c\) epic and
+    \(g : c \to b\) monic in \(\cat C\) such that \(f = gq\), that is
+    another epic-monic factorization of \(f\). Show that there exists
+    one and only one \(h : {a}{/}{r} \to c\) such that
+    \[\begin{tikzcd}[row sep=small]
+        & {a}{/}{r} \ar["h" description, dd] \ar["{\bar f}", dr] & \\
+        a \ar["p", ur] \ar["q", dr, swap] & & b \\
+        & c \ar["g", ur, swap]
+      \end{tikzcd}\] commutes. Show that moreover \(h\) is an
+    isomorphism.
+  \item Explore by yourself: \(f\) is monic if and only if \dots{}
+  \item Apply all that above to some concrete example. Does this sound
+    familiar now?
+  \end{tcbenum}
+  Consider in category \(\cat C\) one pushout square
+  \[\begin{tikzcd}
+      a \ar["f", r] \ar["f", d, swap] & b \ar["u", d] \\
+      b \ar["v", r, swap] & z
+    \end{tikzcd}\] and let \(\im f : f(a) \to b\) be an equalizer of
+  \(u\) and \(v\). Make the dual of above. [Spoiler: again about
+  epic-monic factorizations.]
 \end{exercise}
 
 \begin{exercise}[Equivalence relations]
-\YetToBeTeXed
+  \YetToBeTeXed
 \end{exercise}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:

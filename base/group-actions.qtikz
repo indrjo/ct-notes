@@ -4,20 +4,24 @@
 \def\loopradius{.5*\framesize}
 % The one object category
 \node (G) [rectangle, minimum size=\framesize cm, label={below:\(\mathcal G\)}] at (0,0) {};
-\node (point) [circle] at (G) {\(\bullet\)};
+\node (bullet) [circle] at (G) {\(\bullet\)};
+% The loops based at the unique object
 \foreach \i in {0, ..., 4}
-	\draw [->] (point) 
-            .. controls +(5+72*\i-15:\loopradius cm) and +(5+72*\i+15:\loopradius cm) ..
-            (point);
+  \draw [->]
+    (bullet)
+    .. controls +(5+72*\i-15:\loopradius cm) and +(5+72*\i+15:\loopradius cm) ..
+    (bullet);
 % The image in Set
-\node (Set) [rectangle, rounded corners, fill=gray!15!white, minimum size=\framesize cm, label={below:\(\mathbf{Set}\)}]
-	 at ($(point) + ({1.5*\framesize cm},0)$) {};
+\begin{scope}[xshift=3.5cm]
+\node (Set) [rectangle, rounded corners, fill=gray!15!white, minimum size=\framesize cm, label={below:\(\mathbf{Set}\)}] at (0,0) {};
 \node (X) [circle, inner sep=2pt] at (Set) {\(X\)};
+% The loops based at X
 \foreach \i in {0, ..., 4}
-	\draw[->] (X) 
-           .. controls +(5+72*\i-15:\loopradius cm) and +(5+72*\i+15:\loopradius cm) ..
-           (X);
-% The arrow of the functor
-%\draw[->, thick, shorten <=-.1cm, shorten >=.1cm] (G.east) -- (Set.west);
-\draw[->, thick, shorten <={-.05*\framesize cm}, shorten >={.05*\framesize cm}] (G.east) -- node[above]{\(\delta\)} (Set.west);
+  \draw [->]
+    (X)
+    .. controls +(5+72*\i-15:\loopradius cm) and +(5+72*\i+15:\loopradius cm) ..
+    (X);
+\end{scope}
+% The functor
+\draw[->, thick, shorten <={-.05*\framesize cm}, shorten >={.05*\framesize cm}] (G.east) to node[auto]{\(\delta\)} (Set.west);
 \end{tikzpicture}

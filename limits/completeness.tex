@@ -1,190 +1,304 @@
-% !TEX program = lualatex
-% !TEX spellcheck = en_GB
-% !TEX root = ../limits.tex
 
 \section{(Co)Completeness}
 
-\NotaInterna{Some of the parts here are to be rewritten\dots{}} \NotaInterna{Better notation needed here\dots{}} Consider a functor \(F : {\bf I} \to \cat C\). Let \(I\) be the {\em underlying discrete category} of \({\bf I}\) \NotaInterna{say something about that elsewhere\dots{}} and \(X : I \to \cat C\) the functor introduced as \(X_\lambda := F_\lambda\) for \(\lambda \in I\) \NotaInterna{the {\em underlying discrete functor}\dots{}}. In other words, \(X\) is just \(F\) without no morphism \(F_f : X_\alpha \to X_\beta\), where \(f : \alpha \to \beta\) in \({\bf I}\), since \(I\) itself has not any morphism apart the identities. For the same reason, any cone \(c : k_v \tto X\) is a just cone \(k_x \tto F\) that cannot care about the morphisms \(F_f\); precisely, \(c : k_v \tto X\) is just a family \(\set{v \to X_\lambda \mid \lambda \in I}\), while \(k_v \tto F\) is the same family but also satisfying the naturality condition:
+\NotaInterna{Some of the parts here are to be rewritten\dots{}}
+\NotaInterna{Better notation needed here\dots{}} Consider a functor
+\(F : {\bf I} \to \cat C\). Let \(I\) be the {\em underlying discrete
+  category} of \({\bf I}\) \NotaInterna{say something about that
+  elsewhere\dots{}} and \(X : I \to \cat C\) the functor introduced as
+\(X_\lambda := F_\lambda\) for \(\lambda \in I\) \NotaInterna{the {\em underlying discrete
+    functor}\dots{}}. In other words, \(X\) is just \(F\) without no
+morphism \(F_f : X_\alpha \to X_\beta\), where
+\(f : \alpha \to \beta\) in \({\bf I}\), since \(I\) itself has not any morphism
+apart the identities. For the same reason, any cone \(c : k_v \tto X\)
+is a just cone \(k_x \tto F\) that cannot care about the morphisms
+\(F_f\); precisely, \(c : k_v \tto X\) is just a family
+\(\set{v \to X_\lambda \mid \lambda \in I}\), while \(k_v \tto F\) is the same family but
+also satisfying the naturality condition:
 \[\begin{tikzcd}[row sep=small]
-& X_\alpha \ar["{F_f}", dd] \\
-v \ar["{c_\alpha}", ur] \ar["{c_\beta}", dr, swap] \\
-& X_\beta \\
-\end{tikzcd}\] 
-commutes for every \(\alpha\), \(\beta\) and \(f : \alpha \to \beta\) in \({\bf I}\). So you should expect that in general categories having products cannot guarantee the existence of limits.
+    & X_\alpha \ar["{F_f}", dd] \\
+    v \ar["{c_\alpha}", ur] \ar["{c_\beta}", dr, swap] \\
+    & X_\beta \\
+  \end{tikzcd}\] commutes for every \(\alpha\), \(\beta\) and
+\(f : \alpha \to \beta\) in \({\bf I}\). So you should expect that in general
+categories having products cannot guarantee the existence of limits.
 
-Let us indicate by \(\set{p_\lambda : P \to X_\lambda \mid \lambda \in I}\) one of the products of \(X\): we have the morphisms
+Let us indicate by
+\(\set{p_\lambda : P \to X_\lambda \mid \lambda \in I}\) one of the products of
+\(X\): we have the morphisms
 \[\begin{tikzcd}[row sep=tiny]
-& X_\alpha \ar["{F_f}", dr] \\
-P \ar["{p_\alpha}", ur] \ar["{p_\beta}", rr, swap] & & X_\beta \\ % & P_J \ar["{p_\beta}", l] \\ 
-\end{tikzcd}\]
-that run in parallel for \(\alpha, \beta \in I\) and \(f : \alpha \to \beta\) in \({\bf I}\). Observe that for every \(\beta \in I\) there is one morphism \(P \to X_\beta\), namely \(p_\beta\). On the other hand, for \(\alpha \in I\) there may be one \(f : \alpha \to \beta\) or more or even none of such; this means in general we do not have only one \(F_f\) present in the last diagram. To be safe, we will consider may copies of \(X_\beta\) as needed, so that there is one \(p_\alpha F_f\) going towards its own copy of \(X_\beta\). \NotaInterna{Use a better notation here.} For that scope, consider the set \[J := \bigcup_{\alpha, \beta \in I} {\bf I}(\alpha, \beta)\]
-and the functor \(\tilde X : J \to \cat C\) with \(\tilde X_f\) defined to be \(X_\beta\) where \(\beta\) is the codomain of \(f\). If \(\set{q_f : Q \to \tilde X_f \mid f \in J}\) is one of the products of \(\tilde X\), then we have one morphism \(r : P \to Q\) such that \(q_f r = F_f p_\alpha\) for every \(\alpha \in I\) and morphism \(f \in J\) with domain \(\alpha\), and one morphism \(s : P 	\to Q\) such that \(q_f s = p_\beta\) for every \(\beta \in I\) and morphism \(f \in J\) with codomain \(\beta\).
+    & X_\alpha \ar["{F_f}", dr] \\
+    P \ar["{p_\alpha}", ur] \ar["{p_\beta}", rr, swap] & & X_\beta
+    \\ % & P_J \ar["{p_\beta}", l] \\
+  \end{tikzcd}\] that run in parallel for \(\alpha, \beta \in I\) and
+\(f : \alpha \to \beta\) in \({\bf I}\). Observe that for every
+\(\beta \in I\) there is one morphism \(P \to X_\beta\), namely
+\(p_\beta\). On the other hand, for \(\alpha \in I\) there may be one
+\(f : \alpha \to \beta\) or more or even none of such; this means in general we
+do not have only one \(F_f\) present in the last diagram. To be safe,
+we will consider may copies of \(X_\beta\) as needed, so that there is one
+\(p_\alpha F_f\) going towards its own copy of \(X_\beta\). \NotaInterna{Use a
+  better notation here.} For that scope, consider the set
+\[J := \bigcup_{\alpha, \beta \in I} {\bf I}(\alpha, \beta)\] and the functor
+\(\tilde X : J \to \cat C\) with \(\tilde X_f\) defined to be
+\(X_\beta\) where \(\beta\) is the codomain of \(f\). If
+\(\set{q_f : Q \to \tilde X_f \mid f \in J}\) is one of the products of
+\(\tilde X\), then we have one morphism \(r : P \to Q\) such that
+\(q_f r = F_f p_\alpha\) for every \(\alpha \in I\) and morphism
+\(f \in J\) with domain \(\alpha\), and one morphism \(s : P \to Q\) such that
+\(q_f s = p_\beta\) for every \(\beta \in I\) and morphism \(f \in J\) with
+codomain \(\beta\).
 
 We have thus constructed two parallel morphisms
 \[\begin{tikzcd}
-P \ar["r", r, shift left] \ar["s", r, shift right, swap] & Q
-\end{tikzcd}\]
-Assume there is an equalizer \(i : L \to P\) of the pair \(r\) and \(s\). We are going to show that:
+    P \ar["r", r, shift left] \ar["s", r, shift right, swap] & Q
+  \end{tikzcd}\] Assume there is an equalizer \(i : L \to P\) of the
+pair \(r\) and \(s\). We are going to show that:
 \begin{quotation}
-the morphisms \(p_\alpha i : L \to P_\alpha\) for \(\alpha \in I\) do form a limit for \(F\).
+  the morphisms \(p_\alpha i : L \to P_\alpha\) for \(\alpha \in I\) do form a limit for
+  \(F\).
 \end{quotation}
-First of all, we verify that they form a natural transformation \(k_L \tto X\). In fact,
-\[F_f p_\alpha i = \underbrace{q_f r i = q_f s i}_{\mathclap{i \text{ equalizer of } r \text{ and } s}} = p_\beta i\]
-for every \(\alpha, \beta \in I\) and \((f : a \to b) \in J\). We consider now any natural transformation \(j : k_{L'} \tto F\) and show the existence and the uniqueness of a morphism \(h : L' \to L\) such that
+First of all, we verify that they form a natural transformation
+\(k_L \tto X\). In fact,
+\[F_f p_\alpha i = \underbrace{q_f r i = q_f s i}_{\mathclap{i \text{
+        equalizer of } r \text{ and } s}} = p_\beta i\] for every
+\(\alpha, \beta \in I\) and \((f : a \to b) \in J\). We consider now any natural
+transformation \(j : k_{L'} \tto F\) and show the existence and the
+uniqueness of a morphism \(h : L' \to L\) such that
 \[\begin{tikzcd}[row sep=small]
-L' \ar["{j_\alpha}", dr] \ar["h", dd, swap] \\
-& X_\alpha \\
-L \ar["{p_\alpha i}", ur, swap]
-\end{tikzcd}\]
-commutes for every \(\alpha \in I\). Forming the morphisms \(p_\alpha\) for \(\alpha \in I\) a product in \(\cat C\), let \(g : L' \to P\) in \(\cat C\) be the morphism such that \(p_\alpha g = j_\alpha\) for every \(\alpha \in I\). We can arrange a picture like this:
+    L' \ar["{j_\alpha}", dr] \ar["h", dd, swap] \\
+    & X_\alpha \\
+    L \ar["{p_\alpha i}", ur, swap]
+  \end{tikzcd}\] commutes for every \(\alpha \in I\). Forming the morphisms
+\(p_\alpha\) for \(\alpha \in I\) a product in \(\cat C\), let
+\(g : L' \to P\) in \(\cat C\) be the morphism such that
+\(p_\alpha g = j_\alpha\) for every \(\alpha \in I\). We can arrange a picture like
+this:
 \[\begin{tikzcd}
-L \ar["i", r] & P \ar["r", r, shift left] \ar["s", r, shift right, swap] \ar["{p_\alpha}", d] & Q \ar["{q_f}", d] \\
-L' \ar["{j_\alpha}", r, swap] \ar["g", ur] & X_\alpha \ar["{F_f}", r, swap] & X_\beta
-\end{tikzcd}\]
-Here, we have
-\[q_f r g = F_f p_\alpha g = \underbrace{F_f j_\alpha = j_\beta}_{\mathclap{\substack{j : k_{L'} \tto F \text{is a} \\ \text{natural transformation}}}} = p_\beta g = q_f s g .\]
-Being the family of the morphisms \(q_f : Q \to \tilde X_f\) a product, we must have \(s t = r t\). And being \(i : L \to P\) an equalizer of \(r\) and \(s\), it must be \(g = i h\) for a unique \(h : L' \to L\). Hence, \(j_\alpha = p_\alpha g = (p_\alpha i) h\), that is \(h\) works fine for our scope. To conclude, let \(h' : L' \to L\) such that \((p_\alpha i) h = (p_\alpha i ) h'\) for every \(\alpha \in I\): by the universal property of products, \(i h = i h'\); but, being equalizers monomorphisms, we can conclude \(h = h'\).
-
-%\NotaInterna{Halt! The previous version sounds as follows and it's wrong. We will need the set \(J := \set{\beta \in I \mid {\bf I}(\alpha, \beta) \ne \nil \text{ for some } \alpha \in I}\). Let \(\set{q_\mu : Q \to X_\mu \mid \mu \in J}\) be any of the products of \(\set{X_\mu \mid \mu \in J}\). The morphisms \(p_\beta\) induce one morphism \(r : P \to Q\) such that \(p_\beta = r q_\beta\) for \(\beta \in J\); similarly, there is one \(s : P \to Q\) such that \(F_f p_\alpha = s q_\beta\) for \(\alpha \in I\), \(\beta \in J\) and \(f : \alpha \to \beta\) in \({\bf I}\).}
+    L \ar["i", r] & P \ar["r", r, shift left] \ar["s", r, shift right, swap] \ar["{p_\alpha}", d] & Q \ar["{q_f}", d] \\
+    L' \ar["{j_\alpha}", r, swap] \ar["g", ur] & X_\alpha \ar["{F_f}", r, swap]
+    & X_\beta
+  \end{tikzcd}\] Here, we have
+\[q_f r g = F_f p_\alpha g = \underbrace{F_f j_\alpha =
+    j_\beta}_{\mathclap{\substack{j : k_{L'} \tto F \text{is a} \\
+        \text{natural transformation}}}} = p_\beta g = q_f s g .\] Being
+the family of the morphisms \(q_f : Q \to \tilde X_f\) a product, we
+must have \(s t = r t\). And being \(i : L \to P\) an equalizer of
+\(r\) and \(s\), it must be \(g = i h\) for a unique \(h : L' \to
+L\). Hence, \(j_\alpha = p_\alpha g = (p_\alpha i) h\), that is \(h\) works fine for
+our scope. To conclude, let \(h' : L' \to L\) such that
+\((p_\alpha i) h = (p_\alpha i ) h'\) for every \(\alpha \in I\): by the universal
+property of products, \(i h = i h'\); but, being equalizers
+monomorphisms, we can conclude \(h = h'\).
 
 \begin{definition}
-A category \(\cat C\) is said {\em (co)complete} whenever any functor \({\bf I} \to \cat C\) has a (co)limit. \(\cat C\) is said {\em finitely (co)complete} when every functor \({\bf I} \to \cat C\) with \({\bf I}\) finite admits a (co)limit.
+  A category \(\cat C\) is said {\em (co)complete} whenever any
+  functor \({\bf I} \to \cat C\) has a (co)limit. \(\cat C\) is said
+  {\em finitely (co)complete} when every functor
+  \({\bf I} \to \cat C\) with \({\bf I}\) finite admits a (co)limit.
 \end{definition}
 
-\NotaInterna{No concerns about the size of \({\bf I}\)? It is important.} In general, it may be difficult to demonstrate that a certain category is complete. We have just proved a criterion that may be of aid:
+\NotaInterna{No concerns about the size of \({\bf I}\)? It is
+  important.} In general, it may be difficult to demonstrate that a
+certain category is complete. We have just proved a criterion that may
+be of aid:
 
 \begin{proposition}[Completeness Theorem]\label{proposition:Completeness}
-Categories that have products and equalizers are complete. 
+  Categories that have products and equalizers are complete.
 \end{proposition}
 
-%\begin{proof}
-%Take \({\bf I}\) and \(\cat C\) to be two categories, and \(X : {\bf I} \to \cat C\) any functor; just for convenience, let us write \(I\) for \(\obj{{\bf I}}\). \(\cat C\) has all products, so let us write
-%\[\set{\left. p \functo{\phi_i} X_i \right\mid i \in I}\]
-%for one of --- it does not matter which one, right? --- the products of \(\set{X_i \mid i \in I}\). The class
-%\[H := \set{j \in I \mid {\bf I}(i, j) \ne \nil \text{ for some } i \in I}\]
-%will be useful for the constructions to come. For \(i \in I\), \(j \in H\) and \(f \in {\bf I}(i, j)\) we can draw this
-%\[\begin{tikzcd}[row sep=tiny]
-%& X_i \ar["{X_f}", dr, bend left=15pt] \\
-%p \ar["{\phi_i}", ur, bend left=15pt] \ar["{\phi_j}", rr, swap, bend right] & & X_j
-%\end{tikzcd}\]
-%Again by the fact that \(\cat C\) has products, let us write
-%\[\set{\left. q \functo{\xi_j} X_j \right\mid j \in H}\]
-%for one of the products of \(\set{X_j \mid j \in H}\). Now, the universal property of products yields two morphisms
-%\begin{equation}
-%\begin{tikzcd} p \ar["\delta", r, shift left] \ar["\theta", r, shift right, swap] & q \end{tikzcd}
-%\label{diagram:TwoProducts}
-%\end{equation}
-%of \(\cat C\) obtained as follows:
-%\begin{tcbenum}[label=(\arabic*), ref=\arabic*]
-%\item\label{universal:theta} \(\theta\) is the one that factors \(\phi_j\) through \(\xi_j\) for \(j \in H\), viz \(\phi_j = \xi_j \theta\).
-%\item\label{universal:delta} \(\delta\) is the unique that factors \(X_f \phi_i\) through \(\xi_j\) for every \(i \in I\), \(j \in H\) and \(f \in {\bf I}(i, j)\), that is \(X_f \phi_i = \xi_j \delta\)
-%\end{tcbenum}
-%\(\cat C\) has equalizers too, so let \(\epsilon : e \to p\) be one of the equalizers of the parallel morphisms in~\eqref{diagram:TwoProducts}. Now that everything is arranged, the rest of the proof is to prove that
-%\[\set{\left. e \functo{\phi_i \epsilon} X_i \right\mid i \in I}\]
-%is a limit of \(X\). It is important, however, to check preliminarily that it is a natural transformation. Take
-%\[\begin{tikzcd}[row sep=tiny]
-%& X_i \ar["{X_f}", dd] \\
-%e \ar["{\phi_i\epsilon}", ur] \ar["{\phi_j\epsilon}", dr, swap] \\
-%& X_j 
-%\end{tikzcd}\]
-%with \(i, j \in I\) and \(f \in {\bf I}(i, j)\). If \(j \notin H\), then the commutativity of the diagram is a vacuous truth; otherwise,
-%\[X_i \phi_i \epsilon = \underbrace{\xi_j \delta \epsilon = \xi_j \theta \epsilon}_{\epsilon \text{ is equalizer}} = \phi_j \epsilon .\]
-%So, let us conclude the proof: provided a natural transformation
-%\[\set{\left. a \functo{\sigma_i} X_i \right\mid i \in I} ,\]
-%we show how to construct \(a \to e\) that makes
-%\[\begin{tikzcd}[row sep=tiny]
-%a \ar["{\sigma_i}", dr] \ar[dd] \\
-%& X_i \\
-%e \ar["{\phi_i \epsilon}", ur, swap]
-%\end{tikzcd}\]
-%commute. By universal property of product, there is a unique \(\mu : a \to p\) such that \(\sigma_i = \phi_i \mu = \xi_i \theta \mu\) for every \(i \in I\). In particular, for \(j \in H\), \(i \in I\) and \(f \in {\bf I} (i, j)\)
-%\[\sigma_j = \begin{cases}
-%\phi_j \mu = \xi_j \theta \mu & \text{by~\eqref{universal:theta}} \\
-%X_f \sigma_i = X_f \phi _i \mu = \xi_j  \delta \mu & \parbox{9.5em}{because \(\sigma\) is a natural transformation and~\eqref{universal:delta}}\end{cases}\]
-%As a consequence of the universal property of product of \(\xi\), we must have \(\theta \mu = \delta \mu\). Moreover, being \(\epsilon : e \to p\) an equalizer of~\eqref{diagram:TwoProducts}, then \(\mu = \epsilon \psi\) for exactly one \(\psi : a \to e\) of \(\cat C\). Thus \(\sigma_i = \phi_i \mu = \phi_i \epsilon \psi\), so \(\psi\) is what we are are looking for; at this point you can observe the uniqueness of \(\psi\) as well. That's all.
-%\end{proof}
+\begin{proof}
+  Take \({\bf I}\) and \(\cat C\) to be two categories, and
+  \(X : {\bf I} \to \cat C\) any functor; just for convenience, let us
+  write \(I\) for \(\obj{{\bf I}}\). \(\cat C\) has all products, so
+  let us write
+  \[\set{\left. p \functo{\phi_i} X_i \right\mid i \in I}\]
+  for one of --- it does not matter which one, right? --- the products of
+  \(\set{X_i \mid i \in I}\). The class
+  \[H := \set{j \in I \mid {\bf I}(i, j) \ne \nil \text{ for some } i \in I}\]
+  will be useful for the constructions to come. For \(i \in I\),
+  \(j \in H\) and \(f \in {\bf I}(i, j)\) we can draw this
+  \[\begin{tikzcd}[row sep=tiny]
+      & X_i \ar["{X_f}", dr, bend left=15pt] \\
+      p \ar["{\phi_i}", ur, bend left=15pt] \ar["{\phi_j}", rr, swap, bend
+      right] & & X_j
+    \end{tikzcd}\] Again by the fact that \(\cat C\) has products, let
+  us write
+  \[\set{\left. q \functo{\xi_j} X_j \right\mid j \in H}\]
+  for one of the products of \(\set{X_j \mid j \in H}\). Now, the universal
+  property of products yields two morphisms
+  \begin{equation}
+    \begin{tikzcd} p \ar["\delta", r, shift left] \ar["\theta", r, shift right, swap] & q \end{tikzcd}
+    \label{diagram:TwoProducts}
+  \end{equation}
+  of \(\cat C\) obtained as follows:
+  \begin{tcbenum}%[label=(\arabic*), ref=\arabic*]
+  \item\label{universal:theta} \(\theta\) is the one that factors
+    \(\phi_j\) through \(\xi_j\) for \(j \in H\), viz \(\phi_j = \xi_j \theta\).
+  \item\label{universal:delta} \(\delta\) is the unique that factors
+    \(X_f \phi_i\) through \(\xi_j\) for every \(i \in I\),
+    \(j \in H\) and \(f \in {\bf I}(i, j)\), that is \(X_f \phi_i = \xi_j \delta\)
+  \end{tcbenum}
+  \(\cat C\) has equalizers too, so let \(\epsilon : e \to p\) be one of the
+  equalizers of the parallel morphisms
+  in~\eqref{diagram:TwoProducts}. Now that everything is arranged, the
+  rest of the proof is to prove that
+  \[\set{\left. e \functo{\phi_i \epsilon} X_i \right\mid i \in I}\]
+  is a limit of \(X\). It is important, however, to check
+  preliminarily that it is a natural transformation. Take
+  \[\begin{tikzcd}[row sep=tiny]
+      & X_i \ar["{X_f}", dd] \\
+      e \ar["{\phi_i\epsilon}", ur] \ar["{\phi_j\epsilon}", dr, swap] \\
+      & X_j
+    \end{tikzcd}\] with \(i, j \in I\) and \(f \in {\bf I}(i, j)\). If
+  \(j \notin H\), then the commutativity of the diagram is a vacuous truth;
+  otherwise,
+  \[X_i \phi_i \epsilon = \underbrace{\xi_j \delta \epsilon = \xi_j \theta \epsilon}_{\epsilon \text{ is
+        equalizer}} = \phi_j \epsilon .\] So, let us conclude the proof:
+  provided a natural transformation
+  \[\set{\left. a \functo{\sigma_i} X_i \right\mid i \in I} ,\]
+  we show how to construct \(a \to e\) that makes
+  \[\begin{tikzcd}[row sep=tiny]
+      a \ar["{\sigma_i}", dr] \ar[dd] \\
+      & X_i \\
+      e \ar["{\phi_i \epsilon}", ur, swap]
+    \end{tikzcd}\] commute. By universal property of product, there is
+  a unique \(\mu : a \to p\) such that
+  \(\sigma_i = \phi_i \mu = \xi_i \theta \mu\) for every \(i \in I\). In particular, for
+  \(j \in H\), \(i \in I\) and \(f \in {\bf I} (i, j)\)
+  \[
+    \sigma_j =
+    \begin{cases}
+      \phi_j \mu = \xi_j \theta \mu & \text{by~\eqref{universal:theta}} \\
+      X_f \sigma_i = X_f \phi _i \mu = \xi_j  \delta \mu & \parbox{9.5em}{because \(\sigma\) is
+                                        a natural transformation
+                                        and~\eqref{universal:delta}}
+    \end{cases}
+  \]
+  As a consequence of the universal property of product of \(\xi\), we
+  must have \(\theta \mu = \delta \mu\). Moreover, being
+  \(\epsilon : e \to p\) an equalizer of~\eqref{diagram:TwoProducts}, then
+  \(\mu = \epsilon \psi\) for exactly one \(\psi : a \to e\) of
+  \(\cat C\). Thus \(\sigma_i = \phi_i \mu = \phi_i \epsilon \psi\), so
+  \(\psi\) is what we are are looking for; at this point you can observe
+  the uniqueness of \(\psi\) as well. That's all.
+\end{proof}
 
-%\begin{lemma}
-%A category has finite products if and only if it has a terminal object and all binary products.
-%\end{lemma}
-%
-%\begin{proof}
-%One implication is trivial. Let \(\cat C\) be a category that has a terminal object, say \(1\), and all binary products \NotaInterna{write what this would mean}. Let \(\set{x_1, \dots{}, x_n} \subseteq \obj{\cat C}\) and construct one product for them. We proceed by induction on \(n\). If \(n=0\), we have a product: the terminal object \(1\). Assume now \(\set{x_1, \dots{}, x_n}\) has a product, say the set of morphisms of \(\cat C\)
-%\[\set{\alpha_i : p \to x_i \mid i = 1, \dots{}, n} .\]
-%Take one \(x_{n+1} \in \obj{\cat C}\). By assumption, there is a product of \(p\) and \(x_{n+1}\), a pair of morphisms
-%\[p \xleftarrow \beta q \xrightarrow \gamma x_{n+1} .\]
-%The question is: do the morphisms \(\alpha_i \beta : q \to x_i\), for \(i = 1, \dots{}, n\), and \(\gamma\) form a product of \(\set{x_1, \dots{}, x_n, x_{n+1}}\)? Yes, \inlinethm{exercise} (the drawing below is a hint).
-%\[\begin{tikzcd}
-%& & r \ar["{f_i}", ddll, swap, bend right] \ar["{f_{n+1}}", ddr, bend left] 
-%\ar[ddl, bend right, dashed] \ar[d, dotted] \\
-%& & q \ar["\beta", dl] \ar["\gamma", dr, swap] \\
-%x_i & p \ar["{\alpha_i}", l] & & x_{n+1} 
-%\end{tikzcd}\qedhere\]
-%\end{proof}
+% \begin{lemma}
+%   A category has finite products if and only if it has a terminal
+%   object and all binary products.
+% \end{lemma}
+
+% \begin{proof}
+%   One implication is trivial. Let \(\cat C\) be a category that has a
+%   terminal object, say \(1\), and all binary products
+%   \NotaInterna{write what this would mean}. Let
+%   \(\set{x_1, \dots{}, x_n} \subseteq \obj{\cat C}\) and construct one product
+%   for them. We proceed by induction on \(n\). If \(n=0\), we have a
+%   product: the terminal object \(1\). Assume now
+%   \(\set{x_1, \dots{}, x_n}\) has a product, say the set of morphisms
+%   of \(\cat C\)
+%   \[\set{\alpha_i : p \to x_i \mid i = 1, \dots{}, n} .\]
+%   Take one \(x_{n+1} \in \obj{\cat C}\). By assumption, there is a
+%   product of \(p\) and \(x_{n+1}\), a pair of morphisms
+%   \[p \xleftarrow \beta q \xrightarrow \gamma x_{n+1} .\] The question is: do
+%   the morphisms \(\alpha_i \beta : q \to x_i\), for
+%   \(i = 1, \dots{}, n\), and \(\gamma\) form a product of
+%   \(\set{x_1, \dots{}, x_n, x_{n+1}}\)? Yes, \inlinethm{exercise} (the
+%   drawing below is a hint).
+%   \[\begin{tikzcd}
+%       & & r \ar["{f_i}", ddll, swap, bend right] \ar["{f_{n+1}}", ddr,
+%       bend left]
+%       \ar[ddl, bend right, dashed] \ar[d, dotted] \\
+%       & & q \ar["\beta", dl] \ar["\gamma", dr, swap] \\
+%       x_i & p \ar["{\alpha_i}", l] & & x_{n+1}
+%     \end{tikzcd}\qedhere\]
+% \end{proof}
 
 A special place is for finite (co)limits.
 
 \begin{proposition}[Finite Completeness Theorem I]
-Categories having terminal objects, binary products and equalizers are finitely complete. \NotaInterna{Write a definition for \q{finite completeness}.}
+  Categories having terminal objects, binary products and equalizers
+  are finitely complete. \NotaInterna{Write a definition for \q{finite
+      completeness}.}
 \end{proposition}
 
 \begin{proof}
-Use Corollary~\ref{corollary:FiniteProductsIffTerminalAndBinaryProducts} and the argument to prove the Completeness Theorem.
+  Use
+  Corollary~\ref{corollary:FiniteProductsIffTerminalAndBinaryProducts}
+  and the argument to prove the Completeness Theorem.
 \end{proof}
 
-Actually, we have another finite completeness theorem, which requires some preliminary work.
+% Actually, we have another finite completeness theorem, which requires
+% some preliminary work.
 
-%\begin{lemma}
-%If a category has a terminal object and pullbacks, then it has binary products and equalizers.
-%\end{lemma}
-%
-%\begin{proof}
-%Call \(\cat C\) the category of the assumptions and \(1\) one of its terminal objects. An exercise in the section about pullbacks asked you to show that the pullbacks of \(a \to 1 \gets b\) are products of \(a\) and \(b\). Now we show how to get an equalizer out of a terminal object and an appropriate pullback. Consider two parallel morphisms
-%\[\begin{tikzcd}
-%a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
-%\end{tikzcd}\]
-%of \(\cat C\). Now, let
-%\[\begin{tikzcd}a & a \times b \ar["{p_a}", l, swap] \ar["{p_b}", r] & b \end{tikzcd}\]
-%be one the products of \(a\) and \(b\). Afterwards, define \(\bar f : a \to a \times b\) to be that morphism such that \(p_a \bar f = \id_a\) and \(f = p_b \bar f\); similarly, let \(\bar g : a \to a \times b\) be the morphism such that \(p_a \bar g = \id_a\) and \(g = p_b \bar g\).
-%\[\begin{tikzcd}
-%& a \ar["{\id_a}", dl, swap] \ar["{\bar f}", d] \ar["f", dr] \\
-%a & a \times b \ar["{p_a}", l] \ar["{p_b}", r, swap] & b
-%\end{tikzcd} \quad \begin{tikzcd}
-%& a \ar["{\id_a}", dl, swap] \ar["{\bar g}", d] \ar["g", dr] \\
-%a & a \times b \ar["{p_a}", l] \ar["{p_b}", r, swap] & b
-%\end{tikzcd}\]
-%By assumption, \(\cat C\) has the pullback square
-%\[\begin{tikzcd}
-%p \ar["m", r] \ar["n", d, swap] & a \ar["{\bar f}", d] \\
-%a \ar["{\bar g}", r, swap] & a \times b
-%\end{tikzcd}\]
-%Here \(m = \alpha \bar f m = \alpha \bar g n = n\), so we can collapse all to the commuting
-%\[\begin{tikzcd}
-%p \ar["m", r] & a \ar["{\bar f}", r, shift left] \ar["{\bar g}", r, shift right, swap] & a \times b
-%\end{tikzcd}\]
-%with \(m\) equalizer of \(\bar f\) and \(\bar g\).
-%\end{proof}
-%
-%\begin{exercise}
-%Show that \(m\) is an equalizer. (Hint: \(\bar f\) and \(\bar g\) are monomorphisms.)
-%\end{exercise}
+% \begin{lemma}
+%   If a category has a terminal object and pullbacks, then it has
+%   binary products and equalizers.
+% \end{lemma}
+
+% \begin{proof}
+%   Call \(\cat C\) the category of the assumptions and \(1\) one of its
+%   terminal objects. An exercise in the section about pullbacks asked
+%   you to show that the pullbacks of \(a \to 1 \gets b\) are products of
+%   \(a\) and \(b\). Now we show how to get an equalizer out of a
+%   terminal object and an appropriate pullback. Consider two parallel
+%   morphisms
+%   \[\begin{tikzcd}
+%       a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
+%     \end{tikzcd}\] of \(\cat C\). Now, let
+%   \[\begin{tikzcd}a & a \times b \ar["{p_a}", l, swap] \ar["{p_b}", r] &
+%       b \end{tikzcd}\] be one the products of \(a\) and
+%   \(b\). Afterwards, define \(\bar f : a \to a \times b\) to be that morphism
+%   such that \(p_a \bar f = \id_a\) and \(f = p_b \bar f\); similarly,
+%   let \(\bar g : a \to a \times b\) be the morphism such that
+%   \(p_a \bar g = \id_a\) and \(g = p_b \bar g\).
+%   \[\begin{tikzcd}
+%       & a \ar["{\id_a}", dl, swap] \ar["{\bar f}", d] \ar["f", dr] \\
+%       a & a \times b \ar["{p_a}", l] \ar["{p_b}", r, swap] & b
+%     \end{tikzcd} \quad \begin{tikzcd}
+%       & a \ar["{\id_a}", dl, swap] \ar["{\bar g}", d] \ar["g", dr] \\
+%       a & a \times b \ar["{p_a}", l] \ar["{p_b}", r, swap] & b
+%     \end{tikzcd}\] By assumption, \(\cat C\) has the pullback square
+%   \[\begin{tikzcd}
+%       p \ar["m", r] \ar["n", d, swap] & a \ar["{\bar f}", d] \\
+%       a \ar["{\bar g}", r, swap] & a \times b
+%     \end{tikzcd}\] Here \(m = \alpha \bar f m = \alpha \bar g n = n\), so we can
+%   collapse all to the commuting
+%   \[\begin{tikzcd}
+%       p \ar["m", r] & a \ar["{\bar f}", r, shift left] \ar["{\bar g}",
+%       r, shift right, swap] & a \times b
+%     \end{tikzcd}\] with \(m\) equalizer of \(\bar f\) and \(\bar g\).
+% \end{proof}
+
+% \begin{exercise}
+%   Show that \(m\) is an equalizer. (Hint: \(\bar f\) and \(\bar g\)
+%   are monomorphisms.)
+% \end{exercise}
 
 \begin{proposition}[Finite Completeness Theorem II]
-Categories that have terminal objects and pullbacks are finitely complete.
+  Categories that have terminal objects and pullbacks are finitely
+  complete.
 \end{proposition}
 
 \begin{proof}
-Use the previous Lemma and the Finite Completeness Theorem I.
+  Use the previous Lemma and the Finite Completeness Theorem I.
 \end{proof}
 
 Let us sum all up in one corollary:
 
 \begin{corollary}[Finite Completeness Theorem]
-For any category, the following facts are equivalent:
-\begin{tcbenum}
-\item it is finitely complete
-\item it has a terminal, binary products and equalizers
-\item it has a terminal object and pullbacks
-\end{tcbenum}
+  For any category, the following facts are equivalent:
+  \begin{tcbenum}
+  \item it is finitely complete
+  \item it has a terminal, binary products and equalizers
+  \item it has a terminal object and pullbacks
+  \end{tcbenum}
 \end{corollary}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:
 

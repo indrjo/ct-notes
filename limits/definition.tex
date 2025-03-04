@@ -1,92 +1,150 @@
-% !TEX program = lualatex
-% !TEX spellcheck = en-GB
-% !TEX root = ../limits.tex
 
 \section{Definition}
 
-\NotaInterna{Expand this section with details about duality and \TeX{} some initial exercises.}
+\NotaInterna{Expand this section with details about duality and \TeX{}
+  some initial exercises.}
 
 \begin{definition}[Limits \& colimits]\label{definition:LimitsAndColimits}
-Let \(\cat I\) and \(\cat C\) be two categories. For every object \(v\) of \(\cat C\) we have the {\em constant functor}
-\[k_v : \cat I \to \cat C\]
-  where \(k_v(i) := v\) for every object \(i\) and \(k_v(f) := \id_v\) for every morphism \(f\). \NotaInterna{Later, in the chapter of the adjunctions, we will introduce one functor \(\Delta : \cat C \to [\cat I, \cat C]\).} A {\em limit} of a functor \(F : \cat I \to \cat C\) is some object \(v\) of \(\cat C\) with a natural transformation \(\lambda : k_v \tto F\)
-such that:
-%\begin{quotation}
-for any object \(a\) of \(\cat C\) and \(\mu : k_a \tto F\) there is one and only one \(f : a \to v\) of \(\cat C\) such that
-\[\begin{tikzcd}[row sep=tiny]
-a \ar["{\mu_i}", dr] \ar["f", dd, swap] \\
-& F(i) \\
-v \ar["{\lambda_i}", ur, swap]
-\end{tikzcd}\]
-commutes for every \(i\) in \(\cat I\).
-%\end{quotation}
-A {\em colimit}, instead, is an object \(u\) of \(\cat C\) together with a \(\chi : F \tto k_u\) that has the property:
-%\begin{quotation}
-for every object \(b\) of \(\cat C\) and \(\xi : F \tto k_b\) there exists one and only one \(g : u \to b\) of \(\cat C\) that makes
-\[\begin{tikzcd}[row sep=tiny]
-u  \ar["g", dd, swap] \\
-& F(i) \ar["{\chi_i}", ul, swap] \ar["{\xi_i}", dl]\\
-b
-\end{tikzcd}\]
-commute for every \(i\) in \(\cat I\).
-%\end{quotation}
+  Let \(\cat I\) and \(\cat C\) be two categories. For every object
+  \(v\) of \(\cat C\) we have the {\em constant functor}
+  \[k_v : \cat I \to \cat C\] where \(k_v(i) := v\) for every object
+  \(i\) and \(k_v(f) := \id_v\) for every morphism
+  \(f\). \NotaInterna{Later, in the chapter of the adjunctions, we
+    will introduce one functor
+    \(\Delta : \cat C \to [\cat I, \cat C]\).} A {\em limit} of a functor
+  \(F : \cat I \to \cat C\) is some object \(v\) of \(\cat C\) with a
+  natural transformation \(\lambda : k_v \tto F\) such that:
+  % \begin{quotation}
+  for any object \(a\) of \(\cat C\) and \(\mu : k_a \tto F\) there is
+  one and only one \(f : a \to v\) of \(\cat C\) such that
+  \[\begin{tikzcd}[row sep=tiny]
+      a \ar["{\mu_i}", dr] \ar["f", dd, swap] \\
+      & F(i) \\
+      v \ar["{\lambda_i}", ur, swap]
+    \end{tikzcd}\] commutes for every \(i\) in \(\cat I\).
+  % \end{quotation}
+  A {\em colimit}, instead, is an object \(u\) of \(\cat C\) together
+  with a \(\chi : F \tto k_u\) that has the property:
+  % \begin{quotation}
+  for every object \(b\) of \(\cat C\) and \(\xi : F \tto k_b\) there
+  exists one and only one \(g : u \to b\) of \(\cat C\) that makes
+  \[\begin{tikzcd}[row sep=tiny]
+      u  \ar["g", dd, swap] \\
+      & F(i) \ar["{\chi_i}", ul, swap] \ar["{\xi_i}", dl]\\
+      b
+    \end{tikzcd}\] commute for every \(i\) in \(\cat I\).
+  % \end{quotation}
 \end{definition}
 
-%In general, (co)cones can be twisted things and (co)limits, if exist, can be even more so. Yes, for a functor \(\cat I \to \cat C\), the category \(\cat C\) has its share, but it is \(\cat I\) who has the last say in the research of (co)limits. The role of \(\cat I\) is to give a \q{shape} of the limits we are looking for, indeed.
+% In general, (co)cones can be twisted things and (co)limits, if
+% exist, can be even more so. Yes, for a functor
+% \(\cat I \to \cat C\), the category \(\cat C\) has its share, but it
+% is \(\cat I\) who has the last say in the research of
+% (co)limits. The role of \(\cat I\) is to give a \q{shape} of the
+% limits we are looking for, indeed.
 
 \begin{example}
-We have already seen how a preordered set is a category; in this example let us employ \(\naturals\) with the usual ordering \(\le\). First of all, let us figure out what cones and cocones of functors \(H : \naturals \to \cat C\) are. Such functors, in other words, are sequence of objects and morphisms of \(\cat C\) so arranged
-\[H_0 \functo{\partial_0} H_1 \functo{\partial_2} \cdots \functo{\partial_{n-1}} H_n \functo{\partial_n} H_{n+1} \functo{\partial_{n+1}} \cdots\]
-In this case, a cone on \(H\) is a collection \(\set{\alpha_i : A \to H_i \mid i \in \naturals}\) such that \(\alpha_j = \partial_{j-1} \cdots \partial_i \alpha_i\) for every \(i, j \in \naturals\) such that \(i < j\); remember that if \(j > i\) there is no morphism \(H_j \to H_i\) and, for \(i \in \obj{\cat I}\), the morphism \(H_i \to H_i\) is the identity.
-\NotaInterna{Continue after you have fixed some parts before.}
-%\newline
-%Let us now say what limits and colimits of \(H : \naturals \to \cat C\) are.
+  We have already seen how a preordered set is a category; in this
+  example let us employ \(\naturals\) with the usual ordering
+  \(\le\). First of all, let us figure out what cones and cocones of
+  functors \(H : \naturals \to \cat C\) are. Such functors, in other
+  words, are sequence of objects and morphisms of \(\cat C\) so
+  arranged
+  \[H_0 \functo{\partial_0} H_1 \functo{\partial_2} \cdots \functo{\partial_{n-1}} H_n
+    \functo{\partial_n} H_{n+1} \functo{\partial_{n+1}} \cdots\] In this case, a cone on
+  \(H\) is a collection
+  \(\set{\alpha_i : A \to H_i \mid i \in \naturals}\) such that
+  \(\alpha_j = \partial_{j-1} \cdots \partial_i \alpha_i\) for every
+  \(i, j \in \naturals\) such that \(i < j\); remember that if
+  \(j > i\) there is no morphism \(H_j \to H_i\) and, for
+  \(i \in \obj{\cat I}\), the morphism \(H_i \to H_i\) is the identity.
+  \NotaInterna{Continue after you have fixed some parts before.}
+  % \newline Let us now say what limits and colimits of
+  % \(H : \naturals \to \cat C\) are.
 \end{example}
 
 \begin{example}
-\NotaInterna{Rewrite.} Let \(\cat C\) be a category and \(\mathbf 1\) a category that has one object and one morphism, and take a functor \(f : \mathbf 1 \to \cat C\), some \(v \in \cat C\) and the corresponding constant functor \(k_v : \mathbf 1 \to \cat C\). A natural transformation \(\zeta : k_v \tto f\) amounts of a single morphism \(v \to \tilde f\) of \(\cat C\), where \(\tilde f\) indicates the image of the unique object of \(\mathbf 1\) via \(f\). Thus, a limit of \(f\) is some \(v \in \obj{\cat C}\) and a morphism \(\lambda : v \to \tilde f\) of \(\cat C\) such that: for every object \(u\) and morphism \(\mu : u \to \tilde f\) in \(\cat C\), there is a unique morphism \(u \to v\) of \(\cat C\) that makes
-\[\begin{tikzcd}[row sep=tiny]
-u \ar["\mu", dr] \ar[dd] \\
-& \tilde f \\
-v \ar["\lambda", ur, swap]
-\end{tikzcd}\]
-commute.
+  \NotaInterna{Rewrite.} Let \(\cat C\) be a category and
+  \(\mathbf 1\) a category that has one object and one morphism, and
+  take a functor \(f : \mathbf 1 \to \cat C\), some \(v \in \cat C\) and
+  the corresponding constant functor \(k_v : \mathbf 1 \to \cat C\). A
+  natural transformation \(\zeta : k_v \tto f\) amounts of a single
+  morphism \(v \to \tilde f\) of \(\cat C\), where \(\tilde f\)
+  indicates the image of the unique object of \(\mathbf 1\) via
+  \(f\). Thus, a limit of \(f\) is some \(v \in \obj{\cat C}\) and a
+  morphism \(\lambda : v \to \tilde f\) of \(\cat C\) such that: for every
+  object \(u\) and morphism \(\mu : u \to \tilde f\) in \(\cat C\), there
+  is a unique morphism \(u \to v\) of \(\cat C\) that makes
+  \[\begin{tikzcd}[row sep=tiny]
+      u \ar["\mu", dr] \ar[dd] \\
+      & \tilde f \\
+      v \ar["\lambda", ur, swap]
+    \end{tikzcd}\] commute.
 \end{example}
 
 \begin{exercise}
-What are colimts of functors \(\mathbf 1 \to \cat C\)?
+  What are colimts of functors \(\mathbf 1 \to \cat C\)?
 \end{exercise}
 
 \begin{example}
-\NotaInterna{Rewrite.} Consider a monoid (viz a single object category) \(\cat G\): for the scope of this example we write \(G\) for the set of the morphisms of \(\cat G\). Let \(F : \cat G \to \Set\) be a functor, and let \(\hat F\) indicate the \(F\)-image of the unique object of \(\cat G\) whilst, for \(f \in G\), \(\hat f\) the function \(F(f) : \hat F \to \hat F\). Now, being \(k_X : \cat G \to \Set\) the functor constant at \(X\), with \(X\) a set, a natural transformation \(\lambda : F \tto k_X\) is a morphism \(\lambda : \hat F \to X\) such that \(\lambda = \lambda \hat f\) for every \(f \in G\). These two things, the set \(X\) and the function \(\lambda\), together are a colimit of \(F\) whenever
-\begin{quotation}
-for every set \(Y\) and function \(\mu : \hat F \to Y\) such that \(\mu = \mu \hat f\) for every \(f \in G\) there exists one and only one function \(h : X \to Y\) such that \(\mu = h \lambda\).
-\end{quotation}
-\NotaInterna{Is that thing even interesting?} \NotaInterna{Write about functors \(\cat G \to \Set\)\dots{}}
+  \NotaInterna{Rewrite.} Consider a monoid (viz a single object
+  category) \(\cat G\): for the scope of this example we write \(G\)
+  for the set of the morphisms of \(\cat G\). Let
+  \(F : \cat G \to \Set\) be a functor, and let \(\hat F\) indicate the
+  \(F\)-image of the unique object of \(\cat G\) whilst, for
+  \(f \in G\), \(\hat f\) the function \(F(f) : \hat F \to \hat F\). Now,
+  being \(k_X : \cat G \to \Set\) the functor constant at \(X\), with
+  \(X\) a set, a natural transformation \(\lambda : F \tto k_X\) is a
+  morphism \(\lambda : \hat F \to X\) such that
+  \(\lambda = \lambda \hat f\) for every \(f \in G\). These two things, the set
+  \(X\) and the function \(\lambda\), together are a colimit of \(F\)
+  whenever
+  \begin{quotation}
+    for every set \(Y\) and function \(\mu : \hat F \to Y\) such that
+    \(\mu = \mu \hat f\) for every \(f \in G\) there exists one and only one
+    function \(h : X \to Y\) such that \(\mu = h \lambda\).
+  \end{quotation}
+  \NotaInterna{Is that thing even interesting?} \NotaInterna{Write
+    about functors \(\cat G \to \Set\)\dots{}}
 \end{example}
 
-\noindent\NotaInterna{Write about duality here. Explain how limits and colimits are dual\dots{}}
+\noindent\NotaInterna{Write about duality here. Explain how limits and
+  colimits are dual\dots{}}
 
-The following is very basic property: limits of a same functor are are essentially the same.
+The following is very basic property: limits of a same functor are are
+essentially the same.
 
 \begin{proposition}\label{proposition:LimitsAreIsomorphic}
-Let \(F : \cat I \to \cat C\) be a functor. If \(\set{\eta_i : a \to F(i) \mid i \in \obj{\cat I}}\) and \(\set{\theta_i : b \to F(i) \mid i \in \obj{\cat I}}\) are limits of \(F\), then \(a \cong b\).
+  Let \(F : \cat I \to \cat C\) be a functor. If
+  \(\set{\eta_i : a \to F(i) \mid i \in \obj{\cat I}}\) and
+  \(\set{\theta_i : b \to F(i) \mid i \in \obj{\cat I}}\) are limits of
+  \(F\), then \(a \cong b\).
 \end{proposition}
 
 \begin{proof}
-By definition of limit, we a have a unique \(f : a \to b\) and a unique \(g : b \to a\) making the triangles in
-\[\begin{tikzcd}[row sep=small]
-a \ar["{\eta_i}", dr] \ar["f" description, dd, bend left] \\
-& F(i) \\
-b \ar["{\theta_i}", ur, swap] \ar["g" description, uu, bend left]
-\end{tikzcd}\]
-commute for every object \(i\) of \(\cat I\). In this case,
-\[\begin{aligned}
-& \eta_i = \theta_i f = \eta_i (gf) \\
-& \theta_i = \eta_i g = \theta_i (fg)
-\end{aligned}\]
+  By definition of limit, we a have a unique \(f : a \to b\) and a
+  unique \(g : b \to a\) making the triangles in
+  \[\begin{tikzcd}[row sep=small]
+      a \ar["{\eta_i}", dr] \ar["f" description, dd, bend left] \\
+      & F(i) \\
+      b \ar["{\theta_i}", ur, swap] \ar["g" description, uu, bend left]
+    \end{tikzcd}\] commute for every object \(i\) of \(\cat I\). In
+  this case,
+  \[\begin{aligned}
+    & \eta_i = \theta_i f = \eta_i (gf) \\
+    & \theta_i = \eta_i g = \theta_i (fg)
+  \end{aligned}\]
 Invoking again the universal property of limits, \(gf = \id_a\) and \(fg = \id_b\).
 \end{proof}
 
-Fortunately, there are few shapes that are both ubiquitous and simple. This section is dedicated to them, while in the successive one we will prove (Proposition~\ref{proposition:Completeness}) that if some simple functors have limits, then all the functors do have limits.
+Fortunately, there are few shapes that are both ubiquitous and
+simple. This section is dedicated to them, while in the successive one
+we will prove (Proposition~\ref{proposition:Completeness}) that if
+some simple functors have limits, then all the functors do have
+limits.
 
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:

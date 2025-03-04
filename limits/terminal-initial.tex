@@ -1,143 +1,225 @@
-% !TEX program = lualatex
-% !TEX spellcheck = en_GB
-% !TEX root = ../limits.tex
 
 \section{Terminal and initial objects}
 
 \begin{definition}[Terminal \& initial objects]
-For \(\cat C\) category, the limits of the empty functor \(\nil \to \cat C\) are called {\em terminal objects} of \(\cat C\), whereas the colimits {\em initial objects}.
+  For \(\cat C\) category, the limits of the empty functor
+  \(\nil \to \cat C\) are called {\em terminal objects} of \(\cat C\),
+  whereas the colimits {\em initial objects}.
 \end{definition}
 
-Let us expand the definition above so that we can can look inside. A cone over the empty functor \(\nil \to \cat C\) with vertex \(a\) is a natural transformation
+Let us expand the definition above so that we can can look inside. A
+cone over the empty functor \(\nil \to \cat C\) with vertex \(a\) is a
+natural transformation
 \[\naturaltr{}{\nil}{\cat C}{k_a}{}.\]
-Here, the empty functor is \(k_a\) because there is at most one functor \(\nil \to \cat C\). Again, because there must be a unique one, our natural transformation is the empty transformation, viz the one devoid of morphisms. A similar reasoning leads us to the following explicit definition of terminal and initial object.
+Here, the empty functor is \(k_a\) because there is at most one
+functor \(\nil \to \cat C\). Again, because there must be a unique one,
+our natural transformation is the empty transformation, viz the one
+devoid of morphisms. A similar reasoning leads us to the following
+explicit definition of terminal and initial object.
 
 \begin{definition}[Terminal and initial objects, explicit]\label{definition:TerminalAndInitialExplicit}
-Let \(\cat C\) be a category.
-\begin{tcbitem}
-\item A {\em terminal object} of \(\cat C\) is an object \(1\) of  \(\cat C\) such that for every object \(x\) of \(\cat C\) there exists one and only one \(x \to 1\) in \(\cat C\).
-\item An {\em initial object} of \(\cat C\) is an object \(0\) in \(\cat C\) such that for every object \(x\) in  \(\cat C\) there exists one and only one morphism \(0 \to x\) in \(\cat C\).
-\end{tcbitem}
+  Let \(\cat C\) be a category.
+  \begin{tcbitem}
+  \item A {\em terminal object} of \(\cat C\) is an object \(1\) of
+    \(\cat C\) such that for every object \(x\) of \(\cat C\) there
+    exists one and only one \(x \to 1\) in \(\cat C\).
+  \item An {\em initial object} of \(\cat C\) is an object \(0\) in
+    \(\cat C\) such that for every object \(x\) in \(\cat C\) there
+    exists one and only one morphism \(0 \to x\) in \(\cat C\).
+  \end{tcbitem}
 \end{definition}
 
-%Examples time.
+% Examples time.
 
 \begin{example}[Empty set and singletons]
-It may sound weird, but for every set \(X\) there does exist a function \(\nil \to X\); moreover, it is the unique one. To get this, think set-theoretically: a function is any subset of \(\nil \times X\) that has the property we know. But \(\nil \times X = \nil\), so its unique subset is \(\nil\). This set is a function from \(\nil\) to \(X\) since the statement
-\begin{quotation}
-for every \(a \in \nil\) there is one and only one \(b \in X\) such that \((a, b) \in \nil\)
-\end{quotation}
-is a {\em vacuous truth}.
-%\footnote{{\em Vacuous truths} are nice logical and mathematical tricks. Suppose \(p\) is a predicate that is never true. Then \q{\(p(x)\) for all \(x\)} is true.}
-So \(\nil\) is an initial object of \(\Set\). This case is quite particular, since the initial objects of \(\Set\) are actually equal to \(\nil\). \newline
-Now let us look for terminal objects in \(\Set\). Take an arbitrary set \(X\): there is exactly one function from \(X\) to any singleton, that is singletons are terminal object of \(\Set\). Conversely, by Proposition~\ref{proposition:LimitsAreIsomorphic}, the terminal objects of \(\Set\) must be singletons.
+  It may sound weird, but for every set \(X\) there does exist a
+  function \(\nil \to X\); moreover, it is the unique one. To get this,
+  think set-theoretically: a function is any subset of
+  \(\nil \times X\) that has the property we know. But
+  \(\nil \times X = \nil\), so its unique subset is \(\nil\). This set is a
+  function from \(\nil\) to \(X\) since the statement
+  \begin{quotation}
+    for every \(a \in \nil\) there is one and only one \(b \in X\) such
+    that \((a, b) \in \nil\)
+  \end{quotation}
+  is a {\em vacuous truth}.
+  % \footnote{{\em Vacuous truths} are nice logical and mathematical
+  % tricks. Suppose \(p\) is a predicate that is never true. Then
+  % \q{\(p(x)\) for all \(x\)} is true.}
+  So \(\nil\) is an initial object of \(\Set\). This case is quite
+  particular, since the initial objects of \(\Set\) are actually equal
+  to \(\nil\). \newline Now let us look for terminal objects in
+  \(\Set\). Take an arbitrary set \(X\): there is exactly one function
+  from \(X\) to any singleton, that is singletons are terminal object
+  of \(\Set\). Conversely, by
+  Proposition~\ref{proposition:LimitsAreIsomorphic}, the terminal
+  objects of \(\Set\) must be singletons.
 \end{example}
 
 \begin{exercise}
-Trivial groups --- there is a unique way a singleton can be a group --- are either terminal and initial objects of \(\Grp\).
+  Trivial groups --- there is a unique way a singleton can be a group ---
+  are either terminal and initial objects of \(\Grp\).
 \end{exercise}
 
 \begin{example}[The ring \(\integers\)]
-For if \(R\) is a ring, we write \(1_R\) to write the multiplicative identity of \(R\). A simple ring homomorphism is
-\[\phi : \integers \to R \,,\ \phi(r) := r 1_R .\]
-Assume now, \(\psi : \integers \to R\) is another ring homomorphism: then for every \(r \in \integers\) we have
-\[\psi(r) = r \psi\left(1_R\right) = r \phi\left(1_R\right) = \phi(r) .\]
-Thus we can conclude \(\integers\) is initial in \(\Ring\).
+  For if \(R\) is a ring, we write \(1_R\) to write the multiplicative
+  identity of \(R\). A simple ring homomorphism is
+  \[\phi : \integers \to R \,,\ \phi(r) := r 1_R .\]
+  Assume now, \(\psi : \integers \to R\) is another ring homomorphism: then
+  for every \(r \in \integers\) we have
+  \[\psi(r) = r \psi\left(1_R\right) = r \phi\left(1_R\right) = \phi(r) .\]
+  Thus we can conclude \(\integers\) is initial in \(\Ring\).
 \end{example}
 
 \begin{example}[Recursion]\label{example:Recursion}
-In Set Theory, there is a nice theorem, the {\em Recursion Theorem}:
-\begin{quotation}
-Let \((\naturals, 0, s)\) be a Peano Model, where \(0 \in \naturals\) and \(s : \naturals \to \naturals\) is its successor function. For every pointed set \(X\), \(a \in X\) and \(f : X \to X\) there exists one and only one function \(x : \naturals \to X\) such that \(x_0 = a\) and \(x_{s(n)} = f(x_n)\) for every \(n \in \naturals\).
-\end{quotation}
-Here, by Peano Model we mean a set \(\naturals\) that has one element, we write \(0\), stood out and a function \(s : \naturals \to \naturals\) such that, all this complying some rules:
-\begin{tcbenum}
-\item \(s\) is injective;
-\item \(s(x) \ne 0\) for every \(x \in \naturals\);
-\item for if \(A \subseteq \naturals\) has \(0\) and \(s(n) \in A\) for every \(n \in A\), then \(A = \naturals\).
-\end{tcbenum}
-We show now how we can involve Category Theory in this case. First of all, we need a category where to work.\newline
-The statement is about things made as follows:
-\begin{quotation}
-a set \(X\), one distinguished \(x \in X\) and one function \(f : X \to X\).
-\end{quotation}
-\NotaInterna{Is there a name for these things?}
-We may refer to such new things by barely a triple \((X, a, f)\), but we prefer something like this:
-\[1 \functo{x} X \functo{f} X ,\]
-where \(1\) is any singleton, as usual. Peano Models are such things, with some additional properties. It is told about the existence and the uniqueness of a certain function. We do not want mere functions, of course: given
-\[1 \functo x X \functo f X \text{ and } 1 \functo y Y \functo g Y ,\]
-we take the functions \(r : X \to Y\) such that
-\[\begin{tikzcd}[row sep=tiny]
-& X \ar["f", r] \ar["r", dd] & X \ar["r", dd] \\
-1 \ar["x", ur] \ar["y", dr, swap] \\
-& Y \ar["g", r, swap] & Y
-\end{tikzcd}\]
-commutes and nothing else. \NotaInterna{Is there a name for such functions?} These ones are the things we want to be morphisms. Suppose given
-\[\begin{tikzcd}
-& X \ar["f", r] \ar["p", d] & X \ar["p", d] \\
-1 \ar["x", ur] \ar["y", r] \ar["z", dr, swap] & Y \ar["g", r] \ar["q", d] & Y \ar["q", d] \\
-& Z \ar["h", r, swap] & Z
-\end{tikzcd}\]
-where all the squares and triangles commute: thus we obtain the commuting
-\[\begin{tikzcd}[row sep=tiny]
-& X \ar["f", r] \ar["qp", dd] & X \ar["qp", dd] \\
-1 \ar["x", ur] \ar["z", dr, swap] \\
-& Z \ar["h", r, swap] & Z
-\end{tikzcd}\] This means that composing two morphisms as functions in \(\Set\) produces a morphism. This is how we want composition to defined in this context. This choice makes the categorial axioms automatically respected. We call this category \(\mathbf{Peano}\). \NotaInterna{Unless there is a better naming, of course.}\newline
-Being the environment set now, the Recursion Theorem becomes more concise:
-\begin{quotation}
-Peano Models are initial objects of \(\mathbf{Peano}\). 
-\end{quotation}
-By Proposition~\ref{proposition:LimitsAreIsomorphic}, any other initial object of \(\mathbf{Peano}\) are isomorphic to some Peano Model: does this mean its initial objects are Peano Models? (Exercise.)
+  In Set Theory, there is a nice theorem, the {\em Recursion Theorem}:
+  \begin{quotation}
+    Let \((\naturals, 0, s)\) be a Peano Model, where
+    \(0 \in \naturals\) and \(s : \naturals \to \naturals\) is its
+    successor function. For every pointed set \(X\), \(a \in X\) and
+    \(f : X \to X\) there exists one and only one function
+    \(x : \naturals \to X\) such that \(x_0 = a\) and
+    \(x_{s(n)} = f(x_n)\) for every \(n \in \naturals\).
+  \end{quotation}
+  Here, by Peano Model we mean a set \(\naturals\) that has one
+  element, we write \(0\), stood out and a function
+  \(s : \naturals \to \naturals\) such that, all this complying some
+  rules:
+  \begin{tcbenum}
+  \item \(s\) is injective;
+  \item \(s(x) \ne 0\) for every \(x \in \naturals\);
+  \item for if \(A \subseteq \naturals\) has \(0\) and \(s(n) \in A\) for every
+    \(n \in A\), then \(A = \naturals\).
+  \end{tcbenum}
+  We show now how we can involve Category Theory in this case. First
+  of all, we need a category where to work.\newline The statement is about
+  things made as follows:
+  \begin{quotation}
+    a set \(X\), one distinguished \(x \in X\) and one function
+    \(f : X \to X\).
+  \end{quotation}
+  \NotaInterna{Is there a name for these things?}  We may refer to
+  such new things by barely a triple \((X, a, f)\), but we prefer
+  something like this:
+  \[1 \functo{x} X \functo{f} X ,\] where \(1\) is any singleton, as
+  usual. Peano Models are such things, with some additional
+  properties. It is told about the existence and the uniqueness of a
+  certain function. We do not want mere functions, of course: given
+  \[1 \functo x X \functo f X \text{ and } 1 \functo y Y \functo g Y
+    ,\] we take the functions \(r : X \to Y\) such that
+  \[\begin{tikzcd}[row sep=tiny]
+      & X \ar["f", r] \ar["r", dd] & X \ar["r", dd] \\
+      1 \ar["x", ur] \ar["y", dr, swap] \\
+      & Y \ar["g", r, swap] & Y
+    \end{tikzcd}\] commutes and nothing else. \NotaInterna{Is there a
+    name for such functions?} These ones are the things we want to be
+  morphisms. Suppose given
+  \[\begin{tikzcd}
+      & X \ar["f", r] \ar["p", d] & X \ar["p", d] \\
+      1 \ar["x", ur] \ar["y", r] \ar["z", dr, swap] & Y \ar["g", r] \ar["q", d] & Y \ar["q", d] \\
+      & Z \ar["h", r, swap] & Z
+    \end{tikzcd}\] where all the squares and triangles commute: thus
+  we obtain the commuting
+  \[\begin{tikzcd}[row sep=tiny]
+      & X \ar["f", r] \ar["qp", dd] & X \ar["qp", dd] \\
+      1 \ar["x", ur] \ar["z", dr, swap] \\
+      & Z \ar["h", r, swap] & Z
+    \end{tikzcd}\] This means that composing two morphisms as
+  functions in \(\Set\) produces a morphism. This is how we want
+  composition to defined in this context. This choice makes the
+  categorial axioms automatically respected. We call this category
+  \(\mathbf{Peano}\). \NotaInterna{Unless there is a better naming, of
+    course.}\newline Being the environment set now, the Recursion Theorem
+  becomes more concise:
+  \begin{quotation}
+    Peano Models are initial objects of \(\mathbf{Peano}\).
+  \end{quotation}
+  By Proposition~\ref{proposition:LimitsAreIsomorphic}, any other
+  initial object of \(\mathbf{Peano}\) are isomorphic to some Peano
+  Model: does this mean its initial objects are Peano Models?
+  (Exercise.)
 \end{example}
 
 \begin{exercise}[Induction \(\lrarr\) Recursion]
-In \(\Set\), suppose you have \(1 \functo 0 \naturals \functo s \naturals\), where \(s\) is injective and \(s(n) \ne 0\) for every \(n \in \naturals\). Demonstrate that the following statements are equivalent:
-\begin{tcbenum}
-\item for if \(A \subseteq \naturals\) has \(0\) and \(s(n) \in A\) for every \(n \in A\), then \(A = \naturals\);
-\item \(1 \functo 0 \naturals \functo s \naturals\) is an initial object of \(\mathbf{Peano}\).
-\end{tcbenum} 
-(1) \(\tto\) (2) proves the Recursion Theorem, whereas (2) \(\tto\) (1) requires you to codify a proof by induction into a recursion. Try it, it could be nice. \NotaInterna{Prepare hints\dots{}}
+  In \(\Set\), suppose you have
+  \(1 \functo 0 \naturals \functo s \naturals\), where \(s\) is
+  injective and \(s(n) \ne 0\) for every \(n \in \naturals\). Demonstrate
+  that the following statements are equivalent:
+  \begin{tcbenum}
+  \item for if \(A \subseteq \naturals\) has \(0\) and \(s(n) \in A\) for every
+    \(n \in A\), then \(A = \naturals\);
+  \item \(1 \functo 0 \naturals \functo s \naturals\) is an initial
+    object of \(\mathbf{Peano}\).
+  \end{tcbenum}
+  (1) \(\tto\) (2) proves the Recursion Theorem, whereas (2) \(\tto\)
+  (1) requires you to codify a proof by induction into a
+  recursion. Try it, it could be nice. \NotaInterna{Prepare
+    hints\dots{}}
 \end{exercise}
 
-Limits (colimits) are terminal (initial) objects of appropriate categories. Definition~\ref{definition:TerminalAndInitialExplicit} does not make reference to limits and colimits as stated in Definition~\ref{definition:LimitsAndColimits}: thus, you can say what terminal and initial objects are and then tell what limits and colimits are in terms of terminal and initial objects.
+Limits (colimits) are terminal (initial) objects of appropriate
+categories. Definition~\ref{definition:TerminalAndInitialExplicit}
+does not make reference to limits and colimits as stated in
+Definition~\ref{definition:LimitsAndColimits}: thus, you can say what
+terminal and initial objects are and then tell what limits and
+colimits are in terms of terminal and initial objects.
 
 \begin{construction}[Category of cones]
-For \(\cat C\) category, let \(F : \cat I \to \cat C\) be a functor. Then we define the {\em category of cones} over \(F\) as follows.
-\begin{tcbitem}
-\item The objects are the cones over \(F\).
-\item For \(\alpha := \set{a \functo{\alpha_i} F(i)}_{i \in \obj{\cat I}}\) and \(\beta := \set{b \functo{\beta_i} F(i)}_{i \in \obj{\cat I}}\) two cones, the morphisms from \(\alpha\) to \(\beta\) are the morphisms \(f : a \to b\) of \(\cat C\) such that
-\[\begin{tikzcd}[row sep=tiny]
-a \ar["{\alpha_i}", dr] \ar["f", dd, swap] \\
-& F(i) \\
-b \ar["{\beta_i}", ur, swap]
-\end{tikzcd}\]
-commutes for every \(i \in \obj{\cat I}\).
-\item The composition of morphisms here is the same as that of \(\cat C\).
-\end{tcbitem}
-We write such category as \(\cn_F\). We define also the {\em category of cocones} over \(F\), written as \(\cocn_F\).
-\begin{tcbitem}
-\item The objects are the cocones over \(F\).
-\item For \(\alpha := \set{F(i) \functo{\alpha_i} a}_{i \in \obj{\cat I}}\) and \(\beta := \set{F(i) \functo{\beta_i} b}_{i \in \obj{\cat I}}\) cocones, the morphisms from \(\alpha\) to \(\beta\) are the morphisms \(f : a \to b\) of \(\cat C\) such that
-\[\begin{tikzcd}[row sep=tiny]
-& a \ar["{\alpha_i}", dl, swap] \ar["f", dd] \\
-F(i) \\
-& b \ar["{\beta_i}", ul]
-\end{tikzcd}\]
-commutes for every \(i \in \obj{\cat I}\).
-\item The composition of morphisms here is the same as that of \(\cat C\).
-\end{tcbitem}
-It is quite immediate in either of the cases to show that categorial axioms are verified.
+  For \(\cat C\) category, let \(F : \cat I \to \cat C\) be a
+  functor. Then we define the {\em category of cones} over \(F\) as
+  follows.
+  \begin{tcbitem}
+  \item The objects are the cones over \(F\).
+  \item For
+    \(\alpha := \set{a \functo{\alpha_i} F(i)}_{i \in \obj{\cat I}}\) and
+    \(\beta := \set{b \functo{\beta_i} F(i)}_{i \in \obj{\cat I}}\) two cones,
+    the morphisms from \(\alpha\) to \(\beta\) are the morphisms
+    \(f : a \to b\) of \(\cat C\) such that
+    \[\begin{tikzcd}[row sep=tiny]
+        a \ar["{\alpha_i}", dr] \ar["f", dd, swap] \\
+        & F(i) \\
+        b \ar["{\beta_i}", ur, swap]
+      \end{tikzcd}\] commutes for every \(i \in \obj{\cat I}\).
+  \item The composition of morphisms here is the same as that of
+    \(\cat C\).
+  \end{tcbitem}
+  We write such category as \(\cn_F\). We define also the {\em
+    category of cocones} over \(F\), written as \(\cocn_F\).
+  \begin{tcbitem}
+  \item The objects are the cocones over \(F\).
+  \item For
+    \(\alpha := \set{F(i) \functo{\alpha_i} a}_{i \in \obj{\cat I}}\) and
+    \(\beta := \set{F(i) \functo{\beta_i} b}_{i \in \obj{\cat I}}\) cocones, the
+    morphisms from \(\alpha\) to \(\beta\) are the morphisms
+    \(f : a \to b\) of \(\cat C\) such that
+    \[\begin{tikzcd}[row sep=tiny]
+        & a \ar["{\alpha_i}", dl, swap] \ar["f", dd] \\
+        F(i) \\
+        & b \ar["{\beta_i}", ul]
+      \end{tikzcd}\] commutes for every \(i \in \obj{\cat I}\).
+  \item The composition of morphisms here is the same as that of
+    \(\cat C\).
+  \end{tcbitem}
+  It is quite immediate in either of the cases to show that categorial
+  axioms are verified.
 \end{construction}
 
 \begin{proposition}
-For \(\cat C\)  category and \(F : \cat I \to \cat C\) functor,
-\begin{tcbitem}
-\item limits of \(F\) are terminal objects of \(\cn_F\) and viceversa.
-\item colimits of \(F\) are initial objects of \(\cocn_F\) and viceversa.
-\end{tcbitem}
+  For \(\cat C\) category and \(F : \cat I \to \cat C\) functor,
+  \begin{tcbitem}
+  \item limits of \(F\) are terminal objects of \(\cn_F\) and
+    viceversa.
+  \item colimits of \(F\) are initial objects of \(\cocn_F\) and
+    viceversa.
+  \end{tcbitem}
 \end{proposition}
 
 \begin{proof}
-This is \inlinethm{exercise}.
+  This is \inlinethm{exercise}.
 \end{proof}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:

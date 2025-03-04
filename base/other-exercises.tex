@@ -1,10 +1,57 @@
-% !TEX program = lualatex
-% !TEX root = ../base.tex
-% !TEX spellcheck = en_GB
 
 \section{Other exercises}
+
+\begin{exercise}[\(\mathbb V\)-categories?]
+\YetToBeTeXed
+\end{exercise}
+
+\begin{exercise}[Free diagrams]
+\YetToBeTeXed
+\end{exercise}
 
 \begin{exercise}[Currying functors]
 \YetToBeTeXed
 \end{exercise}
 
+\begin{exercise}[Natural transformations as\dots{} homotopies]
+  Consider two functors \(F, G : \cat C \to \cat D\) and the category
+  \[
+    \mathbb 2 := \set{0 \functo e 1}
+  \]
+  Consider also two functors \(i_0, i_1 : \cat C \to \cat C \times \mathbb{2}\) defined by \(i_0(x) = (x, 0)\) and \(i_1(x) = (x, 1)\) on
+  objects and \(i_0(f) = (f, \id_0)\) and \(i_1(f) = (f, \id_1)\) on morphisms. 
+  \begin{itemize}
+  \item From a functor \(H : \cat C \times \mathbb 2 \to \cat D\) such that
+   \[
+      \begin{tikzcd}
+        \cat C \ar["{i_0}", r] \ar["F", dr, swap] & \cat
+        C \times \mathbb 2 \ar["H", d] & \cat C \ar["{i_1}", l, swap]
+        \ar["G", dl] \\
+        & \cat D
+      \end{tikzcd}
+    \]
+    commutes, construct a natural transformation \(\hat H : F \tto G\).
+
+  \item From a natural transformation \(\alpha : F \tto G\) construct a
+    functor \(\tilde \alpha : \cat C \times \mathbb 2 \to \cat D\) such that
+    \[
+      \begin{tikzcd}
+        \cat C \ar["{i_0}", r] \ar["F", dr, swap] & \cat
+        C \times \mathbb 2 \ar["{\tilde \alpha}", d] & \cat C \ar["{i_1}", l, swap]
+        \ar["G", dl] \\
+        & \cat D
+      \end{tikzcd}
+    \]
+    commutes.
+
+  \item Determine a bijection between natural transformations \(F \tto
+    G\) and certain functors \(\cat C \times \mathbb 2 \to \cat D\). 
+  \end{itemize} 
+\end{exercise}
+
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:

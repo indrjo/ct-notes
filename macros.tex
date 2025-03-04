@@ -1,4 +1,3 @@
-% !TEX program = lualatex
 
 % General notations
 \newcommand\nil\varnothing
@@ -50,6 +49,8 @@
 \newcommand\subobjs{\operatorname{Sub}}
 
 % Some categories
+\newcommand\uno{\mathbb{1}}
+\newcommand\due{\mathbb{2}}
 \newcommand\Rel{\mathbf{Rel}}
 \newcommand\Set{\mathbf{Set}}
 \newcommand\FinSet{\mathbf{FinSet}}
@@ -57,12 +58,14 @@
 \newcommand\Par{\mathbf{Par}}
 \newcommand\Grp{\mathbf{Grp}}
 \newcommand\Ring{\mathbf{Ring}}
+\newcommand\CRing{\mathbf{CRing}}
 \newcommand\Top{\mathbf{Top}}
 \newcommand\Mat{\mathbf{Mat}}
 \newcommand\Modu{\mathbf{Mod}}
 \newcommand\Vect{\mathbf{Vect}}
 \newcommand\FDVect{\mathbf{FDVect}}
 \newcommand\Dyn{\mathbf{Dyn}}
+\newcommand\Meas{\mathbf{Meas}}
 \newcommand\cn{\mathbf{Cn}}
 \newcommand\cocn{\mathbf{CoCn}}
 
@@ -92,9 +95,16 @@
 \newcommand\yo{\mathcal{Y}}
 
 % I'd like a \mathtt\lambda, but I don't know how to have this here.
-\newcommand\lam\lambda
+%\newcommand\lam\lambda
 
 % This is a *temporary* command: I need it to make notes around
 % the text. These notes shall be removed in the final document.
-\newcommand\NotaInterna[1]{{\color{red} [#1]}}
+\newcommand\NotaInterna[1]{{\color{red}[#1]}}
 \newcommand\YetToBeTeXed{\NotaInterna{Yet to be \TeX{}ed\dots{}}}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "CT"
+%%% TeX-engine: luatex
+%%% End:
+

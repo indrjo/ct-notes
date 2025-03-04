@@ -1,465 +1,581 @@
-% !TEX program = lualatex
-% !TEX spellcheck = en_GB
-% !TEX root = ../limits.tex
 
 \section{Pullbacks and pushouts}
 
 Let \(\cat C\) be a category. The limits of the functors
 \[\left(\begin{tikzcd}[sep=tiny]
-\bullet \ar[dr] &         & \bullet \ar[dl] \\
-                & \bullet &
-\end{tikzcd}\right) \to \cat C\]
+      \bullet \ar[dr] &         & \bullet \ar[dl] \\
+      & \bullet &
+    \end{tikzcd}\right) \to \cat C\]
 are called {\em pullbacks}. Dually, the colimits of the functors
 \[\left(\begin{tikzcd}[sep=tiny]
-        & \bullet \ar[dl] \ar[dr] &         \\
-\bullet &                         & \bullet
-\end{tikzcd} \right) \to \cat C\]
-are said {\em pushouts}. More explicitly:
+      & \bullet \ar[dl] \ar[dr] &         \\
+      \bullet & & \bullet
+    \end{tikzcd} \right) \to \cat C\] are said {\em pushouts}. More
+explicitly:
 
 \begin{definition}[Pullbacks \& pushouts, explicit]
-Let \(\cat C\) a category and a pair of morphisms with the same codomain
-\begin{equation}
-\begin{tikzcd}[row sep=tiny]
-a \ar["f", dr, swap] &   & b \ar["g", dl] \\
-                     & c &
-\end{tikzcd}
-\label{diagram:MorphismsToPullback}\end{equation}
-in \(\cat C\). A {\em pullback} of~\eqref{diagram:MorphismsToPullback} is any pair of morphisms with a common domain
-\[\begin{tikzcd}[row sep=tiny]
-  & p \ar["h", dl, swap] \ar["k", dr] &   \\
-a &                                   & b
-\end{tikzcd}\]
-in \(\cat C\) such that:
-\begin{tcbitem}
-\item the square
-\[\begin{tikzcd}[row sep=tiny]
-  & p \ar["h", dl, swap] \ar["k", dr] &   \\
-a \ar["f", dr, swap] &   & b \ar["g", dl] \\
-                     & c &
-\end{tikzcd}\]
-commutes
-\item for every
-\[\begin{tikzcd}[row sep=tiny]
-  & p' \ar["{h'}", dl, swap] \ar["{k'}", dr] &   \\
-a &                                          & b
-\end{tikzcd}\]
-in \(\cat C\)
-%such that \(fh' = gk'\) 
-making
-\[\begin{tikzcd}[row sep=tiny]
-  & p \ar["{h'}", dl, swap] \ar["{k'}", dr] &   \\
-a \ar["f", dr, swap] &   & b \ar["g", dl] \\
-                     & c &
-\end{tikzcd}\]
-commute there exists one and only one \(r : p' \to p\) in \(\cat C\) such that
-\[\begin{tikzcd}
-& p' \ar["{h'}", dl, swap] \ar["r", d, dashed] \ar["{k'}", dr] & \\
-a & p \ar["h", l] \ar["k", r, swap] & b
-\end{tikzcd}\]
-commutes.
-\end{tcbitem}
-Assuming now we have a pair of morphisms with the same domain
-\begin{equation}
-\begin{tikzcd}[row sep=tiny]
-& c \ar["f", dl, swap] \ar["g", dr] & \\
-a & & b
-\end{tikzcd}
-\label{diagram:MorphismsToPushout}\end{equation}
-in \(\cat C\), a {\em pushout} of~\eqref{diagram:MorphismsToPushout} is any pair of morphisms in \(\cat C\) with a common codomain
-\[\begin{tikzcd}[row sep=tiny]
-a \ar["h", dr, swap] & & b \ar["k", dl] \\
-& q &
-\end{tikzcd}\]
-such that:
-\begin{tcbitem}
-\item the square
-\[\begin{tikzcd}[row sep=tiny]
-                     & c \ar["f", dl, swap] \ar["g", dr] &                \\
-a \ar["h", dr, swap] &                                   & b \ar["k", dl] \\
-                     & q                                 &
-\end{tikzcd}\]
-commutes
-\item for every
-\[\begin{tikzcd}[row sep=tiny]
-a \ar["{h'}", dr, swap] & & b \ar["{k'}", dl] \\
-& q' &
-\end{tikzcd}\]
-in \(\cat C\)
-%such that \(h'f = k'g\)
-making
-\[\begin{tikzcd}[row sep=tiny]
-                     & c \ar["f", dl, swap] \ar["g", dr] &                \\
-a \ar["{h'}", dr, swap] &                                   & b \ar["{k'}", dl] \\
-                     & q                                 &
-\end{tikzcd}\]
-commute there exists one and only one \(s : q \to q'\) in \(\cat C\) such that
-\[\begin{tikzcd}
-a \ar["h", r] \ar["{h'}", dr, swap] & q \ar["s", d, dashed] & b \ar["k", l, swap] \ar["{k'}", dl] \\
-& q' &
-\end{tikzcd}\]
-commutes.
-\end{tcbitem}
+  Let \(\cat C\) a category and a pair of morphisms with the same
+  codomain
+  \begin{equation}
+    \begin{tikzcd}[row sep=tiny]
+      a \ar["f", dr, swap] &   & b \ar["g", dl] \\
+      & c &
+    \end{tikzcd}
+    \label{diagram:MorphismsToPullback}\end{equation}
+  in \(\cat C\). A {\em pullback}
+  of~\eqref{diagram:MorphismsToPullback} is any pair of morphisms with
+  a common domain
+  \[\begin{tikzcd}[row sep=tiny]
+      & p \ar["h", dl, swap] \ar["k", dr] &   \\
+      a & & b
+    \end{tikzcd}\] in \(\cat C\) such that:
+  \begin{tcbitem}
+  \item the square
+    \[\begin{tikzcd}[row sep=tiny]
+        & p \ar["h", dl, swap] \ar["k", dr] &   \\
+        a \ar["f", dr, swap] &   & b \ar["g", dl] \\
+        & c &
+      \end{tikzcd}\] commutes
+  \item for every
+    \[\begin{tikzcd}[row sep=tiny]
+        & p' \ar["{h'}", dl, swap] \ar["{k'}", dr] &   \\
+        a & & b
+      \end{tikzcd}\] in \(\cat C\)
+    % such that \(fh' = gk'\)
+    making
+    \[\begin{tikzcd}[row sep=tiny]
+        & p \ar["{h'}", dl, swap] \ar["{k'}", dr] &   \\
+        a \ar["f", dr, swap] &   & b \ar["g", dl] \\
+        & c &
+      \end{tikzcd}\] commute there exists one and only one
+    \(r : p' \to p\) in \(\cat C\) such that
+    \[\begin{tikzcd}
+        & p' \ar["{h'}", dl, swap] \ar["r", d, dashed] \ar["{k'}", dr] & \\
+        a & p \ar["h", l] \ar["k", r, swap] & b
+      \end{tikzcd}\] commutes.
+  \end{tcbitem}
+  Assuming now we have a pair of morphisms with the same domain
+  \begin{equation}
+    \begin{tikzcd}[row sep=tiny]
+      & c \ar["f", dl, swap] \ar["g", dr] & \\
+      a & & b
+    \end{tikzcd}
+    \label{diagram:MorphismsToPushout}\end{equation}
+  in \(\cat C\), a {\em pushout} of~\eqref{diagram:MorphismsToPushout}
+  is any pair of morphisms in \(\cat C\) with a common codomain
+  \[\begin{tikzcd}[row sep=tiny]
+      a \ar["h", dr, swap] & & b \ar["k", dl] \\
+      & q &
+    \end{tikzcd}\] such that:
+  \begin{tcbitem}
+  \item the square
+    \[\begin{tikzcd}[row sep=tiny]
+        & c \ar["f", dl, swap] \ar["g", dr] &                \\
+        a \ar["h", dr, swap] &                                   & b \ar["k", dl] \\
+        & q &
+      \end{tikzcd}\] commutes
+  \item for every
+    \[\begin{tikzcd}[row sep=tiny]
+        a \ar["{h'}", dr, swap] & & b \ar["{k'}", dl] \\
+        & q' &
+      \end{tikzcd}\] in \(\cat C\)
+    % such that \(h'f = k'g\)
+    making
+    \[\begin{tikzcd}[row sep=tiny]
+        & c \ar["f", dl, swap] \ar["g", dr] &                \\
+        a \ar["{h'}", dr, swap] &                                   & b \ar["{k'}", dl] \\
+        & q &
+      \end{tikzcd}\] commute there exists one and only one
+    \(s : q \to q'\) in \(\cat C\) such that
+    \[\begin{tikzcd}
+        a \ar["h", r] \ar["{h'}", dr, swap] & q \ar["s", d, dashed] & b \ar["k", l, swap] \ar["{k'}", dl] \\
+        & q' &
+      \end{tikzcd}\] commutes.
+  \end{tcbitem}
 \end{definition}
 
-The definitions above become can be more concise though: pullbacks (pushouts) are products (coproducts) in certain categories.
+The definitions above become can be more concise though: pullbacks
+(pushouts) are products (coproducts) in certain categories.
 
 \begin{proposition}
-A pullback of
-\[\begin{tikzcd}[row sep=tiny]
-a \ar["f", dr, swap] &   & b \ar["g", dl] \\
-                     & c &
-\end{tikzcd}\]
-in \(\cat C\) is any of the products that pair of morphisms in \(\cat C {\downarrow} c\). Dually, a pushout of
-\[\begin{tikzcd}[row sep=tiny]
-& c \ar["f", dl, swap] \ar["g", dr] & \\
-a & & b
-\end{tikzcd}\]
-in \(\cat C\) is any of the coproducts such pair of morphisms in \(c {\downarrow} \cat C\).
+  A pullback of
+  \[\begin{tikzcd}[row sep=tiny]
+      a \ar["f", dr, swap] &   & b \ar["g", dl] \\
+      & c &
+    \end{tikzcd}\] in \(\cat C\) is any of the products that pair of
+  morphisms in \(\cat C {\downarrow} c\). Dually, a pushout of
+  \[\begin{tikzcd}[row sep=tiny]
+      & c \ar["f", dl, swap] \ar["g", dr] & \\
+      a & & b
+    \end{tikzcd}\] in \(\cat C\) is any of the coproducts such pair of
+  morphisms in \(c {\downarrow} \cat C\).
 \end{proposition}
 
 \begin{proof}
-This is \inlinethm{exercise}.
+  This is \inlinethm{exercise}.
 \end{proof}
 
 \begin{exercise}
-Let \(\cat C\) be a category with initial object \(0\) and terminal object \(1\). What are pullbacks of a pair of morphisms with codomain \(1\)? What are pushouts of a pair of morphisms with domain \(0\)?
+  Let \(\cat C\) be a category with initial object \(0\) and terminal
+  object \(1\). What are pullbacks of a pair of morphisms with
+  codomain \(1\)? What are pushouts of a pair of morphisms with domain
+  \(0\)?
 \end{exercise}
 
 \begin{example}[Pullbacks in \(\Set\)]\label{example:PullbacksInSet}
-Now we consider sets and functions as in
-\[\begin{tikzcd}
-                    & A \ar["f", d] \\
-B \ar["g", r, swap] & C
-\end{tikzcd}\]
-with the aim to find a pullback of it. From the set
-\[D := \set{(a, b) \in A \times B \mid f(a) = g(b)}\]
-we can make the functions
-\begin{align*}
-& p : D \to A\,, \ p(a, b) := a \\
-& q : D \to B\,, \ q(a, b) := b
-\end{align*}
-Hence we can draw at least the commuting square
-\[\begin{tikzcd}
-D \ar["p", r] \ar["q", d, swap] & A \ar["f", d] \\
-B \ar["g", r, swap]             & C
-\end{tikzcd}\]
-Now consider
-\[\begin{tikzcd}
-D' \ar["{p'}", drr, bend left] \ar["{q'}", ddr, bend right, swap]                 \\
-& D \ar["p", r] \ar["q", d, swap]                                & A \ar["f", d] \\
-& B \ar["g", r, swap]                                            & C
-\end{tikzcd}\]
-with \(fp' = gq'\). This hypothesis implies that \(\left(p'(x), q'(x)\right) \in D\) for every \(x \in D'\), and allows us to introduce the function
-\[r : D' \to D\,, \ r(x) := \left(p'(x), q'(x)\right)\]
-which is such that \(p r = p'\) and \(q r = q'\). Finally, \(r\) is the unique one to do so, which fact is immediate for how \(r\) is defined.
+  Now we consider sets and functions as in
+  \[\begin{tikzcd}
+      & A \ar["f", d] \\
+      B \ar["g", r, swap] & C
+    \end{tikzcd}\] with the aim to find a pullback of it. From the set
+  \[D := \set{(a, b) \in A \times B \mid f(a) = g(b)}\] we can make the
+  functions
+  \begin{align*}
+    & p : D \to A\,, \ p(a, b) := a \\
+    & q : D \to B\,, \ q(a, b) := b
+  \end{align*}
+  Hence we can draw at least the commuting square
+  \[\begin{tikzcd}
+      D \ar["p", r] \ar["q", d, swap] & A \ar["f", d] \\
+      B \ar["g", r, swap] & C
+    \end{tikzcd}\] Now consider
+  \[\begin{tikzcd}
+      D' \ar["{p'}", drr, bend left] \ar["{q'}", ddr, bend right, swap]                 \\
+      & D \ar["p", r] \ar["q", d, swap]                                & A \ar["f", d] \\
+      & B \ar["g", r, swap] & C
+    \end{tikzcd}\] with \(fp' = gq'\). This hypothesis implies that
+  \(\left(p'(x), q'(x)\right) \in D\) for every \(x \in D'\), and allows
+  us to introduce the function
+  \[r : D' \to D\,, \ r(x) := \left(p'(x), q'(x)\right)\] which is such
+  that \(p r = p'\) and \(q r = q'\). Finally, \(r\) is the unique one
+  to do so, which fact is immediate for how \(r\) is defined.
 \end{example}
 
-Let us remain in \(\Set\). Consider a function \(f : A \to B\) and the diagram
+Let us remain in \(\Set\). Consider a function \(f : A \to B\) and the
+diagram
 \[\begin{tikzcd}
-                    & A \ar["f", d] \\
-A \ar["f", r, swap] & B
-\end{tikzcd}\]
-where we have duplicated \(f\). The example above tells us we have the pullback square
+    & A \ar["f", d] \\
+    A \ar["f", r, swap] & B
+  \end{tikzcd}\] where we have duplicated \(f\). The example above
+tells us we have the pullback square
 \[\begin{tikzcd}
-R_f \ar["p", r] \ar["q", d, swap] & A \ar["f", d] \\
-A \ar["f", r, swap]               & B
-\end{tikzcd}\]
-with \(R_f := \set{(a, b) \in A \times A \mid f(a) = f(b)}\). This subset of \(A \times A\) is a certain equivalence relation over \(A\), namely the {\em kernel relation} of \(f\). \NotaInterna{Did we mention kernel relations in the intro?}
+    R_f \ar["p", r] \ar["q", d, swap] & A \ar["f", d] \\
+    A \ar["f", r, swap] & B
+  \end{tikzcd}\] with
+\(R_f := \set{(a, b) \in A \times A \mid f(a) = f(b)}\). This subset of
+\(A \times A\) is a certain equivalence relation over \(A\), namely the
+{\em kernel relation} of \(f\). \NotaInterna{Did we mention kernel
+  relations in the intro?}
 
-There is nothing special of \(\Set\) that prevents us to generalize it to any category \(\cat C\): we define the {\em kernel relation} of a \(f : a \to b\) in \(\cat C\) to be any of the pullbacks of
+There is nothing special of \(\Set\) that prevents us to generalize it
+to any category \(\cat C\): we define the {\em kernel relation} of a
+\(f : a \to b\) in \(\cat C\) to be any of the pullbacks of
 \[\begin{tikzcd}
-                    & a \ar["f", d] \\
-a \ar["f", r, swap] & b
-\end{tikzcd}\]
+    & a \ar["f", d] \\
+    a \ar["f", r, swap] & b
+  \end{tikzcd}\]
 
-As soon as we meet coequalizers, we will have the tool to express the quotient \({X}{/}{R_f}\) in a categorial fashion, and thus to motivate the general concept of {\em quotient object}.
+As soon as we meet coequalizers, we will have the tool to express the
+quotient \({X}{/}{R_f}\) in a categorial fashion, and thus to motivate
+the general concept of {\em quotient object}.
 
 \begin{example}[Pushouts in \(\Set\)]\label{example:PushoutsInSet}
-Recall what we have done in Example~\ref{example:CoprodOfSets}, but change a bit the notation. Take a family of two sets \(A_1\) and \(A_2\): write \(A_1+A_1\) instead of using the \(\sum\) or \(\coprod\) notation, write \(\linj\) and \(\rinj\) in place of \(\inj_1\) and \(\inj_2\), respectively.\newline
-To get started, let us consider sets and functions
-\[\begin{tikzcd}[row sep=tiny]
-  & C \ar["f", dl, swap] \ar["g", dr] &   \\
-A &                                   & B 
-\end{tikzcd}\]
-Let us draw a diagram
-\begin{equation}\begin{tikzcd}
-C \ar["f", r] \ar["g", d, swap]  & A \ar["\linj", d] \\
-B \ar["\rinj", r, swap] & A+B
-\end{tikzcd}\label{diagram:NotYetACommSquareInSet}\end{equation}
-By definition of \(A+B\), it can be \(\mathtt{left} f(x) \ne \mathtt{right} g(x)\) for some \(x \in C\). However, we can make them \q{equal} under an adequate equivalence relation \(\sim\): the smallest in which, for \(x \in C\), the elements \(\linj f(x)\) and \(\rinj g(x)\) are identified; that is we define \(\sim\) to be the smallest equivalence relation containing
-\[R := \set{(\linj f(x), \rinj g(x)) \mid x \in C}.\]
-In this case, let us write \(p\) the projection \(A+B \to \frac{A+B}{\sim}\). The new square is
-\begin{equation}\begin{tikzcd}
-C \ar["f", r] \ar["g", d, swap] & A \ar["h", d]    \\
-B \ar["k", r, swap]             & \frac{A+B}{\sim}
-\end{tikzcd}\label{diagram:NowACommSquareInSet}\end{equation}
-with \(h := p \linj\) and \(k := p \rinj\) and it is commutative. Now, pick
-\[\begin{tikzcd}
-C \ar["f", r] \ar["g", d, swap] & A \ar["h", d] \ar["{h'}", ddr, bend left] \\
-B \ar["k", r, swap] \ar["{k'}", drr, bend right, swap] & \frac{A+B}{\sim} \\
- & & X
-\end{tikzcd}\]
-such that \(h'f = k'g\). By the universal property of coproduct, we have the function
-\[h' + k' : A + B \to X\]
-such that \(\left(h' + k'\right) \linj =  h'\) and \(\left(h' + k'\right) \rinj =  k'\). Taken, for any \(x \in C\), one \((\linj f(x), \rinj g(x)) \in R\), we have
-\begin{align*}
-& (h'+g')(\rinj f(x)) = h'f(x) \\
-& (h'+g')(\linj g(x)) = k'g(x) 
-\end{align*}
-which are equal for every \(x \in C\), by assumption. \NotaInterna{Talk about generated equivalence relations and what follows.} Thus the triangle
-\[\begin{tikzcd}[column sep=tiny]
-A+B \ar["{h'+k'}", rr] \ar["p", dr, swap] & & X \\
- & \frac{A+B}{\sim} \ar[ur, dashed, swap]
-\end{tikzcd}\]
-commutes for exactly one dashed function. This function is the one we are looking for. \NotaInterna{Complete\dots{}}
+  Recall what we have done in Example~\ref{example:CoprodOfSets}, but
+  change a bit the notation. Take a family of two sets \(A_1\) and
+  \(A_2\): write \(A_1+A_1\) instead of using the \(\sum\) or
+  \(\coprod\) notation, write \(\linj\) and \(\rinj\) in place of
+  \(\inj_1\) and \(\inj_2\), respectively.\newline To get started, let us
+  consider sets and functions
+  \[\begin{tikzcd}[row sep=tiny]
+      & C \ar["f", dl, swap] \ar["g", dr] &   \\
+      A & & B
+    \end{tikzcd}\] Let us draw a diagram
+  \begin{equation}\begin{tikzcd}
+      C \ar["f", r] \ar["g", d, swap]  & A \ar["\linj", d] \\
+      B \ar["\rinj", r, swap] & A+B
+    \end{tikzcd}\label{diagram:NotYetACommSquareInSet}\end{equation}
+  By definition of \(A+B\), it can be
+  \(\mathtt{left} f(x) \ne \mathtt{right} g(x)\) for some \(x \in
+  C\). However, we can make them \q{equal} under an adequate
+  equivalence relation \(\sim\): the smallest in which, for
+  \(x \in C\), the elements \(\linj f(x)\) and \(\rinj g(x)\) are
+  identified; that is we define \(\sim\) to be the smallest equivalence
+  relation containing
+  \[R := \set{(\linj f(x), \rinj g(x)) \mid x \in C}.\] In this case, let
+  us write \(p\) the projection \(A+B \to \frac{A+B}{\sim}\). The new
+  square is
+  \begin{equation}\begin{tikzcd}
+      C \ar["f", r] \ar["g", d, swap] & A \ar["h", d]    \\
+      B \ar["k", r, swap] & \frac{A+B}{\sim}
+    \end{tikzcd}\label{diagram:NowACommSquareInSet}\end{equation}
+  with \(h := p \linj\) and \(k := p \rinj\) and it is
+  commutative. Now, pick
+  \[\begin{tikzcd}
+      C \ar["f", r] \ar["g", d, swap] & A \ar["h", d] \ar["{h'}", ddr, bend left] \\
+      B \ar["k", r, swap] \ar["{k'}", drr, bend right, swap] & \frac{A+B}{\sim} \\
+      & & X
+    \end{tikzcd}\] such that \(h'f = k'g\). By the universal property
+  of coproduct, we have the function
+  \[h' + k' : A + B \to X\] such that
+  \(\left(h' + k'\right) \linj = h'\) and
+  \(\left(h' + k'\right) \rinj = k'\). Taken, for any \(x \in C\), one
+  \((\linj f(x), \rinj g(x)) \in R\), we have
+  \begin{align*}
+    & (h'+g')(\rinj f(x)) = h'f(x) \\
+    & (h'+g')(\linj g(x)) = k'g(x) 
+  \end{align*}
+  which are equal for every \(x \in C\), by
+  assumption. \NotaInterna{Talk about generated equivalence relations
+    and what follows.} Thus the triangle
+  \[\begin{tikzcd}[column sep=tiny]
+      A+B \ar["{h'+k'}", rr] \ar["p", dr, swap] & & X \\
+      & \frac{A+B}{\sim} \ar[ur, dashed, swap]
+    \end{tikzcd}\] commutes for exactly one dashed function. This
+  function is the one we are looking
+  for. \NotaInterna{Complete\dots{}}
 \end{example}
 
 \begin{exercise}
-In the previous example, what is \(\frac{A+B}{\sim}\) if \(C = A \cap B\) and \(f\) and \(g\) are just the inclusions of \(C\) in \(A\) and \(B\) respectively? \NotaInterna{There is other material to put here\dots{}}
+  In the previous example, what is \(\frac{A+B}{\sim}\) if
+  \(C = A \cap B\) and \(f\) and \(g\) are just the inclusions of
+  \(C\) in \(A\) and \(B\) respectively? \NotaInterna{There is other
+    material to put here\dots{}}
 \end{exercise}
 
 \begin{exercise}
-Go back to Example~\ref{example:PushoutsInSet}. What if we started our discourse from
-\[\begin{tikzcd}
-C \ar["f", r] \ar["g", d, swap]  & A \ar[d, hookrightarrow] \\
-B \ar[r, hookrightarrow]         & A \cup B
-\end{tikzcd}\]
-instead?
-%You may tackle this question from two different points: trying to readapt the discourse or prove that \((A \cup B){/}{\sim'} \cong (A+B){/}{\sim}\), where \(\sim'\) is the equivalence relation generated by
-%\[f(x) \sim' g(x) \ \text{for } x \in C.\] 
+  Go back to Example~\ref{example:PushoutsInSet}. What if we started
+  our discourse from
+  \[\begin{tikzcd}
+      C \ar["f", r] \ar["g", d, swap]  & A \ar[d, hookrightarrow] \\
+      B \ar[r, hookrightarrow] & A \cup B
+    \end{tikzcd}\] instead?
+  % You may tackle this question from two different points: trying to
+  % readapt the discourse or prove that
+  % \((A \cup B){/}{\sim'} \cong (A+B){/}{\sim}\), where \(\sim'\) is the equivalence
+  % relation generated by
+  % \[f(x) \sim' g(x) \ \text{for } x \in C.\]
 \end{exercise}
 
-%\begin{lemma}
-%Let \(\cat C\) be a category and
-%\begin{equation}\begin{tikzcd}[row sep=tiny]
-%a \ar["f", dr, swap] &   & b \ar["g", dl] \\
-%                     & c &
-%\end{tikzcd}\label{diagram:MorphismsToBePullbacked}\end{equation}
-%a couple of morphisms in \(\cat C\). If \(\cat C\) has a product
-%\begin{equation}\begin{tikzcd}[row sep=tiny]
-%  & p \ar["h", dl, swap] \ar["k", dr] &   \\
-%a &                                   & b
-%\end{tikzcd}\label{diagram:ProductToBePullback}\end{equation}
-%of \(a\) and \(b\) such that the square
-%\[\begin{tikzcd}[row sep=tiny]
-%  & p \ar["h", dl, swap] \ar["k", dr] &   \\
-%a \ar["f", dr, swap] &   & b \ar["g", dl] \\
-%                     & c &
-%\end{tikzcd}\]
-%commutes, then~\eqref{diagram:ProductToBePullback} is a pullback of~\eqref{diagram:MorphismsToBePullbacked}.
-%\end{lemma}
+\begin{lemma}
+  Let \(\cat C\) be a category and
+  \begin{equation}\begin{tikzcd}[row sep=tiny]
+      a \ar["f", dr, swap] &   & b \ar["g", dl] \\
+      & c &
+    \end{tikzcd}\label{diagram:MorphismsToBePullbacked}\end{equation}
+  a couple of morphisms in \(\cat C\). If \(\cat C\) has a product
+  \begin{equation}\begin{tikzcd}[row sep=tiny]
+      & p \ar["h", dl, swap] \ar["k", dr] &   \\
+      a & & b
+    \end{tikzcd}\label{diagram:ProductToBePullback}\end{equation}
+  of \(a\) and \(b\) such that the square
+  \[\begin{tikzcd}[row sep=tiny]
+      & p \ar["h", dl, swap] \ar["k", dr] &   \\
+      a \ar["f", dr, swap] &   & b \ar["g", dl] \\
+      & c &
+    \end{tikzcd}\] commutes, then~\eqref{diagram:ProductToBePullback}
+  is a pullback of~\eqref{diagram:MorphismsToBePullbacked}.
+\end{lemma}
 
 \begin{exercise}[Gluing topological spaces]
-If you are given two spaces \(X\) and \(A\), a subspace \(E \subseteq A\) and a continuous function \(f : E \to X\), then \(X \sqcup_f A\) denotes the disjoint union \(X \sqcup A\) where every \(x \in E\) is identified to \(f(x)\), that is% . More formally: on \(X \sqcup A\) we define the equivalence relation \(\sim_f\) as the smallest one containing \(R_f := \set{(f(x), x) \mid x \in E}\) and
-\[X \sqcup_f A := \frac{X \sqcup A}{x \sim f(x) \text{ for } x \in E} .\]
-Find a pushout square
-\[\begin{tikzcd}
-E \ar[r, hookrightarrow] \ar["f", d, swap] & A \ar[d]     \\
-X \ar[r]                                   & X \sqcup_f A
-\end{tikzcd}\]
-in \(\Top\). The exercise requires you to work about the topologies involved and about continuity.
-%with the arrow \(\hookrightarrow\) indicating a mere inclusion. Does this look familiar? Yes! Continue. Part of the exercise is to reason about the topology over the stuff involved here.
+  If you are given two spaces \(X\) and \(A\), a subspace
+  \(E \subseteq A\) and a continuous function \(f : E \to X\), then
+  \(X \sqcup_f A\) denotes the disjoint union \(X \sqcup A\) where every
+  \(x \in E\) is identified to \(f(x)\), that
+  is% . More formally: on \(X \sqcup A\) we define the equivalence relation \(\sim_f\) as the smallest one containing \(R_f := \set{(f(x), x) \mid x \in E}\) and
+  \[X \sqcup_f A := \frac{X \sqcup A}{x \sim f(x) \text{ for } x \in E} .\] Find a
+  pushout square
+  \[\begin{tikzcd}
+      E \ar[r, hookrightarrow] \ar["f", d, swap] & A \ar[d]     \\
+      X \ar[r] & X \sqcup_f A
+    \end{tikzcd}\] in \(\Top\). The exercise requires you to work
+  about the topologies involved and about continuity.
+  % with the arrow \(\hookrightarrow\) indicating a mere inclusion. Does this look
+  % familiar? Yes! Continue. Part of the exercise is to reason about
+  % the topology over the stuff involved here.
 \end{exercise}
 
 \begin{example}[CW complexes]
-In Topology, several spaces often employed are homotopic --- or even homeomorphic --- to other spaces glued together. Although you can glue everything to everything, very simple spaces to attach are disks \(\mathbb D^n := \set{x \in \mathbb R^n \mid \lVert x \rVert \le 1}\) along their boundaries \(\mathbb S^{n-1} := \partial \dsc^n\). (Pay attention to superscripts.) For any topological space \(X\), we can perform the following recursive construction:
-\begin{tcbitem} 
-\item Let \(X_0\) be the space \(X\) but with the discrete topology.
-\item For \(n \in \naturals\), from topological space \(X_n\) we prescribe the construction of another space \(X_{n+1}\). If we are given a family \(\set{D_\alpha \mid \alpha \in \Lambda}\) of copies of \(\mathbb D^{n+1}\) and collection of continuous functions
-\[\set{\left. f_\alpha : \partial D_\alpha \to X_n \right\mid \alpha \in \Lambda}\]
-%Define now \(\sim\) to be the smallest equivalence relation that identifies every \(x \in \partial D_\alpha^{n+1}\) with \(f_\alpha^{n+1}(x)\), for \(\alpha \in \Lambda\).
-%\[X_{n+1} := \frac{X_n \sqcup \coprod_{\alpha \in \Lambda} D_\alpha^{n+1}}{\sim}\]
-then we can consider the following topological space
-\[X_{n+1} := \frac{X_n \sqcup \coprod_{\alpha \in \Lambda} D_\alpha}{
-  x \sim f_\alpha(x) \text{ for } \alpha \in \Lambda \text{ and } x \in \partial D_\alpha
-}.\]
-In other words, \(X_{n+1}\) is \(X_n\) with \((n+1)\)-dimensional disks attached to it along their boundaries.
-\end{tcbitem}
-As always, we are striving to find some universal property worth of consideration. A square comes easily if you consider the inclusions running in parallel \(\mathbb S^n \hookrightarrow \mathbb D^{n+1}\) and \(X_n \hookrightarrow X_{n+1}\) together with \(\mathbb D^{n+1} \hookrightarrow X_{n+1}\) of the construction above. The other pieces are the attaching maps: indeed we have a commuting square
-%\NotaInterna{A lot of ugly notation and imprecision here\dots{}} As before, at every step of recursive construction just described, we have a commuting square
-\[\begin{tikzcd}[column sep=large]
-\coprod_{\alpha \in \Lambda} \partial D_\alpha
-  \ar[r, hookrightarrow]
-  \ar["{\coprod_{\alpha \in \Lambda} f_\alpha}", d, swap]
-&
-\coprod_{\alpha \in \Lambda} D_\alpha  \ar[d, hookrightarrow]
-\\
-X_n \ar[r, hookrightarrow] & X_{n+1}
-\end{tikzcd}\]
-This square is a pushout one in \(\Top\), which is easy to prove.
+  In Topology, several spaces often employed are homotopic --- or even
+  homeomorphic --- to other spaces glued together. Although you can glue
+  everything to everything, very simple spaces to attach are disks
+  \(\mathbb D^n := \set{x \in \mathbb R^n \mid \lVert x \rVert \le 1}\) along
+  their boundaries \(\mathbb S^{n-1} := \partial \dsc^n\). (Pay attention to
+  superscripts.) For any topological space \(X\), we can perform the
+  following recursive construction:
+  \begin{tcbitem}
+  \item Let \(X_0\) be the space \(X\) but with the discrete topology.
+  \item For \(n \in \naturals\), from topological space \(X_n\) we
+    prescribe the construction of another space \(X_{n+1}\). If we are
+    given a family \(\set{D_\alpha \mid \alpha \in \Lambda}\) of copies of
+    \(\mathbb D^{n+1}\) and collection of continuous functions
+    \[\set{\left. f_\alpha : \partial D_\alpha \to X_n \right\mid \alpha \in \Lambda}\]
+    then we can consider the following topological space
+    \[X_{n+1} := \frac{X_n \sqcup \coprod_{\alpha \in \Lambda} D_\alpha}{ x \sim f_\alpha(x) \text{ for } \alpha
+        \in \Lambda \text{ and } x \in \partial D_\alpha }.\] In other words,
+    \(X_{n+1}\) is \(X_n\) with \((n+1)\)-dimensional disks attached
+    to it along their boundaries.
+  \end{tcbitem}
+  As always, we are striving to find some universal property worth of
+  consideration. A square comes easily if you consider the inclusions
+  running in parallel \(\mathbb S^n \hookrightarrow \mathbb D^{n+1}\) and
+  \(X_n \hookrightarrow X_{n+1}\) together with
+  \(\mathbb D^{n+1} \hookrightarrow X_{n+1}\) of the construction above. The other
+  pieces are the attaching maps: indeed we have a commuting square
+  % \NotaInterna{A lot of ugly notation and imprecision here\dots{}}
+  % As before, at every step of recursive construction just described,
+  % we have a commuting square
+  \[\begin{tikzcd}[column sep=large]
+      \coprod_{\alpha \in \Lambda} \partial D_\alpha \ar[r, hookrightarrow] \ar["{\coprod_{\alpha \in \Lambda} f_\alpha}", d,
+      swap] & \coprod_{\alpha \in \Lambda} D_\alpha \ar[d, hookrightarrow]
+      \\
+      X_n \ar[r, hookrightarrow] & X_{n+1}
+    \end{tikzcd}\] This square is a pushout one in \(\Top\), which is
+  easy to prove.
 \end{example}
 
-\begin{exercise}[Spheres are CW complexes] Consider the case in which \(X_0\) is a single point space and so are the spaces \(X_i\) for \(1 \le i \le n-1\). Such situation can be achieved by attaching no disk for a while; afterwards, attach one disk \(\dsc^{n}\) along \(\sph^{n-1}\) to \(X_{n-1}\). Hence we have a homeomorphism \(X_n \cong {\dsc^n}{/}{\sph^{n-1}}\), but you will show something more, that is \(X_n \cong \sph^n\).\newline
-In your Topology course, you might have managed to show this as follows:
-\begin{tcbenum}
-\item You have constructed a surjective continuous function \(f : \dsc^n \to \sph^n\) and considered the quotient space \({\dsc^n}{/}{\sim_f}\) where \(\sim_f\) is the kernel relation \NotaInterna{talk about kernel relations!} of \(f\). This relation is not a random relation: for every \(x, y \in \dsc^n\), we have \(x \sim_f y\) if and only if \(x = y\) or \(x, y \in \sph^{n-1}\). As consequence, \({\dsc^n}{/}{\sim_f} = {\dsc^n}{/}{\sph^{n-1}}\).
-\item Thanks to the universal property of quotients, the function \(\phi : {\dsc^n}{/}{\sph^{n-1}} \to \sph^n\) such that \(f = \phi p_n\), with the \(p_n\) the canonical projection, is continuous and bijective. Now, recalling that continuous functions from compact spaces to Hausdorff spaces are closed, conclude that indeed \(\phi\) is a homeomorphism.
-\end{tcbenum}
-%We will construct a continuous function \(f : \dsc^n \to \sph^n\), let us see if we can recycle something.\newline
-%To get the idea imagine the situation with \(n=2\). The space \(\dsc^n\) is covered by two closed spaces
-%\begin{align*}
-%& A := \set{x \in \dsc^n \mid \Abs x \le \frac12} \\
-%& B := \set{x \in \dsc^n \mid \frac12 \le \Abs x}
-%\end{align*}
-%So let us define two continuous functions \(f_A : A \to \sph^2\) and \(f_B : B \to \sph^n\) such that coincide on the intersection of \(A\) and \(B\) and the resulting function
-%\[f : \dsc^n \to \sph^n\,, \ f(x) := \begin{cases} f_A(x) & \text{if } x \in A \\ f_B(x) & \text{if } x \in B \end{cases}\]
-%is continue and surjective. The first is simple
-%\[f_A(x) := \left(2x, -\sqrt{1-4 {\Abs x}^2}\right)\]
-%whereas the second requires little more time
-%\[f_B(x) := \left(2\left(\frac{x}{\Abs x}-x\right), \sqrt{1-4 \Abs{\frac{x}{\Abs x}-x}^2}\right)\]
-%\NotaInterna{Some pictures in preparation help to understand the idea behind...}
-The aim of this exercise it that you can arrive to the same result in a different manner. If you can recollect your memories or retrieve your notes, see if you can recycle the \(f\) above and write a pushout square
-\begin{equation}\begin{tikzcd}
-\sph^{n-1} \ar[hookrightarrow, r] \ar["!", d, swap] & \dsc^n \ar["f", d] \\
-X_{n-1} \ar[r] & \sph^n
-\end{tikzcd}\label{diagram:SpherePushout}\end{equation}
-If you do not know how \({\dsc^n}{/}{\sph^{n-1}} \cong \sph^n\), it does not matter since you will force yourself to search for a pushout square like~\eqref{diagram:SpherePushout}.
+\begin{exercise}[Spheres are CW complexes] Consider the case in which
+  \(X_0\) is a single point space and so are the spaces \(X_i\) for
+  \(1 \le i \le n-1\). Such situation can be achieved by attaching no disk
+  for a while; afterwards, attach one disk \(\dsc^{n}\) along
+  \(\sph^{n-1}\) to \(X_{n-1}\). Hence we have a homeomorphism
+  \(X_n \cong {\dsc^n}{/}{\sph^{n-1}}\), but you will show something more,
+  that is \(X_n \cong \sph^n\).\newline In your Topology course, you might have
+  managed to show this as follows:
+  \begin{tcbenum}
+  \item You have constructed a surjective continuous function
+    \(f : \dsc^n \to \sph^n\) and considered the quotient space
+    \({\dsc^n}{/}{\sim_f}\) where \(\sim_f\) is the kernel relation
+    \NotaInterna{talk about kernel relations!} of \(f\). This relation
+    is not a random relation: for every \(x, y \in \dsc^n\), we have
+    \(x \sim_f y\) if and only if \(x = y\) or
+    \(x, y \in \sph^{n-1}\). As consequence,
+    \({\dsc^n}{/}{\sim_f} = {\dsc^n}{/}{\sph^{n-1}}\).
+  \item Thanks to the universal property of quotients, the function
+    \(\phi : {\dsc^n}{/}{\sph^{n-1}} \to \sph^n\) such that
+    \(f = \phi p_n\), with the \(p_n\) the canonical projection, is
+    continuous and bijective. Now, recalling that continuous functions
+    from compact spaces to Hausdorff spaces are closed, conclude that
+    indeed \(\phi\) is a homeomorphism.
+  \end{tcbenum}
+  The aim of this exercise it that you can arrive to the same result
+  in a different manner. If you can recollect your memories or
+  retrieve your notes, see if you can recycle the \(f\) above and
+  write a pushout square
+  \begin{equation}\begin{tikzcd}
+      \sph^{n-1} \ar[hookrightarrow, r] \ar["!", d, swap] & \dsc^n \ar["f", d] \\
+      X_{n-1} \ar[r] & \sph^n
+    \end{tikzcd}\label{diagram:SpherePushout}\end{equation}
+  If you do not know how \({\dsc^n}{/}{\sph^{n-1}} \cong \sph^n\), it does
+  not matter since you will force yourself to search for a pushout
+  square like~\eqref{diagram:SpherePushout}.
 \end{exercise}
 
 \begin{exercise}[\(\rpspc^n\) is a CW complex]
-In Topology, the \(n\)-th {\em real projective space} is
-\[\rpspc^n := \frac{\reals^{n+1} \setminus \set{0}}{x \sim \lambda x \text{ for } x \in \reals^{n+1}, \lambda \in \reals}\]
-which is known to be homeomorphic to the sphere \(\sph^n\) which has the antipodal points identified:
-\[\frac{\sph^n}{\displaystyle x \sim - x \text{ for } x \in \sph^n} .\]
-This observation is the key for the coming arguments. In fact, \(\sph^n\) is the boundary of \(\dsc^{n+1}\) and we already have a continuous function \(p_n : \sph^n \to \rpspc^n\) that attaches the the disc to the projective space along the boundary. Find a pushout square of the form
-\[\begin{tikzcd}
-\sph^n \ar[hookrightarrow, r] \ar["p_n", d, swap] & \dsc^{n+1} \ar["?", d] \\
-\rpspc^n \ar[r, hookrightarrow] & \rpspc^{n+1}
-\end{tikzcd}.\]
-%This has remarkable consequence: here is how the real projective spaces are CW complexes!
+  In Topology, the \(n\)-th {\em real projective space} is
+  \[\rpspc^n := \frac{\reals^{n+1} \setminus \set{0}}{x \sim \lambda x \text{ for } x \in
+      \reals^{n+1}, \lambda \in \reals}\] which is known to be homeomorphic to
+  the sphere \(\sph^n\) which has the antipodal points identified:
+  \[\frac{\sph^n}{\displaystyle x \sim - x \text{ for } x \in \sph^n} .\]
+  This observation is the key for the coming arguments. In fact,
+  \(\sph^n\) is the boundary of \(\dsc^{n+1}\) and we already have a
+  continuous function \(p_n : \sph^n \to \rpspc^n\) that attaches the
+  the disc to the projective space along the boundary. Find a pushout
+  square of the form
+  \[\begin{tikzcd}
+      \sph^n \ar[hookrightarrow, r] \ar["p_n", d, swap] & \dsc^{n+1} \ar["?", d] \\
+      \rpspc^n \ar[r, hookrightarrow] & \rpspc^{n+1}
+    \end{tikzcd}.\]
+  % This has remarkable consequence: here is how the real projective
+  % spaces are CW complexes!
 \end{exercise}
 
 Topology, again, but combined with Group Theory.
 
 \begin{example}[Seifert-van Kampen Theorem]
-Suppose given a topological space \(X\), two open subsets \(A, B \subseteq X\) such that \(A \cup B = X\) and one point \(x_0\) of \(A \cap B\). Let us denote by \(i_A\), \(i_B\), \(j_A\) and \(j_B\) the group morphisms induced by the inclusions \(A \cap B \hookrightarrow A\), \(A \cap B \hookrightarrow B\), \(A \hookrightarrow X\) and \(B \hookrightarrow X\), respectively. If \(A\), \(B\) and \(A \cap B\) are path-connected then,
-\[\begin{tikzcd}[sep=small]
- & \pi_1(A, x_0) \ar["{j_A}", dr] & \\
-\pi_1(A \cap B, x_0) \ar["{i_A}", ur] \ar["{i_B}", dr, swap] & & \pi_1(X, x_0) \\
- & \pi_1(B, x_0) \ar["{j_B}", ur, swap]
-\end{tikzcd}\]
-is a pushout square of \(\Grp\).
+  Suppose given a topological space \(X\), two open subsets
+  \(A, B \subseteq X\) such that \(A \cup B = X\) and one point
+  \(x_0\) of \(A \cap B\). Let us denote by \(i_A\), \(i_B\), \(j_A\) and
+  \(j_B\) the group morphisms induced by the inclusions
+  \(A \cap B \hookrightarrow A\), \(A \cap B \hookrightarrow B\),
+  \(A \hookrightarrow X\) and \(B \hookrightarrow X\), respectively. If
+  \(A\), \(B\) and \(A \cap B\) are path-connected then,
+  \[\begin{tikzcd}[sep=small]
+      & \pi_1(A, x_0) \ar["{j_A}", dr] & \\
+      \pi_1(A \cap B, x_0) \ar["{i_A}", ur] \ar["{i_B}", dr, swap] & & \pi_1(X, x_0) \\
+      & \pi_1(B, x_0) \ar["{j_B}", ur, swap]
+    \end{tikzcd}\] is a pushout square of \(\Grp\).
 \end{example}
 
-\NotaInterna{The Pullback Lemma is dropped here without a precise plan to embed it nicely with examples and further development. It's an issue that must be fixed.}
+\NotaInterna{The Pullback Lemma is dropped here without a precise plan
+  to embed it nicely with examples and further development. It's an
+  issue that must be fixed.}
 
 \begin{proposition}[The Pullback Lemma]
-In a category \(\cat C\) consider a diagram
-\[\begin{tikzcd}
-\bullet \ar["a", r] \ar["d", d, swap] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r] \ar["g" description, d] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d]\\
-\bullet \ar["e", r, swap] & \bullet \ar["f", r, swap] & \bullet
-\end{tikzcd}\]
-where the perimetric rectangle commutes and the square on the right is a pullback one. Then that on the left is a pullback square is and only if so is the outer rectangle. 
+  In a category \(\cat C\) consider a diagram
+  \[\begin{tikzcd}
+      \bullet \ar["a", r] \ar["d", d, swap] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r] \ar["g" description, d] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d]\\
+      \bullet \ar["e", r, swap] & \bullet \ar["f", r, swap] & \bullet
+    \end{tikzcd}\] where the perimetric rectangle commutes and the
+  square on the right is a pullback one. Then that on the left is a
+  pullback square is and only if so is the outer rectangle.
 \end{proposition}
 
 \begin{proof}
-Let us assume \(Q_1\) is a pullback square first. Consider any choice of \(h\) and \(k\) such that \(ch = f(ek)\):
-\[\begin{tikzcd}
-\bullet \ar["h", bend left=10, drrr, blue] \ar["k", bend right=10, ddr, swap, blue] & & & \\
-& \bullet \ar["a", r, swap] \ar["d", d] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r, swap] \ar["g", d] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d, blue]\\
-& \bullet \ar["e", r, swap, blue] & \bullet \ar["f", r, swap, blue] & \bullet
-\end{tikzcd}\]
-Being \(Q_2\) a pullback square, there exists one and only one \(l\) such that \(h = bl\) and \(gl = ek\).
-\[\begin{tikzcd}
-\bullet \ar["h", bend left=10, drrr, blue] \ar["k", bend right=10, ddr, swap, blue] \ar["l"{description}, bend left=8, drr] & & & \\
-& \bullet \ar["a", r, swap] \ar["d", d] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r, swap] \ar["g", d] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d, blue]\\
-& \bullet \ar["e", r, swap, blue] & \bullet \ar["f", r, swap, blue] & \bullet
-\end{tikzcd}\]
-We have just said that this square in red commutes:
-\[\begin{tikzcd}
-\bullet \ar["h", bend left=10, drrr] \ar["k", bend right=10, ddr, swap, red] \ar["l"{description}, drr, bend left=8, red] & & & \\
-& \bullet \ar["a", r, swap] \ar["d", d] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r, swap] \ar["g", d, red] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d]\\
-& \bullet \ar["e", r, swap, red] & \bullet \ar["f", r, swap] & \bullet
-\end{tikzcd}\]
-Now, being \(Q_1\) a pullback square, we have one \(m\) such that\(l = am\) and \(k = dm\):
-\[\begin{tikzcd}
-\bullet \ar["h", bend left=10, drrr] \ar["k", bend right=10, ddr, swap, red] \ar["l"{description}, drr, bend left=8, red] \ar["m"{description}, dr] & & & \\
-& \bullet \ar["a", r, swap] \ar["d", d] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r, swap] \ar["g", d, red] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d]\\
-& \bullet \ar["e", r, swap, red] & \bullet \ar["f", r, swap] & \bullet
-\end{tikzcd}\]
-At this point, we have \(b a m = b l = h\) and \(dm = k\). To conclude the first half of the theorem, you have to pick any \(m'\) making commute the triangles in green:
-\[\begin{tikzcd}
-\bullet \ar["h", bend left=10, drrr, green!65!black] \ar["k", bend right=10, ddr, swap, green!65!black] \ar["am" description, drr, bend left=8] \ar["{m'}" description, dr, green!65!black] & & & \\
-& \bullet \ar["a", r, swap, green!65!black] \ar["d", d, green!65!black] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r, swap, green!65!black] \ar["g", d] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d]\\
-& \bullet \ar["e", r, swap] & \bullet \ar["f", r, swap] & \bullet
-\end{tikzcd}\]
-Being \(Q_2\) a pullback square, we have \(am' = am\). In conclusion, being \(Q_1\) a pullback square too, we have \(m = m'\). \NotaInterna{Finer explanation here\dots{}}
+  Let us assume \(Q_1\) is a pullback square first. Consider any
+  choice of \(h\) and \(k\) such that \(ch = f(ek)\):
+  \[\begin{tikzcd}
+      \bullet \ar["h", bend left=10, drrr, blue] \ar["k", bend right=10, ddr, swap, blue] & & & \\
+      & \bullet \ar["a", r, swap] \ar["d", d] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r, swap] \ar["g", d] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d, blue]\\
+      & \bullet \ar["e", r, swap, blue] & \bullet \ar["f", r, swap, blue] & \bullet
+    \end{tikzcd}\] Being \(Q_2\) a pullback square, there exists one
+  and only one \(l\) such that \(h = bl\) and \(gl = ek\).
+  \[\begin{tikzcd}
+      \bullet \ar["h", bend left=10, drrr, blue] \ar["k", bend right=10, ddr, swap, blue] \ar["l"{description}, bend left=8, drr] & & & \\
+      & \bullet \ar["a", r, swap] \ar["d", d] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r, swap] \ar["g", d] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d, blue]\\
+      & \bullet \ar["e", r, swap, blue] & \bullet \ar["f", r, swap, blue] & \bullet
+    \end{tikzcd}\] We have just said that this square in red commutes:
+  \[\begin{tikzcd}
+      \bullet \ar["h", bend left=10, drrr] \ar["k", bend right=10, ddr, swap, red] \ar["l"{description}, drr, bend left=8, red] & & & \\
+      & \bullet \ar["a", r, swap] \ar["d", d] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r, swap] \ar["g", d, red] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d]\\
+      & \bullet \ar["e", r, swap, red] & \bullet \ar["f", r, swap] & \bullet
+    \end{tikzcd}\] Now, being \(Q_1\) a pullback square, we have one
+  \(m\) such that\(l = am\) and \(k = dm\):
+  \[\begin{tikzcd}
+      \bullet \ar["h", bend left=10, drrr] \ar["k", bend right=10, ddr, swap, red] \ar["l"{description}, drr, bend left=8, red] \ar["m"{description}, dr] & & & \\
+      & \bullet \ar["a", r, swap] \ar["d", d] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r, swap] \ar["g", d, red] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d]\\
+      & \bullet \ar["e", r, swap, red] & \bullet \ar["f", r, swap] & \bullet
+    \end{tikzcd}\] At this point, we have \(b a m = b l = h\) and
+  \(dm = k\). To conclude the first half of the theorem, you have to
+  pick any \(m'\) making commute the triangles in green:
+  \[\begin{tikzcd}
+      \bullet \ar["h", bend left=10, drrr, green!65!black] \ar["k", bend right=10, ddr, swap, green!65!black] \ar["am" description, drr, bend left=8] \ar["{m'}" description, dr, green!65!black] & & & \\
+      & \bullet \ar["a", r, swap, green!65!black] \ar["d", d, green!65!black] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r, swap, green!65!black] \ar["g", d] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d]\\
+      & \bullet \ar["e", r, swap] & \bullet \ar["f", r, swap] & \bullet
+    \end{tikzcd}\] Being \(Q_2\) a pullback square, we have
+  \(am' = am\). In conclusion, being \(Q_1\) a pullback square too, we
+  have \(m = m'\). \NotaInterna{Finer explanation here\dots{}}
 \end{proof}
 
 \begin{exercise}
-Prove the remaining part of the theorem above.
+  Prove the remaining part of the theorem above.
 \end{exercise}
 
 \begin{example}[Character functions]
-Consider a subset \(A\) of some larger set \(X\). You sure know a simple function called {\em character function} with just says if an element of \(X\) is a member of \(A\):
-\[\chi_A : X \to \set{\mathtt{true}, \mathtt{false}}\,,\ \chi_A (x) := \begin{cases} \mathtt{true} & \text{if } x \in A \\ \mathtt{false} & \text{otherwise} \end{cases}\]
-From now on, let us write \(\Omega\) to mean \(\set{\mathtt{true}, \mathtt{false}}\). As always, let us draw what we have:
-\[\begin{tikzcd}
-A \ar[r, hookrightarrow] & X \ar["{\chi_A}", d] \\
-& \Omega
-\end{tikzcd}\]
-with \(A \hookrightarrow X\) being the usual inclusion. The composition of such functions is function constant to \(\mathtt{true}\). We know that constant functions are such because they can be factored through some function \(A \to 1\) \NotaInterna{write about this explicitly somewhere}, which results in a commuting square
-\[\begin{tikzcd}
-A \ar[r, hookrightarrow] \ar["!", d, swap] & X \ar["{\chi_A}", d] \\
-1 \ar["{\lam x. \mathtt{true}}", r, swap] & \Omega
-\end{tikzcd}\]
-Well, this square is a pullback square. Of course, that is not all we have to say. \NotaInterna{To be continued.}
+  Consider a subset \(A\) of some larger set \(X\). You sure know a
+  simple function called {\em character function} with just says if an
+  element of \(X\) is a member of \(A\):
+  \[\chi_A : X \to \set{\mathtt{true}, \mathtt{false}}\,,\ \chi_A (x)
+    := \begin{cases} \mathtt{true} & \text{if } x \in A \\
+      \mathtt{false} & \text{otherwise} \end{cases}\] From now on, let
+  us write \(\Omega\) to mean \(\set{\mathtt{true}, \mathtt{false}}\). As
+  always, let us draw what we have:
+  \[\begin{tikzcd}
+      A \ar[r, hookrightarrow] & X \ar["{\chi_A}", d] \\
+      & \Omega
+    \end{tikzcd}\] with \(A \hookrightarrow X\) being the usual inclusion. The
+  composition of such functions is function constant to
+  \(\mathtt{true}\). We know that constant functions are such because
+  they can be factored through some function \(A \to 1\)
+  \NotaInterna{write about this explicitly somewhere}, which results
+  in a commuting square
+  \[\begin{tikzcd}
+      A \ar[r, hookrightarrow] \ar["!", d, swap] & X \ar["{\chi_A}", d] \\
+      1 \ar["{\lambda x. \mathtt{true}}", r, swap] & \Omega
+    \end{tikzcd}\] Well, this square is a pullback square. Of course,
+  that is not all we have to say. \NotaInterna{To be continued.}
 \end{example}
 
-%Let us introduce a small generalization of pullbacks and pushouts. Let \(\cat I\) be a category which has one object \(b\) and, for \(\lambda \in \Gamma\), one object \(x_\lambda\) one morphism \(f_\lambda : x_\lambda \to b\); there is no other morphisms than these ones and the identities in \(\cat I\). What are limits of functors \(F : \cat I \to \cat C\) in more explicit terms? Any limit of \(F\) consists of one object \(p\), one morphism \(h : p \to b\) and, for every \(\lambda \in \Gamma\), one morphism \(g_\lambda : p \to x_\lambda\) such that
-%\[f_\lambda g_\lambda = h \text{ for every } \lambda \in \Gamma .\]
-%We shall call this kind of limits {\em generalized pullbacks}. \NotaInterna{\q{Unofficial} name.} Generalized because the usual definition of pullback is obtained by choosing \(\Gamma\) to be a set of solely two elements. Observe also, as in the case of pullbacks, generalized pullbacks are products in certain comma categories. \NotaInterna{Talk about generalized pushouts too.}
-%
-%\begin{example}[Generalized pullbacks in \(\Set\)]
-%Consider a family of sets \(\set{X_\lambda \mid \lambda \in \Gamma}\), one set \(T\) and functions \(f_\lambda : X_\lambda \to T\).
-%\[E := \set{\left. x \in \prod_{\lambda \in \Gamma} X_\lambda \right\mid f_\alpha (x(\alpha)) = f_\beta (x(\beta)) \text{ for every } \alpha, \beta \in \Gamma} .\]
-%We have then commutative squares
-%\[\begin{tikzcd}
-%E \ar["{p_\alpha}", r] \ar["{p_\beta}", d, swap] & X_\alpha \ar["{f_\alpha}", d] \\
-%X_\beta \ar["{f_\beta}", r, swap] & T
-%\end{tikzcd}\]
-%where the \(p_\alpha\)-s are restrictions to \(E\) of the \(\proj_\alpha\)-s in Example~\ref{example:ProdOfSets}. Consider, for \(\alpha, \beta \in \Gamma\),
-%\[\begin{tikzcd}
-%Y \ar["{g_\alpha}", drr, bend left] \ar["{g_\beta}", ddr, bend right, swap] \\
-%& E \ar["{p_\alpha}", r] \ar["{p_\beta}", d, swap] & X_\alpha \ar["{f_\alpha}", d] \\
-%& X_\beta \ar["{f_\beta}", r, swap]                      & T
-%\end{tikzcd}\]
-%where \(f_\alpha g_\alpha = f_\beta g_\beta\). Thus \(g_\bullet (y) \in E\) for every \(y \in Y\), which fact motivates the following function
-%\[Y \to E\,, \ y \to g_\bullet(y).\]
-%After realizing how here we have generalized Example~\ref{example:PullbacksInSet}, continue and finish this example: \inlinethm{exercise}.
-%\end{example}
-%
-%\begin{example}[Generalized pushouts in \(\Set\)]
-%Recall Example~\ref{example:PushoutsInSet}, because we will need it. Consider a family of sets \(\set{X_\mu \mid \mu \in \Lambda}\), one set \(T\) and functions \(g_\mu : S \to X_\mu\), one for each \(\mu \in \Lambda\). As in the binary case, we have non commuting diagrams
-%\[\begin{tikzcd}
-%S \ar["{g_\delta}", r] \ar["{g_\eta}", d, swap] & X_\eta \ar["{\inj_\delta}", d] \\
-%X_\eta \ar["{\inj_\eta}", r, swap]            & {\displaystyle\sum_{\mu \in \Lambda} X_\mu}
-%\end{tikzcd}\]
-%for \(\delta, \eta \in \Lambda\). This is just to push ourselves to the next move: consider the smallest relation \(\sim\) on the disjoint sum containing
-%\[R := \set{(\inj_\delta g_\delta (x), \inj_\eta g_\eta(x)) \mid x \in S \text{ and } \delta, \eta \in \Lambda} .\]
-%In this case, we have a commutative diagram
-%\[\begin{tikzcd}
-%S \ar["{g_\delta}", r] \ar["{g_\eta}", d, swap] & X_\delta \ar["{q_\delta}", d] \\
-%X_\eta \ar["{q_\eta}", r, swap]                    & \frac{\sum_{\mu \in \Lambda} X_\mu}{\sim}
-%\end{tikzcd}\]
-%where, for \(\mu \in \Lambda\), we define \(q_\mu (x)\) to be the \(\sim\)-equivalence class of \(x \in X_\mu\). Take now one function \(h_\mu : X_k \to F\), for \(\mu \in \Lambda\), such that \(h_\delta g_\delta = h_\eta g_\theta\) for every \(\delta, \eta \in \Lambda\).
-%\[\begin{tikzcd}
-%S \ar["{g_\delta}", r] \ar["{g_\eta}", d, swap] & X_\delta \ar["{q_\delta}", d] \ar["{h_\delta}", ddr, bend left] \\
-%X_\eta \ar["{q_\eta}", r, swap] \ar["{h_\eta}", drr, bend right, swap] & \frac{\sum_{\mu \in \Lambda} X_\mu}{\sim} \ar[dr, dashed] \\
-%& & F
-%\end{tikzcd}\]
-%To construct the dotted function, we proceed similarly as in the binary case. We have the function
-%\[\sum_{\mu \in \Lambda} h_\mu : \sum_{\mu \in \Lambda} X_\mu \to F\]
-%which satisfies
-%%\begin{align*}
-%%& \left( \sum_{\mu \in \Lambda} h_\mu \right) (\inj_\delta g_\delta (x)) = h_\delta g_\delta (x) =  %\\
-%%& = h_\eta g_\eta (x) = \left( \sum_{\mu \in \Lambda} h_\mu \right) (\inj_\eta g_\eta (x))
-%%\end{align*}
-%\[\left( \sum_{\mu \in \Lambda} h_\mu \right) (\inj_\delta g_\delta (x)) = h_\delta g_\delta (x) = h_\eta g_\eta (x) = \left( \sum_{\mu \in \Lambda} h_\mu \right) (\inj_\eta g_\eta (x))\]
-%for \(x \in S\) and \(\delta, \eta \in \Lambda\). The function we are looking for is the one induce by \(\sum_{\mu \in \Lambda} h_\mu\). The continuation of this example is \inlinethm{exercise}.
-%\end{example}
+Let us introduce a small generalization of pullbacks and pushouts. Let
+\(\cat I\) be a category which has one object \(b\) and, for
+\(\lambda \in \Gamma\), one object \(x_\lambda\) one morphism
+\(f_\lambda : x_\lambda \to b\); there is no other morphisms than these ones and the
+identities in \(\cat I\). What are limits of functors
+\(F : \cat I \to \cat C\) in more explicit terms? Any limit of \(F\)
+consists of one object \(p\), one morphism \(h : p \to b\) and, for
+every \(\lambda \in \Gamma\), one morphism \(g_\lambda : p \to x_\lambda\) such that
+\[f_\lambda g_\lambda = h \text{ for every } \lambda \in \Gamma .\] We shall call this kind of
+limits {\em generalized pullbacks}. \NotaInterna{\q{Unofficial} name.}
+Generalized because the usual definition of pullback is obtained by
+choosing \(\Gamma\) to be a set of solely two elements. Observe also, as in
+the case of pullbacks, generalized pullbacks are products in certain
+comma categories. \NotaInterna{Talk about generalized pushouts too.}
 
-%\begin{exercise}
-%Can you do something similar to what we have done with finite products? We are referring to Proposition~\ref{proposition:FiniteProdLeftCons}, Proposition~\ref{proposition:FiniteProdRightCons} and Corollary~\ref{corollary:ProdAssoc}.
-%\end{exercise}
+\begin{example}[Generalized pullbacks in \(\Set\)]
+  Consider a family of sets
+  \(\set{X_\lambda \mid \lambda \in \Gamma}\), one set \(T\) and functions
+  \(f_\lambda : X_\lambda \to T\).
+  \[E := \set{\left. x \in \prod_{\lambda \in \Gamma} X_\lambda \right\mid f_\alpha (x(\alpha)) = f_\beta (x(\beta))
+      \text{ for every } \alpha, \beta \in \Gamma} .\] We have then commutative
+  squares
+  \[\begin{tikzcd}
+      E \ar["{p_\alpha}", r] \ar["{p_\beta}", d, swap] & X_\alpha \ar["{f_\alpha}", d] \\
+      X_\beta \ar["{f_\beta}", r, swap] & T
+    \end{tikzcd}\] where the \(p_\alpha\)-s are restrictions to \(E\) of
+  the \(\proj_\alpha\)-s in Example~\ref{example:ProdOfSets}. Consider, for
+  \(\alpha, \beta \in \Gamma\),
+  \[\begin{tikzcd}
+      Y \ar["{g_\alpha}", drr, bend left] \ar["{g_\beta}", ddr, bend right, swap] \\
+      & E \ar["{p_\alpha}", r] \ar["{p_\beta}", d, swap] & X_\alpha \ar["{f_\alpha}", d] \\
+      & X_\beta \ar["{f_\beta}", r, swap] & T
+    \end{tikzcd}\] where \(f_\alpha g_\alpha = f_\beta g_\beta\). Thus
+  \(g_\bullet (y) \in E\) for every \(y \in Y\), which fact motivates the
+  following function
+  \[Y \to E\,, \ y \to g_\bullet(y).\] After realizing how here we have
+  generalized Example~\ref{example:PullbacksInSet}, continue and
+  finish this example: \inlinethm{exercise}.
+\end{example}
+
+\begin{example}[Generalized pushouts in \(\Set\)]
+  Recall Example~\ref{example:PushoutsInSet}, because we will need
+  it. Consider a family of sets \(\set{X_\mu \mid \mu \in \Lambda}\), one set
+  \(T\) and functions \(g_\mu : S \to X_\mu\), one for each
+  \(\mu \in \Lambda\). As in the binary case, we have non commuting diagrams
+  \[\begin{tikzcd}
+      S \ar["{g_\delta}", r] \ar["{g_\eta}", d, swap] & X_\eta \ar["{\inj_\delta}", d] \\
+      X_\eta \ar["{\inj_\eta}", r, swap] & {\displaystyle\sum_{\mu \in \Lambda} X_\mu}
+    \end{tikzcd}\] for \(\delta, \eta \in \Lambda\). This is just to push ourselves to
+  the next move: consider the smallest relation \(\sim\) on the disjoint
+  sum containing
+  \[R := \set{(\inj_\delta g_\delta (x), \inj_\eta g_\eta(x)) \mid x \in S \text{ and } \delta,
+      \eta \in \Lambda} .\] In this case, we have a commutative diagram
+  \[\begin{tikzcd}
+      S \ar["{g_\delta}", r] \ar["{g_\eta}", d, swap] & X_\delta \ar["{q_\delta}", d] \\
+      X_\eta \ar["{q_\eta}", r, swap] & \frac{\sum_{\mu \in \Lambda} X_\mu}{\sim}
+    \end{tikzcd}\] where, for \(\mu \in \Lambda\), we define
+  \(q_\mu (x)\) to be the \(\sim\)-equivalence class of
+  \(x \in X_\mu\). Take now one function \(h_\mu : X_k \to F\), for
+  \(\mu \in \Lambda\), such that \(h_\delta g_\delta = h_\eta g_\theta\) for every \(\delta, \eta \in \Lambda\).
+  \[\begin{tikzcd}
+      S \ar["{g_\delta}", r] \ar["{g_\eta}", d, swap] & X_\delta \ar["{q_\delta}", d] \ar["{h_\delta}", ddr, bend left] \\
+      X_\eta \ar["{q_\eta}", r, swap] \ar["{h_\eta}", drr, bend right, swap] & \frac{\sum_{\mu \in \Lambda} X_\mu}{\sim} \ar[dr, dashed] \\
+      & & F
+    \end{tikzcd}\] To construct the dotted function, we proceed
+  similarly as in the binary case. We have the function
+  \[\sum_{\mu \in \Lambda} h_\mu : \sum_{\mu \in \Lambda} X_\mu \to F\]
+  which satisfies
+  \begin{align*}
+    & \left( \sum_{\mu \in \Lambda} h_\mu \right) (\inj_\delta g_\delta (x)) = h_\delta g_\delta (x) =  %\\
+    & = h_\eta g_\eta (x) = \left( \sum_{\mu \in \Lambda} h_\mu \right) (\inj_\eta g_\eta (x))
+  \end{align*}
+  \[\left( \sum_{\mu \in \Lambda} h_\mu \right) (\inj_\delta g_\delta (x)) = h_\delta g_\delta (x) = h_\eta
+    g_\eta (x) = \left( \sum_{\mu \in \Lambda} h_\mu \right) (\inj_\eta g_\eta (x))\] for
+  \(x \in S\) and \(\delta, \eta \in \Lambda\). The function we are looking for is the
+  one induce by \(\sum_{\mu \in \Lambda} h_\mu\). The continuation of this example is
+  \inlinethm{exercise}.
+\end{example}
+
+\begin{exercise}
+  Can you do something similar to what we have done with finite
+  products? We are referring to
+  Proposition~\ref{proposition:FiniteProdLeftCons},
+  Proposition~\ref{proposition:FiniteProdRightCons} and
+  Corollary~\ref{corollary:ProdAssoc}.
+\end{exercise}
+
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:
 

@@ -1,28 +1,49 @@
-% !TEX program = lualatex
-% !TEX spellcheck = en_GB
-% !TEX root = ../base.tex
 
 \section{Construct new categories}
 
-In this section, we will present some basic constructions yielding categories from other categories.
+In this section, we will present some basic constructions yielding
+categories from other categories.
 
-As from two sets you can obtain their product, we have something akin to that for two categories. For \(\cat C_1\) and \(\cat C_2\) categories, the product \(\cat C_1 \times \cat C_2\) is the category in which
+As from two sets you can obtain their product, we have something akin
+to that for two categories. For \(\cat C_1\) and \(\cat C_2\)
+categories, the product \(\cat C_1 \times \cat C_2\) is the category in
+which
 \begin{tcbitem}
-\item The objects are the pairs \((a, b) \in \obj{\cat C_1} \times \obj{\cat C_2}\), formally
-\[\obj{\cat C_1 \times \cat C_2} := \obj{\cat C_1} \times \obj{\cat C_2}.\]
-\item Being a morphism \((a_1, b_1) \to (a_2, b_2)\) means being a pair of two morphisms
-\[\left(\begin{tikzcd}[row sep=small] a_1 \ar["f", d, swap] \\ a_2 \end{tikzcd}, \begin{tikzcd}[row sep=small] b_1 \ar["g", d] \\ b_2 \end{tikzcd}\right)\]
-where \(f\) is in \(\cat C_1\) and \(g\) in \(\cat C_2\); we write such morphism as \(\left(f, g\right)\).
+\item The objects are the pairs
+  \((a, b) \in \obj{\cat C_1} \times \obj{\cat C_2}\), formally
+  \[\obj{\cat C_1 \times \cat C_2} := \obj{\cat C_1} \times \obj{\cat C_2}.\]
+\item Being a morphism \((a_1, b_1) \to (a_2, b_2)\) means being a pair
+  of two morphisms
+  \[\left(\begin{tikzcd}[row sep=small] a_1 \ar["f", d, swap] \\
+        a_2 \end{tikzcd}, \begin{tikzcd}[row sep=small] b_1 \ar["g",
+        d] \\ b_2 \end{tikzcd}\right)\] where \(f\) is in \(\cat C_1\)
+  and \(g\) in \(\cat C_2\); we write such morphism as
+  \(\left(f, g\right)\).
 \item The composition is defined component-wise
-\[\left(\begin{tikzcd}[row sep=small] a_2 \ar["f_2", d, swap] \\ a_3 \end{tikzcd}, \begin{tikzcd}[row sep=small] b_2 \ar["g_2", d] \\ b_3 \end{tikzcd}\right) \left(\begin{tikzcd}[row sep=small] a_1 \ar["f_1", d, swap] \\ a_2 \end{tikzcd}, \begin{tikzcd}[row sep=small] b_1 \ar["g_1", d] \\ b_2 \end{tikzcd}\right) := (f_2 f_1, g_2 g_1) .\]
+  \[\left(\begin{tikzcd}[row sep=small] a_2 \ar["f_2", d, swap] \\
+        a_3 \end{tikzcd}, \begin{tikzcd}[row sep=small] b_2 \ar["g_2",
+        d] \\ b_3 \end{tikzcd}\right) \left(\begin{tikzcd}[row
+        sep=small] a_1 \ar["f_1", d, swap] \\
+        a_2 \end{tikzcd}, \begin{tikzcd}[row sep=small] b_1 \ar["g_1",
+        d] \\ b_2 \end{tikzcd}\right) := (f_2 f_1, g_2 g_1) .\]
 \end{tcbitem}
 
 \begin{exercise}
-Verify categorial axioms hold for the product of two categories.
+  Verify categorial axioms hold for the product of two categories.
 \end{exercise}
 
-In future, we will need to consider product categories of the form \(\opcat C \times \cat D\). For objects, there is nothing to say. About morphism, keep in mind that a morphism
+In future, we will need to consider product categories of the form
+\(\opcat C \times \cat D\). For objects, there is nothing to say. About
+morphism, keep in mind that a morphism
 \[\begin{tikzcd} (a, b) \ar["{(f, g)}", d] \\ (a', b')\end{tikzcd}\]
 is just the pair
-\[\left(\begin{tikzcd}[row sep=small] a \\ a' \ar["f", u] \end{tikzcd}, \begin{tikzcd}[row sep=small] b \ar["g", d] \\ b \end{tikzcd}\right)\]
-whose first component comes from \(\cat C\) while the second one from \(\cat D\).
+\[\left(\begin{tikzcd}[row sep=small] a \\ a' \ar["f",
+      u] \end{tikzcd}, \begin{tikzcd}[row sep=small] b \ar["g", d] \\
+      b \end{tikzcd}\right)\] whose first component comes from
+\(\cat C\) while the second one from \(\cat D\).
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:

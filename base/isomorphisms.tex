@@ -1,178 +1,278 @@
-% !TEX program = lualatex
-% !TEX spellcheck = en_GB
-% !TEX root = ../base.tex
 
 \section{Isomorphisms}
 
 \NotaInterna{This sections requires a heavy rewriting.}
 
-Let us step back to the origins. The categorial axioms state identities that deals with morphisms, since equality between morphisms is involved. For that reason, we shall regard these axioms as ones about morphisms, since objects barely appear as start/end point of morphisms.
+Let us step back to the origins. The categorial axioms state
+identities that deals with morphisms, since equality between morphisms
+is involved. For that reason, we shall regard these axioms as ones
+about morphisms, since objects barely appear as start/end point of
+morphisms.
 
-Thus categories have a notion of sameness between morphisms, the equality, but nothing is said about objects. Of course, there is equality for objects too, but we can craft a better notion of sameness of objects. Not because equality is bad, but we shall look for something that can be stated solely in categorial terms. As usual, simple examples help us to isolate the right notion.
+Thus categories have a notion of sameness between morphisms, the
+equality, but nothing is said about objects. Of course, there is
+equality for objects too, but we can craft a better notion of sameness
+of objects. Not because equality is bad, but we shall look for
+something that can be stated solely in categorial terms. As usual,
+simple examples help us to isolate the right notion.
 
-%\begin{example}[Set Theory, equinumerousity]
-%Cantor, the father of Set Theory, conducted its enquiry on cardinalities and not on equality of sets. For \(A\) and \(B\) sets, the following statements are equivalent:
-%\begin{tcbenum}
-%\item there exists a bijective function \(A \to B\);
-%\item there exist two functions
-%\begin{tikzcd}[cramped]
-%A \ar["f", r, bend left] & B \ar["g", l, bend left]
-%\end{tikzcd}
-%such that \(g f = \id_A\) and \(fg = \id_B\).
-%\end{tcbenum}
-%Though they are logically equivalent, they differ in some sense. In Set Theory, the adjective \q{bijective} is defined by referring of the fact that sets are things that have elements:
-%\begin{quotation}
-%for every \(y \in B\) there is one and only one \(x \in A\) such that \(f(x) = y\).
-%\end{quotation}
-%In contrast, (2) is a statement written in terms of functions and compositions of functions: so (2) is written in a categorial language.
-%\end{example}
+% \begin{example}[Set Theory, equinumerousity]
+%   Cantor, the father of Set Theory, conducted its enquiry on
+%   cardinalities and not on equality of sets. For \(A\) and \(B\)
+%   sets, the following statements are equivalent:
+%   \begin{tcbenum}
+%   \item there exists a bijective function \(A \to B\);
+%   \item there exist two functions
+%     \begin{tikzcd}[cramped]
+%       A \ar["f", r, bend left] & B \ar["g", l, bend left]
+%     \end{tikzcd}
+%     such that \(g f = \id_A\) and \(fg = \id_B\).
+%   \end{tcbenum}
+%   Though they are logically equivalent, they differ in some
+%   sense. In Set Theory, the adjective \q{bijective} is defined by
+%   referring of the fact that sets are things that have elements:
+%   \begin{quotation}
+%     for every \(y \in B\) there is one and only one \(x \in A\) such
+%     that \(f(x) = y\).
+%   \end{quotation}
+%   In contrast, (2) is a statement written in terms of functions and
+%   compositions of functions: so (2) is written in a categorial
+%   language.
+% \end{example}
 %
 %\begin{exercise}
-%Demonstrate the equivalence above.
+%  Demonstrate the equivalence above.
 %\end{exercise}
 
-Cantor, the father of Set Theory, conducted its enquiry on cardinalities and not on equality of sets.
+Cantor, the father of Set Theory, conducted its enquiry on
+cardinalities and not on equality of sets.
 
 \begin{example}[Isomorphisms of sets]
-For \(A\) and \(B\) sets, there exists a bijective function \(A \to B\) if and only if there exist two functions
-\[\begin{tikzcd}[cramped]
-A \ar["f", r, shift left] & B \ar["g", l, shift left]
-\end{tikzcd}\]
-such that \(g f = \id_A\) and \(fg = \id_B\). In Set Theory, the adjective \q{bijective} is defined by referring of the fact that sets are things that have elements:
-\begin{quotation}
-for every \(y \in B\) there is one and only one \(x \in A\) such that \(f(x) = y\).
-\end{quotation}
-In contrast,
-\begin{quotation}
-there exist two functions
-\begin{tikzcd}[cramped]
-A \ar["f", r, shift left] & B \ar["g", l, shift left]
-\end{tikzcd}
-such that \(g f = \id_A\) and \(fg = \id_B\)
-\end{quotation}
-is written in terms of functions and compositions of functions, that is it is written in a categorial language.
+  For \(A\) and \(B\) sets, there exists a bijective function
+  \(A \to B\) if and only if there exist two functions
+  \[\begin{tikzcd}[cramped]
+      A \ar["f", r, shift left] & B \ar["g", l, shift left]
+    \end{tikzcd}\] such that \(g f = \id_A\) and \(fg = \id_B\). In
+  Set Theory, the adjective \q{bijective} is defined by referring of
+  the fact that sets are things that have elements:
+  \begin{quotation}
+    for every \(y \in B\) there is one and only one \(x \in A\) such that
+    \(f(x) = y\).
+  \end{quotation}
+  In contrast,
+  \begin{quotation}
+    there exist two functions
+    \begin{tikzcd}[cramped]
+      A \ar["f", r, shift left] & B \ar["g", l, shift left]
+    \end{tikzcd}
+    such that \(g f = \id_A\) and \(fg = \id_B\)
+  \end{quotation}
+  is written in terms of functions and compositions of functions, that
+  is it is written in a categorial language.
 \end{example}
 
 \begin{example}[Isomorphisms in \(\Grp\)]
-\YetToBeTeXed
+  \YetToBeTeXed
 \end{example}
 
 \begin{example}[Isomorphisms in \(\Top\)]
-In Topology, things work a little differently. There are bijective continuous functions that that are not homeomorphisms. For instance,
-\[f : [0,2\pi) \to \sph^1\,,\ f(x) := (\cos x, \sin x)\]
-is continuous and bijective, but fails to be a homeomorphism because \(\sph^1\) is compact while \([0,1)\) is not. \q{Fortunately}, in Topology there are two basic facts:
-\begin{itemize}
-\item bijective continuous functions that are also closed are homeomorphisms
-\item continuous functions from compact spaces to Hausdorff spaces are closed
-\end{itemize}
-As a consequence, \(\Top\) has a subcategory in which bijections are homeomorphisms: the sub{\em category of compact Hausdorff spaces} \(\mathbf{CHaus}\).
+  In Topology, things work a little differently. There are bijective
+  continuous functions that that are not homeomorphisms. For instance,
+  \[f : [0,2\pi) \to \sph^1\,,\ f(x) := (\cos x, \sin x)\] is continuous
+  and bijective, but fails to be a homeomorphism because \(\sph^1\) is
+  compact while \([0,1)\) is not. \q{Fortunately}, in Topology there
+  are two basic facts:
+  \begin{itemize}
+  \item bijective continuous functions that are also closed are
+    homeomorphisms
+  \item continuous functions from compact spaces to Hausdorff spaces
+    are closed
+  \end{itemize}
+  As a consequence, \(\Top\) has a subcategory in which bijections are
+  homeomorphisms: the sub{\em category of compact Hausdorff spaces}
+  \(\mathbf{CHaus}\).
 \end{example}
 
 Fine, there is some idea that we can formulate in categorial language.
 
 \begin{definition}[Isomorphic objects]
-In a category \(\cat C\), let \(a\) and \(b\) two objects and \(f : a \to b\) a morphism. A morphism \(g : b \to a\) of the same category is said {\em inverse} of \(f\) whenever \(gf = \id_a\) and \(fg = \id_b\). In that case
-\begin{tcbitem}
-\item \(f : a \to b\) of \(\cat C\) is an {\em isomorphism} when it has an inverse.
-\item \(a\) is said {\em isomorphic} to \(b\) when there is an isomorphism \(a \to b\) in \(\cat C\), and write \(a \cong b\).
-\end{tcbitem}
+  In a category \(\cat C\), let \(a\) and \(b\) two objects and
+  \(f : a \to b\) a morphism. A morphism \(g : b \to a\) of the same
+  category is said {\em inverse} of \(f\) whenever \(gf = \id_a\) and
+  \(fg = \id_b\). In that case
+  \begin{tcbitem}
+  \item \(f : a \to b\) of \(\cat C\) is an {\em isomorphism} when it
+    has an inverse.
+  \item \(a\) is said {\em isomorphic} to \(b\) when there is an
+    isomorphism \(a \to b\) in \(\cat C\), and write \(a \cong b\).
+  \end{tcbitem}
 \end{definition}
 
 \begin{lemma}
-Every morphism has at most one inverse.
+  Every morphism has at most one inverse.
 \end{lemma}
 
-That is it may not exist, but if it does it is unique. We write the inverse of \(f\) as \(\inv f\).
+That is it may not exist, but if it does it is unique. We write the
+inverse of \(f\) as \(\inv f\).
 
 \begin{proof}
-Fixed a certain category \(\cat C\) and given a morphism \(f : a \to b\) with inverses \(g_1, g_2 : b \to a\), we have \(g_1 = g_1 \id_b = g_1 (fg_2) = (g_1f)g_2 = \id_a g_2 = g_2\).
+  Fixed a certain category \(\cat C\) and given a morphism
+  \(f : a \to b\) with inverses \(g_1, g_2 : b \to a\), we have
+  \(g_1 = g_1 \id_b = g_1 (fg_2) = (g_1f)g_2 = \id_a g_2 = g_2\).
 \end{proof}
 
 \begin{example}[Isomorphisms in \(\Mat_k\)]
-In this category, morphisms are matrices with entries in some field \(k\) and isomorphisms are exactly invertible matrices. Recall that a square matrix \(A\) is said invertible whenever the is some matrix \(B\) of the same order such that \(AB = BA = I\). From Linear Algebra, we know that a matrix \(A\) is invertible if and only if (for example) \(\det A \ne 0\). One thing a careful reader may ask is: why restrict to only square matrices? We can easily prove that
-\begin{quotation}
-if a matrix of type \(m \times n\) has an inverse, then \(m=n\).
-\end{quotation}
-This means for \(\Mat_k\) that two different objects cannot be isomorphic, or equivalently isomorphic objects are equal.
+  In this category, morphisms are matrices with entries in some field
+  \(k\) and isomorphisms are exactly invertible matrices. Recall that
+  a square matrix \(A\) is said invertible whenever the is some matrix
+  \(B\) of the same order such that \(AB = BA = I\). From Linear
+  Algebra, we know that a matrix \(A\) is invertible if and only if
+  (for example) \(\det A \ne 0\). One thing a careful reader may ask is:
+  why restrict to only square matrices? We can easily prove that
+  \begin{quotation}
+    if a matrix of type \(m \times n\) has an inverse, then \(m=n\).
+  \end{quotation}
+  This means for \(\Mat_k\) that two different objects cannot be
+  isomorphic, or equivalently isomorphic objects are equal.
 \end{example}
 
 Categories like this one have a dedicated name.
 
 \begin{definition}[Skeletal categories]
-A category is said {\em skeletal} whenever its isomorphic objects are equal.
+  A category is said {\em skeletal} whenever its isomorphic objects
+  are equal.
 \end{definition}
 
 \begin{exercise}
-Write \(\FinSet\) for the category of finite sets and functions between sets. Find one skeleton.
+  Write \(\FinSet\) for the category of finite sets and functions
+  between sets. Find one skeleton.
 \end{exercise}
 
 \begin{exercise}
-Find one skeleton of \(\FDVect_k\).
+  Find one skeleton of \(\FDVect_k\).
 \end{exercise}
 
-%\NotaInterna{Heavy work in progress here\dots{}} In categories one is more acquainted with, like \(\Set\), \(\Grp\), \(\Top\) or \(\FDVect_k\), isomorphisms have a clear meaning and a role that is promptly evident. In generic category, what are isomorphisms for?
-%
-%\begin{figure}
-%\centering
-%\begin{tikzcd}
-%a \ar["f", rr] & & b \\
-%& c \ar["g", ""{name=g, above}, ul] \ar["fg", ""{name=fg, above}, ur, swap]
-%\ar[bend left, from=g, to=fg]
-%\end{tikzcd}
-%\begin{tikzcd}
-%a \ar["f", rr] \ar["hf", ""{name=hf, above}, dr, swap] & & b \ar["h", ""{name=h, above}, dl] \\
-%& c \ar[bend right, from=h, to=hf]
-%\end{tikzcd}
-%\caption{Pre- and post-compostion with \(f\)}
-%\end{figure}
-%
-%Consider a \NotaInterna{locally small? if our categories are all locally small by default, then no problem here\dots{}} category \(\cat C\), one object \(c\) of \(\cat C\) and a morphism \(f : a \to b\) in \(\cat C\). We can consider the function
-%\[f \circ - : \cat C (c, a) \to \cat C (c, b)\,,\ (f \circ -) (g) := fg\]
-%called {\em pre-composition} with \(f\). There is the {\em post-composition} with \(f\) too
-%\[- \circ f : \cat C (b, c) \to \cat C (a, c)\,,\ (- \circ f) (h) := hf .\]
-%
-%Frankly, the notations \q{\(f \circ -\)} and \q{\(- \circ f\)} may be ambiguous and hide a lot of information: pay attention to what are the domain and the codomain of \(f\) to determine their type signature! \NotaInterna{Wait\dots{} \q{type signature}?} Here, \(f \circ - : \cat C (c, a) \to \cat C (c, b)\) if \(f : a \to b\), observe how the order of domain and codomain is preserved passing from \(f\) to \(f \circ -\). Instead, the post-compositions are a bit tricky: if \(f : a \to b\), then \(- \circ f : \cat C (b, c) \to \cat C (a, c)\), observing here the places \(a\) and \(b\) occupy in the type signature of \(- \circ f\).
-%
-%However, that symbolism is quite advantageous since it makes easier to state and use some basic properties. For if \(f : x_1 \to x_2\) and \(g : x_2 \to x_3\), then
-%\[(gf) \circ - = (g \circ -) (f \circ -) .\]
-%This property says nothing new, the composition of morphisms is associative. Furthermore, for if \(x\) is an object of \(\cat C\), then
-%\[\id_x \circ  - = \id_{\cat C (c, x)} .\]
-%The properties just stated work again for post-compositions:
-%\[- \circ (gf) = (- \circ g) (- \circ f)\]
-%for every \(f : y_1 \to y_2\) and \(g : y_2 \to y_3\), and
-%\[- \circ \id_y = \id_{\cat C (y, c)}\]
-%for \(y\) object of \(\cat C\).
-%
-%We will meet again these functions, as we will talk about functors. Anyway, for now the matter is the following lemma.
-%
-%\begin{lemma}
-%if \(f\) is an isomorphism, then \(f \circ -\) and \(- \circ f\) are bijections.
-%\end{lemma}
-%
-%\begin{proof}
-%If \(f\) an isomorphism, then \(\inv f : b \to a\); the picture we are interested in here is
-%\[\begin{tikzcd}
-%\cat C (c, a) \ar["{f \circ -}", rr, shift left] & & \cat C (c, b) \ar["{\inv f \circ -}", ll, shift left]
-%\end{tikzcd}\]
-%Here happens that
-%\begin{align*}
-%& \left(\inv f \circ -\right) (f \circ -) = \left(\inv f f\right) \circ - = \id_a \circ - = \id_{\cat C (c, a)} \\
-%& (f \circ -) \left(\inv f \circ -\right) = \left(f \inv f\right) \circ - = \id_b \circ - = \id_{\cat C (c, b)} .
-%\end{align*}
-%that is \(\inv f \circ -\) is the inverse of \(f \circ -\): this means that \(f \circ -\) is a bijection. Similarly, one can prove that \(- \circ f\) is a bijection.
-%\end{proof}
-%
-%The lemma here states that morphisms can be identitfied up to pre- or post-compositions with isomorphisms. But this identification is more expressive when we see how this enters in the discourse of diagrams and their commutativity. \NotaInterna{\TeX{} the part that comes here!}
+\NotaInterna{Heavy work in progress here\dots{}} In categories one is
+more acquainted with, like \(\Set\), \(\Grp\), \(\Top\) or
+\(\FDVect_k\), isomorphisms have a clear meaning and a role that is
+promptly evident. In generic category, what are isomorphisms for?
 
-%Being the relation \(\cong\) an equivalence relation (\inlinethm{exercise}), the following construction is motivated. Assume you are given a category \(\cat C\) such that the class \(\obj{\cat C}\) is an actual set. Then the relation of isomorphism gives a partition on \(\obj{\cat C}\) and then a quotient \({\obj{\cat C}}{/}{\cong}\). Thanks to the Axiom of Choice, you can pick one element from each of such equivalence classes and form a set \(S\). For every \(a, b \in S\), take all the morphisms \(a \to b\) that are already in \(\cat C\). This allows us to import the notion of composition in \(\cat C\). Categorial axioms hold, thus we have a genuine category, that we call {\em skeleton} of \(\cat C\). Observe that there is not a unique skeleton: in general there is not a unique possibility for \(S\), and consequently for the morphisms taken from the original category.
-%
-%\NotaInterna{Rewrite.} We are yet at an early stage to formulate this, but we hope we give a useful insight about skeletons and what isomorphisms mean.
-%
-%For convenience, let us pick one skeleton of \(\cat C\) and refer to it as \(\sk{\cat C}\). Any object of \(\cat C\) has precisely one object in any of its skeletons that is isomorphic to. In that case for every \(f : a \to b\) of \(\cat C\) we have two isomorphisms \(u\) and \(v\)
-%\[\begin{tikzcd}
-%a^\ast \ar["u", r] & a \ar["f", d] \\
-%b^\ast \ar["v", r, swap] & b
-%\end{tikzcd}\]
-%where \(a^\ast\) and \(b^\ast\) are objects of \(\sk{\cat C}\). The nice thing here is that \(\inv v f u\) is a morphism of \(\sk{\cat C}\), and that from this arrow you can retrieve back \(f\) by a simple composition: \(v \left(\inv v f u \right) \inv u\).
-%
-%The passage from a category to one of its skeleton may seem drastic, but operating this choice of objects and --- consequently --- morphisms does not cause any serious loss: any morphism can be reconstructed from the ones of the skeleton.
+\begin{figure}
+  \centering
+  \begin{tikzcd}
+    a \ar["f", rr] & & b \\
+    & c \ar["g", ""{name=g, above}, ul] \ar["fg", ""{name=fg, above},
+    ur, swap] \ar[bend left, from=g, to=fg]
+  \end{tikzcd}
+  \begin{tikzcd}
+    a \ar["f", rr] \ar["hf", ""{name=hf, above}, dr, swap] & & b \ar["h", ""{name=h, above}, dl] \\
+    & c \ar[bend right, from=h, to=hf]
+  \end{tikzcd}
+  \caption{Pre- and post-compostion with \(f\)}
+\end{figure}
+
+Consider a \NotaInterna{locally small? if our categories are all
+  locally small by default, then no problem here\dots{}} category
+\(\cat C\), one object \(c\) of \(\cat C\) and a morphism
+\(f : a \to b\) in \(\cat C\). We can consider the function
+\[f \circ - : \cat C (c, a) \to \cat C (c, b)\,,\ (f \circ -) (g) := fg\] called
+{\em pre-composition} with \(f\). There is the {\em post-composition}
+with \(f\) too
+\[- \circ f : \cat C (b, c) \to \cat C (a, c)\,,\ (- \circ f) (h) := hf .\]
+
+Frankly, the notations \q{\(f \circ -\)} and \q{\(- \circ f\)} may be
+ambiguous and hide a lot of information: pay attention to what are the
+domain and the codomain of \(f\) to determine their type signature!
+\NotaInterna{Wait\dots{} \q{type signature}?} Here,
+\(f \circ - : \cat C (c, a) \to \cat C (c, b)\) if \(f : a \to b\), observe
+how the order of domain and codomain is preserved passing from \(f\)
+to \(f \circ -\). Instead, the post-compositions are a bit tricky: if
+\(f : a \to b\), then \(- \circ f : \cat C (b, c) \to \cat C (a, c)\),
+observing here the places \(a\) and \(b\) occupy in the type signature
+of \(- \circ f\).
+
+However, that symbolism is quite advantageous since it makes easier to
+state and use some basic properties. For if \(f : x_1 \to x_2\) and
+\(g : x_2 \to x_3\), then
+\[(gf) \circ - = (g \circ -) (f \circ -) .\] This property says nothing new, the
+composition of morphisms is associative. Furthermore, for if \(x\) is
+an object of \(\cat C\), then
+\[\id_x \circ - = \id_{\cat C (c, x)} .\]
+The properties just stated work again for post-compositions:
+\[- \circ (gf) = (- \circ g) (- \circ f)\] for every
+\(f : y_1 \to y_2\) and \(g : y_2 \to y_3\), and
+\[- \circ \id_y = \id_{\cat C (y, c)}\] for \(y\) object of \(\cat C\).
+
+We will meet again these functions, as we will talk about
+functors. Anyway, for now the matter is the following lemma.
+
+\begin{lemma}
+  if \(f\) is an isomorphism, then \(f \circ -\) and \(- \circ f\) are
+  bijections.
+\end{lemma}
+
+\begin{proof}
+  If \(f\) an isomorphism, then \(\inv f : b \to a\); the picture we are
+  interested in here is
+  \[\begin{tikzcd}
+      \cat C (c, a) \ar["{f \circ -}", rr, shift left] & & \cat C (c, b)
+      \ar["{\inv f \circ -}", ll, shift left]
+    \end{tikzcd}\] Here happens that
+  \begin{align*}
+    & \left(\inv f \circ -\right) (f \circ -) = \left(\inv f f\right) \circ - = \id_a \circ - = \id_{\cat C (c, a)} \\
+    & (f \circ -) \left(\inv f \circ -\right) = \left(f \inv f\right) \circ - = \id_b \circ - = \id_{\cat C (c, b)} .
+  \end{align*}
+  that is \(\inv f \circ -\) is the inverse of \(f \circ -\): this means that
+  \(f \circ -\) is a bijection. Similarly, one can prove that
+  \(- \circ f\) is a bijection.
+\end{proof}
+
+The lemma here states that morphisms can be identitfied up to pre- or
+post-compositions with isomorphisms. But this identification is more
+expressive when we see how this enters in the discourse of diagrams
+and their commutativity. \NotaInterna{\TeX{} the part that comes
+  here!}
+
+Being the relation \(\cong\) an equivalence relation
+(\inlinethm{exercise}), the following construction is
+motivated. Assume you are given a category \(\cat C\) such that the
+class \(\obj{\cat C}\) is an actual set. Then the relation of
+isomorphism gives a partition on \(\obj{\cat C}\) and then a quotient
+\({\obj{\cat C}}{/}{\cong}\). Thanks to the Axiom of Choice, you can pick
+one element from each of such equivalence classes and form a set
+\(S\). For every \(a, b \in S\), take all the morphisms \(a \to b\) that
+are already in \(\cat C\). This allows us to import the notion of
+composition in \(\cat C\). Categorial axioms hold, thus we have a
+genuine category, that we call {\em skeleton} of \(\cat C\). Observe
+that there is not a unique skeleton: in general there is not a unique
+possibility for \(S\), and consequently for the morphisms taken from
+the original category.
+
+\NotaInterna{Rewrite.} We are yet at an early stage to formulate this,
+but we hope we give a useful insight about skeletons and what
+isomorphisms mean.
+
+For convenience, let us pick one skeleton of \(\cat C\) and refer to
+it as \(\sk{\cat C}\). Any object of \(\cat C\) has precisely one
+object in any of its skeletons that is isomorphic to. In that case for
+every \(f : a \to b\) of \(\cat C\) we have two isomorphisms \(u\) and
+\(v\)
+\[\begin{tikzcd}
+    a^\ast \ar["u", r] & a \ar["f", d] \\
+    b^\ast \ar["v", r, swap] & b
+  \end{tikzcd}\] where \(a^\ast\) and \(b^\ast\) are objects of
+\(\sk{\cat C}\). The nice thing here is that \(\inv v f u\) is a
+morphism of \(\sk{\cat C}\), and that from this arrow you can retrieve
+back \(f\) by a simple composition:
+\(v \left(\inv v f u \right) \inv u\).
+
+The passage from a category to one of its skeleton may seem drastic,
+but operating this choice of objects and --- consequently --- morphisms
+does not cause any serious loss: any morphism can be reconstructed
+from the ones of the skeleton.
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:

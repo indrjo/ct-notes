@@ -1,212 +1,263 @@
-% !TEX program = lualatex
-% !TEX spellcheck = en_GB
-% !TEX root = ../limits.tex
 
 \section{Equalizers and coequalizers}
 
 For \(\cat C\) category, the limits of functors
-\[\left(\begin{tikzcd}[column sep=tiny] \bullet \ar[r, shift left] \ar[r, shift right] & \bullet \end{tikzcd}\right) \to \cat C\]
-are called {\em equalizers}. The colimits are called {\em coequalizers} instead.
+\[\left(\begin{tikzcd}[column sep=tiny] \bullet \ar[r, shift left] \ar[r,
+      shift right] & \bullet \end{tikzcd}\right) \to \cat C\] are called {\em
+  equalizers}. The colimits are called {\em coequalizers} instead.
 
 \begin{definition}[Equalizers \& coequalizers, explicit]
-Let \(\cat C\) be a category and
-\begin{equation}\begin{tikzcd}
-a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
-\end{tikzcd}\label{diagram:PairOfParallelMorphisms}\end{equation}
-a pair of morphisms in \(\cat C\). An {\em equalizer} of this pair is any morphism \(i : c \to a\) such that:
-\begin{tcbitem}
-\item the diagram 
-\[\begin{tikzcd}
-c \ar["i", r] & a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
-\end{tikzcd}\]
-commutes
-\item for every \(i' : c' \to a\) of \(\cat C\) making
-\[\begin{tikzcd}
-c' \ar["{i'}", r] & a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
-\end{tikzcd}\]
-commute, there is one and only one \(k : c' \to c\) in \(\cat C\) such that
-\[\begin{tikzcd}[row sep=small]
-c' \ar["{i'}", dr] \ar["k", dd, swap] \\
-& a \\
-c \ar["i", ur, swap]
-\end{tikzcd}\]
-commutes.
-\end{tcbitem}
+  Let \(\cat C\) be a category and
+  \begin{equation}\begin{tikzcd}
+      a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
+    \end{tikzcd}\label{diagram:PairOfParallelMorphisms}\end{equation}
+  a pair of morphisms in \(\cat C\). An {\em equalizer} of this pair
+  is any morphism \(i : c \to a\) such that:
+  \begin{tcbitem}
+  \item the diagram
+    \[\begin{tikzcd}
+        c \ar["i", r] & a \ar["f", r, shift left] \ar["g", r, shift
+        right, swap] & b
+      \end{tikzcd}\] commutes
+  \item for every \(i' : c' \to a\) of \(\cat C\) making
+    \[\begin{tikzcd}
+        c' \ar["{i'}", r] & a \ar["f", r, shift left] \ar["g", r,
+        shift right, swap] & b
+      \end{tikzcd}\] commute, there is one and only one
+    \(k : c' \to c\) in \(\cat C\) such that
+    \[\begin{tikzcd}[row sep=small]
+        c' \ar["{i'}", dr] \ar["k", dd, swap] \\
+        & a \\
+        c \ar["i", ur, swap]
+      \end{tikzcd}\] commutes.
+  \end{tcbitem}
 %
-Dually, a {\em coequalizer} of the pair~\eqref{diagram:PairOfParallelMorphisms} is any morphism \(j : b \to d\) such that
-\begin{tcbitem}
-\item the diagram 
-\[\begin{tikzcd}
-a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b \ar["j", r] & d
-\end{tikzcd}\]
-commutes;
-\item for every \(j' : b \to d'\) of \(\cat C\) making
-\[\begin{tikzcd}
-a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b \ar["{j'}", r] & d'
-\end{tikzcd}\]
-commute, there exists one and only one \(h : d \to d'\) such that
-\[\begin{tikzcd}[row sep=small]
- & d \ar["h", dd] \\
-b \ar["j", ur] \ar["{j'}", dr, swap] \\
- & d'
-\end{tikzcd}\]
-commutes.
-\end{tcbitem}
+  Dually, a {\em coequalizer} of the
+  pair~\eqref{diagram:PairOfParallelMorphisms} is any morphism
+  \(j : b \to d\) such that
+  \begin{tcbitem}
+  \item the diagram
+    \[\begin{tikzcd}
+        a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
+        \ar["j", r] & d
+      \end{tikzcd}\] commutes;
+  \item for every \(j' : b \to d'\) of \(\cat C\) making
+    \[\begin{tikzcd}
+        a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
+        \ar["{j'}", r] & d'
+      \end{tikzcd}\] commute, there exists one and only one
+    \(h : d \to d'\) such that
+    \[\begin{tikzcd}[row sep=small]
+        & d \ar["h", dd] \\
+        b \ar["j", ur] \ar["{j'}", dr, swap] \\
+        & d'
+      \end{tikzcd}\] commutes.
+  \end{tcbitem}
 \end{definition}
 
-Before we analyse some example, the following lemma, may be quite useful to guide us.
+Before we analyse some example, the following lemma, may be quite
+useful to guide us.
 
 \begin{lemma}\label{lemma:EqualizersAreMonos}
-Equalizers are monomorphisms. Dually, coequalizers are epimorphisms.
+  Equalizers are monomorphisms. Dually, coequalizers are epimorphisms.
 \end{lemma}
 
 \begin{proof}
-Consider
-\[\begin{tikzcd}
-e' \ar["s", r, shift left] \ar["t", r, shift right, swap] & e \ar["i", r] & a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
-\end{tikzcd}\]
-with \(i\) equalizer of \(f\) and \(g\) and \(is = it\). We can redraw this diagram as follows:
-\[\begin{tikzcd}[row sep=small]
-e \ar["i", dr] \\
- & a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b \\
-e' \ar["s", uu, bend left=10] \ar["t", uu, bend right=10, swap] \ar["{is = it}", ur, swap]
-\end{tikzcd}\]
-In this case, we have \(f(is) = f(it) = g(is) = g(it)\). Thus, by definition of equalizer, it must be \(s = t\).
+  Consider
+  \[\begin{tikzcd}
+      e' \ar["s", r, shift left] \ar["t", r, shift right, swap] & e
+      \ar["i", r] & a \ar["f", r, shift left] \ar["g", r, shift right,
+      swap] & b
+    \end{tikzcd}\] with \(i\) equalizer of \(f\) and \(g\) and
+  \(is = it\). We can redraw this diagram as follows:
+  \[\begin{tikzcd}[row sep=small]
+      e \ar["i", dr] \\
+      & a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b \\
+      e' \ar["s", uu, bend left=10] \ar["t", uu, bend right=10, swap]
+      \ar["{is = it}", ur, swap]
+    \end{tikzcd}\] In this case, we have
+  \(f(is) = f(it) = g(is) = g(it)\). Thus, by definition of equalizer,
+  it must be \(s = t\).
 \end{proof}
 
-How could this be of aid? For example, in \(\Set\) this means we have to look for inclusions in the domain of the domain of the parallel arrows. That is the case, indeed.
+How could this be of aid? For example, in \(\Set\) this means we have
+to look for inclusions in the domain of the domain of the parallel
+arrows. That is the case, indeed.
 
 \begin{example}[Equalizers in \(\Set\)]
-In \(\Set\), consider two functions
-\[\begin{tikzcd}
-  X \ar["f", r, shift left] \ar["g", r, shift right, swap] & Y
-\end{tikzcd} .\]
-The subset
-\[E := \set{x \in X \mid f(x) = g(x)}\]
-has the inclusion in \(X\), we call it \(i : E \hookrightarrow X\). Of course, we have \(fi = gi\), so one part of the work is done. Now, let us take a commuting diagram
-\[\begin{tikzcd}
-E' \ar["{i'}", r] & X \ar["f", r, shift left] \ar["g", r, shift right, swap] & Y
-\end{tikzcd} .\]
-It follows that \(i'(x) \in E\) for every \(x \in E'\). Hence, we shall consider the function
-\[h : E' \to E\,, \ h(x) := i'(x) .\]
-It is immediate now that \(i : E \hookrightarrow X\) is an equalizer of \(f\) and \(g\).
+  In \(\Set\), consider two functions
+  \[\begin{tikzcd}
+      X \ar["f", r, shift left] \ar["g", r, shift right, swap] & Y
+    \end{tikzcd} .\] The subset
+  \[E := \set{x \in X \mid f(x) = g(x)}\] has the inclusion in \(X\), we
+  call it \(i : E \hookrightarrow X\). Of course, we have \(fi = gi\), so one part
+  of the work is done. Now, let us take a commuting diagram
+  \[\begin{tikzcd}
+      E' \ar["{i'}", r] & X \ar["f", r, shift left] \ar["g", r, shift
+      right, swap] & Y
+    \end{tikzcd} .\] It follows that \(i'(x) \in E\) for every
+  \(x \in E'\). Hence, we shall consider the function
+  \[h : E' \to E\,, \ h(x) := i'(x) .\] It is immediate now that
+  \(i : E \hookrightarrow X\) is an equalizer of \(f\) and \(g\).
 \end{example}
 
-If we want one example of coequalizer in \(\Set\), we have to look for some surjection out of the codomain of the given parallel arrows. 
+If we want one example of coequalizer in \(\Set\), we have to look for
+some surjection out of the codomain of the given parallel arrows.
 
 \begin{example}[Coequalizers in \(\Set\)]
-In \(\Set\), consider two functions
-\[\begin{tikzcd}
-X \ar["f", r, shift left] \ar["g", r, shift right, swap] & Y
-\end{tikzcd} .\]
-Having a commuting diagram like
-\[\begin{tikzcd}
-X \ar["f", r, shift left] \ar["g", r, shift right, swap] & Y \ar["j", r] & A 
-\end{tikzcd}\]
-means that we must look for some \(j : Y \to A\) such that, for \(x \in X\), the elements \(f(x)\) and \(g(x)\) are brought to the same element of \(A\). The thing works if take \(A\) to be the quotient
-\[\frac{Y}{f(x) \sim g(x) \ \text{for } x \in X}\]
-and define \(j\) as quotient map \(Y \to Y{/}{\sim}\). It only remains to verify the universal property of coequalizer. Take any \(j' : Y \to Z\) such that \(j'f = j'g\).
-\[\begin{tikzcd}[row sep=small]
-& & Y{/}{\sim} \ar[dd, dashed] \\
-X \ar["f", r, shift left] \ar["g", r, shift right, swap] & Y \ar["j", ur] \ar["{j'}", dr, swap] \\
-& & Z
-\end{tikzcd}\]
-The existence of the unique function \(Y{/}{\sim} \to Z\) easily follows from Corollary~\ref{corollary:SetIsoGenEqRel}.
+  In \(\Set\), consider two functions
+  \[\begin{tikzcd}
+      X \ar["f", r, shift left] \ar["g", r, shift right, swap] & Y
+    \end{tikzcd} .\] Having a commuting diagram like
+  \[\begin{tikzcd}
+      X \ar["f", r, shift left] \ar["g", r, shift right, swap] & Y
+      \ar["j", r] & A
+    \end{tikzcd}\] means that we must look for some \(j : Y \to A\) such
+  that, for \(x \in X\), the elements \(f(x)\) and \(g(x)\) are brought
+  to the same element of \(A\). The thing works if take \(A\) to be
+  the quotient
+  \[\frac{Y}{f(x) \sim g(x) \ \text{for } x \in X}\]
+  and define \(j\) as quotient map \(Y \to Y{/}{\sim}\). It only remains to
+  verify the universal property of coequalizer. Take any
+  \(j' : Y \to Z\) such that \(j'f = j'g\).
+  \[\begin{tikzcd}[row sep=small]
+      & & Y{/}{\sim} \ar[dd, dashed] \\
+      X \ar["f", r, shift left] \ar["g", r, shift right, swap] & Y \ar["j", ur] \ar["{j'}", dr, swap] \\
+      & & Z
+    \end{tikzcd}\] The existence of the unique function
+  \(Y{/}{\sim} \to Z\) easily follows from
+  Corollary~\ref{corollary:SetIsoGenEqRel}.
 \end{example}
 
 \begin{exercise}
-Retrieve Example~\ref{example:PushoutsInSet} and prepare to combine it with the example we have just made. The square~\eqref{diagram:NotYetACommSquareInSet} doesn't even commute, but \(A+B\) with the two injections is a coproduct, not a random thing out there. You can rearrange that diagram too
-\[\begin{tikzcd}[column sep=large]
-C \ar["{\linj f}",r, shift left] \ar["{\rinj g}", r, shift right, swap] & A+B
-\end{tikzcd}\]
-and summon the canonical projection \(A+B \to \frac{A+B}{\sim}\) which is a coequalizer. At this point, we have the commutative square~\eqref{diagram:NowACommSquareInSet}, which we proved to be a pushout square. Luckily, this works in general, and it is up to you to realize why and make the dual of the result too.\newline
-In a category \(\cat C\), suppose you have a coproduct 
-\[\begin{tikzcd}a & a+b \ar["{\linj}", l, swap] \ar["{\rinj}", r] & b\end{tikzcd}\]
-a square
-\[\begin{tikzcd}
-c \ar["f", r] \ar["g", d, swap]  & a \ar["\linj", d] \\
-b \ar["\rinj", r, swap] & a+b
-\end{tikzcd}\]
-and a coequalizer \(p : a+b \to d\) of \(\linj f\) and \(\rinj g\). Prove that
-\[\begin{tikzcd}
-c \ar["f", r] \ar["g", d, swap]  & a \ar["p\linj", d] \\
-b \ar["p\rinj", r, swap] & d
-\end{tikzcd}\]
-is a pushout square in \(\cat C\).% Eventually, you have an amazing result.
+  Retrieve Example~\ref{example:PushoutsInSet} and prepare to combine
+  it with the example we have just made. The
+  square~\eqref{diagram:NotYetACommSquareInSet} doesn't even commute,
+  but \(A+B\) with the two injections is a coproduct, not a random
+  thing out there. You can rearrange that diagram too
+  \[\begin{tikzcd}[column sep=large]
+      C \ar["{\linj f}",r, shift left] \ar["{\rinj g}", r, shift
+      right, swap] & A+B
+    \end{tikzcd}\] and summon the canonical projection
+  \(A+B \to \frac{A+B}{\sim}\) which is a coequalizer. At this point, we
+  have the commutative square~\eqref{diagram:NowACommSquareInSet},
+  which we proved to be a pushout square. Luckily, this works in
+  general, and it is up to you to realize why and make the dual of the
+  result too.\newline In a category \(\cat C\), suppose you have a coproduct
+  \[\begin{tikzcd}a \ar["{\linj}", r] & a+b & b \ar["{\rinj}", l,
+      swap]\end{tikzcd}\] a square
+  \[\begin{tikzcd}
+      c \ar["f", r] \ar["g", d, swap]  & a \ar["\linj", d] \\
+      b \ar["\rinj", r, swap] & a+b
+    \end{tikzcd}\] and a coequalizer \(p : a+b \to d\) of \(\linj f\)
+  and \(\rinj g\). Prove that
+  \[\begin{tikzcd}
+      c \ar["f", r] \ar["g", d, swap]  & a \ar["p\linj", d] \\
+      b \ar["p\rinj", r, swap] & d
+    \end{tikzcd}\] is a pushout square in \(\cat
+  C\).% Eventually, you have an amazing result.
 \end{exercise}
 
-%\begin{proposition}
-%Categories with binary products/coproducts and equalizers/coequalizers have pullbacks/pushouts.
-%\end{proposition}
+% \begin{proposition}
+%   Categories with binary products/coproducts and
+%   equalizers/coequalizers have pullbacks/pushouts.
+% \end{proposition}
 
-%Another exercise will help you to prove the converse.
+% Another exercise will help you to prove the converse.
 
 \begin{exercise}
-In a category \(\cat C\), consider two parallel morphisms
-\[\begin{tikzcd}
-a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
-\end{tikzcd}\]
-and a product
-\[\begin{tikzcd}
-a & a \times b \ar["{p_a}", l, swap] \ar["{p_b}", r] & b
-\end{tikzcd}\]
-The universal property of products gives the morphisms \(\bar f, \bar g : a \to a \times b\) such that \(p_a \bar f = \id_a\), \(p_b \bar f = f\), \(p_a \bar g = \id_a\) and \(p_b \bar g = g\): 
-\[\begin{tikzcd}
-& a \ar["{\id_a}", dl, swap] \ar["{\bar f}", d, shift right, swap] \ar["{\bar g}", d, shift left] \ar["f", dr, shift right, swap] \ar["g", dr, shift left] \\
-a & a \times b \ar["{p_a}", l] \ar["{p_b}", r, swap] & b
-\end{tikzcd}\]
-Consider the pullback square
-\[\begin{tikzcd}
-c \ar["m", r] \ar["n", d, swap] & a \ar["{\bar f}", d] \\
-a \ar["{\bar g}", r, swap] & a \times b
-\end{tikzcd}\]
-and prove that:
-\begin{tcbenum}
-\item \(m = n\).
-\item \(m\) is equalizer of \(f\) and \(g\).
-\end{tcbenum}
+  In a category \(\cat C\), consider two parallel morphisms
+  \[\begin{tikzcd}
+      a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
+    \end{tikzcd}\] and a product
+  \[\begin{tikzcd}
+      a & a \times b \ar["{p_a}", l, swap] \ar["{p_b}", r] & b
+    \end{tikzcd}\] The universal property of products gives the
+  morphisms \(\bar f, \bar g : a \to a \times b\) such that
+  \(p_a \bar f = \id_a\), \(p_b \bar f = f\), \(p_a \bar g = \id_a\)
+  and \(p_b \bar g = g\):
+  \[\begin{tikzcd}
+      & a \ar["{\id_a}", dl, swap] \ar["{\bar f}", d, shift right, swap] \ar["{\bar g}", d, shift left] \ar["f", dr, shift right, swap] \ar["g", dr, shift left] \\
+      a & a \times b \ar["{p_a}", l] \ar["{p_b}", r, swap] & b
+    \end{tikzcd}\] Consider the pullback square
+  \[\begin{tikzcd}
+      c \ar["m", r] \ar["n", d, swap] & a \ar["{\bar f}", d] \\
+      a \ar["{\bar g}", r, swap] & a \times b
+    \end{tikzcd}\] and prove that:
+  \begin{tcbenum}
+  \item \(m = n\).
+  \item \(m\) is equalizer of \(f\) and \(g\).
+  \end{tcbenum}
 \end{exercise}
 
-%In other words:
+% In other words:
 
 \begin{proposition}
-Categories with binary products/coproducts have equalizers/coequalizers if and only if have pullbacks/pushouts. That is: in a category with products/coproducts, pullbacks/pushouts can be obtained by equalizers/coequalizers and vice versa.  
+  Categories with binary products/coproducts have
+  equalizers/coequalizers if and only if have pullbacks/pushouts. That
+  is: in a category with products/coproducts, pullbacks/pushouts can
+  be obtained by equalizers/coequalizers and vice versa.
 \end{proposition}
 
-%\begin{proposition}
-%Categories with binary products/coproducts and pullbacks/pushouts have equalizers/coequalizers.
-%\end{proposition}
+% \begin{proposition}
+%   Categories with binary products/coproducts and pullbacks/pushouts
+%   have equalizers/coequalizers.
+% \end{proposition}
 
-%\NotaInterna{Write about {\em quotient objects}\dots{}}
+% \NotaInterna{Write about {\em quotient objects}\dots{}}
 
-%The following proposition may be of help sometimes.
+% The following proposition may be of help sometimes.
 
-Ok, let us step back to Lemma~\ref{lemma:EqualizersAreMonos}, for there is something curious. Equalizers are monomorphisms, but what are the consequences if an equalizer is in addition epic?
+Ok, let us step back to Lemma~\ref{lemma:EqualizersAreMonos}, for
+there is something curious. Equalizers are monomorphisms, but what are
+the consequences if an equalizer is in addition epic?
 
 \begin{proposition}\label{proposition:EpicEqualizersAreIsomorphisms}
-An epic equalizer is an isomorphism. Dually, a monic epimonomorphism is an isomorphism.
+  An epic equalizer is an isomorphism. Dually, a monic epimonomorphism
+  is an isomorphism.
 \end{proposition}
 
 \begin{proof}
-Assume \(i : e \to a\) is an epic equalizer of
-\[\begin{tikzcd} a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b \end{tikzcd}\] From \(fi = gi\), we can derive \(f = g\), being \(i\) epic. Hence
-\[\begin{tikzcd} a \ar["{\id_a}", r] & a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b \end{tikzcd}\]
-commutes: by the universal property of equalizers, \(\id_a = ik\) for a unique \(k : a \to e\). Moreover, by simple computation \(iki = i = i \id_e\), which implies that \(ki = \id_e\) since \(i\) is monic. In conclusion, \(i\) is invertible.
+  Assume \(i : e \to a\) is an epic equalizer of
+  \[\begin{tikzcd} a \ar["f", r, shift left] \ar["g", r, shift right,
+      swap] & b \end{tikzcd}\] From \(fi = gi\), we can derive
+  \(f = g\), being \(i\) epic. Hence
+  \[\begin{tikzcd} a \ar["{\id_a}", r] & a \ar["f", r, shift left]
+      \ar["g", r, shift right, swap] & b \end{tikzcd}\] commutes: by
+  the universal property of equalizers, \(\id_a = ik\) for a unique
+  \(k : a \to e\). Moreover, by simple computation
+  \(iki = i = i \id_e\), which implies that \(ki = \id_e\) since \(i\)
+  is monic. In conclusion, \(i\) is invertible.
 \end{proof}
 
-How could this become even interesting to us? If a category is such that every monomorphism is an equalizer of some pair of parallel arrows, then there monic and epic morphisms are ismorphisms, which we know it does not occur in every category.
+How could this become even interesting to us? If a category is such
+that every monomorphism is an equalizer of some pair of parallel
+arrows, then there monic and epic morphisms are ismorphisms, which we
+know it does not occur in every category.
 
 \begin{example}
-In \(\Set\) that phenomenon does occur, let us look in it more closely. The problem we have can be stated as follows: take and injective function \(f : A \to B\) and find two parallel functions parting from \(B\) to which \(f\) is an equalizer. We know, how to construct equalizers in \(\Set\) and, even though that is not what we want, that example may guide our exploration. The problem we want to solve requires to find a certain set \(C\) and two certain functions \(h, k : B \to C\). \YetToBeTeXed{}
-%\[\begin{tikzcd} B \ar["{\chi_f}", r, shift left] \ar["t", r, shift right, swap] & \set{0, 1} \end{tikzcd}\]
-%where \YetToBeTeXed{}
+  In \(\Set\) that phenomenon does occur, let us look in it more
+  closely. The problem we have can be stated as follows: take and
+  injective function \(f : A \to B\) and find two parallel functions
+  parting from \(B\) to which \(f\) is an equalizer. We know, how to
+  construct equalizers in \(\Set\) and, even though that is not what
+  we want, that example may guide our exploration. The problem we want
+  to solve requires to find a certain set \(C\) and two certain
+  functions \(h, k : B \to C\). \YetToBeTeXed{}
 \end{example}
 
-%\begin{exercise}
-%In a category \(\cat C\), if
-%\[\begin{tikzcd}
-%e \ar["i", r] \ar["i", d, swap] & a \ar["f", d] \\
-%a \ar["g", r, swap]             & b
-%\end{tikzcd}\]
-%is a pullback square, then \(i : e \to a\) is an equalizer of the pair \(f\) and \(g\). Is the converse true? If it is false, add hypothesis to make it true.
-%\end{exercise}
+\begin{exercise}
+  In a category \(\cat C\), if
+  \[\begin{tikzcd}
+      e \ar["i", r] \ar["i", d, swap] & a \ar["f", d] \\
+      a \ar["g", r, swap] & b
+    \end{tikzcd}\] is a pullback square, then \(i : e \to a\) is an
+  equalizer of the pair \(f\) and \(g\). Is the converse true? If it
+  is false, add hypothesis to make it true.
+\end{exercise}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:

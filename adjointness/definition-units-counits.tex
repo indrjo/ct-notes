@@ -1,134 +1,254 @@
-% !TEX program = lualatex
-% !TEX spellcheck = en_GB
-% !TEX root = ../adjointness.tex
 
 \section{Definition, units and counits}
 
 \begin{definition}[Adjunctions]
-Consider two locally small categories and two functors as in
-\[\begin{tikzcd}[column sep=small]
-\cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
-\end{tikzcd}\]
-An {\em adjunction} from \(L\) to \(R\) any natural isomorphism
+  Consider two locally small categories and two functors as in
+  \[\begin{tikzcd}[column sep=small]
+      \cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
+    \end{tikzcd}\] An {\em adjunction} from \(L\) to \(R\) any natural
+  isomorphism
 %
-\begin{equation}
-\begin{tikzcd}[column sep=large]
-\op{\cat C} \times \cat D
-  \ar["{\cat D(L(\hole), \hole)}"{name=A}, r, bend left=35] 
-  \ar["{\cat C(\hole, R(\hole))}"{name=B}, r, bend right=35, swap]
-  & \Set
-\ar["\alpha", from=A, to=B, natural]
-\end{tikzcd}
-\label{diagram:AdjunctionI}\end{equation}
-We say \(L\) is the {\em left adjoint} and \(R\) is the {\em right adjoint}: the reason behind the naming comes from when we write the bijection
-\[\cat D (L(x), y) \cong \cat C (x, R(y))\]
-\(L\) occurs in \(\cat D (L(x), y)\) applied to the argument on the left, while \(R\) appears in \(\cat C (x, R(y))\) applied on the right.
-Adjunctions are usually written as \(\alpha : L \dashv R\). Sometimes \(L \dashv R\) is written to mean that there is an adjunction in between without specifying which one. If on the the paper we are writing there is space, we can write something like
+  \begin{equation}
+    \begin{tikzcd}[column sep=large]
+      \op{\cat C} \times \cat D \ar["{\cat D(L(\hole), \hole)}"{name=A}, r,
+      bend left=35] \ar["{\cat C(\hole, R(\hole))}"{name=B}, r, bend
+      right=35, swap] & \Set \ar["\alpha", from=A, to=B, natural]
+    \end{tikzcd}
+    \label{diagram:AdjunctionI}\end{equation}
+  We say \(L\) is the {\em left adjoint} and \(R\) is the {\em right
+    adjoint}: the reason behind the naming comes from when we write
+  the bijection
+  \[\cat D (L(x), y) \cong \cat C (x, R(y))\]
+  \(L\) occurs in \(\cat D (L(x), y)\) applied to the argument on the
+  left, while \(R\) appears in \(\cat C (x, R(y))\) applied on the
+  right.  Adjunctions are usually written as \(\alpha : L \dashv R\). Sometimes
+  \(L \dashv R\) is written to mean that there is an adjunction in between
+  without specifying which one. If on the the paper we are writing
+  there is space, we can write something like
 %
-\begin{equation}
-\begin{tikzcd}
-\cat C \ar["L"{name=L}, r, bend left] & \cat D \ar["R"{name=R}, l, bend left]
-\ar["\perp"{description}, from=L, to=R, phantom]
-\end{tikzcd}
-\label{diagram:AdjunctionII}\end{equation}
+  \begin{equation}
+    \begin{tikzcd}
+      \cat C \ar["L"{name=L}, r, bend left] & \cat D \ar["R"{name=R},
+      l, bend left] \ar["\perp"{description}, from=L, to=R, phantom]
+    \end{tikzcd}
+    \label{diagram:AdjunctionII}\end{equation}
 %
-which has in addition shows the categories involved.
+  which has in addition shows the categories involved.
 \end{definition}
 
-%\begin{remark}
-%In~\eqref{diagram:AdjunctionII} there is not the information of direction, as there is in~\eqref{diagram:AdjunctionI}. An adjunction is a natural isomorphism, but we must be explicit when we are using the components of the adjunction and not make the reader waste to much time for inferring what we are doing. There is some abuse of notation that help.
-%
-%One is dropping the pedices used to distinguish the components of a natural transformation. \NotaInterna{Talk about that!} Although this requires more space, we sometimes embed type signatures, being that more transparent and comfortable for both writers and readers. Writing
-%%
-%\[\alpha\left(L(x) \functo f y\right)\]
-%%
-%is more immediate than \(\alpha_{x,y}(f)\) and \(\alpha(f)\).
-%
-%Another abuse is when we are (willingly) careless about directions. If we have the adjunction~\eqref{diagram:AdjunctionI}, then we may sometimes happen to write
-%\[\alpha (g) \quad\text{for } g : x \to R(y) .\]
-%Of course, we mean \(\inv\alpha_{x,y}(g)\), bear with us.
-%
-%However, observe how the abuse drives to something that may baffle:
-%\[\alpha(\alpha(h)) = h\]
-%We are not saying that \(\alpha\) is idempotent. If \(h : L(x) \to y\), then it is to be read like
-%\[\inv\alpha_{x, y} \left(\alpha_{x, y} (h)\right) = h .\] 
-%If \(h : x \to R(y)\), then it is to be read like
-%\[\alpha_{x, y} \left(\inv\alpha_{x, y} (h)\right) = h .\] 
-%\end{remark}
+\begin{remark}
+  In~\eqref{diagram:AdjunctionII} there is not the information of
+  direction, as there is in~\eqref{diagram:AdjunctionI}. An adjunction
+  is a natural isomorphism, but we must be explicit when we are using
+  the components of the adjunction and not make the reader waste to
+  much time for inferring what we are doing. There is some abuse of
+  notation that help.
 
-We will soon return to the introductory example later; as for now, let us indulge a bit more on the definition of adjunction.
+  One is dropping the pedices used to distinguish the components of a
+  natural transformation. \NotaInterna{Talk about that!} Although this
+  requires more space, we sometimes embed type signatures, being that
+  more transparent and comfortable for both writers and
+  readers. Writing
+%
+  \[\alpha\left(L(x) \functo f y\right)\]
+%
+  is more immediate than \(\alpha_{x,y}(f)\) and \(\alpha(f)\).
+
+  Another abuse is when we are (willingly) careless about
+  directions. If we have the adjunction~\eqref{diagram:AdjunctionI},
+  then we may sometimes happen to write
+  \[\alpha (g) \quad\text{for } g : x \to R(y) .\]
+  Of course, we mean \(\inv\alpha_{x,y}(g)\), bear with us.
+
+  However, observe how the abuse drives to something that may baffle:
+  \[\alpha(\alpha(h)) = h\]
+  We are not saying that \(\alpha\) is idempotent. If
+  \(h : L(x) \to y\), then it is to be read like
+  \[\inv\alpha_{x, y} \left(\alpha_{x, y} (h)\right) = h .\]
+  If \(h : x \to R(y)\), then it is to be read like
+  \[\alpha_{x, y} \left(\inv\alpha_{x, y} (h)\right) = h .\]
+\end{remark}
+
+We will soon return to the introductory example later; as for now, let
+us indulge a bit more on the definition of adjunction.
+
+\newcommand\curry{\operatorname{curry}}
+
+\begin{example}[Prescribing functions via currying]\label{example:CurryingFunctions}
+  We can build a bijection
+  \begin{equation}\begin{aligned}
+    & \curry : \Set(A \times B, C) \to \Set(A, \Set(B, C)) \\
+    & \curry f := \lambda x. \lambda y. f(x, y)
+  \end{aligned}\label{function:Curry}\end{equation}
+The truth is it is more than a bijection, but in order to realise that
+we need to do some reverse engineering: more precisely, the functions
+\(\curry\) should form a natural transformation from two functors
+\[\begin{tikzcd}[column sep=small] \Set \ar[r, shift left] & \Set
+    \ar[l, shift left] \end{tikzcd}\] Which functors, though? Look
+at~\eqref{function:Curry} for a hint. The functor pointing leftward
+takes sets \(A\) to \(A \times B\), while the opposite sends sets
+\(C\) to \(\Set(B, C)\). Indeed the functors
+\[\begin{tikzcd}
+    \Set \ar["{(\times B)}", r, shift left] & \Set \ar["{\Set(B, \hole)}",
+    l, shift left]
+  \end{tikzcd}\] fit in the adjunction situation
+\[\curry : (\times B) \dashv \Set(B, \hole) .\]
+(As you can see, the set \(B\) is fixed while \(A\) and \(C\) while
+varying provides the components of the natural isomorphism.) Let us
+explicitly check naturality of \(\curry\): consider
+\[\begin{tikzcd}
+    \Set(A \times B, C) \ar["{\Set(f \times \id_B, g)}", d, swap] \ar["\curry", r] & \Set(A, \Set(B, C)) \ar["{\Set(f, \Set(B, g))}", d] \\
+    \Set(A' \times B, C') \ar["\curry", r, swap] & \Set(A', \Set(B, C'))
+  \end{tikzcd}\] for every pair of functions \(f : A' \to A\) and
+\(g : C \to C'\). We calculate now: for every function
+\(h : A \times B \to C\) we have
+\[\curry \Set(f \times B, g) (h) = \curry \left(g h \left(f \times
+      \id_B\right)\right) = \lambda x. \lambda y. gh(f(x), y) \] and
+\[\begin{aligned}
+  \Set(f, \Set(B, g)) \curry (h) &= \Set(f, \Set(B, g)) (\lambda x. \lambda y. h(x, y)) = \\
+                                 &= (\lambda k. gk) (\lambda x. \lambda y. h(x, y)) f
+\end{aligned}\]
+hence they are equal. \NotaInterna{Since we happen to use lambda calculus quite often, write about it a little more.}
+\end{example}
 
 \begin{exercise}[Partial functions]
-For \(A\) and \(B\) sets, a {\em partial function} from \(A\) to \(B\) is relation \(f \subseteq A \times B\) with the property
-\begin{center}
-for every \(x \in A\) and \(y_1, y_2 \in B\), if \((x, y_1) \in f\) and \((x, y_2) \in f\) then \(y_1 = y_2\).
-\end{center}
-We want to compose partial functions as well: provided \(f \in \Par(A, B)\) and \(g \in \Par(B, C)\),
-\[gf \coloneq \set{(x, y) \in A \times C \mid (x, z) \in f \text{ and } (z, y) \in g \text{ for some } z \in B} .\]
-It is immediate to verify \(\Par\) complies the rules that make it a category. Indeed, this is the {\em category of partial functions}, written as \(\Par\): here, the objects are sets and the morphisms are partial functions.\newline
-Suppose given a partial function \(f : A \to B\). For every \(x \in A\) the possibilities are two: there is one element of \(B\) bound to is, and we write it \(f(x)\), or none. What if we considered {\em no value} as an output value? Provided two sets \(A\) and \(B\) and a partial function \(f : A \to B\), we assign an actual function
-\[\bar f : A \to B+1 \,, \ \bar f(x) \coloneq \begin{cases} f(x) & \text{if \(x\) has an element of \(B\) bound} \\ \ast & \text{otherwise} \end{cases}\]
-where \(1 \coloneq \set{\ast}\) with \(\ast\) designating the absence of output. It is quite simple to show that
-\[\Par(A, B) \to \Set(A, B+1)\,,\ f \to \bar f\]
-is a bijection for every couple of sets \(A\) and \(B\). Now it's up to you to categorify this: find two functors that make an adjunction
-\[\begin{tikzcd}
-\Set \ar["I"{name=I}, r, bend left] & \Par \ar["J"{name=J}, l, bend left]
-\ar["\perp"{description}, phantom, from=I, to=J]
-\end{tikzcd}\]
+  For \(A\) and \(B\) sets, a {\em partial function} from \(A\) to
+  \(B\) is relation \(f \subseteq A \times B\) with the property
+  \begin{center}
+    for every \(x \in A\) and \(y_1, y_2 \in B\), if
+    \((x, y_1) \in f\) and \((x, y_2) \in f\) then \(y_1 = y_2\).
+  \end{center}
+  We want to compose partial functions as well: provided
+  \(f \in \Par(A, B)\) and \(g \in \Par(B, C)\),
+  \[gf \coloneq \set{(x, y) \in A \times C \mid (x, z) \in f \text{ and } (z, y) \in g
+      \text{ for some } z \in B} .\] It is immediate to verify
+  \(\Par\) complies the rules that make it a category. Indeed, this is
+  the {\em category of partial functions}, written as \(\Par\): here,
+  the objects are sets and the morphisms are partial functions.\newline
+  Suppose given a partial function \(f : A \to B\). For every
+  \(x \in A\) the possibilities are two: there is one element of \(B\)
+  bound to is, and we write it \(f(x)\), or none. What if we
+  considered {\em no value} as an output value?  Provided two sets
+  \(A\) and \(B\) and a partial function \(f : A \to B\), we assign an
+  actual function
+  \[
+    \bar f : A \to B+1 \,, \ \bar f(x) \coloneq
+    \begin{cases} f(x) & \text{if \(x\) has an element of \(B\) bound}
+      \\
+      \ast & \text{otherwise}
+    \end{cases}
+  \]
+  where \(1 \coloneq \set{\ast}\) with \(\ast\) designating the absence of
+  output. It is quite simple to show that
+  \[\Par(A,
+    B) \to \Set(A, B+1)\,,\ f \to \bar f\] is a bijection for every couple
+  of sets \(A\) and \(B\). Now it's up to you to categorify this: find
+  two functors that make an adjunction
+  \[\begin{tikzcd}
+      \Set \ar["I"{name=I}, r, bend left] & \Par
+      \ar["J"{name=J}, l, bend left] \ar["\perp"{description}, phantom,
+      from=I, to=J]
+    \end{tikzcd}\]
 \end{exercise}
 
+In the previous section, we have deduced from the notion of adjunction
+from terminal and initial objects of certain comma categories. The
+converse is true: adjunctions give terminal and initial objects in the
+same comma categories.
+
 \begin{figure}
-\centering
-\begin{tabular}{c}
-\input{adjointness/unit.qtikz} \\ 
-\midrule
-\input{adjointness/counit.qtikz}
-\end{tabular}
-\caption{Units and co-units of an adjunction}
+  \centering
+  \begin{tabular}{c}
+    \input{adjointness/unit.qtikz} \\ 
+    \midrule
+    \input{adjointness/counit.qtikz}
+  \end{tabular}
+  \caption{Units and co-units of an adjunction}
 \end{figure}
 
-\begin{proposition}
-Provided you have locally small categories and functors
-\[\begin{tikzcd}[column sep=small]
-\cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
-\end{tikzcd}\]
-and an adjunction
-\[\alpha : \cat D(L(\hole), \hole) \to \cat C(\hole, R(\hole)) .\]
-Then:
-\begin{tcbenum}
-\item For \(x \in \obj{\cat C}\) the morphisms
-\[\eta_x : x \to RL(x) \,,\ \eta_x := \alpha_{x, L(x)}\left(\id_{L(x)}\right)\]
-form a natural transformation \(\eta : \id_{\cat C} \tto RL\) such that \(\eta_x\) is initial in \(x {\downarrow} R\).
-\item For \(y \in \obj{\cat C}\) the morphisms
-\[\theta_y : LR(y) \to y \,,\ \theta_y := \inv\alpha_{R(y),y} \left(\id_{R(y)}\right)\]
-form a natural transformation \(\theta : LR \tto \id_{\cat D}\) such that \(\theta_y\) is terminal in \(L {\downarrow} y\).
-\end{tcbenum}
+\begin{proposition}\label{proposition:UnitsAndCounits}
+  Provided you have locally small categories and functors
+  \[\begin{tikzcd}[column sep=small]
+      \cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
+    \end{tikzcd}\] and an adjunction
+  \[\alpha : \cat D(L(\hole), \hole) \to \cat C(\hole, R(\hole)) .\]
+  Then:
+  \begin{tcbenum}
+  \item For \(x \in \obj{\cat C}\) the morphisms
+    \[\eta_x : x \to RL(x) \,,\ \eta_x := \alpha_{x,
+        L(x)}\left(\id_{L(x)}\right)\] form a natural transformation
+    \(\eta : \id_{\cat C} \tto RL\) such that \(\eta_x\) is initial in
+    \(x {\downarrow} R\).
+  \item For \(y \in \obj{\cat C}\) the morphisms
+    \[\theta_y : LR(y) \to y \,,\ \theta_y := \inv\alpha_{R(y),y}
+      \left(\id_{R(y)}\right)\] form a natural transformation
+    \(\theta : LR \tto \id_{\cat D}\) such that \(\theta_y\) is terminal in
+    \(L {\downarrow} y\).
+  \end{tcbenum}
 \end{proposition}
 
 \begin{proof}\NotaInterna{Rewrite proof.}
-Let us write the adjunction of the statement above as
-\[\bar\hole : \cat D (L(\hole), \hole) \tto \cat C (\hole, R(\hole)) .\]
-We verify that
-\[\begin{tikzcd}
-x \ar["{\eta_x}", r] \ar["f", d, swap] & RL(x) \ar["RL(f)", d] \\
-y \ar["{\eta_y}", r, swap] & RL(y)
-\end{tikzcd}\]
-commutes for every \(f\) in \(\cat C\). In fact,
-\begin{align*}
-& RL(f) \eta_x = RL(f) \bar{\id_{L(x)}} \id_x = \bar{L(f) \id_{L(x)} \id_{L(x)}} = \bar{L(f)} \\
-& \eta_y f = R(\id_{L(y)}) \bar{\id_{L(y)}} f = \bar{\id_{L(y)} \id_{L(y)} L(f)} = \bar{L(f)} .
-\end{align*}
-It remains to show that the morphisms \(\eta_x : x \to RL(x)\) are initial in \(x {\downarrow} R\). In \(\cat C\) we draw
-\[\begin{tikzcd}
-x \ar["{\eta_x}", r] \ar["g", dr, swap] & RL(x) \\
-& R(y)
-\end{tikzcd}\]
-We know that there is one and only one \(h : L(x) \to y\) such that \(g = \bar{h}\). Then
-\[g = \bar{h \id_{L(x)} L\left(\id_x\right)} = R(h) \bar{\id_{L(x)}} \id_{x} = R(h) \eta_x . \qedhere .\]
+  Let us write the adjunction of the statement above as
+  \[\bar\hole : \cat D (L(\hole), \hole) \tto \cat C (\hole, R(\hole))
+    .\] We verify that
+  \[\begin{tikzcd}
+      x \ar["{\eta_x}", r] \ar["f", d, swap] & RL(x) \ar["RL(f)", d] \\
+      y \ar["{\eta_y}", r, swap] & RL(y)
+    \end{tikzcd}\] commutes for every \(f\) in \(\cat C\). In fact,
+  \begin{align*}
+    & RL(f) \eta_x = RL(f) \bar{\id_{L(x)}} \id_x = \bar{L(f) \id_{L(x)} \id_{L(x)}} = \bar{L(f)} \\
+    & \eta_y f = R(\id_{L(y)}) \bar{\id_{L(y)}} f = \bar{\id_{L(y)} \id_{L(y)} L(f)} = \bar{L(f)} .
+  \end{align*}
+  It remains to show that the morphisms \(\eta_x : x \to RL(x)\) are
+  initial in \(x {\downarrow} R\). In \(\cat C\) we draw
+  \[\begin{tikzcd}
+      x \ar["{\eta_x}", r] \ar["g", dr, swap] & RL(x) \\
+      & R(y)
+    \end{tikzcd}\] We know that there is one and only one
+  \(h : L(x) \to y\) such that \(g = \bar{h}\). Then
+  \[g = \bar{h \id_{L(x)} L\left(\id_x\right)} = R(h) \bar{\id_{L(x)}}
+    \id_{x} = R(h) \eta_x . \qedhere .\]
 \end{proof}
 
-\begin{example}[Prescribing functions via currying]
-\YetToBeTeXed
+\newcommand\uncurry{\operatorname{uncurry}}
+
+\begin{example}[Unit and counit for \(\curry\)]
+  Recover Example~\ref{example:CurryingFunctions} now, because we
+  calculate the units and counits, in the exact manner of the
+  Proposition~\ref{proposition:UnitsAndCounits}. Here, the left
+  adjoint is \((\times B)\) and the right adjoint is
+  \(\Set(B, \hole)\). Thus the unit relative to the set \(A\) is the
+  natural transformation having as components the images of
+  \(\id_{A \times B}\) under \(\curry\), that is
+  \[\eta_A := \curry(\id_{A \times B}) = \lambda x. \lambda y. (x, y) .\]
+  For the determination of the counit, we need the inverse of
+  \(\curry\) first of all:
+  \[
+    \begin{aligned}
+      & \uncurry : \Set(A, \Set(B, C)) \to \Set(A \times B, C) \\
+      & \uncurry f := \lambda (x, y). f(x)(y)
+    \end{aligned}
+  \]
+  (Spend some time to understand why this is true.) The counit
+  relative to the set \(C\) is the natural transformation having as
+  components the images of \(\id_{\Set(B, C)}\) under \(\uncurry\),
+  that is
+  \[\theta_C := \uncurry\left(\id_{\Set(B, C)}\right) = \lambda (f,
+    x). f(x) .\] Don't forget that \(\eta\) and \(\theta\) bring universal
+  properties! We write them out. \YetToBeTeXed
 \end{example}
 
-\NotaInterna{More examples of units and counits here\dots{}}
+\begin{remark}
+  The example above is interesting:
+  Exercise~\ref{exercise:ExponentialObject} will ask you to be more
+  general. Moreover, you have just gained a universal property for the
+  powerset, haven't you? In the same section, you can find something
+  in that direction and started in the chapter of
+  limits. \YetToBeTeXed
+\end{remark}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:

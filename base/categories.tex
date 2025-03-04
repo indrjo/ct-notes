@@ -1,246 +1,461 @@
-% !TEX program = lualatex
-% !TEX spellcheck = en_GB
-% !TEX root = ../base.tex
 
 \section{Categories}
 
-It is quite easy to make examples motivating the definition of categories and the evolution that follows through these pages.
+It is quite easy to make examples motivating the definition of
+categories and the evolution that follows through these pages.
 
 \begin{example}[Set Theory]
-Here, we have {\em sets} and {\em functions}. Whereas the concepts of set ad membership are primitive, functions are formalised as follows: for \(A\) and \(B\) sets, a function from \(A\) to \(B\) is any \(f \subseteq A \times B\) such that for every \(x \in A\) there exists one and only one \(y \in B\) such that \((x, y ) \in f\). We write
-\[f : A \to B \ \text{or} \ A \functo f B\]
-to say \q{\(f\) is a function from \(A\) to \(B\)} and, for \(x \in A\), we write \(f(x)\) the element of \(B\) bound to \(x\) by \(f\). Consecutive functions can be combined in a quite natural way: for \(A\), \(B\) and \(C\) sets and functions
-\[A \functo{f} B \functo {g} C ,\]
-the {\em composite} of \(g\) and \(f\) is the function
-\[g \circ f : A \to C \,,\ g \circ f(x) := g\big(f(x)\big) .\]
-Informally speaking: \(f\) takes one input and gives one output; it is then passed to \(g\), which then provides one result. Such operation is called {\em composition} and has some nice basic properties
-\begin{tcbenum}
-\item Every set \(A\) has associated an {\em identity}
-\[\id_A : A \to A \,,\ \id_A (x) := x\]
-is such that for every set \(B\) and function \(g : B \to A\) we have
-\[\id_A \circ g = g\]
-and for every set \(C\) and function \(h : A \to C\) we have
-\[h \circ \id_A = h .\]
-\item \(\circ\) is {\em associative}, that is for \(A\), \(B\), \(C\) and \(D\) sets and
-\[A \functo{f} B \functo{g} C \functo{h} D\]
-functions, we have the identity
-\[(h \circ g) \circ f = h \circ (g \circ f) .\]
-\end{tcbenum}
+  Here, we have {\em sets} and {\em functions}. Whereas the concepts
+  of set ad membership are primitive, functions are formalised as
+  follows: for \(A\) and \(B\) sets, a function from \(A\) to \(B\) is
+  any \(f \subseteq A \times B\) such that for every \(x \in A\) there
+  exists one and only one \(y \in B\) such that \((x, y ) \in f\). We
+  write
+  \[f : A \to B \ \text{or} \ A \functo f B\] to say \q{\(f\) is a
+    function from \(A\) to \(B\)} and, for \(x \in A\), we write
+  \(f(x)\) the element of \(B\) bound to \(x\) by \(f\). Consecutive
+  functions can be combined in a quite natural way: for \(A\), \(B\)
+  and \(C\) sets and functions
+  \[A \functo{f} B \functo {g} C ,\] the {\em composite} of \(g\) and
+  \(f\) is the function
+  \[g \circ f : A \to C \,,\ g \circ f(x) := g\big(f(x)\big) .\]
+  Informally speaking: \(f\) takes one input and gives one output; it
+  is then passed to \(g\), which then provides one result. Such
+  operation is called {\em composition} and has some nice basic
+  properties
+  \begin{tcbenum}
+  \item Every set \(A\) has associated an {\em identity}
+    \[\id_A : A \to A \,,\ \id_A (x) := x\]
+    is such that for every set \(B\) and function \(g : B \to A\) we
+    have
+    \[\id_A \circ g = g\]
+    and for every set \(C\) and function \(h : A \to C\) we have
+    \[h \circ \id_A = h .\]
+  \item \(\circ\) is {\em associative}, that is for \(A\), \(B\),
+    \(C\) and \(D\) sets and
+    \[A \functo{f} B \functo{g} C \functo{h} D\] functions, we have
+    the identity
+    \[(h \circ g) \circ f = h \circ (g \circ f) .\]
+  \end{tcbenum}
 \end{example}
 
 \begin{example}[Topology]
-A {\em topological space} is a set where some of its subsets have the status of \q{open} sets. Being sets at their core, we have functions between topological spaces, but some of them are more interesting than others. Namely, {\em continuous functions} are functions that care about the label of open: for if \(X\) and \(Y\) are topological spaces, a function \(f : X \to Y\) is said {\em continuous} whenever for every open set \(U\) of \(Y\) the set \(\inv f U\) is an open set of \(X\). Being function, consecutive continuous functions can be composed: is the resulting function continuous as well? Yes: if \(X\), \(Y\) and \(Z\) are topological spaces and \(f\) and \(g\) continuous, for if \(U\) is open, then so is \(\inv{(g \circ f)}U\).\footnote{It is a fact of Set Theory that for \(X\), \(Y\) and \(Z\) sets and \(f : X \to Y\) and \(g : Y \to Z\) functions, we have \(\inv{(g \circ f)}U = \inv f \left(\inv g U\right)\) for every \(U \subseteq Z\).} We can state the following basic properties for the composition of continuous functions:
-\begin{tcbenum}
-\item Every topological space \(A\) has associated the continuous function
-\[\id_A : A \to A \,,\ \id_A (x) := x\]
-is such that for every topological space \(B\) and continuous function \(g : B \to A\) we have
-\[\id_A \circ g = g\]
-and for every topological space \(C\) and continuous function \(h : A \to C\) we have
-\[h \circ \id_A = h .\]
-\item \(\circ\) is {\em associative}, that is for \(A\), \(B\), \(C\) and \(D\) topological spaces and
-\[A \functo{f} B \functo{g} C \functo{h} D\]
-continuous functions, we have
-\[(h \circ g) \circ f = h \circ (g \circ f) .\]
-\end{tcbenum} 
-%Being continuous functions functions, the associativity comes for free; moreover, the identity functions are continuous. 
-That is: take the properties listed in the previous example and replace \q{set} with \q{topological space} and \q{function} with \q{continuous function}.
+  A {\em topological space} is a set where some of its subsets have
+  the status of \q{open} sets. Being sets at their core, we have
+  functions between topological spaces, but some of them are more
+  interesting than others. Namely, {\em continuous functions} are
+  functions that care about the label of open: for if \(X\) and \(Y\)
+  are topological spaces, a function \(f : X \to Y\) is said {\em
+    continuous} whenever for every open set \(U\) of \(Y\) the set
+  \(\inv f U\) is an open set of \(X\). Being function, consecutive
+  continuous functions can be composed: is the resulting function
+  continuous as well? Yes: if \(X\), \(Y\) and \(Z\) are topological
+  spaces and \(f\) and \(g\) continuous, for if \(U\) is open, then so
+  is \(\inv{(g \circ f)}U\).\footnote{It is a fact of Set Theory that
+    for \(X\), \(Y\) and \(Z\) sets and \(f : X \to Y\) and
+    \(g : Y \to Z\) functions, we have
+    \(\inv{(g \circ f)}U = \inv f \left(\inv g U\right)\) for every
+    \(U \subseteq Z\).} We can state the following basic properties
+  for the composition of continuous functions:
+  \begin{tcbenum}
+  \item Every topological space \(A\) has associated the continuous
+    function
+    \[\id_A : A \to A \,,\ \id_A (x) := x\]
+    is such that for every topological space \(B\) and continuous
+    function \(g : B \to A\) we have
+    \[\id_A \circ g = g\]
+    and for every topological space \(C\) and continuous function
+    \(h : A \to C\) we have
+    \[h \circ \id_A = h .\]
+  \item \(\circ\) is {\em associative}, that is for \(A\), \(B\),
+    \(C\) and \(D\) topological spaces and
+    \[A \functo{f} B \functo{g} C \functo{h} D\] continuous functions,
+    we have
+    \[(h \circ g) \circ f = h \circ (g \circ f) .\]
+  \end{tcbenum}
+  % Being continuous functions functions, the associativity comes for
+  % free; moreover, the identity functions are continuous.
+  That is: take the properties listed in the previous example and
+  replace \q{set} with \q{topological space} and \q{function} with
+  \q{continuous function}.
 \end{example}
 
 \begin{exercise}
-In Measure Theory, we have \(\sigma\)-{\em algebras}, that is sets where some of its subsets are said to be {\em measurable}. We can define {\em measurable functions} too, that is functions that care about the property od being measurable as continuous functions do of the property of being open.\footnote{Perhaps, you are taught that measurable functions are functions \(f : \Omega \to \reals\) from a measurable space \(\Omega\) such that \(\inv f (-\infty, a]\) is a measurable for every \(a \in \reals\). Anyway, \(\reals\) has the Borel \(\sigma\)-algebra, which is defined as the smallest of the \(\sigma\)-algebras containing the open subsets of \(\reals\) under the Euclidean topology. It can be easily shown that \(f : \Omega \to \reals\) is measurable if and only if \(\inv f B\) is measurable for every Borel subset \(B\) of \(\reals\).} Of course, you can found other example of categories in Algebra, Linear Algebra, Geometry and Analysis. Go and catch as many as you can within you mathematical knowledge. And yes, it may be boring sometimes, and you are right, but as we progress there are remarkable differences from one category to another one.
+  In Measure Theory, we have \(\sigma\)-{\em algebras}, that is sets
+  where some of its subsets are said to be {\em measurable}. We can
+  define {\em measurable functions} too, that is functions that care
+  about the property od being measurable as continuous functions do of
+  the property of being open.\footnote{Perhaps, you are taught that
+    measurable functions are functions \(f : \Omega \to \reals\) from
+    a measurable space \(\Omega\) such that \(\inv f (-\infty, a]\) is
+    a measurable for every \(a \in \reals\). Anyway, \(\reals\) has
+    the Borel \(\sigma\)-algebra, which is defined as the smallest of
+    the \(\sigma\)-algebras containing the open subsets of \(\reals\)
+    under the Euclidean topology. It can be easily shown that
+    \(f : \Omega \to \reals\) is measurable if and only if
+    \(\inv f B\) is measurable for every Borel subset \(B\) of
+    \(\reals\).} Of course, you can found other example of categories
+  in Algebra, Linear Algebra, Geometry and Analysis. Go and catch as
+  many as you can within you mathematical knowledge. And yes, it may
+  be boring sometimes, and you are right, but as we progress there are
+  remarkable differences from one category to another one.
 \end{exercise}
 
 It should be clear a this point what the pattern is:
 
 \begin{definition}[Categories]
-A {\em category} amounts at assigning some things called {\em objects} and, for each couple of objects \(a\) and \(b\), other things named {\em morphisms} from \(a\) to \(b\). We write \(f : a \to b\) to say that \(f\) is a morphism from \(a\) to \(b\), where \(a\) is the {\em domain} of \(f\) and \(b\) the {\em codomain}. Besides, for \(a\), \(b\) and \(c\) objects and \(f : a \to b\) and \(g : b \to c\) morphisms, there is associated the {\em composite morphism}
-\[gf : a \to c .\]
-All those things are regulated by the following axioms:
-\begin{tcbenum}
-\item for every object \(x\) there is a morphism, \(\id_x\), from \(x\) to \(x\) such that for every object \(y\) and morphism \(g : y \to x\) we have
-\[\id_x g = g\]
-and for every object \(z\) and morphism \(h : x \to z\) we have
-\[h \id_x = h ;\]
-\item for \(a\), \(b\), \(c\) and \(d\) objects and morphisms
-\[a \functo{f} b \functo{g} c \functo{h} d\]
-we have the identity
-\[(h g) f = h (g f) .\]
-\end{tcbenum}
+  A {\em category} amounts at assigning some things called {\em
+    objects} and, for each couple of objects \(a\) and \(b\), other
+  things named {\em morphisms} from \(a\) to \(b\). We write
+  \(f : a \to b\) to say that \(f\) is a morphism from \(a\) to \(b\),
+  where \(a\) is the {\em domain} of \(f\) and \(b\) the {\em
+    codomain}. Besides, for \(a\), \(b\) and \(c\) objects and
+  \(f : a \to b\) and \(g : b \to c\) morphisms, there is associated
+  the {\em composite morphism}
+  \[gf : a \to c .\] All those things are regulated by the following
+  axioms:
+  \begin{tcbenum}
+  \item for every object \(x\) there is a morphism, \(\id_x\), from
+    \(x\) to \(x\) such that for every object \(y\) and morphism
+    \(g : y \to x\) we have
+    \[\id_x g = g\]
+    and for every object \(z\) and morphism \(h : x \to z\) we have
+    \[h \id_x = h ;\]
+  \item for \(a\), \(b\), \(c\) and \(d\) objects and morphisms
+    \[a \functo{f} b \functo{g} c \functo{h} d\] we have the identity
+    \[(h g) f = h (g f) .\]
+  \end{tcbenum}
 \end{definition}
 
-Sometimes, instead of \q{morphism} you may find written \q{map} or \q{arrow}. The former is quite used outside Category Theory, whereas the latter refers to the fact that the symbol \(\to\) is employed.
+Sometimes, instead of \q{morphism} you may find written \q{map} or
+\q{arrow}. The former is quite used outside Category Theory, whereas
+the latter refers to the fact that the symbol \(\to\) is employed.
 
-We have started with sets and functions, afterwards we have made an example based on the previous one; if you have accepted the invite of the exercise above, you have likely found categories where objects are sets at their core and morphisms are functions with extra property. We have given an abstract definition of categories because out there are many other categories that deserve attention.
+We have started with sets and functions, afterwards we have made an
+example based on the previous one; if you have accepted the invite of
+the exercise above, you have likely found categories where objects are
+sets at their core and morphisms are functions with extra property. We
+have given an abstract definition of categories because out there are
+many other categories that deserve attention.
 
 \begin{example}[Monoids are categories]
-Consider a category \(\cat G\) with a single object, that we indicate with a bare \(\bullet\). All of its morphisms have \(\bullet\) as domain and codomain: then any two morphisms are composable and the composite of two morphisms \(\bullet \to \bullet\) is a morphism \(\bullet \to \bullet\). This motivates us to proceed as follows: let \(G\) be the collection of the morphisms of \(\cat G\) and consider the operation of composing morphism
-\[G \times G \to G\,,\ (x, y) \to xy .\]
-Being \(\cat G\) a category implies this function is associative and \(\cat G\) has the identity of \(\bullet\), that is \(G\) has one element we call \(1\) and such that \(f1 = 1f = f\) for every \(f \in G\). In other words, we are saying \(G\) is a monoid. We say the single object category \(\cat G\) {\em is} a monoid. \newline
-Conversely, take a monoid \(G\) and a symbol \(\bullet\): make such thing acquire the status of object and the elements of \(G\) that of morphisms; in that case, the operation of \(G\) has the right to be called composition because the axioms of monoid say so. Here, \(\bullet\) is something we care of just because by definition morphisms require objects and it has no role other than this.
+  Consider a category \(\cat G\) with a single object, that we
+  indicate with a bare \(\bullet\). All of its morphisms have
+  \(\bullet\) as domain and codomain: then any two morphisms are
+  composable and the composite of two morphisms
+  \(\bullet \to \bullet\) is a morphism \(\bullet \to \bullet\). This
+  motivates us to proceed as follows: let \(G\) be the collection of
+  the morphisms of \(\cat G\) and consider the operation of composing
+  morphism
+  \[G \times G \to G\,,\ (x, y) \to xy .\] Being \(\cat G\) a category
+  implies this function is associative and \(\cat G\) has the identity
+  of \(\bullet\), that is \(G\) has one element we call \(1\) and such
+  that \(f1 = 1f = f\) for every \(f \in G\). In other words, we are
+  saying \(G\) is a monoid. We say the single object category
+  \(\cat G\) {\em is} a monoid. \newline Conversely, take a monoid
+  \(G\) and a symbol \(\bullet\): make such thing acquire the status
+  of object and the elements of \(G\) that of morphisms; in that case,
+  the operation of \(G\) has the right to be called composition
+  because the axioms of monoid say so. Here, \(\bullet\) is something
+  we care of just because by definition morphisms require objects and
+  it has no role other than this.
 \end{example}
 
-In Mathematics, a lot of things are monoids, so this is nice. In particular, a {\em group} is a single object category where for every morphism \(f\) there is a morphism \(g\) such that \(gf\) and \(fg\) are the identity of the the unique object. We will deal with isomorphism later in this chapter.
+In Mathematics, a lot of things are monoids, so this is nice. In
+particular, a {\em group} is a single object category where for every
+morphism \(f\) there is a morphism \(g\) such that \(gf\) and \(fg\)
+are the identity of the the unique object. We will deal with
+isomorphism later in this chapter.
 
 \begin{example}[Preordered sets are categories]
-A {\em preordered set} (sometimes contracted as {\em proset}) consists of a set \(A\) and a relation \(\le\) on \(A\) such that:
-\begin{tcbenum}
-\item \(x \le x\) for every \(x \in A\);
-\item for every \(x, y, z \in A\) we have that if \(x \le y\) and \(y \le z\) then \(x \le z\).
-\end{tcbenum}
-Now we do this: for \(x, y \in A\), whenever \(x \le y\) take \((a, b) \in A \times A\). We operate with these couples as follows:
-\begin{equation}
-(y, z) (x, y) := (x, z), \label{eqn:ProsetCirc}
-\end{equation}
-where \(x, y, z \in A\). This definition is perfectly motivated by (2): in fact, if \(x \le y\) and \(y \le z\) then \(x \le z\), and so there is \((x, z)\). By (1), for every \(x \in A\) we have the couple \((x, x)\), which has the following property: for every \(y \in A\)
-\begin{equation}
-\begin{aligned}
-(x, y) (x, x) &= (x, y) & \text{for every } y \in A \\
-(x, x) (z, x) &= (z, x) & \text{for every } z \in A .
-\end{aligned}\label{eqn:ProsetId}
-\end{equation}
-Another remarkable feature is that for every \(x_1, x_2, x_3, x_4 \in A\)
-\begin{equation}
-\big((x_3, x_4)(x_2, x_3)\big)(x_1, x_2) = (x_3, x_4)\big((x_2, x_3)(x_1, x_2)\big)\label{eqn:ProsetAssoc}
-\end{equation}
-We have a category indeed: its objects are the elements of \(A\), the morphisms are the couples \((x, y)\) such that \(x \le y\) and~\eqref{eqn:ProsetCirc} gives the notion of composition; \eqref{eqn:ProsetId} says what are identities while~\eqref{eqn:ProsetAssoc} tells the compositions are associative.
+  A {\em preordered set} (sometimes contracted as {\em proset})
+  consists of a set \(A\) and a relation \(\le\) on \(A\) such that:
+  \begin{tcbenum}
+  \item \(x \le x\) for every \(x \in A\);
+  \item for every \(x, y, z \in A\) we have that if \(x \le y\) and
+    \(y \le z\) then \(x \le z\).
+  \end{tcbenum}
+  Now we do this: for \(x, y \in A\), whenever \(x \le y\) take
+  \((a, b) \in A \times A\). We operate with these couples as follows:
+  \begin{equation}
+    (y, z) (x, y) := (x, z), \label{eqn:ProsetCirc}
+  \end{equation}
+  where \(x, y, z \in A\). This definition is perfectly motivated by
+  (2): in fact, if \(x \le y\) and \(y \le z\) then \(x \le z\), and
+  so there is \((x, z)\). By (1), for every \(x \in A\) we have the
+  couple \((x, x)\), which has the following property: for every
+  \(y \in A\)
+  \begin{equation}
+    \begin{aligned}
+      (x, y) (x, x) &= (x, y) & \text{for every } y \in A \\
+      (x, x) (z, x) &= (z, x) & \text{for every } z \in A .
+    \end{aligned}\label{eqn:ProsetId}
+  \end{equation}
+  Another remarkable feature is that for every
+  \(x_1, x_2, x_3, x_4 \in A\)
+  \begin{equation}
+    \big((x_3, x_4)(x_2, x_3)\big)(x_1, x_2) = (x_3, x_4)\big((x_2, x_3)(x_1, x_2)\big)\label{eqn:ProsetAssoc}
+  \end{equation}
+  We have a category indeed: its objects are the elements of \(A\),
+  the morphisms are the couples \((x, y)\) such that \(x \le y\)
+  and~\eqref{eqn:ProsetCirc} gives the notion of composition;
+  \eqref{eqn:ProsetId} says what are identities
+  while~\eqref{eqn:ProsetAssoc} tells the compositions are
+  associative.
 \end{example}
 
-Several things are prosets, so this is nice. Namely, {\em partially ordered sets}, or {\em posets}, are prosets where every time there are morphisms going opposite directions
+Several things are prosets, so this is nice. Namely, {\em partially
+  ordered sets}, or {\em posets}, are prosets where every time there
+are morphisms going opposite directions
 \[\begin{tikzcd}
-a \ar[r, shift left] & b \ar[l, shift left]
-\end{tikzcd}\]
-then \(a = b\). Later in this chapter, we will meet {\em skeletal} categories.
+    a \ar[r, shift left] & b \ar[l, shift left]
+  \end{tikzcd}\] then \(a = b\). Later in this chapter, we will meet
+{\em skeletal} categories.
 
 \begin{example}[Matrices]
-We need to clarify some terms and notations before. Fixed some field \(k\), for \(m\) and \(n\) positive integers, a {\em matrix} of type \(m \times n\) is a table of elements of \(k\) arranged in \(m\) rows and \(n\) columns:
-\[\begin{pmatrix}
-x_{1,1} & x_{1,2} & \cdots{} & x_{1,n} \\
-x_{2,1} & x_{2,2} & \cdots{} & x_{2,n} \\
-\vdots  & \vdots  &          & \vdots  \\
-x_{m,1} & x_{m,2} & \cdots{} & x_{m,n}
-\end{pmatrix}\]
+  We need to clarify some terms and notations before. Fixed some field
+  \(k\), for \(m\) and \(n\) positive integers, a {\em matrix} of type
+  \(m \times n\) is a table of elements of \(k\) arranged in \(m\)
+  rows and \(n\) columns:
+  \[\begin{pmatrix}
+    x_{1,1} & x_{1,2} & \cdots{} & x_{1,n} \\
+    x_{2,1} & x_{2,2} & \cdots{} & x_{2,n} \\
+    \vdots  & \vdots  &          & \vdots  \\
+    x_{m,1} & x_{m,2} & \cdots{} & x_{m,n}
+  \end{pmatrix}\]
 If \(A\) is the name of a matrix, then \(A_{i, j}\) is the element on the intersection of the \(i\)th row and the \(j\)th column. Matrices can be multiplied: if \(A\) and \(B\) are matrices of type \(m \times n\) and \(n \times r\) respectively, then \(AB\) is the matrix of type \(m \times r\) where
-\[(AB)_{i, j} := \sum_{p = 1}^n A_{i, p} B_{p ,j} .\]
-Our experiment is this: consider the positive integers in the role of objects and, for \(m\) and \(n\) integers, the matrices of type \(m \times n\) as morphisms from \(n\) to \(m\); now, take \(AB\) as the composition of \(A\) and \(B\). Let us investigate whether categorial axioms hold.
+\[(AB)_{i, j} := \sum_{p = 1}^n A_{i, p} B_{p ,j} .\] Our experiment
+is this: consider the positive integers in the role of objects and,
+for \(m\) and \(n\) integers, the matrices of type \(m \times n\) as
+morphisms from \(n\) to \(m\); now, take \(AB\) as the composition of
+\(A\) and \(B\). Let us investigate whether categorial axioms hold.
 \begin{tcbitem}
-\item For \(n\) positive integer, we have the {\em identity matrix} \(I_n\), the one of type \(n \times n\) defined by
-\[(I_n)_{i, j} = \begin{cases}
-1 & \text{if } i = j \\
-0 & \text{otherwise}
-\end{cases}\]
+\item For \(n\) positive integer, we have the {\em identity matrix}
+  \(I_n\), the one of type \(n \times n\) defined by
+  \[(I_n)_{i, j} = \begin{cases}
+    1 & \text{if } i = j \\
+    0 & \text{otherwise}
+  \end{cases}\]
 One, in fact, can verify that such matrix is an \q{identity} in categorial sense: for every positive integer \(m\), an object, and for every matrix \(A\) of type \(m \times n\), a morphism from \(n\) to \(m\), we have
-\[A I_n = A ,\]
-that is composing \(A\) with \(I_n\) returns \(A\); similarly, for every positive integer \(r\) and for every matrix \(B\) of type \(r \times n\) we have
+\[A I_n = A ,\] that is composing \(A\) with \(I_n\) returns \(A\);
+similarly, for every positive integer \(r\) and for every matrix \(B\)
+of type \(r \times n\) we have
 \[I_n B = B .\]
-\item For \(A\), \(B\) and \(C\) matrices of type \(m \times n\), \(n \times r\) and \(r \times s\) respectively, we have
-\[(AB)C = A(BC) .\]
-Again, this identity can be regarded under a categorial light.
+\item For \(A\), \(B\) and \(C\) matrices of type \(m \times n\),
+  \(n \times r\) and \(r \times s\) respectively, we have
+  \[(AB)C = A(BC) .\] Again, this identity can be regarded under a
+  categorial light.
 \end{tcbitem}
-The category of matrices over a field \(k\) just depicted is written \(\Mat_k\). This example may seem quite useless, but it really does matter when you know there is the category of finite vector spaces \(\FDVect_k\): just wait until we talk about equivalence of categories. \NotaInterna{We may leave something to think about in the meantime, right?}
+The category of matrices over a field \(k\) just depicted is written
+\(\Mat_k\). This example may seem quite useless, but it really does
+matter when you know there is the category of finite vector spaces
+\(\FDVect_k\): just wait until we talk about equivalence of
+categories. \NotaInterna{We may leave something to think about in the
+  meantime, right?}
 \end{example}
 
 \begin{figure}
-\centering
-\input{./base/monoid.qtikz}
-\caption{The group \(\integers_5\) in a diagrammatic vest}
+  \centering \input{./base/monoid.qtikz}
+  \caption{The group \(\integers_5\) in a diagrammatic vest}
 \end{figure}
 
-A diagram is a drawing made of \q{nodes}, that is empty slots, and \q{arrows}, that part from some nodes and head to other ones. Here is an example:
+A diagram is a drawing made of \q{nodes}, that is empty slots, and
+\q{arrows}, that part from some nodes and head to other ones. Here is
+an example:
 \begin{equation}\begin{tikzcd}[row sep=tiny]
-  & \phantom\square \ar[dr, bend left=10] \\
-\phantom\square \ar[ur, bend left=20] \ar[ur, bend right=20, swap] & & \phantom\square  \\
-  & \phantom\square \ar[uu, bend right=10, swap] 
-\end{tikzcd}\label{diagram:MuteDiag}\end{equation}
+    & \phantom\square \ar[dr, bend left=10] \\
+    \phantom\square \ar[ur, bend left=20] \ar[ur, bend right=20, swap] & & \phantom\square  \\
+    & \phantom\square \ar[uu, bend right=10, swap]
+  \end{tikzcd}\label{diagram:MuteDiag}\end{equation}
 %
-Nodes are the places where to put objects' names and arrows are to be labelled with morphisms' names. The next step is putting labels indeed, something like this:
+Nodes are the places where to put objects' names and arrows are to be
+labelled with morphisms' names. The next step is putting labels
+indeed, something like this:
 \begin{equation}\begin{tikzcd}[row sep=tiny]
-  & b \ar["q", dr, bend left=10] \\
-a \arrow["f", ur, bend left=20] \arrow["g", ur, bend right=20, swap] & & d  \\
-  & c \arrow["h", uu, bend right=10, swap] 
-\end{tikzcd}\label{diagram:LabelDiag}\end{equation}
+    & b \ar["q", dr, bend left=10] \\
+    a \arrow["f", ur, bend left=20] \arrow["g", ur, bend right=20, swap] & & d  \\
+    & c \arrow["h", uu, bend right=10, swap]
+  \end{tikzcd}\label{diagram:LabelDiag}\end{equation}
 %
-The idea we want to capture is: having a scheme of nodes and arrows, as in~\eqref{diagram:MuteDiag}, and then assigning labels, as in~\eqref{diagram:LabelDiag}. Since diagrams serve to graphically show some categorial structure, there should exist the possibility to \q{compose} arrows: two consecutive arrows
+The idea we want to capture is: having a scheme of nodes and arrows,
+as in~\eqref{diagram:MuteDiag}, and then assigning labels, as
+in~\eqref{diagram:LabelDiag}. Since diagrams serve to graphically show
+some categorial structure, there should exist the possibility to
+\q{compose} arrows: two consecutive arrows
 \begin{equation}\begin{tikzcd}
-\phantom\square \ar[r, bend left=20] & \phantom\square \ar[r, swap, bend right=20] & \phantom\square
-\end{tikzcd}\label{diagram:ConseqArrs}\end{equation}
-naturally yields that one that goes from the first node and heads to the last one; if in~\eqref{diagram:ConseqArrs} we label the arrows with \(f\) and \(g\), respectively, then the composite arrow is to be labelled with the composite morphism \(gf\). That operation shall be associative and there should exist identity arrows too, that is arrows that represent and behave exactly as identity morphisms. In other words, our drawings shall care of the categorial structure.
+    \phantom\square \ar[r, bend left=20] & \phantom\square \ar[r,
+    swap, bend right=20] & \phantom\square
+  \end{tikzcd}\label{diagram:ConseqArrs}\end{equation}
+naturally yields that one that goes from the first node and heads to
+the last one; if in~\eqref{diagram:ConseqArrs} we label the arrows
+with \(f\) and \(g\), respectively, then the composite arrow is to be
+labelled with the composite morphism \(gf\). That operation shall be
+associative and there should exist identity arrows too, that is arrows
+that represent and behave exactly as identity morphisms. In other
+words, our drawings shall care of the categorial structure.
 
-If we want to formalize the idea just outlined, the definition of diagram sounds something like this:
+If we want to formalize the idea just outlined, the definition of
+diagram sounds something like this:
 
-%Yes, there is a formal definition of diagram, but we'd better defer this sophistication a bit later.
+% Yes, there is a formal definition of diagram, but we'd better defer
+% this sophistication a bit later.
 
 \begin{definition}[Diagrams]
-A {\em diagram} in a category \(\cat C\) is having:
-\begin{tcbitem}
-\item a scheme of nodes and arrows, that is a category \(\cat I\);
-\item labels for nodes, that is for every object \(i\) of  \(\cat I\) one object \(x_i\) of \(\cat C\);
-\item labels for arrows, that is for every pair of objects \(i\) and \(j\) of \(\cat I\) and morphism \(\alpha : i \to j\) of \(\cat I\), one morphism \(f_\alpha : x_i \to x_j\) of \(\cat C\)
-\end{tcbitem}
-with all this complying the following rules:
-\begin{tcbenum}
-\item \(f_{\id_i} = \id_{x_i}\) for every \(i\) object of \(\cat I\);
-\item \(f_\beta f_\alpha = f_{\beta\alpha}\), for \(\alpha\) and \(\beta\) two consecutive morphisms of \(\cat I\).
-\end{tcbenum}
+  A {\em diagram} in a category \(\cat C\) is having:
+  \begin{tcbitem}
+  \item a scheme of nodes and arrows, that is a category \(\cat I\);
+  \item labels for nodes, that is for every object \(i\) of \(\cat I\)
+    one object \(x_i\) of \(\cat C\);
+  \item labels for arrows, that is for every pair of objects \(i\) and
+    \(j\) of \(\cat I\) and morphism \(\alpha : i \to j\) of
+    \(\cat I\), one morphism \(f_\alpha : x_i \to x_j\) of \(\cat C\)
+  \end{tcbitem}
+  with all this complying the following rules:
+  \begin{tcbenum}
+  \item \(f_{\id_i} = \id_{x_i}\) for every \(i\) object of
+    \(\cat I\);
+  \item \(f_\beta f_\alpha = f_{\beta\alpha}\), for \(\alpha\) and
+    \(\beta\) two consecutive morphisms of \(\cat I\).
+  \end{tcbenum}
 \end{definition}
 
-Rather than thinking diagrams abstractly --- like in the form stated in the definition ---, one usually draws them. In general, it is not a good idea to draw all the compositions. For example, consider four nodes and three arcs displayed as
+Rather than thinking diagrams abstractly --- like in the form stated
+in the definition ---, one usually draws them. In general, it is not a
+good idea to draw all the compositions. For example, consider four
+nodes and three arcs displayed as
 \[\begin{tikzcd}[row sep=tiny]
-a \ar["f"{description}, dr] & & c \ar["h"{description}, dr] \\
-& b \ar["g"{description}, ur, swap] & & d
-\end{tikzcd}\]
-and draw all the compositions: you will convince yourself it may be a huge mess even for small diagrams. In fact, why waste an arrow to represent the composite \(gf\) in
+    a \ar["f"{description}, dr] & & c \ar["h"{description}, dr] \\
+    & b \ar["g"{description}, ur, swap] & & d
+  \end{tikzcd}\] and draw all the compositions: you will convince
+yourself it may be a huge mess even for small diagrams. In fact, why
+waste an arrow to represent the composite \(gf\) in
 % In the diagram
 \[\begin{tikzcd}[row sep=tiny]
-a \ar["f", dr] & & c \\
-& b \ar["g", ur, swap]
-\end{tikzcd}\]
-when \(gf\) is walking along \(f\) before and \(g\) then? Neither identities need to be drawn: we know every object has one and only one identity and thus the presence of an object automatically carries the presence of its identity.
+    a \ar["f", dr] & & c \\
+    & b \ar["g", ur, swap]
+  \end{tikzcd}\] when \(gf\) is walking along \(f\) before and \(g\)
+then? Neither identities need to be drawn: we know every object has
+one and only one identity and thus the presence of an object
+automatically carries the presence of its identity.
 
-\NotaInterna{A finer formalisation of commutativity?} Consecutive arrows form a \q{path}; in that case, we refer to the domain of its first arrow as the domain of the path and to the codomain of the last one as the codomain of the path. Two paths are said {\em parallel} when they share both domain and codomain. A diagram is said to be {\em commutative} whenever any pair of parallel paths yields the same composite morphism.
+\NotaInterna{A finer formalisation of commutativity?} Consecutive
+arrows form a \q{path}; in that case, we refer to the domain of its
+first arrow as the domain of the path and to the codomain of the last
+one as the codomain of the path. Two paths are said {\em parallel}
+when they share both domain and codomain. A diagram is said to be {\em
+  commutative} whenever any pair of parallel paths yields the same
+composite morphism.
 
-Let us express the categorial axioms in a diagrammatic vest. Let \(\cat C\) be a category and \(x\) an object of \(\cat C\). The fact that \(\id_x\) the identity of \(x\) can be translated as follows: the diagrams
+Let us express the categorial axioms in a diagrammatic vest. Let
+\(\cat C\) be a category and \(x\) an object of \(\cat C\). The fact
+that \(\id_x\) the identity of \(x\) can be translated as follows: the
+diagrams
 \begin{equation}\begin{tikzcd}[row sep=small]
- & x \ar["{\id_x}", dd] \\
-a \ar["f", ur] \ar["f", dr, swap]  \\
-  & x &
-\end{tikzcd} \quad
-\begin{tikzcd}[row sep=small]
-x \ar["{\id_x}", dd, swap] \ar["g", dr] & \\
-&  b \\
-x \ar["g", ur, swap] &
-\end{tikzcd}
-\label{diag:IdPropDiag}\end{equation}
-commute for every \(a\) and \(b\) objects and \(f\) and \(g\) morphisms of \(\cat C\). Associativity can be rephrased by saying:
+    & x \ar["{\id_x}", dd] \\
+    a \ar["f", ur] \ar["f", dr, swap]  \\
+    & x &
+  \end{tikzcd} \quad
+  \begin{tikzcd}[row sep=small]
+    x \ar["{\id_x}", dd, swap] \ar["g", dr] & \\
+    &  b \\
+    x \ar["g", ur, swap] &
+  \end{tikzcd}
+  \label{diag:IdPropDiag}\end{equation}
+commute for every \(a\) and \(b\) objects and \(f\) and \(g\)
+morphisms of \(\cat C\). Associativity can be rephrased by saying:
 \[\begin{tikzcd}
-a \ar["f", r] \ar["{gf}", swap, dr] & b \ar["{hg}", dr] \\
-& c \ar["h", swap, r] & d
-\end{tikzcd}\]
-commutes for every \(a\), \(b\), \(c\) and \(d\) objects and \(f\), \(g\) and \(h\) morphisms in \(\cat C\).
+    a \ar["f", r] \ar["{gf}", swap, dr] & b \ar["{hg}", dr] \\
+    & c \ar["h", swap, r] & d
+  \end{tikzcd}\] commutes for every \(a\), \(b\), \(c\) and \(d\)
+objects and \(f\), \(g\) and \(h\) morphisms in \(\cat C\).
 
-%Cause diagrams are supposed to be drawn, we shall assume some conventions. The spatial placement of nodes and the shape of arrows is a matter of aesthetics, just pursue clarity. Do not burden your diagrams: though arrows can be composed, we usually do not draw them; similarly, neither identities shall be drawn.
+% Cause diagrams are supposed to be drawn, we shall assume some
+% conventions. The spatial placement of nodes and the shape of arrows
+% is a matter of aesthetics, just pursue clarity. Do not burden your
+% diagrams: though arrows can be composed, we usually do not draw
+% them; similarly, neither identities shall be drawn.
+
+\begin{example}[Homotopy]
+  Consider two continuous functions \(f, g : X \to Y\); so we are in
+  \(\Top\). We say \(f\) is {\em homotopic} to \(g\) whenever there is
+  some continuous function \(H : X \times I \to Y\), the {\em homotopy}, such
+  that
+  \begin{align*}
+    & H(x, 0) = f(x) \text{ for every } x \in X \\
+    & H(x, 1) = g(x) \text{ for every } x \in X
+  \end{align*}
+  How do we write this in diagrammatic fashion? We can consider two
+  devices: \(i_0 : X \to X \times I\) defined by \(i_0(x) = (x, 0)\) and
+  \(i_1 : X \to X \times I\) defined by \(i_1(x) = (x, 1)\). In fact, the two
+  conditions above can be equivalently stated as: the diagram
+  \[
+    \begin{tikzcd}
+      X \ar["{i_0}", r] \ar["f", dr, swap] & X \times I \ar["H", d] & X
+      \ar["{i_1}", l,
+      swap] \ar["g", dl] \\
+      & Y
+    \end{tikzcd}
+  \]
+  commutes.
+\end{example}
+
 
 \begin{example}[Semigroup axioms]
-A {\em semigroup} is a set \(X\) together with a function \(\mu : X \times X \to X\) which is associative, that is
-\[\mu(\mu(a, b), c) = \mu(a, \mu(b, c)) \ \text{for every } a, b, c \in X .\] The aim of this example is to see how can we put in diagrams all this. We have a triple of elements, to start with, \((a, b, c) \in X \times X \times X\). On the left side of the equality above, \(a\) and \(b\) are multiplied first, and the result is multiplied with \(c\):
-\[\begin{tikzcd}[row sep=tiny, column sep=small]
-X \times X \times X \ar[r] & X \times X \ar[r] & X \\
-(a, b, c) \ar[r] & (\mu(a, b), c) \ar[r] & \mu(\mu(a, b), c)
-\end{tikzcd}\]
-It is best we some effort in naming these functions. While it is clear that \(X \times X \to X\) is our \(\mu\), how do we write \(X \times X \times X \to X\)? There is notation for it: \(\mu \times \id_X\).\footnote{In general, if you have two functions \(f : A_1 \to A_2\) and \(g : B_1 \to B_2\), the function \(f \times g : A_1 \times B_1 \to A_2 \times B_2\) is the one defined by \(f \times g (a, b) = (f(a), g(b))\).} Instead, on the other side, \(b\) and \(c\) are multiplied first, and then \(a\) is multiplied to their product:
-\[\begin{tikzcd}[row sep=tiny, column sep=small]
-X \times X \times X \ar[r] & X \times X \ar[r] & X \\
-(a, b, c) \ar[r] & (a, \mu(b, c)) \ar[r] & \mu(a, \mu(b, c))
-\end{tikzcd}\]
-The first function is \(\id_X \times \mu\) and the second one is \(\mu\). Thus the equality of the definition of semigroup is equivalent to the fact that the diagram
-\[\begin{tikzcd}
-X \times X \times X \ar["{\mu \times \id_X}", r] \ar["{\id_X \times \mu}", d, swap] & X \times X \ar["\mu", d] \\
-X \times X \ar["\mu", r, swap] & X
-\end{tikzcd}\]
-commutes.
+  A {\em semigroup} is a set \(X\) together with a function
+  \(\mu : X \times X \to X\) which is associative, that is
+  \[\mu(\mu(a, b), c) = \mu(a, \mu(b, c)) \ \text{for every } a, b, c
+    \in X .\] The aim of this example is to see how can we put in
+  diagrams all this. We have a triple of elements, to start with,
+  \((a, b, c) \in X \times X \times X\). On the left side of the equality above,
+  \(a\) and \(b\) are multiplied first, and the result is multiplied
+  with \(c\):
+  \[\begin{tikzcd}[row sep=tiny, column sep=small]
+      X \times X \times X \ar[r] & X \times X \ar[r] & X \\
+      (a, b, c) \ar[r] & (\mu(a, b), c) \ar[r] & \mu(\mu(a, b), c)
+    \end{tikzcd}\] It is best we some effort in naming these
+  functions. While it is clear that \(X \times X \to X\) is our
+  \(\mu\), how do we write \(X \times X \times X \to X\)? There is notation for it:
+  \(\mu \times \id_X\).\footnote{In general, if you have two functions
+    \(f : A_1 \to A_2\) and \(g : B_1 \to B_2\), the function
+    \(f \times g : A_1 \times B_1 \to A_2 \times B_2\) is the one defined by
+    \(f \times g (a, b) = (f(a), g(b))\).} Instead, on the other side,
+  \(b\) and \(c\) are multiplied first, and then \(a\) is multiplied
+  to their product:
+  \[\begin{tikzcd}[row sep=tiny, column sep=small]
+      X \times X \times X \ar[r] & X \times X \ar[r] & X \\
+      (a, b, c) \ar[r] & (a, \mu(b, c)) \ar[r] & \mu(a, \mu(b, c))
+    \end{tikzcd}\] The first function is \(\id_X \times \mu\) and the second
+  one is \(\mu\). Thus the equality of the definition of semigroup is
+  equivalent to the fact that the diagram
+  \[\begin{tikzcd}
+      X \times X \times X \ar["{\mu \times \id_X}", r] \ar["{\id_X \times \mu}", d, swap] & X \times X \ar["\mu", d] \\
+      X \times X \ar["\mu", r, swap] & X
+    \end{tikzcd}\] commutes.
 \end{example}
 
 \begin{exercise}
-Recall that a monoid is a semigroup \((X, \mu)\) with \(e \in X\) such that \(\mu(x, e) = \mu(e, x) = x\) for every \(x \in X\). We usually write a monoid as a triple \((X, \mu, e)\). A {\em group} is a monoid \((G, \mu, e)\) such that for every \(x \in G\) there exists \(y \in G\) such that \(\mu(x, y) = \mu(y, x) = e\). Rewrite these structures using commutative diagrams. (The work about associativity is already done, so you should focus how to express the property of the identity in a monoid and the property of inversion for groups.) Also recall that a {\em monoid homomorphism}, then, from a monoid \((X, \mu, e_X)\) to a monoid \((Y, \lambda, e_Y)\) is any function \(f : X \to Y\) such that \(f(\mu(a, b)) = \lambda (f(a), f(b))\) for every \(a, b \in X\) and \(f(e_X) = e_Y\). Use commutative diagrams. Observe that group homomorphisms are defined by requiring to preserve multiplication, whereas the the preservation of identities can be deduced. 
+  Recall that a monoid is a semigroup \((X, \mu)\) with \(e \in X\) such
+  that \(\mu(x, e) = \mu(e, x) = x\) for every \(x \in X\). We usually write
+  a monoid as a triple \((X, \mu, e)\). A {\em group} is a monoid
+  \((G, \mu, e)\) such that for every \(x \in G\) there exists
+  \(y \in G\) such that \(\mu(x, y) = \mu(y, x) = e\). Rewrite these
+  structures using commutative diagrams. (The work about associativity
+  is already done, so you should focus how to express the property of
+  the identity in a monoid and the property of inversion for groups.)
+  Also recall that a {\em monoid homomorphism}, then, from a monoid
+  \((X, \mu, e_X)\) to a monoid \((Y, \lambda, e_Y)\) is any function
+  \(f : X \to Y\) such that \(f(\mu(a, b)) = \lambda (f(a), f(b))\) for every
+  \(a, b \in X\) and \(f(e_X) = e_Y\). Use commutative diagrams. Observe
+  that group homomorphisms are defined by requiring to preserve
+  multiplication, whereas the the preservation of identities can be
+  deduced.
 \end{exercise}
 
 \NotaInterna{There is some remark on this.}
+
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:

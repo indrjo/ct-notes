@@ -1,192 +1,277 @@
-% !TEX program = lualatex
-% !TEX spellcheck = en_GB
-% !TEX root = ../adjointness.tex
 
 \section{Isolating the concept}
 
 \begin{example}[Defining linear functions, part I]\label{example:DefineLinearFunctionsI}
-Consider two vector spaces \(V\) and \(W\) (over the same field) and the problem:
+  Consider two vector spaces \(V\) and \(W\) (over the same field) and
+  the problem:
 %
-\begin{quotation}
-how can we define a linear function \(f : V \to W\)?
-\end{quotation}
+  \begin{quotation}
+    how can we define a linear function \(f : V \to W\)?
+  \end{quotation}
 %
-There is a well known theorem that says that prescribing the images of the elements of the base \(S\) determines uniquely a linear function \(V \to W\). More precisely, the theorem sounds like this:
+  There is a well known theorem that says that prescribing the images
+  of the elements of the base \(S\) determines uniquely a linear
+  function \(V \to W\). More precisely, the theorem sounds like this:
 %
-\begin{quotation}
-Let \(V\) and \(W\) two vector spaces, both over a field \(k\), and let \(S\) be a base of \(V\). Let us write \(i\) for the inclusion \(S \hookrightarrow V\). Then for every function \(\phi : S \to W\) there exists one and only one linear function \(f : V \to W\) such that
-\begin{equation}\begin{tikzcd}
-S \ar["{i}", r, hook] \ar["\phi", dr, swap] & V \ar["f", d] \\
-& W
-\end{tikzcd}\label{diagram:FunctionsExtendsToALinearMapI}\end{equation}
-commutes.
-\end{quotation}
+  \begin{quotation}
+    Let \(V\) and \(W\) two vector spaces, both over a field \(k\),
+    and let \(S\) be a base of \(V\). Let us write \(i\) for the
+    inclusion \(S \hookrightarrow V\). Then for every function
+    \(\phi : S \to W\) there exists one and only one linear function
+    \(f : V \to W\) such that
+    \begin{equation}\begin{tikzcd}
+        S \ar["i", r, hook] \ar["\phi", dr, swap] & V \ar["f", d] \\
+        & W
+      \end{tikzcd}\label{diagram:FunctionsExtendsToALinearMapI}\end{equation}
+    commutes.
+  \end{quotation}
 %
-The statement is equivalent to saying that the function
-\begin{equation}
-\Vect_k(V, W) \to \Set(S, W) \,,\ f \to fi \label{function:AdjBijSetVectI}
-\end{equation}
-is a bijection.\newline
-Let us reason about the theorem. Fist of all, it is about a {\em function} \(\phi : S \to W\), pointing to a vector space \(W\): the morphisms of \(\Set\) do not care whether the sets have an additional structure. Let us say that \(\phi\) is a {\em function} from \(S\) to \(W\) \q{downgraded} from the status of vector space to the one of set. On the other hand, from a set we construct an actual vector space, this is what being a base means.
+  The statement is equivalent to saying that the function
+  \begin{equation}
+    \Vect_k(V, W) \to \Set(S, W) \,,\ f \to fi \label{function:AdjBijSetVectI}
+  \end{equation}
+  is a bijection.\newline Let us reason about the theorem. Fist of all, it is
+  about a {\em function} \(\phi : S \to W\), pointing to a vector space
+  \(W\): the morphisms of \(\Set\) do not care whether the sets have
+  an additional structure. Let us say that \(\phi\) is a {\em function}
+  from \(S\) to \(W\) \q{downgraded} from the status of vector space
+  to the one of set. On the other hand, from a set we construct an
+  actual vector space, this is what being a base means.
 %
-\begin{figure}
-\centering
-\input{adjointness/free-forgetful-adjunction.qtikz}
-\caption{\(F\) upgrades sets to vector spaces; \(U\) does the opposite, that is downgrades}
-\end{figure}
+  \begin{figure}
+    \centering \input{adjointness/free-forgetful-adjunction.qtikz}
+    \caption{\(F\) upgrades sets to vector spaces; \(U\) does the
+      opposite, that is downgrades}
+  \end{figure}
 %
-Indeed, behind the scenes two functors
-\[\begin{tikzcd}
-\Set \ar["F", r, shift left] & \Vect_k \ar["U", l, shift left]
-\end{tikzcd}\]
-are moving:
+  Indeed, behind the scenes two functors
+  \[\begin{tikzcd}
+      \Set \ar["F", r, shift left] & \Vect_k \ar["U", l, shift left]
+    \end{tikzcd}\] are moving:
 %
-\begin{tcbitem}
-\item \(F\) the functor that {\em constructs} a vector space \(F(S)\) from set \(S\) it and extends a function of bases \(\alpha : S \to T\) to a genuine linear functions \(F(\alpha) : F(S) \to F(T)\), as we have already explained.
-\item \(U\) is the functor that {\em forgets}: that is takes a vector space and returns the set of vectors (thus no addition, no external product and no vector space axioms); it takes a linear function and returns the same function, but observe the homomorphism property cannot make sense any longer in \(\Set\).
-\end{tcbitem}
+  \begin{tcbitem}
+  \item \(F\) the functor that {\em constructs} a vector space
+    \(F(S)\) from set \(S\) it and extends a function of bases
+    \(\alpha : S \to T\) to a genuine linear functions
+    \(F(\alpha) : F(S) \to F(T)\), as we have already explained.
+  \item \(U\) is the functor that {\em forgets}: that is takes a
+    vector space and returns the set of vectors (thus no addition, no
+    external product and no vector space axioms); it takes a linear
+    function and returns the same function, but observe the
+    homomorphism property cannot make sense any longer in \(\Set\).
+  \end{tcbitem}
 %
-Let us rewrite the quoted theorem to make it more aware of these functors. First, let us rewrite \(i : S \to V\) as \(i_S : S \to U(F(S))\) and \(\phi : S \to W\) as \(\phi : S \to U(W)\): we have just wrapped \(V\) and \(W\) with \(U\). So far, the situation ca be depicted as
+  Let us rewrite the quoted theorem to make it more aware of these
+  functors. First, let us rewrite \(i : S \to V\) as
+  \(i_S : S \to U(F(S))\) and \(\phi : S \to W\) as
+  \(\phi : S \to U(W)\): we have just wrapped \(V\) and \(W\) with
+  \(U\). So far, the situation ca be depicted as
 %
-\[\begin{tikzcd}
-S \ar["{i_S}", r, hook] \ar["\phi", dr, swap] & U(F(S)) \\
-& U(W)
-\end{tikzcd}\]
+  \[\begin{tikzcd}
+      S \ar["{i_S}", r, hook] \ar["\phi", dr, swap] & U(F(S)) \\
+      & U(W)
+    \end{tikzcd}\]
 %
-We are not loosing the commutative diagram~\eqref{diagram:FunctionsExtendsToALinearMapI}! The composition of a \q{function} \(S \to V\) with a \q{linear function} \(V \to W\) which gives as result a \q{function} \(S \to W\): in this composition we not care about linearity anymore, thus let us wrap the \(f : V \to W\) with \(U\), so that it can fit in a commutative diagram:
+  We are not loosing the commutative
+  diagram~\eqref{diagram:FunctionsExtendsToALinearMapI}! The
+  composition of a \q{function} \(S \to V\) with a \q{linear function}
+  \(V \to W\) which gives as result a \q{function} \(S \to W\): in
+  this composition we not care about linearity anymore, thus let us
+  wrap the \(f : V \to W\) with \(U\), so that it can fit in a
+  commutative diagram:
 %
-\begin{quotation}
-Let \(V\) and \(W\) two vector spaces over a field \(k\), and let \(S\) be a base of \(V\). In this context, \(V = F(S)\). Moreover, write \(i_S\) for the inclusion function \(S \hookrightarrow U(F(S))\). Then for every function \(\phi : S \to U(W)\) there exists one and only one linear function \(f : V \to W\) for which
-\begin{equation}\begin{tikzcd}
-S \ar["{i_S}", r, hook] \ar["\phi", dr, swap] & U(F(S)) \ar["U(f)", d] \\
-& U(W)
-\end{tikzcd}\label{diagram:FunctionsExtendsToALinearMapII}\end{equation}
-is a commutative diagram of \(\Set\).
-\end{quotation}
+  \begin{quotation}
+    Let \(V\) and \(W\) two vector spaces over a field \(k\), and let
+    \(S\) be a base of \(V\). In this context, \(V = F(S)\). Moreover,
+    write \(i_S\) for the inclusion function
+    \(S \hookrightarrow U(F(S))\). Then for every function
+    \(\phi : S \to U(W)\) there exists one and only one linear
+    function \(f : V \to W\) for which
+    \begin{equation}\begin{tikzcd}
+        S \ar["{i_S}", r, hook] \ar["\phi", dr, swap] & U(F(S)) \ar["U(f)", d] \\
+        & U(W)
+      \end{tikzcd}\label{diagram:FunctionsExtendsToALinearMapII}\end{equation}
+    is a commutative diagram of \(\Set\).
+  \end{quotation}
 %
-The restyling touches also the bijections in~\eqref{function:AdjBijSetVectI}:
-\begin{equation}\xi_{S,W} : \Vect_k(F(S), W) \to \Set(S, U(W)) \,,\ \xi_{S,W}(f) := U(f)i_S \label{function:AdjBijSetVectII}\end{equation}
-We need to pause the example a bit now and resume it later.
+  The restyling touches also the bijections
+  in~\eqref{function:AdjBijSetVectI}:
+  \begin{equation}\xi_{S,W} : \Vect_k(F(S), W) \to \Set(S, U(W)) \,,\
+    \xi_{S,W}(f) :=
+    U(f)i_S \label{function:AdjBijSetVectII}\end{equation}
+  We need to pause the example a bit now and resume it later.
 \end{example}
 
 \begin{construction}
-Let \(\cat C\) and \(\cat D\) be two locally small categories and two functors
-\[\begin{tikzcd} \cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left] \end{tikzcd}\]
-We have then the functor
-\[\cat C(\hole, R(\hole)) : \opcat C \times \cat D \to \Set\]
-that maps objects \((x, y)\) to \(\cat C(x, R(y))\) and pairs of morphisms
-\[\left(\begin{tikzcd}[row sep=small](x, y) \ar["{(f, g)}", d, swap] \\ (x', y')\end{tikzcd}\right) = \left(\begin{tikzcd}[row sep=small]x \\ x' \ar["f", u]\end{tikzcd}, \begin{tikzcd}[row sep=small]y \ar["g", d] \\ y'\end{tikzcd}\right)\]
-to functions
-\[\begin{aligned}
-\cat C(x, R(y)) &\to \cat C(x', R(y')) \\
-h &\to R(g) h f
-\end{aligned}\]
+  Let \(\cat C\) and \(\cat D\) be two locally small categories and
+  two functors
+  \[\begin{tikzcd} \cat C \ar["L", r, shift left] & \cat D \ar["R", l,
+      shift left] \end{tikzcd}\] We have then the functor
+  \[\cat C(\hole, R(\hole)) : \opcat C \times \cat D \to \Set\]
+  that maps objects \((x, y)\) to \(\cat C(x, R(y))\) and pairs of
+  morphisms
+  \[\left(\begin{tikzcd}[row sep=small](x, y) \ar["{(f, g)}", d, swap]
+        \\ (x', y')\end{tikzcd}\right) = \left(\begin{tikzcd}[row
+        sep=small]x \\ x' \ar["f", u]\end{tikzcd}, \begin{tikzcd}[row
+        sep=small]y \ar["g", d] \\ y'\end{tikzcd}\right)\] to
+  functions
+  \[\begin{aligned}
+    \cat C(x, R(y)) &\to \cat C(x', R(y')) \\
+    h &\to R(g) h f
+  \end{aligned}\]
 We have also the functor
 \[\cat D(L(\hole), \hole) : \opcat C \times \cat D \to \Set\]
 that maps \((x, y)\) to \(\cat C(L(x), y)\) and pairs of morphisms
-\[\left(\begin{tikzcd}[row sep=small](x, y) \ar["{(f, g)}", d, swap] \\ (x', y')\end{tikzcd}\right) = \left(\begin{tikzcd}[row sep=small]x \\ x' \ar["f", u]\end{tikzcd}, \begin{tikzcd}[row sep=small]y \ar["g", d] \\ y'\end{tikzcd}\right)\]
-to functions
+\[\left(\begin{tikzcd}[row sep=small](x, y) \ar["{(f, g)}", d, swap]
+      \\ (x', y')\end{tikzcd}\right) = \left(\begin{tikzcd}[row
+      sep=small]x \\ x' \ar["f", u]\end{tikzcd}, \begin{tikzcd}[row
+      sep=small]y \ar["g", d] \\ y'\end{tikzcd}\right)\] to functions
 \[\begin{aligned}
-\cat D(L(x), y) &\to \cat D(L(x'), y') \\
-h &\to g h L(f) .
+  \cat D(L(x), y) &\to \cat D(L(x'), y') \\
+  h &\to g h L(f) .
 \end{aligned}\]
 \end{construction}
 
 \begin{example}[Defining linear functions, part II]\label{example:DefineLinearFunctionsII}
-We return to the last example. The functions \(\xi_{S,W}\) form a natural isomorphism
-\[\xi : \Vect_k(F(\hole), \hole) \tto \Set(\hole, U(\hole))\]
-We know the components are bijections, hence it remains to check it is a natural transformation. Thus consider the diagram
+  We return to the last example. The functions \(\xi_{S,W}\) form a
+  natural isomorphism
+  \[\xi : \Vect_k(F(\hole), \hole) \tto \Set(\hole, U(\hole))\]
+  We know the components are bijections, hence it remains to check it
+  is a natural transformation. Thus consider the diagram
 %
-\[\begin{tikzcd}
-\Vect_k(F(S), W) \ar["{\Vect_k(F(\alpha), f)}", d, swap] \ar["{\xi_{S,W}}", r] & \Set(S, U(W)) \ar["{\Set(\alpha, U(f))}", d] \\
-\Vect_k(F(S'), W') \ar["{\xi_{S',W'}}", r, swap] & \Set(S', U(W'))
-\end{tikzcd}\]
+  \[\begin{tikzcd}
+      \Vect_k(F(S), W) \ar["{\Vect_k(F(\alpha), f)}", d, swap] \ar["{\xi_{S,W}}", r] & \Set(S, U(W)) \ar["{\Set(\alpha, U(f))}", d] \\
+      \Vect_k(F(S'), W') \ar["{\xi_{S',W'}}", r, swap] & \Set(S',
+      U(W'))
+    \end{tikzcd}\]
 %
-and we show it is commutative. A linear function \(h : F(S) \to W\) goes to the function \(U(h)i_S : S \to U(W)\), which is sent to the function \(U(f) (U(h)i_S) \alpha : S' \to U(W')\). By functoriality, \(U(f) (U(h)i_S) \alpha = U(fh) i_S \alpha\). On the other way, \(h\) goes to the linear function \(f h F(\alpha) : F(S') \to W'\) which goes to \(U(f h F(\alpha)) i_{S'} : S' \to U(W')\). Here, \(U(f h F(\alpha)) i_{S'} = U(fh) U(F(\alpha))i_{S'}\). Thus, to verify that the functions \(S' \to U(W')\) here are equal, one could just verify that
-\[\begin{tikzcd}
-S \ar["{i_S}", r] & U(F(S)) \\
-S' \ar["\alpha", u] \ar["{i_{S'}}", r, swap] & U(F(S')) \ar["U(F(\alpha))", u, swap]
-\end{tikzcd}\]
-commutes, which is immediate.
+  and we show it is commutative. A linear function \(h : F(S) \to W\)
+  goes to the function \(U(h)i_S : S \to U(W)\), which is sent to the
+  function \(U(f) (U(h)i_S) \alpha : S' \to U(W')\). By functoriality,
+  \(U(f) (U(h)i_S) \alpha = U(fh) i_S \alpha\). On the other way,
+  \(h\) goes to the linear function \(f h F(\alpha) : F(S') \to W'\)
+  which goes to \(U(f h F(\alpha)) i_{S'} : S' \to U(W')\). Here,
+  \(U(f h F(\alpha)) i_{S'} = U(fh) U(F(\alpha))i_{S'}\). Thus, to
+  verify that the functions \(S' \to U(W')\) here are equal, one could
+  just verify that
+  \[\begin{tikzcd}
+      S \ar["{i_S}", r] & U(F(S)) \\
+      S' \ar["\alpha", u] \ar["{i_{S'}}", r, swap] & U(F(S'))
+      \ar["U(F(\alpha))", u, swap]
+    \end{tikzcd}\] commutes, which is immediate.
 \end{example}
 
-Example~\ref{example:DefineLinearFunctionsI} and~\ref{example:DefineLinearFunctionsII} of the introduction should have triggered your attention. If not, look at them closely now: after the initial restyling of one result of Linear Algebra, it is just a matter of categories and functors. 
+Example~\ref{example:DefineLinearFunctionsI}
+and~\ref{example:DefineLinearFunctionsII} of the introduction should
+have triggered your attention. If not, look at them closely now: after
+the initial restyling of one result of Linear Algebra, it is just a
+matter of categories and functors.
 
 \begin{construction}
-Let \(\cat C\) and \(\cat J\) two categories, \(a\) one of its objects and take a functor \(F : \cat J \to \cat C\). We have the category \(a {\downarrow} F\) made as follows:
-\begin{tcbitem}
-\item the objects are the morphisms \(a \to F(x)\) of \(\cat C\), with \(x\) being an object of \(\cat J\);
-\item the morphisms from \(f : a \to F(x)\) to \(g : a \to F(y)\) are the morphisms \(h : x \to y\) of \(\cat J\) such that
-\[\begin{tikzcd}[row sep=small]
- & F(x) \ar["{F(h)}", dd] \\
-a \ar["f", ur] \ar["g", dr, swap] \\
- & F(y)
-\end{tikzcd}\]
-commutes;
-\item the composition is that of \(\cat J\). 
-\end{tcbitem}
+  Let \(\cat C\) and \(\cat J\) two categories, \(a\) one of its
+  objects and take a functor \(F : \cat J \to \cat C\). We have the
+  category \(a {\downarrow} F\) made as follows:
+  \begin{tcbitem}
+  \item the objects are the morphisms \(a \to F(x)\) of \(\cat C\),
+    with \(x\) being an object of \(\cat J\);
+  \item the morphisms from \(f : a \to F(x)\) to \(g : a \to F(y)\)
+    are the morphisms \(h : x \to y\) of \(\cat J\) such that
+    \[\begin{tikzcd}[row sep=small]
+        & F(x) \ar["{F(h)}", dd] \\
+        a \ar["f", ur] \ar["g", dr, swap] \\
+        & F(y)
+      \end{tikzcd}\] commutes;
+  \item the composition is that of \(\cat J\).
+  \end{tcbitem}
 \end{construction}
 
 \begin{proposition}\label{proposition:AdjunctionAsInitialInCommaCategory}
-Suppose given two locally small categories \(\cat C\) and \(\cat D\), two functors
-\[\begin{tikzcd}[column sep=small]
-\cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
-\end{tikzcd}\]
-and a natural transformation \(\eta : \id_{\cat C} \tto RL\) such that \(\eta_x : x \to RL(x)\) is initial in \(x {\downarrow} R\) for every \(x \in \obj{\cat C}\).  Then, for \(x \in \obj{\cat C}\) and \(y \in \obj{\cat D}\), the functions
-\[\alpha_{x,y} : \cat D(L(x), y) \to \cat C(x, R(y)) \,,\ \alpha_{x,y}(f) := R(f)\eta_x\]
-form an adjunction \(\alpha : L \dashv R\).
+  Suppose given two locally small categories \(\cat C\) and
+  \(\cat D\), two functors
+  \[\begin{tikzcd}[column sep=small]
+      \cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
+    \end{tikzcd}\] and a natural transformation
+  \(\eta : \id_{\cat C} \tto RL\) such that \(\eta_x : x \to RL(x)\)
+  is initial in \(x {\downarrow} R\) for every \(x \in \obj{\cat C}\).
+  Then, for \(x \in \obj{\cat C}\) and \(y \in \obj{\cat D}\), the
+  functions
+  \[\alpha_{x,y} : \cat D(L(x), y) \to \cat C(x, R(y)) \,,\
+    \alpha_{x,y}(f) := R(f)\eta_x\] form an adjunction
+  \(\alpha : L \dashv R\).
 \end{proposition}
 
 \begin{exercise}
-Look at Example~\ref{example:DefineLinearFunctionsI} and~\ref{example:DefineLinearFunctionsII}: isolate what in the proposition is the natural transformation \(\eta\). Can you prove the theorem by yourself?
+  Look at Example~\ref{example:DefineLinearFunctionsI}
+  and~\ref{example:DefineLinearFunctionsII}: isolate what in the
+  proposition is the natural transformation \(\eta\). Can you prove
+  the theorem by yourself?
 \end{exercise}
 
 \begin{proof}[Proof of Proposition~\ref{proposition:AdjunctionAsInitialInCommaCategory}]
-The fact that \(\eta_x\) is initial object implies that these function are all bijective. Now, we just need to verify the transformation is natural. Take \(x, x' \in \obj{\cat C}\), \(y, y' \in \obj{\cat D}\), \(f \in \cat C(x', x)\) and \(g \in \cat D(y, y')\) and examine the square
-\[\begin{tikzcd}[column sep=large]
-\cat D(L(x), y) \ar["{\cat D(L(f), g)}", d, swap] \ar["{\alpha_{x,y}}", r] & \cat C(x, R(y)) \ar["{\cat C(f, R(g))}", d] \\
-\cat D\left(L\left(x'\right), y'\right) \ar["{\alpha_{x',y'}}", r, swap] & \cat C\left(x', R\left(y'\right)\right)
-\end{tikzcd}\]
-For \(h \in \cat D(L(x), y)\), we have
-\begin{align*}
-& \cat C(f, R(g)) (\alpha_{x,y} (h)) = R(g) R(h) \eta_x f = R(gh) \eta_x f \\
-& \alpha_{x',y'} (\cat D (L(f), g)(h)) = R(guL(f)) \eta_{x'} = R(gu) RL(f) \eta_{x'}
-\end{align*}
-By the naturality of \(\eta\), we have \(\eta_x f = RL(f) \eta_{x'}\), and the proof ends here.
+  The fact that \(\eta_x\) is initial object implies that these
+  function are all bijective. Now, we just need to verify the
+  transformation is natural. Take \(x, x' \in \obj{\cat C}\),
+  \(y, y' \in \obj{\cat D}\), \(f \in \cat C(x', x)\) and
+  \(g \in \cat D(y, y')\) and examine the square
+  \[\begin{tikzcd}[column sep=large]
+      \cat D(L(x), y) \ar["{\cat D(L(f), g)}", d, swap] \ar["{\alpha_{x,y}}", r] & \cat C(x, R(y)) \ar["{\cat C(f, R(g))}", d] \\
+      \cat D\left(L\left(x'\right), y'\right) \ar["{\alpha_{x',y'}}",
+      r, swap] & \cat C\left(x', R\left(y'\right)\right)
+    \end{tikzcd}\] For \(h \in \cat D(L(x), y)\), we have
+  \begin{align*}
+    & \cat C(f, R(g)) (\alpha_{x,y} (h)) = R(g) R(h) \eta_x f = R(gh) \eta_x f \\
+    & \alpha_{x',y'} (\cat D (L(f), g)(h)) = R(guL(f)) \eta_{x'} = R(gu) RL(f) \eta_{x'}
+  \end{align*}
+  By the naturality of \(\eta\), we have
+  \(\eta_x f = RL(f) \eta_{x'}\), and the proof ends here.
 \end{proof}
 
-Here is another example in the spirit of the initial example about vector spaces and of the proposition just proved here.
+Here is another example in the spirit of the initial example about
+vector spaces and of the proposition just proved here.
 
 \begin{example}[Isomorphism Theorem for Set Theory]
-We have defined \(\Eqv\) earlier, recall it here. Let us introduce the functor
-\[E : \Set \to \Eqv\]
-that maps a set \(X\) to a setoid \((X, =_X)\), where \(=_X\) is the equality relation over \(X\), and a function \(f : X \to Y\) to itself regarded as morphisms of setoids. Besides, Corollary~\ref{cor:SetIso2} gives a functor
-\[P : \Eqv \to \Set .\]
-Consequently, Proposition~\ref{proposition:SetIso1} can be easily rephrased more concisely as:
-\begin{quotation}
-the canonical projection \((X, \sim) \to E(P(X, \sim))\) is initial in \((X, \sim) \downarrow E\).
-\end{quotation}
+  We have defined \(\Eqv\) earlier, recall it here. Let us introduce
+  the functor
+  \[E : \Set \to \Eqv\] that maps a set \(X\) to a setoid
+  \((X, =_X)\), where \(=_X\) is the equality relation over \(X\), and
+  a function \(f : X \to Y\) to itself regarded as morphisms of
+  setoids. Besides, Corollary~\ref{cor:SetIso2} gives a functor
+  \[P : \Eqv \to \Set .\] Consequently,
+  Proposition~\ref{proposition:SetIso1} can be easily rephrased more
+  concisely as:
+  \begin{quotation}
+    the canonical projection \((X, \sim) \to E(P(X, \sim))\) is
+    initial in \((X, \sim) \downarrow E\).
+  \end{quotation}
 \end{example}
 
-There is the dual of Proposition~\ref{proposition:AdjunctionAsInitialInCommaCategory} as well.
+There is the dual of
+Proposition~\ref{proposition:AdjunctionAsInitialInCommaCategory} as
+well.
 
 \begin{proposition}\label{proposition:AdjunctionAsTerminalInCommaCategory}
-Suppose given two locally small categories \(\cat C\) and \(\cat D\), two functors
-\[\begin{tikzcd}[column sep=small]
-\cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
-\end{tikzcd}\]
-and a natural transformation \(\theta : LR \tto \id_{\cat D}\) such that \(\theta_y : LR(y) \to y\) is terminal in \(L {\downarrow} y\) for every \(y \in \obj{\cat C}\).  Then, for \(x \in \obj{\cat C}\) and \(y \in \obj{\cat D}\), the functions
-\begin{align*}
-\cat C(x, R(y)) & \to \cat D(L(x), y) \\
-f &\to \theta_y L(f)
-\end{align*}
-form an adjunction \(L \dashv R\).
+  Suppose given two locally small categories \(\cat C\) and
+  \(\cat D\), two functors
+  \[\begin{tikzcd}[column sep=small]
+      \cat C \ar["L", r, shift left] & \cat D \ar["R", l, shift left]
+    \end{tikzcd}\] and a natural transformation
+  \(\theta : LR \tto \id_{\cat D}\) such that
+  \(\theta_y : LR(y) \to y\) is terminal in \(L {\downarrow} y\) for
+  every \(y \in \obj{\cat C}\).  Then, for \(x \in \obj{\cat C}\) and
+  \(y \in \obj{\cat D}\), the functions
+  \[\beta_{x,y} : \cat C(x, R(y)) \to \cat D(L(x), y) \,,\
+    \beta_{x,y}(f) := \theta_y L(f)\] form an adjunction
+  \(L \dashv R\).
 \end{proposition}
 
 \begin{exercise}
-The proof is left to you.
+  The proof of
+  Proposition~\ref{proposition:AdjunctionAsTerminalInCommaCategory} is
+  left to you.
 \end{exercise}
 
-\begin{example}[Evaluation of polynomials]
-\YetToBeTeXed
-\end{example}
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:

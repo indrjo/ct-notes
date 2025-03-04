@@ -1,0 +1,67 @@
+
+\section{An introductory puzzle}
+
+In a category our tools are objects, morphisms and compositionality: an environment where objects generally do not live alone, but they look at other objects. A morphism \(a \to b\) is like \(a\) is viewing the object \(b\). Of course, there may be more than one morphisms \(a \to b\) or none: more morphisms is more facets of the target are noticed, no morphisms means the objects are isolated.
+
+Now, consider a {\em locally small} category \(\cat C\) with and two object \(a\), \(a'\) in it. Assume also we have a natural isomorphism
+\begin{equation}
+\xi : \cat C (a, -) \tto \cat C(a', -) . \label{equation:IsoOfLeftHoms}
+\end{equation}
+
+Let us try to visualize the situation: the observations of \(a\) and \(a'\) are the same, where \q{the same} here means there is an isomorphism between the observations. Now some philosophy for you:
+%
+\begin{quotation}
+if the world \(a\) looks at is equivalent to the world \(a'\) looks at, can we conclude that that the observers themselves are equivalent?
+\end{quotation}
+%
+The answer of Category Theory is: yes, you have \(a \cong a'\).
+
+The construction of an isomorphism \(a \cong a'\) amounts at finding a way to make the pieces of a puzzle fit to each other. As you will realize, there is a unique way in doing things here. First things first:
+%
+\begin{quotation}
+From a natural transformation \(\xi : \cat C(a, -) \tto \cat C(a', -)\), could we construct some morphism \(a \to a'\)? Or \(a' \to a\)? [In any case, it would be a huge step ahead.]
+\end{quotation}
+%
+\begin{figure}
+\centering
+\input{./yoneda/stare-at.qtikz}
+\caption{A natural transformation \(\cat C(a, -) \tto \cat C(a', -)\) yields a morphism \(a' \to a\)}
+%\label{figure:}
+\end{figure}
+%
+Take \(\xi_a : \cat C (a, a) \to \cat C(a', a)\): we have a mapping that sends for example \(\id_a\) to some morphism \(\xi_a \left(\id_a\right) : a' \to a\). Of course, we hope the answer of the question
+%
+\begin{quotation}
+Is \(\xi_a(\id_a) : a' \to a\) an isomorphism?
+\end{quotation}
+is yes. Now \(\xi_{a'} : \cat C(a, a') \to \cat C(a', a')\) and you have exactly one \(f : a \to a'\) such that \(\xi_{a'}(f) = \id_{a'}\). By naturality, we have
+%
+\[\begin{tikzcd}
+a \ar["f", d, swap] & & \cat C (a, a) \ar["{\lambda g . fg}", d, swap] \ar["{\xi_a}", r] & \cat C(a', a) \ar["{\lambda h . fh}", d] \\
+a' & & \cat C(a, a') \ar["{\xi_{a'}}", r, swap] & \cat C(a', a')
+\end{tikzcd}\]
+%
+Now just pick \(\id_a\) and pass it the consecutive functions in the square, so we will end with
+\[\id_{a'} = \xi_{a'} (f) = f \xi_{a}(\id_a) .\]
+If we prove that also \(\xi_{a}(\id_a) f = \id_a\), then have found the inverse of \(\xi_a(\id_a)\)! We use naturality again to do so:
+%
+\[\begin{tikzcd}
+a' \ar["{\xi_a(\id_a)}", d, swap] & & \cat C (a, a') \ar["{\lambda g . \xi_a(\id_a) g}", d, swap] \ar["{\xi_{a'}}", r] & \cat C(a', a') \ar["{\lambda h . \xi_{a} (\id_a)} h", d] \\
+a & & \cat C(a, a) \ar["{\xi_a}", r, swap] & \cat C(a', a)
+\end{tikzcd}\]
+%
+Indeed, if we pick \(f : a \to a'\) and apply the functions as in the commutative square, we have
+%
+\[\xi_a \left( \xi_a(\id_a) f \right) = \xi_a(\id_a) .\]
+%
+Being the \(\xi_a\)'s bijections, we can conclude and that's all.
+
+\begin{exercise}
+Try to prove that if \(\cat C(-, a) \cong \cat C(-, a')\) then \(a \cong a'\).
+\end{exercise}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:

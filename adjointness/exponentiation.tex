@@ -1,0 +1,116 @@
+
+\section{Exponentiation}
+
+Let \(\cat C\) be a category with binary products. Consider one object
+\(c\) of \(\cat C\). For \(a\) object in \(\cat C\) choose
+\[\begin{tikzcd}[row sep=tiny]
+    & a \times c \ar["{p_a}", dl, swap] \ar["{q_a}", dr] & \\
+    a & & c
+  \end{tikzcd}\] to be any of the products of \(a\) and \(c\). That
+being said, we will work now to construe a functor
+\[(\times c) : \cat C \to \cat C .\] As the notation hints, we make the
+convention
+\[(\times c) (x) := x \times c\] for \(x\) object of \(\cat C\). \NotaInterna{In
+  the zeroth chapter, remember to introduce this kind of notation.}
+Now, we shall involve morphisms too. \NotaInterna{In the section of
+  products, remember to talk about the the product of morphisms.} If
+we take any \(f : a \to b\) of \(\cat C\), then we instruct
+\((\times c)\) on morphisms as follows:
+\[(\times c) (f) := f \times \id_c .\] \NotaInterna{In the section of products,
+  remember to talk about the the product of morphisms.} Functoriality,
+in this case, directly descends from what we have said in the section
+about products. \NotaInterna{Remember to \TeX{} that part too.}
+% We dedicate some lines to prove \((\times c)\) is actually a functor.
+% \NotaInterna{Working about this\dots{}}
+
+\begin{definition}[Exponential object]
+  In the category \(\cat C\) that has binary products, the {\em
+    exponential object} of two objects \(a\) and \(b\) of \(\cat C\)
+  is any
+  \begin{tcbitem}
+  \item object of \(\cat C\), we write as \(b^a\)
+  \item a morphism \(\ev : b^a \times a \to b\), the {\em evaluation}
+  \end{tcbitem}
+  such that \(\ev\) is a terminal object of
+  \((\times a) \downarrow b\). A category \(\cat C\) is said to \q{have
+    exponentials} whenever for every \(a, b \in \obj{\cat C}\) there is
+  in \(\cat C\) the corresponding exponential object.
+\end{definition}
+
+We can involve adjunctions in this discourse now! In fact, the
+definition gives a bijection
+\[\cat C(a \times c, b) \cong \cat C\left(a, b^c\right)\]
+for \(a, b, c \in \obj{\cat C}\). Thus, first of all, we shall try to
+arrive to a situation like this
+\[\begin{tikzcd}
+    \cat C \ar["{(\times c)}", r, shift left] & \cat C \ar["?", l, shift
+    left]
+  \end{tikzcd}\] so that we can see if
+\((\times c) \dashv ?\).\newline The functor labelled with a question mark comes from a
+close analysis of the the new objects just introduced. Consider a
+morphism \(f : a \to b\) and a third object \(c\) of \(\cat C\). Assume
+also, \(\cat C\) has exponentials. If we write \(\ev_a\) and \(\ev_b\)
+for the evaluations associated to \(a^c\) and \(b^c\), we we have
+\[\begin{tikzcd}
+    a^c \times c \ar["{\ev_a}", d, swap] & b^c \times c \ar["{\ev_b}", d] \\
+    a \ar["f", r, swap] & b
+  \end{tikzcd} .\] Composing \(\ev_a\) and \(f\) and the definition of
+exponential objects yield a unique morphism \(a^c \to b^c\) of
+\(\cat C\), we denote \(f^c\), making
+\[\begin{tikzcd}
+    a^c \times c \ar["{\ev_a}", d, swap] \ar["{f^c \times \id_c}", r] & b^c \times c \ar["{\ev_b}", d] \\
+    a \ar["f", r, swap] & b
+  \end{tikzcd}\] commute. Indeed, we have the functor
+\(\square^c : \cat C \to \cat C\) with
+\[\square^c (x) := x^c\]
+for \(x\) object of \(\cat C\) and
+\[\square^c (f) := f^c\]
+for \(f : a \to b\) in \(\cat C\).
+
+\begin{exercise}
+  Under the hypothesis that \(\cat C\) has exponentials, you can
+  provide functors \(c^\bullet : \opcat C \to \cat C\), using exponential
+  objects. This exercise is not essential for this section.
+\end{exercise}
+
+The conclusion is the following theorem.
+
+\begin{proposition}
+  \((\times c) \dashv \square^c\) for every \(c \in \obj{\cat C}\).
+\end{proposition}
+
+\begin{proof}
+  There is not much work left to do: we have two functors running in
+  opposite directions and we have bijections
+  \(\cat C(a \times c, b) \to \cat C\left(a, b^c\right)\), one for every
+  \(c \in \obj{\cat C}\); we have just to verify the naturality
+  condition.
+\end{proof}
+
+\begin{proposition}
+  A category \(\cat C\) with binary products has exponentials if and
+  only if for every \(c \in \obj{\cat C}\) the functor
+  \((\times c) : \cat C \to \cat C\) has a right adjoint. \NotaInterna{More
+    details\dots{}}
+\end{proposition}
+
+\begin{proof}
+  At this point, one of the implications is already demonstrated. The
+  remaining can be readily derived using the constructions of the
+  section about units and counits. \NotaInterna{That section is a
+    mess\dots{}} Indeed, the evaluation morphisms
+  \[\ev : a^c \times c \to a\]
+  are terminal objects of
+  \([(\times c) \circ \square^c] \downarrow a\) and form a natural transformation
+  \[(\times c) \circ \square^c \tto \id_{\cat C} .\] \NotaInterna{More
+    details\dots{}} \NotaInterna{Make additions to the section about
+    units and co-units.}
+\end{proof}
+
+\NotaInterna{And now\dots{} Cartesian closed categories?}
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:
