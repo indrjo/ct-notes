@@ -1,0 +1,40 @@
+
+\begin{titlepage}
+
+\raggedleft
+  
+\vspace*{.1\textheight}
+
+{\Large Indrjo Dedej}
+
+\vspace*{0.2\textheight}
+
+{\LARGE Notes on}\\[\baselineskip]
+
+{\Huge Category Theory}\\[\baselineskip]
+
+\vspace*{.2\textheight}
+
+\begin{tikzpicture}
+\def\r{2}
+\foreach \i/\obj in {1/A, 2/B, 3/C} {
+  \node (\obj) [circle] at ({120*\i}:\r) {\(\obj\)};
+}
+\draw[->, semithick] (A) -- node[auto, swap]{\(f\)} (B);
+\draw[->, semithick] (B) -- node[auto, swap]{\(g\)} (C);
+\draw[->, semithick] (A) -- node[auto]{\(gf\)} (C);
+\end{tikzpicture}
+
+\vfill
+
+{Last revision: \today{}}
+
+\end{titlepage}
+
+
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "CT"
+%%% TeX-engine: luatex
+%%% End:
