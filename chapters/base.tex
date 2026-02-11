@@ -142,18 +142,18 @@ It should be clear a this point what the pattern is:
 % \end{definition}
 
 \begin{definition}[Categories]\label{definition:categories}
-  A {\em category} \(\cat C\) consists of:
+  A {\em category} \(\mathcal{C}\) consists of:
   \begin{tcbitem}
-  \item A class of {\em objects}, denoted \(\obj{\cat C}\).
-  \item For every \(a, b \in \obj{\cat C}\), a class of {\em morphisms}
+  \item A class of {\em objects}, denoted \(\obj{\mathcal{C}}\).
+  \item For every \(a, b \in \obj{\mathcal{C}}\), a class of {\em morphisms}
     (or {\em maps} or {\em arrows}) from \(a\) to \(b\), written as
-    \(\cat C(a, b)\). Often, when the category we are working in is
+    \(\mathcal{C}(a, b)\). Often, when the category we are working in is
     clear from the context, we write \(f : a \to b\) in place of
-    \(f \in \cat C(a, b)\).
-  \item For every \(a, b, c \in \obj{\cat C}\), an operation of {\em
+    \(f \in \mathcal{C}(a, b)\).
+  \item For every \(a, b, c \in \obj{\mathcal{C}}\), an operation of {\em
       composition}
     \[
-      \circ_{a, b, c} : \cat C(b, c) \times \cat C(a, b) \to \cat C(a, c) \,, \ (g,
+      \circ_{a, b, c} : \mathcal{C}(b, c) \times \mathcal{C}(a, b) \to \mathcal{C}(a, c) \,, \ (g,
       f) \to g \circ_{a, b, c} f
     \]
     It is customary to write \(g \circ f\) instead of
@@ -162,18 +162,18 @@ It should be clear a this point what the pattern is:
   \end{tcbitem}
   with the following axioms:
   \begin{tcbenum}
-  \item For every \(x \in \obj{\cat C}\) there exists a
-    \(\id_x \in \cat C(x, x)\) such that for every
-    \(y \in \obj{\cat C}\) and \(g \in \cat C(y, x)\) we have
+  \item For every \(x \in \obj{\mathcal{C}}\) there exists a
+    \(\id_x \in \mathcal{C}(x, x)\) such that for every
+    \(y \in \obj{\mathcal{C}}\) and \(g \in \mathcal{C}(y, x)\) we have
     \[
       \id_x g = g
     \]
-    and for every \(z \in \obj{\cat C}\) and \(h \in \cat C(x, z)\) we have
+    and for every \(z \in \obj{\mathcal{C}}\) and \(h \in \mathcal{C}(x, z)\) we have
     \[
       h \id_x = h .
     \]
-  \item For \(a, b, c, d \in \obj{\cat C}\) and \(f \in \cat C(a, b)\),
-    \(g \in \cat C(b, c)\) and \(h \in \cat C(c, d)\) we have the identity
+  \item For \(a, b, c, d \in \obj{\mathcal{C}}\) and \(f \in \mathcal{C}(a, b)\),
+    \(g \in \mathcal{C}(b, c)\) and \(h \in \mathcal{C}(c, d)\) we have the identity
     \[
       (h g) f = h (g f) .
     \]
@@ -226,18 +226,18 @@ have given an abstract definition of categories because out there are
 many other categories that deserve attention.
 
 \begin{example}[Monoids are categories]
-  Consider a category \(\cat G\) with a single object, that we indicate
+  Consider a category \(\mathcal{G}\) with a single object, that we indicate
   with a bare \(\bullet\). All of its morphisms have \(\bullet\) as domain and
   codomain: then any two morphisms are composable and the composite of
   two morphisms \(\bullet \to \bullet\) is a morphism
   \(\bullet \to \bullet\). This motivates us to proceed as follows: let
-  \(G\) be the collection of the morphisms of \(\cat G\) and consider
+  \(G\) be the collection of the morphisms of \(\mathcal{G}\) and consider
   the operation of composing morphism
-  \[G \times G \to G\,,\ (x, y) \to xy .\] Being \(\cat G\) a category implies
-  this function is associative and \(\cat G\) has the identity of
+  \[G \times G \to G\,,\ (x, y) \to xy .\] Being \(\mathcal{G}\) a category implies
+  this function is associative and \(\mathcal{G}\) has the identity of
   \(\bullet\), that is \(G\) has one element we call \(1\) and such that
   \(f1 = 1f = f\) for every \(f \in G\). In other words, we are saying
-  \(G\) is a monoid. We say the single object category \(\cat G\) {\em
+  \(G\) is a monoid. We say the single object category \(\mathcal{G}\) {\em
     is} a monoid. \newline Conversely, take a monoid \(G\) and a symbol
   \(\bullet\): make such thing acquire the status of object and the elements
   of \(G\) that of morphisms; in that case, the operation of \(G\) has
@@ -370,29 +370,29 @@ morphisms going opposite directions
 \section{Functors}
 
 \begin{definition}[Functors]\label{definition:functors}
-  A {\em functor} \(F\) from a category \(\cat C\) to a category
-  \(\cat D\) amounts to:
+  A {\em functor} \(F\) from a category \(\mathcal{C}\) to a category
+  \(\mathcal{D}\) amounts to:
   \begin{tcbitem}
   \item One \q{function on objects}
     \[
-      F_{\text{obj}} : \obj{\cat C} \to \obj{\cat D}
+      F_{\text{obj}} : \obj{\mathcal{C}} \to \obj{\mathcal{D}}
     \]
-  \item For every \(a, b \in \obj{\cat C}\), one \q{function on morphisms}
+  \item For every \(a, b \in \obj{\mathcal{C}}\), one \q{function on morphisms}
     \[
-      F_{a, b} : \cat C(a, b) \to \cat D(F_{\text{obj}}(a),
+      F_{a, b} : \mathcal{C}(a, b) \to \mathcal{D}(F_{\text{obj}}(a),
       F_{\text{obj}}(b))
     \]
   \end{tcbitem}
   such that:
   \begin{tcbenum}
-  \item For every \(x \in \obj{\cat C}\), we have
+  \item For every \(x \in \obj{\mathcal{C}}\), we have
     \(F_{x, x}(\id_x) = \id_{F_{\text{obj}}(x)}\).
-  \item For every \(x, y, z \in \obj{\cat C}\) and \(f : x \to y\) and
-    \(g : y \to z\) in \(\cat C\), we have
+  \item For every \(x, y, z \in \obj{\mathcal{C}}\) and \(f : x \to y\) and
+    \(g : y \to z\) in \(\mathcal{C}\), we have
     \(F_{b, c}(g) F_{a, b}(f) = F_{a, c}(gf)\).
   \end{tcbenum}
-  To say that \(F\) is a functor from \(\cat C\) to \(\cat D\) we use
-  \(F : \cat C \to \cat D\), a symbolism that recalls that one of morphism
+  To say that \(F\) is a functor from \(\mathcal{C}\) to \(\mathcal{D}\) we use
+  \(F : \mathcal{C} \to \mathcal{D}\), a symbolism that recalls that one of morphism
   in categories. We write \(F(a)\) instead of \(F_{\text{obj}}(a)\) if
   \(a\) is an object and \(F(f)\) instead of \(F_{a, b}(f)\) if
   \(f : a \to b\) because there cannot be any confusion if the context is
@@ -403,8 +403,8 @@ A first straightforward consequence of functoriality is contained in the
 following proposition.
 
 \begin{proposition}
-  Let \(F : \cat C \to \cat D\) be a functor. If \(f\) is an isomorphism
-  of \(\cat C\), then so is \(F(f)\).
+  Let \(F : \mathcal{C} \to \mathcal{D}\) be a functor. If \(f\) is an isomorphism
+  of \(\mathcal{C}\), then so is \(F(f)\).
 \end{proposition}
 
 \begin{proof}
@@ -417,15 +417,15 @@ the simplest ones can be obtained by choosing very simple categories.
 \begin{example}[Functors from sets]\label{example:CollectionsAreCats}
   You can identify a set to the category where its objects are the
   elements of the class and the unique morphisms present are the
-  identities. Consider a functor \(F : \cat S \to \cat C\) where \(S\) is
+  identities. Consider a functor \(F : \mathcal{S} \to \mathcal{C}\) where \(S\) is
   a set. \(F\) maps objects to objects and morphisms to morphisms, but
-  the only morphisms of \(\cat S\) are identities, which are taken to
-  identities of \(\cat C\). Since \(F\) involves only objects and
-  identities, \(F\) is just a function \(\obj{\cat S} \to \obj{\cat C}\).
+  the only morphisms of \(\mathcal{S}\) are identities, which are taken to
+  identities of \(\mathcal{C}\). Since \(F\) involves only objects and
+  identities, \(F\) is just a function \(\obj{\mathcal{S}} \to \obj{\mathcal{C}}\).
 \end{example}
 
 \begin{example}[Functors from prosets]
-  Consider a functor \(F : (A, \le) \to \cat C\) from a proset. We know
+  Consider a functor \(F : (A, \le) \to \mathcal{C}\) from a proset. We know
   \((A, \le)\) is a category that has at most one morphism for each
   ordered couple in \(A \times A\). For that reason, let us adopt this
   notation: for every \(i, j \in A\) such that \(i \le j\) indicate by
@@ -435,14 +435,14 @@ the simplest ones can be obtained by choosing very simple categories.
   \(i, j \in A\) if \(i \le j\).
   % As a particular instance of this, let us
   % examine functors
-  % \[H : (\naturals, \le) \to \cat C\] with \(\le\) being the usual ordering of
+  % \[H : (\naturals, \le) \to \mathcal{C}\] with \(\le\) being the usual ordering of
   % \(\naturals\). For \(i, j \in \naturals\) with \(i \le j\), the morphism
   % \(i \to j\) can be factored into consecutive morphisms
   % \[i \to j = (j-1 \to j) \cdots{} (i+1 \to i+2) (i \to i+1) .\] For that reason, our
   % \(H\) \q{is} just a sequence
   % \[H_0 \functo{\partial_0} H_1 \functo{\partial_1} \cdots{} \functo{\partial_{n+1}} H_n
   %   \functo{\partial_n} \cdots{}\] of objects and morphisms in
-  % \(\cat C\), where we have written \(\partial_j\) for \(H_{j, j+1}\).
+  % \(\mathcal{C}\), where we have written \(\partial_j\) for \(H_{j, j+1}\).
 \end{example}
 
 \begin{example}[Monotonic functions]
@@ -455,21 +455,21 @@ the simplest ones can be obtained by choosing very simple categories.
 
 \begin{example}[Monoid homomorphsisms]
   We have previously seen that monoids are single object
-  categories. Consider now two such categories, say \(\cat G\) and
-  \(\cat H\), and let us see what a functor \(f : \cat G \to \cat H\)
-  is. Denoting by \(\bullet_{\cat G}\) and \(\bullet_{\cat H}\) the object of
-  \(\cat G\) and \(\cat H\) respectively, there is a unique possibility:
-  mapping \(\bullet_{\cat G}\) to \(\bullet_{\cat H}\). The functorial axioms in
+  categories. Consider now two such categories, say \(\mathcal{G}\) and
+  \(\mathcal{H}\), and let us see what a functor \(f : \mathcal{G} \to \mathcal{H}\)
+  is. Denoting by \(\bullet_{\mathcal{G}}\) and \(\bullet_{\mathcal{H}}\) the object of
+  \(\mathcal{G}\) and \(\mathcal{H}\) respectively, there is a unique possibility:
+  mapping \(\bullet_{\mathcal{G}}\) to \(\bullet_{\mathcal{H}}\). The functorial axioms in
   that case are:
   \[
     f(xy) = f(x)f(y)
   \]
-  for every morphisms \(x\) and \(y\) of \(\cat G\) and
+  for every morphisms \(x\) and \(y\) of \(\mathcal{G}\) and
   \[
-    f(1_{\cat G}) = 1_{\cat H} ,
+    f(1_{\mathcal{G}}) = 1_{\mathcal{H}} ,
   \]
-  with \(1_{\cat G}\) and \(1_{\cat H}\) being the identities of
-  \(\cat G\) and \(\cat H\) respectively. These two properties say that
+  with \(1_{\mathcal{G}}\) and \(1_{\mathcal{H}}\) being the identities of
+  \(\mathcal{G}\) and \(\mathcal{H}\) respectively. These two properties say that
   \(f\) is a monoid homomorphism. In this case there is also an equation
   that about objects, but these two are a mere subtlety that adds
   nothing.
@@ -481,17 +481,17 @@ fancier abbreviation of \q{single object groupoid}.) The answer is
 contained in the following example.
 
 \begin{example}[Group actions]
-  If \(\cat G\) is a group, what is a functor
-  \(\delta : \cat G \to \Set\)? Let us write \(G\) the set of its
-  morphisms. The unique object of \(\cat G\) is mapped to one set
-  \(X\). Since all the morphisms of \(\cat G\) are isomorphisms, then
+  If \(\mathcal{G}\) is a group, what is a functor
+  \(\delta : \mathcal{G} \to \Set\)? Let us write \(G\) the set of its
+  morphisms. The unique object of \(\mathcal{G}\) is mapped to one set
+  \(X\). Since all the morphisms of \(\mathcal{G}\) are isomorphisms, then
   \(\delta\) takes each of them to bijections from \(X\) to \(X\). Thus we
   can say \(\delta\) is the assignment of a certain set \(X\) and, for every
   \(g\) element of the group, of one isomorphism \(\delta_g : X \to X\), done
   in a very specific manner:
   \begin{itemize}
   \item \(\delta_{\id} = \id_X\), where \(\id\) is the identity on the unique
-    object of \(\cat G\).
+    object of \(\mathcal{G}\).
   \item \(\delta_{gf} = \delta_g \delta_f\) for every \(f, g \in G\).
   \end{itemize}
   Does this sound familiar? What we have described is a group {\em
@@ -501,30 +501,7 @@ contained in the following example.
 
 \begin{figure}
   \centering
-  \begin{tikzpicture}
-    \def\framesize{2.5} \def\loopradius{.5*\framesize}
-    % The one object category
-    \node (G) [rectangle, minimum size=\framesize cm,
-    label={below:\(\mathcal G\)}] at (0,0) {}; \node (bullet) [circle]
-    at (G) {\(\bullet\)};
-    % The loops based at the unique object
-    \foreach \i in {0, ..., 4} \draw [->] (bullet) .. controls
-    +(5+72*\i-15:\loopradius cm) and +(5+72*\i+15:\loopradius cm) ..
-    (bullet);
-    % The image in Set
-    \begin{scope}[xshift=3.5cm]
-      \node (Set) [rectangle, rounded corners, fill=gray!15!white,
-      minimum size=\framesize cm, label={below:\(\mathbf{Set}\)}] at
-      (0,0) {}; \node (X) [circle, inner sep=2pt] at (Set) {\(X\)};
-      % The loops based at X
-      \foreach \i in {0, ..., 4} \draw [->] (X) .. controls
-      +(5+72*\i-15:\loopradius cm) and +(5+72*\i+15:\loopradius cm) ..
-      (X);
-    \end{scope}
-    % The functor
-    \draw[->, thick, shorten <={-.05*\framesize cm}, shorten
-    >={.05*\framesize cm}] (G.east) to node[auto]{\(\delta\)} (Set.west);
-  \end{tikzpicture}
+  \input{./tikz/group-actions.qtikz}
   \caption{A group action as functor}
 \end{figure}
 
@@ -820,18 +797,16 @@ contained in the following example.
   \[
     \operatorname{Prob} : \Meas \to \Set
   \]
-  \NotaInterna{Write calculations\dots{}}
 \end{example}
 
 Functors can be composed --- and I think at this point it is not a
-secret. Take \(\cat C\), \(\cat D\) and \(\cat E\) categories and
+secret. Take \(\mathcal{C}\), \(\mathcal{D}\) and \(\mathcal{E}\) categories and
 functors
-\[\cat C \functo F \cat D \functo G \cat E .\]
+\[\mathcal{C} \functo F \mathcal{D} \functo G \mathcal{E} .\]
 The sensible way to define the composite functor
-\(GF : \cat C \to \cat E\) is mapping the objects \(x\) of \(\cat C\) to
-the objects \(GF(x)\) of \(\cat E\), and the morphisms \(f : x \to y\) of
-\(\cat C\) to the morphisms \(GF(f) : GF(x) \to GF(y)\) of \(\cat
-E\). That being set, the composition is associative and there is an
+\(GF : \mathcal{C} \to \mathcal{E}\) is mapping the objects \(x\) of \(\mathcal{C}\) to
+the objects \(GF(x)\) of \(\mathcal{E}\), and the morphisms \(f : x \to y\) of
+\(\mathcal{C}\) to the morphisms \(GF(f) : GF(x) \to GF(y)\) of \(\mathcal{E}\). That being set, the composition is associative and there is an
 identity functor too.
 
 There are all the conditions, so what prevents us to consider a category
@@ -845,9 +820,9 @@ class of objects of \(\bf Cat\) has an element that is a proper class,
 which isn't legal in NBG.
 
 Is a category of {\em locally small} categories and functors
-problematic? Take \(\cat C\) such that \(\cat C(a, b)\) is a proper
-class for some \(a\) and \(b\) objects: consider \(\cat C{/}{b}\). In
-this case \(\obj{\cat C/b}\) is a proper class too, and here we go
+problematic? Take \(\mathcal{C}\) such that \(\mathcal{C}(a, b)\) is a proper
+class for some \(a\) and \(b\) objects: consider \(\mathcal{C}{/}{b}\). In
+this case \(\obj{\mathcal{C}/b}\) is a proper class too, and here we go
 again.
 
 Now what? If we stick to NBG, this is a limit we have to take into
@@ -905,23 +880,23 @@ need:
 % this sophistication a bit later.
 
 \begin{definition}[Diagrams]
-  A {\em diagram} in a category \(\cat C\) consists of a \q{index
-    category} \(\cat I\) and a functor \(X : I \to \cat C\).
-  % A {\em diagram} in a category \(\cat C\) is having:
+  A {\em diagram} in a category \(\mathcal{C}\) consists of a \q{index
+    category} \(\mathcal{I}\) and a functor \(X : I \to \mathcal{C}\).
+  % A {\em diagram} in a category \(\mathcal{C}\) is having:
   % \begin{tcbitem}
-  % \item a scheme of nodes and arrows, that is a category \(\cat I\);
+  % \item a scheme of nodes and arrows, that is a category \(\mathcal{I}\);
   % \item labels for nodes, that is for every object \(i\) of
-  %   \(\cat I\) one object \(x_i\) of \(\cat C\);
+  %   \(\mathcal{I}\) one object \(x_i\) of \(\mathcal{C}\);
   % \item labels for arrows, that is for every pair of objects \(i\)
-  %   and \(j\) of \(\cat I\) and morphism \(\alpha : i \to j\) of
-  %   \(\cat I\), one morphism \(f_\alpha : x_i \to x_j\) of \(\cat C\)
+  %   and \(j\) of \(\mathcal{I}\) and morphism \(\alpha : i \to j\) of
+  %   \(\mathcal{I}\), one morphism \(f_\alpha : x_i \to x_j\) of \(\mathcal{C}\)
   % \end{tcbitem}
   % with all this complying the following rules:
   % \begin{tcbenum}
   % \item \(f_{\id_i} = \id_{x_i}\) for every \(i\) object of
-  %   \(\cat I\);
+  %   \(\mathcal{I}\);
   % \item \(f_\beta f_\alpha = f_{\beta\alpha}\), for \(\alpha\) and
-  %   \(\beta\) two consecutive morphisms of \(\cat I\).
+  %   \(\beta\) two consecutive morphisms of \(\mathcal{I}\).
   % \end{tcbenum}
 \end{definition}
 
@@ -973,12 +948,12 @@ have crafted? Here are some examples.
   \[
     ji := k
   \]
-  A {\em commutative triangle} in a category \(\cat C\) is a diagram
+  A {\em commutative triangle} in a category \(\mathcal{C}\) is a diagram
   with scheme \(\mathbb{3}\).
 \end{example}
 
 \begin{example}[Commutative squares]
-  Let \(\cat I\) be the category
+  Let \(\mathcal{I}\) be the category
   \[
     \begin{tikzcd}
       \bullet \ar["{i_1}", r] \ar["{j_1}", d, swap] \ar["k", dr] & \bullet \ar["i_2", d] \\
@@ -990,8 +965,8 @@ have crafted? Here are some examples.
     & i_2i_1 := k \\
     & j_2j_i := k
   \end{align*}
-  A {\em commutative square} in a category \(\cat C\) is a diagram
-  whose scheme is \(\cat I\).
+  A {\em commutative square} in a category \(\mathcal{C}\) is a diagram
+  whose scheme is \(\mathcal{I}\).
 \end{example}
 
 Since diagrams are meant to be drawn and the definition we have given
@@ -1033,7 +1008,7 @@ In any case, keep in mind that a functor is what running under a diagram.
 
 \begin{example}[Categorial axioms]
   Let us express the categorial axioms in a diagrammatic vest. Let
-  \(\cat C\) be a category and \(x\) an object of \(\cat C\). The fact
+  \(\mathcal{C}\) be a category and \(x\) an object of \(\mathcal{C}\). The fact
   that \(\id_x\) the identity of \(x\) can be translated as follows:
   the diagrams
   \begin{equation}\begin{tikzcd}[row sep=small]
@@ -1048,7 +1023,7 @@ In any case, keep in mind that a functor is what running under a diagram.
     \end{tikzcd}
     \label{diag:IdPropDiag}\end{equation}
   commute for every \(a\) and \(b\) objects and \(f\) and \(g\)
-  morphisms of \(\cat C\). Associativity can be rephrased by saying:
+  morphisms of \(\mathcal{C}\). Associativity can be rephrased by saying:
   \[
     \begin{tikzcd}
       a \ar["f", r] \ar["{gf}", swap, dr] & b \ar["{hg}", dr] \\
@@ -1056,7 +1031,7 @@ In any case, keep in mind that a functor is what running under a diagram.
     \end{tikzcd}
   \]
   commutes for every \(a\), \(b\), \(c\) and \(d\) objects and \(f\),
-  \(g\) and \(h\) morphisms in \(\cat C\).
+  \(g\) and \(h\) morphisms in \(\mathcal{C}\).
 \end{example}
 % Cause diagrams are supposed to be drawn, we shall assume some
 % conventions. The spatial placement of nodes and the shape of arrows
@@ -1158,19 +1133,19 @@ In any case, keep in mind that a functor is what running under a diagram.
 \section{Duality}
 
 \begin{construction}
-For \(\cat C\) a category, its {\em dual} (or {\em opposite}) category
+For \(\mathcal{C}\) a category, its {\em dual} (or {\em opposite}) category
 is denoted \(\opcat C\) and is described as follows:
 \begin{itemize}
-\item The objects are the same of \(\cat C\), that is
-  \(\obj{\opcat C} = \obj{\cat C}\).
+\item The objects are the same of \(\mathcal{C}\), that is
+  \(\obj{\opcat C} = \obj{\mathcal{C}}\).
 \item The morphism \(a \to b\) in \(\opcat C\) are the morphisms
-  \(b \to a\) in \(\cat C\). In other words,
-  \(\opcat C (a, b) = \cat C(b, a)\).
+  \(b \to a\) in \(\mathcal{C}\). In other words,
+  \(\opcat C (a, b) = \mathcal{C}(b, a)\).
 \item For
   \(\begin{tikzcd}[column sep=small, cramped] a \ar["{f}", r] & b
     \ar["{g}", r] & c \end{tikzcd}\) in \(\opcat C\), i.e.
   \(\begin{tikzcd}[column sep=small, cramped] c \ar["{g}", r] & b
-    \ar["{f}", r] & a \end{tikzcd}\) in \(\cat C\), the composition is
+    \ar["{f}", r] & a \end{tikzcd}\) in \(\mathcal{C}\), the composition is
   given by
   \[
     gf := fg .
@@ -1179,8 +1154,8 @@ is denoted \(\opcat C\) and is described as follows:
 The dual category has the same objects of the original one. They have
 the same morphisms too, but have their verses reversed: a morphism
 \(a \to b\) of \(\opcat C\) can be found among morphisms \(b \to a\) in
-\(\cat C\). This has consequence on the composition as well: the
-composition in \(\opcat C\) is that of \(\cat C\) but with arguments
+\(\mathcal{C}\). This has consequence on the composition as well: the
+composition in \(\opcat C\) is that of \(\mathcal{C}\) but with arguments
 reversed. The proof of the categorial properties for dual categories is
 straightforward as it reduces to computation in the original one.
 \end{construction}
@@ -1192,12 +1167,12 @@ straightforward as it reduces to computation in the original one.
 \end{example}
 
 % \begin{exercise}
-%   Consider a single object category \(\cat G\), that is a monoid. What
-%   is \(\opcat G\)? What is \(\opcat G\) if \(\cat G\) is a group?
+%   Consider a single object category \(\mathcal{G}\), that is a monoid. What
+%   is \(\opcat G\)? What is \(\opcat G\) if \(\mathcal{G}\) is a group?
 % \end{exercise}
 
 \begin{example}
-  Let \(\cat C\) be a monoid, that is a single object category, and look
+  Let \(\mathcal{C}\) be a monoid, that is a single object category, and look
   at \(\opcat C\). The unique part to make explicit is the
   composition. Given \(m\) and \(n\) in \(\opcat C\)
   \[
@@ -1236,25 +1211,25 @@ of Category Theory. To understand this, we provide examples.
 
 Traditionally, functors of Definition~\ref{definition:functors} are
 called \q{covariant}, because there are {\em contra}variant functors
-too. For if \(\cat C\) and \(\cat D\) are categories, a {\em
-  contravariant functor} from \(\cat C\) to \(\cat D\) is just a functor
-\(\op{\cat C} \to \cat D\).
+too. For if \(\mathcal{C}\) and \(\mathcal{D}\) are categories, a {\em
+  contravariant functor} from \(\mathcal{C}\) to \(\mathcal{D}\) is just a functor
+\(\op{\mathcal{C}} \to \mathcal{D}\).
 
-Let us unpack a functor \(F : \op{\cat C} \to \cat D\). They map objects
-to objects and morphisms \(f : a \to b\) of \(\op{\cat C}\) to morphisms
-\(F(f) : F(a) \to F(b)\) of \(\cat D\). But, remembering how dual
+Let us unpack a functor \(F : \op{\mathcal{C}} \to \mathcal{D}\). They map objects
+to objects and morphisms \(f : a \to b\) of \(\op{\mathcal{C}}\) to morphisms
+\(F(f) : F(a) \to F(b)\) of \(\mathcal{D}\). But, remembering how dual
 categories are defined, what \(F\) actually does is this:
 \begin{quotation}
-  it maps objects of \(\cat C\) to objects of \(\cat D\) and morphisms
-  \(f : b \to a\) of \(\cat C\) to morphisms \(F(f) : F(a) \to F(b)\) of
-  \(\cat D\) (mind that \(a\) and \(b\) have their roles flipped).
+  it maps objects of \(\mathcal{C}\) to objects of \(\mathcal{D}\) and morphisms
+  \(f : b \to a\) of \(\mathcal{C}\) to morphisms \(F(f) : F(a) \to F(b)\) of
+  \(\mathcal{D}\) (mind that \(a\) and \(b\) have their roles flipped).
 \end{quotation}
 Now, what about functoriality axioms? Neither with identities \(F\) does
-something different and the composite \(gf\) of \(\op{\cat C}\) is
-mapped to the composite \(F(g)F(f)\) of \(\cat D\). Again by definition
+something different and the composite \(gf\) of \(\op{\mathcal{C}}\) is
+mapped to the composite \(F(g)F(f)\) of \(\mathcal{D}\). Again by definition
 of dual categories, this can be translated as follows:
 \begin{quotation}
-  the composite \(fg\) of \(\cat C\) is mapped to \(F(g)F(f)\) (notice
+  the composite \(fg\) of \(\mathcal{C}\) is mapped to \(F(g)F(f)\) (notice
   here how \(f\) and \(g\) have their places switched).
 \end{quotation}
 
@@ -1263,7 +1238,7 @@ of dual categories, this can be translated as follows:
 %     & b \ar["g", dd] \\
 %     a \ar["f", ur] \ar["h", dr, swap] \\
 %     & c
-%   \end{tikzcd}\] of \(\cat C\) are exactly commuting triangles
+%   \end{tikzcd}\] of \(\mathcal{C}\) are exactly commuting triangles
 % \[\begin{tikzcd}[row sep=small]
 %     & b \ar["f", dl, swap] \\
 %     a \\
@@ -1277,12 +1252,12 @@ of dual categories, this can be translated as follows:
 % and quantifiers acting on such names.
 
 % \begin{example}
-%   If we have a morphism \(f : a \to b\) in some category \(\cat C\),
+%   If we have a morphism \(f : a \to b\) in some category \(\mathcal{C}\),
 %   consider the statement
 %   \begin{quotation}
-%     For every {\color{red!65!black} object \(c\) of \(\cat C\)} and
+%     For every {\color{red!65!black} object \(c\) of \(\mathcal{C}\)} and
 %     {\color{blue!65!black} morphisms \(g_1, g_2 : c \to a\) in
-%       \(\cat C\)}, if {\color{green!65!black} \(f g_1 = f g_2\)} then
+%       \(\mathcal{C}\)}, if {\color{green!65!black} \(f g_1 = f g_2\)} then
 %     {\color{orange!65!black}\(g_1 = g_2\)}.
 %   \end{quotation}
 %   If you remember, it is just said that \(f\) is a monomorphism. We
@@ -1312,12 +1287,12 @@ of dual categories, this can be translated as follows:
 \section{Bifunctors}
 
 \begin{construction}
-  Given two categories \(\cat C\) and \(\cat D\), the {\em product
-    category} \(\cat C \times \cat D\) is the category where:
+  Given two categories \(\mathcal{C}\) and \(\mathcal{D}\), the {\em product
+    category} \(\mathcal{C} \times \mathcal{D}\) is the category where:
   \begin{itemize}[leftmargin=*]
   \item The objects are exactly pairs
-    \((x, y) \in \obj{\cat C} \times \obj{\cat D}\).
-  \item For every \((x, x'), (y, y') \in \obj{\cat C \times \cat D}\), a
+    \((x, y) \in \obj{\mathcal{C}} \times \obj{\mathcal{D}}\).
+  \item For every \((x, x'), (y, y') \in \obj{\mathcal{C} \times \mathcal{D}}\), a
     morphism from \((x, x')\) to \((y, y')\) is defined to be a pair
     \[
       \left(
@@ -1337,11 +1312,12 @@ of dual categories, this can be translated as follows:
   \end{itemize}
 \end{construction}
 
-As a matter of fact, we will meet and work with functors with products
-as domain. Let us start with one that will be relevant.
+\begin{example}
+  \NotaInterna{Functoriality of the product of sets.}
+\end{example}
 
 In a locally small \NotaInterna{have we defined somewhere that?}
-category \(\cat C\), take two morphisms
+category \(\mathcal{C}\), take two morphisms
 \[
   \begin{tikzcd}
     a_1 \\
@@ -1353,7 +1329,7 @@ category \(\cat C\), take two morphisms
 \]
 For \(f : a_1 \to a_2\) we have the composite
 \(g_2 f g_1 : b_1 \to b_2\), that is a function
-\[\cat C (a_1, a_2) \to \cat C (b_1, b_2) .\]
+\[\mathcal{C} (a_1, a_2) \to \mathcal{C} (b_1, b_2) .\]
 We will refer to this function using lambda calculus notation:
 \(\lambda f . g_2 f g_1\). If we have
 \[
@@ -1371,22 +1347,22 @@ associativity of the composition. Another remarkable property can be
 obtained when \(a_1 = b_1\), \(g_1 = \id_{a_1}\), \(a_2 = b_2\) and
 \(g_2 = \id_{a_2}\):
 \[
-  \lambda f . \id_{a_2} f \id_{a_1} = \lambda f . f = \id_{\cat C (a_1,
+  \lambda f . \id_{a_2} f \id_{a_1} = \lambda f . f = \id_{\mathcal{C} (a_1,
     b_1)} .
 \]
 There is functoriality, to understand that, we need to package all this
 machinery in one functor.
 
 \begin{definition}
-  If \(\cat C\) is a locally small category, the functor
+  If \(\mathcal{C}\) is a locally small category, the functor
   \[
-    \hom_{\cat C} : \opcat C \times \cat C \to \Set
+    \hom_{\mathcal{C}} : \opcat C \times \mathcal{C} \to \Set
   \]
-  takes every \((x, y) \in \obj{\opcat C \times \cat C}\) to
-  \(\cat C (x, y)\) and on morphisms in \(\opcat C \times \cat C\) is
+  takes every \((x, y) \in \obj{\opcat C \times \mathcal{C}}\) to
+  \(\mathcal{C} (x, y)\) and on morphisms in \(\opcat C \times \mathcal{C}\) is
   given as follows:
   \[
-    \hom_{\cat C} \left(\begin{tikzcd}[row sep=small] a_1 \\ b_1
+    \hom_{\mathcal{C}} \left(\begin{tikzcd}[row sep=small] a_1 \\ b_1
         \ar["g_1", u] \end{tikzcd}, \begin{tikzcd}[row sep=small] a_2
         \ar["g_2", d] \\ b_2 \end{tikzcd}\right)
     \left(\begin{tikzcd}[column sep=small] a_1 \ar["f", r] &
@@ -1394,29 +1370,29 @@ machinery in one functor.
   \]
 \end{definition}
 
-Assume we have a functor \(F : \cat C \times \cat D \to \cat E\). In
+Assume we have a functor \(F : \mathcal{C} \times \mathcal{D} \to \mathcal{E}\). In
 total analogy to what happens with functions in two variables, we can
-curry functors as well. Fixed some \(a \in \obj{\cat C}\), we introduce
+curry functors as well. Fixed some \(a \in \obj{\mathcal{C}}\), we introduce
 the functor
 \[
-  F(a, -) : \cat D \to \cat E
+  F(a, -) : \mathcal{D} \to \mathcal{E}
 \]
-which takes \(b \in \obj{\cat D}\) to \(F(a, b)\) and \(g : b \to b'\)
+which takes \(b \in \obj{\mathcal{D}}\) to \(F(a, b)\) and \(g : b \to b'\)
 to \(F(\id_a, g) : F(a, b) \to F(a, b')\). Similarly, assigned one
-\(b \in \obj{\cat D}\), we introduce the functor
+\(b \in \obj{\mathcal{D}}\), we introduce the functor
 \[
-  F(-, b) : \cat C \to \cat E
+  F(-, b) : \mathcal{C} \to \mathcal{E}
 \]
-which takes \(a \in \obj{\cat C}\) to \(F(a, b)\) and \(f : a \to a'\)
+which takes \(a \in \obj{\mathcal{C}}\) to \(F(a, b)\) and \(f : a \to a'\)
 to \(F(f, \id_b) : F(a, b) \to F(a', b)\).
 
 \begin{definition}\label{definition:hom-functors}
-  Let \(\cat C\) be a locally small category. From
-  \(\hom_{\cat C} : \opcat C \times \cat C \to \Set\) we have the
+  Let \(\mathcal{C}\) be a locally small category. From
+  \(\hom_{\mathcal{C}} : \opcat C \times \mathcal{C} \to \Set\) we have the
   functors
   \begin{align*}
-    & \cat C(a, -) := \hom_{\cat C}(a, -) : \cat C \to \Set \\
-    & \cat C(-, b) := \hom_{\cat C}(-, b) : \opcat C \to \Set
+    & \mathcal{C}(a, -) := \hom_{\mathcal{C}}(a, -) : \mathcal{C} \to \Set \\
+    & \mathcal{C}(-, b) := \hom_{\mathcal{C}}(-, b) : \opcat C \to \Set
   \end{align*}
 \end{definition}
 
@@ -1424,24 +1400,24 @@ We will meet again these functors later; for the moment consider some
 simple example.
 
 \begin{example}
-  If \(\cat G\) is a monoid, a category whose unique object is written
+  If \(\mathcal{G}\) is a monoid, a category whose unique object is written
   as \(\bullet\), then the functor
-  \(\cat G(\bullet, -) : \cat G \to \Set\) is an action on the set
-  \(M := \cat G(\bullet, \bullet)\). Unpacking a bit, it maps a morphism
+  \(\mathcal{G}(\bullet, -) : \mathcal{G} \to \Set\) is an action on the set
+  \(M := \mathcal{G}(\bullet, \bullet)\). Unpacking a bit, it maps a morphism
   \(m : \bullet \to \bullet\) to the function
   \begin{align*}
     & M \to M \\
     & g \mapsto mg
   \end{align*}
-  In other words, \(\cat G (\bullet, -)\) is the action of the monoid
+  In other words, \(\mathcal{G} (\bullet, -)\) is the action of the monoid
   \(M\) on the set \(M\) by multiplication on the left. It is not
   difficult at this point to understand what
-  \(\cat G(-, \bullet) : \opcat C \to \Set\) is.
+  \(\mathcal{G}(-, \bullet) : \opcat C \to \Set\) is.
 \end{example}
 
 In some texts you might find written \(f_\ast\) for
-\(\cat C(a, f) = \cat C(\id_a, f)\) and \(g^\ast\) instead of
-\(\cat C(g, b) = \cat C(g, \id_b)\).
+\(\mathcal{C}(a, f) = \mathcal{C}(\id_a, f)\) and \(g^\ast\) instead of
+\(\mathcal{C}(g, b) = \mathcal{C}(g, \id_b)\).
 
 \begin{example}[The dual space]\label{example:DualSpace}
   If \(V\) is vector space on a field \(k\), we write \(V^\ast\) for its
@@ -1462,30 +1438,28 @@ In some texts you might find written \(f_\ast\) for
 
 \section{Natural transformations}
 
-Given two functors \(F, G : \cat C \to \cat D\), a {\em transformation}
-from \(F\) to \(G\) is a family of morphisms of \(\cat D\)
-% \[
-%   \eta_x : F(x) \to G(x) \text{ for } x \in \obj{\cat C} .
-% \]
+Given two functors \(F, G : \mathcal{C} \to \mathcal{D}\), a {\em transformation}
+from \(F\) to \(G\) is a family of morphisms of \(\mathcal{D}\)
 \[
   \begin{tikzcd}[column sep=small]
     F(x) \ar["{\eta_x}", r] & G(x)
   \end{tikzcd}
-  \text{ for } x \in \obj{\cat C}
+  \text{ for } x \in \obj{\mathcal{C}}
 \]
 The idea behind is measuring the difference of two parallel functor by
 the unique means we have, viz morphisms.
 
-In general, we stick to the following convention: if \(\eta\) is the name
-of a transformation from \(F\) to \(G\), then \(\eta_x\) indicates the
-component \(F(x) \to G(x)\) of the transformation.
+In general, we stick to the following convention: if \(\eta\) is the
+name of a transformation from \(F\) to \(G\), then \(\eta_x\) indicates
+the component \(F(x) \to G(x)\) of the transformation.
 
 We are not interested in all transformations, of course.
 
 \begin{definition}[Natural transformations]
-  A transformation \(\eta\) from a functor \(F : \cat C \to \cat D\) to a
-  functor \(G : \cat C \to \cat D\) is said to be {\em natural} whenever
-  for every \(a, b \in \obj{\cat C}\) and \(f \in \cat C(a, b)\) the square
+  A transformation \(\eta\) from a functor \(F : \mathcal{C} \to \mathcal{D}\) to
+  a functor \(G : \mathcal{C} \to \mathcal{D}\) is said to be {\em natural}
+  whenever for every \(a, b \in \obj{\mathcal{C}}\) and
+  \(f \in \mathcal{C}(a, b)\) the square
   \[
     \begin{tikzcd}
       F(a) \ar["{\eta_a}", r] \ar["{F(f)}", d, swap] & G(a) \ar["{G(f)}", d] \\
@@ -1495,31 +1469,32 @@ We are not interested in all transformations, of course.
   commutes. This property is called \q{naturality} of \(\eta\).
 \end{definition}
 
-We write \(\eta : F \tto G\) to say \(\eta\) is a natural transformation from
-\(F\) to \(G\). If we want to -- or need to -- give the picture of the
-whole context we might go for something like this:
+We write \(\eta : F \tto G\) to say \(\eta\) is a natural transformation
+from \(F\) to \(G\). If we want to -- or need to -- give the picture of
+the whole context we might go for something like this:
 \[
-  \naturaltr{\eta}{\cat C}{\cat D}{F}{G}
+  \naturaltr{\eta}{\mathcal{C}}{\mathcal{D}}{F}{G}
 \]
 
 Sometimes, we introduce a family of morphisms \(\eta_x : Fx \to Gx\)
 parameterised by the objects of the domain of \(F\) and \(G\) and say
 such morphisms are {\em natural in \(x\)}. This jargon motivated by
-practice: one isolates the single maps \(Fx \to Gx\) and afterwards
-learns they are natural.
+practice: one isolates the single maps \(Fx \to Gx\) and afterwards learns
+they are natural.
 
 \begin{example}
-  Let \(V\) be a vector space on some field \(k\). Recall that \(V^\ast\)
-  is the vector space on \(k\) of the linear maps \(f : V \to
-  k\). Introduce now the linear map
+  Let \(V\) be a vector space on some field \(k\). Recall that
+  \(V^\ast\) is the vector space on \(k\) of the linear maps
+  \(f : V \to k\). Introduce now the linear map
   \[
-    e_V : V \to V^{\ast\ast} 
+    e_V : V \to V^{\ast\ast}
   \]
-  taking \(\mathbf v \in V\) to the linear map \(V^\ast \to k\), \(f \mapsto
-  f(\mathbf v)\). If we want to see if \(e_V\) is natural in \(V\), we
-  need to make sure categories and functors are involved. Well, it seems
-  the identity functor \(\id_{\Vect_k}\) is involved, hence we want
-  another functor \(\Vect_k \to \Vect_k\). In fact there is a functor
+  taking \(\mathbf v \in V\) to the linear map \(V^\ast \to k\),
+  \(f \mapsto f(\mathbf v)\). If we want to see if \(e_V\) is natural in
+  \(V\), we need to make sure categories and functors are
+  involved. Well, it seems the identity functor \(\id_{\Vect_k}\) is
+  involved, hence we want another functor \(\Vect_k \to \Vect_k\). In fact
+  there is a functor
   \[
     (\phantom\square)^{\ast\ast} : \Vect_k \to \Vect_k
   \]
@@ -1534,10 +1509,11 @@ learns they are natural.
 Again Linear Algebra.
 
 \begin{example}[Determinant of matrices]
-  Fix one \(n \in \naturals\) and a commutative ring (with unity) \(R\). Then
-  the matrices of type \(n \times n\) with entries in \(R\) together with the
-  usual matrix multiplication form a monoid. We write such object as
-  \(M_n(R)\). The {\em determinant} is a monoid homomorphism
+  Fix one \(n \in \naturals\) and a commutative ring (with unity)
+  \(R\). Then the matrices of type \(n \times n\) with entries in \(R\)
+  together with the usual matrix multiplication form a monoid. We write
+  such object as \(M_n(R)\). The {\em determinant} is a monoid
+  homomorphism
   \[
     \det_{n, R} : M_n(R) \to R .
   \]
@@ -1545,8 +1521,7 @@ Again Linear Algebra.
   is the forgetful functor \(U : \CRing \to \Mon\) and the other is
   \(M_n : \CRing \to \Mon\), which takes
   \begin{itemize}
-  \item commutative rings \(R\) to
-    \(M_n(R)\)
+  \item commutative rings \(R\) to \(M_n(R)\)
   \item ring homomorphism \(f : R \to S\) to the monoid homomorphism
     \(M_n(f)\) sending a matrix \(A\) to the matrix with \(f(A_{ij})\)
     as entry at position \((i, j)\).
@@ -1554,40 +1529,493 @@ Again Linear Algebra.
   That said, we can easily verify \(\det_{n, R}\) is natural in \(R\).
 \end{example}
 
+As you may have already surmised, natural transformation are morphisms
+between functors. Indeed there is a nation of compositionality
+satisfying categorial axioms.
 
-\section{Composing natural transformations}
-
-Natural transformations can be composed: taken two consecutive natural
-transformations
+Consider two consecutive natural transformations
 \[
   \begin{tikzcd}
-    \cat C \ar["F"{name=F}, rr, bend left=70] \ar["G"{name=G,
+    \mathcal{C} \ar["F"{name=F}, rr, bend left=70] \ar["G"{name=G,
       description}, rr] \ar["H"{name=H}, rr, bend right=70, swap] & &
-    \cat D \ar["\eta", natural, from=F, to=G] \ar["\theta", natural, from=G,
+    \mathcal{D} \ar["\eta", natural, from=F, to=G] \ar["\theta", natural, from=G,
     to=H]
   \end{tikzcd}
 \]
-the transformation \(\theta \eta\) that have the components
-\(\theta_x \eta_x : F(x) \to H(x)\), for \(x \in \obj{\cat C}\) of
-\(\cat D\) is natural. Such composition is associative. Moreover, for
-every functor \(F: \cat C \to \cat D\) there is the natural transformation
-\(\id_F : F \tto F\) with components \(\id_{F(x)} : F(x) \to F(x)\), for
-\(x \in \obj{\cat C}\); they are identities in categorial sense:
-\begin{align*}
-  \eta \id_F = \eta & \text{ for every natural transformation } \eta : F \tto G \\ 
-  \id_F \mu = \mu & \text{ for every natural transformation } \mu : H \tto F .
-\end{align*}
+We can define \(\theta \eta\) to be the family of morphisms
+\[
+  (\theta \eta)_x := \theta_x \eta_x : Fx \to Hx \quad\text{for } x \in \obj{\mathcal{C}} .
+\]
+It is simple to verify that \((\theta \eta)_x\) is natural in \(x\) by simply
+looking at the diagram
+\[
+  \begin{tikzcd}
+    Fa \ar["{Ff}", d, swap] \ar["{\eta_a}", r] & Ga \ar["{Gf}", d]
+    \ar["{\theta_a}", r] & Ha \ar["{Hf}", d] \\
+    Fb \ar["{\eta_b}", r, swap] & Gb \ar["{\theta_b}", r, swap] & Hb
+  \end{tikzcd}
+\]
+Such composition is associative; moreover, for every functor
+\(F: \mathcal{C} \to \mathcal{D}\) there is the natural transformation
+\(\id_F : F \tto F\) with components \(\id_{Fx} : Fx \to Fx\), for
+\(x \in \obj{\mathcal{C}}\). Such natural transformations are identities in
+categorial sense.
 
-All this suggests to, given two categories \(\cat C\) and \(\cat D\),
-form a category with functors \(\cat C \to \cat D\) as objects and
-natural transformations as morphism, them being composable as explained
-above. [\dots{}]
+\begin{definition}
+  Given categories \(F, G : \mathcal{C} \to \mathcal{D}\), we write
+  \([\mathcal{C}, \mathcal{D}]\) the {\em functor category}, that is the category
+  of functors and natural transformations depicted earlier. In
+  particular, a {\em natural isomorphism} is an isomorphism in
+  \([\mathcal{C}, \mathcal{D}]\).
+\end{definition}
 
-\NotaInterna{Consider \url{https://mathoverflow.net/q/39073}\dots{}}
+% All this suggests to, given two categories \(\mathcal{C}\) and \(\mathcal{D}\),
+% form a category with functors \(\mathcal{C} \to \mathcal{D}\) as objects and natural
+% transformations as morphism, them being composable as explained
+% above. [\dots{}]
 
+% \NotaInterna{Consider \url{https://mathoverflow.net/q/39073}\dots{}}
+
+There is a simple characterisation of isomorphisms of functor categories.
+
+\begin{proposition}
+  A natural transformation is a natural isomorphism if and only if its
+  components are all isomorphisms.
+\end{proposition}
+
+\begin{exercise}
+  Prove the previous Proposition.
+\end{exercise}
+
+Sometimes we will need to work with natural transformations between
+bifunctors. Verifying naturality in two variables can be difficult
+sometimes though. Luckily you can split the work in two: check
+naturality in the variables separately.
+
+\begin{proposition}\label{proposition:NaturalityInToVariables}
+  Let \(F, G : \mathcal{C}_1 \times \mathcal{C}_2 \to \mathcal{D}\) be functors and a transformation \(\eta : F
+  \Rightarrow G\) a transformation. Then the following are equivalent:
+  \begin{enumerate}[leftmargin=*]
+  \item \(\eta\) is natural.
+  \item For every \(a \in \obj{\mathcal{C}_1}\), the morphism
+    \(\eta_{a, b} : F(a, b) \to G(a, b)\) is natural in \(b\) and for every
+    \(b \in \obj{\mathcal{C}_2}\), the morphism
+    \(\eta_{a, b} : F(a, b) \to G(a, b)\) is natural in \(a\).
+  \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+  
+\end{proof}
+
+% \begin{example}
+%   Consider the bifunctor
+%   \[
+%     (\times) : \Set \times \Set \to \Set
+%   \]
+%   that sends pairs \((A, B)\) to cartesian products \(A \times B\) and pairs
+%   \((f : A \to A', g : B \to B')\) to
+%   \begin{align*}
+%     & f \times g : A \times B \to A' \times B' \\
+%     & (f \times g)(a, b) := (f(a), g(b))
+%   \end{align*}
+%   Now consider the bifunctor
+%   \[
+%     (\tilde\times) : \Set \times \Set \to \Set
+%   \]
+%   defined which is \(\times\) but swaps arguments: sends \((A, B)\) to
+%   \(B \times A\) and \((f, g)\) to \(g \times f\). Prove now that
+%   \begin{align*}
+%     & \swap_{A, B} : A \times B \to B \times A \\
+%     & \swap_{A, B} (a, b) := (b, a)
+%   \end{align*}
+%   is natural in \(A\) and \(B\), that is \(\swap : (\times) \Rightarrow (\tilde\times)\). 
+% \end{example}
+
+% \begin{example}
+%   Consider for \(A, B, C \in \obj\Set\) the function
+%   \begin{align*}
+%     & (\hole)^\sharp : \Set(A \times B, C) \to \Set(A, \Set(B, C)) \\
+%     & f^\sharp := \lambda a . \lambda b . f(a, b)
+%   \end{align*}
+%   and verify that it is natural in \(A, B, C \in \obj\Set\). To do so,
+%   make sure you get the whole picture. One functor is
+%   \[
+%     F : \op\Set \times \op\Set \times \Set \to \Set
+%   \]
+%   which takes \((A, B, C)\) to \(\Set (A \times B, C)\) and \((f : A' \to A, g
+%   : B' \to B, h : C \to C')\) to the function
+%   \begin{align*}
+%     & F(f, g, h) : \Set(A \times B, C) \to \Set( A' \times B', C') \\
+%     & F(f, g, h)(k) := hk(f \times g)
+%   \end{align*}
+%   The other functor is
+%   \[
+%     G : \op\Set \times \op\Set \times \Set \to \Set
+%   \]
+%   which takes \((A, B, C)\) to \(\Set (A, \Set(B, C))\) and \((f : A' \to A, g
+%   : B' \to B, h : C \to C')\) to the function
+%   \begin{align*}
+%     & G(f, g, h) : \Set(A, \Set(B, C)) \to \Set(A', \Set(B', C')) \\
+%     & G(f, g, h)(k) := \lambda a' . \lambda b' . hk(f a')(g b')
+%   \end{align*}
+% \end{example}
 
 
 \section{Equivalence of categories}
+
+It might seem the discussion about ``sameness'' categories can be easily
+liquidated: two categories \(\mathcal{C}\) and \(\mathcal{D}\) are the same whenever they are isomorphic, in
+the sense there are functors \(F : \mathcal{C} \to \mathcal{D}\) and \(G : \mathcal{D} \to
+C\) such that \(GF = \id_{\mathcal{C}}\) and \(FG = \id_{\mathcal{D}}\). Well,
+it's not that easy.
+
+\begin{definition}
+  We say a category \(\mathcal{C}\) is {\em equivalent} to a category
+  \(\mathcal{D}\), and write \(\mathcal{C} \simeq \mathcal{D}\), when there are functors
+  \[
+    \begin{tikzcd}[column sep=small, cramped] \mathcal{C} \ar["{F}", r, shift
+      left] & \mathcal{D} \ar["{G}", l, shift left] \end{tikzcd}
+  \]
+  and two natural isomorphisms
+  \[
+    \eta : \id_{\mathcal{C}} \Rightarrow GF \quad\text{and}\quad \epsilon : FG \Rightarrow \id_{\mathcal{D}} .
+  \]
+  The tuple \((F, G, \eta, \epsilon)\) is called {\em equivalence}. In other
+  books, you might find written that an equivalence is just a functor
+  \(F : \mathcal{C} \to \mathcal{D}\) for which there exist
+  \(G : \mathcal{D} \to \mathcal{C}\) and natural isomorphisms
+  \(\eta : \id_{\mathcal{C}} \Rightarrow GF\) and \(\epsilon : FG \Rightarrow \id_{\mathcal{D}}\).
+\end{definition}
+
+Since \(\eta\) and \(\epsilon\) are natural isomorphisms, then also
+\((G, F, \inv\epsilon, \inv\eta)\) is an equivalence. However, observe that the
+equivalence is \(\mathcal{D} \simeq \mathcal{C}\) and we have never written that the
+equivalence of categories is an equivalence relation. Yes, it is, but
+that comes after some work.
+
+Here is a reformulation of the concept of equivalence of categories.
+
+\begin{proposition}
+  Let \((F, G, \eta, \epsilon)\) be an equivalence between \(\mathcal{C}\) and
+  \(\mathcal{D}\). Then \(F\) are \(G\) are full, faithful and essentially
+  surjective on objects. Conversely -- if you accept the {\sc Axiom of
+    Choice} -- a full, faithful and essentially surjective functor
+  \(F : \mathcal{C} \to \mathcal{D}\) gives an equivalence
+  \((F, G, \eta, \epsilon)\) of categories such that
+  \begin{align}
+    & (\epsilon F)(F \eta) = \id_F \label{eqn:TriId1} \\
+    & (G \epsilon) (\eta G) = \id_G \label{eqn:TriId2}
+  \end{align}
+\end{proposition}
+
+\NotaInterna{Talk about the natural transformations
+  in~\eqref{eqn:TriId1} and~\eqref{eqn:TriId2}.}
+
+This is the reason why sometimes we refer to full, faithfull and
+essentially surjective functors as equivalences.
+
+\begin{proof}
+  (\(\Rightarrow\)) We prove only that \(F\) is full, faithful and essentially
+  surjective on objects, since for \(G\) the argument is similar. Let
+  \(f, f' \in \mathcal{C} (a, b)\) such that \(Ff = Ff'\). By naturality of
+  \(\eta\), the squares in
+  \[
+    \begin{tikzcd}
+      a \ar["{f}", d, swap, shift right] \ar["{f'}", d, shift left] \ar["{\eta_a}", r] & GFa \ar["{GFf = GFf'}", d] \\
+      b \ar["{\eta_b}", r, swap] & GFb
+    \end{tikzcd}
+  \]
+  commutes. The equality \(f = f'\) follows immediately because
+  \[
+    f = \inv \eta_b (GF f) \eta_a = \inv\eta_b (GF f') \eta_a = f' .
+  \]
+  Now let \(g \in \mathcal{D}(Fa, Fb)\) and pick
+  \(f := \inv \eta_b(Gg) \eta_a \in \mathcal{C}(a, b)\). Again by naturality of
+  \(\eta\), we have the following commutative square
+  \[
+    \begin{tikzcd}
+      a \ar["{f}", d, swap] \ar["{\eta_a}", r] & GFa \ar["{GFf}", d] \\
+      b \ar["{\eta_b}", r, swap] & GFb
+    \end{tikzcd}
+  \]
+  In this case \(G(Ff) = \eta_b f \inv\eta_a = Gg\), which implies
+  \(Ff = g\) because \(G\) is faithful. To conclude, observe also that
+  for \(d \in \obj{\mathcal{D}}\), we have \(F(Gd) \cong d\) thanks to \(\epsilon\).
+
+  (\(\Leftarrow\)) Assume you have a functor \(F : \mathcal{C} \to \mathcal{D}\) full,
+  faithful and essentially surjective: from this we will construct
+  \(G : \mathcal{D} \to \mathcal{C}\) and natural isomorphisms
+  \(\eta : \id_{\mathcal{C}} \Rightarrow GF\) and \(\epsilon : FG \Rightarrow \id_{\mathcal{D}}\).
+  \begin{itemize}
+  \item Since \(F\) is essentially surjective, for every
+    \(d \in \obj{\mathcal{D}}\) choose one object in \(\mathcal{C}\) that we name
+    \(Gd\) and such that \(F(G d) \cong d\). Since we need this notation
+    later, write \(\epsilon_d : F(G d) \to d\) one of the morphisms realising the
+    isomorphism \(F(G d) \cong d\). Now for every \(g : a \to b\) in
+    \(\mathcal{D}\), let \(Gg : Ga \to Gb\) the morphism such that
+    \[
+      F(Gg) := \inv\epsilon_b g \epsilon_a
+    \]
+    \[
+      \begin{tikzcd}
+        a \ar["{g}", d, swap] & FGa \ar["{\epsilon_a}", l, swap] \ar["{FGg}", d] \\
+        b \ar["{\inv\epsilon_b}", r, swap] & FGb
+      \end{tikzcd}
+    \]
+    We shall now verify \(G\) gives arise to a functor
+    \(\mathcal{D} \to \mathcal{C}\). First of all,
+    \[
+      F\left( G\id_a \right) = \inv\epsilon_a \id_a \epsilon_a =
+      F\left(\id_{Ga}\right) .
+    \]
+    Being \(F\) faithful, we can derive \(G \id_a = \id_{Ga}\). Now take
+    two composable morphisms
+    \(\begin{tikzcd}[column sep=small, cramped] a \ar["{f}", r] & b
+      \ar["{g}", r] & c \end{tikzcd}\).
+    \begin{align*}
+      F(G(gf)) &= \inv\epsilon_c (gf) \epsilon_a = \left( \inv\epsilon_c g \epsilon_b \right) \left(
+                 \inv\epsilon_b f \epsilon_a \right) = \\
+               &= F(Gg) F(Gf) = F(Gg Gf) .
+    \end{align*}
+    Again by faithfulness of \(F\), conclude that \(G(gf) = Gg Gf\).
+  \item We have already introduced a family of isomorphisms
+    \(\epsilon_a : FGa \to a\). These morphisms are natural in
+    \(a \in \obj{\mathcal{D}}\) just by construction of \(G\) on morphisms.
+  \item Now, for every \(x \in \obj{\mathcal{C}}\) we shall introduce
+    \(\eta_x : x \to GFx\) which is natural in \(x\). Take the morphism
+    \(\begin{tikzcd}[column sep=small, cramped] Fx
+      \ar["{\inv\epsilon_{Fx}}", r] & FGFx \end{tikzcd}\) in \(\mathcal{D}\):
+    being \(F\) full and faithful, there is a unique
+    \(\eta_x : x \to GFx\) such that \(F\eta_x =
+    \inv\epsilon_{Fx}\). Observe that~\eqref{eqn:TriId1} is
+    proved. Observe also that \(\eta_x\) is an isomorphism, since \(F\)
+    is full and faithful. Consider the square
+    \[
+      \begin{tikzcd}
+        x \ar["{f}", d, swap] \ar["{\eta_x}", r] & GFx \ar["{GFf}", d] \\
+        y \ar["{\eta_y}", r, swap] & GFy
+      \end{tikzcd}
+    \]
+    We have
+    \begin{align*}
+      & F\left((GFf) \eta_x\right) = (FGFf) (F\eta_x) = (FGFf) \inv\epsilon_{Fx} \\
+      & F\left(\eta_yf\right) = (F\eta_y) (Ff) = \inv \epsilon_{Fy} (Ff)
+    \end{align*}
+    The naturality of \(\eta\) derives from the naturality of \(\epsilon\)
+    \[
+      \begin{tikzcd}
+        FGFx \ar["{FGFf}", d, swap] \ar["{\epsilon_{Fx}}", r] & Fx \ar["{Ff}", d] \\
+        FGFy \ar["{\epsilon_{Fy}}", r, swap] & Fy
+      \end{tikzcd}
+    \]
+    and from the fact that \(F\) is faithful.
+    
+  \item By how the functor \(G\) is introduced, we have
+    \[
+      F\left(G\epsilon_a\right) = \inv\epsilon_a \epsilon_a \epsilon_{FGa} = \epsilon_{FGa}
+    \]
+    On the other hand, by how \(\eta\) is introduced, we have
+    \(F(\eta_{Ga}) = \inv\epsilon_{FGa}\), from which we deduce that
+    \[
+      F\left( \inv\eta_{Ga} \right) = \epsilon_{FGa}.
+    \]
+    To derive~\eqref{eqn:TriId2} use the fact that \(F\) is
+    faithful.\qedhere
+  \end{itemize}
+\end{proof}
+
+\begin{example}[\(\Mat_k \simeq \FDVect_k\)]
+  We have already met the category \(\Mat_k\) of matrices over a field
+  \(k\) (Example~\ref{example:Mat}). Consider the functor
+  \[
+    F : \Mat_k \to \FDVect_k
+  \]
+  that maps \(n \in \mathbb{N}\) to the vector space \(k^n\) and matrices
+  \(A : m \to n\) (that is, matrices of type \(n \times m\)) to the linear map
+  \(x \mapsto Ax\). A basic knowledge of {\sc Linear Algebra} is enough to see
+  that \(F\) is full, faithful and essentially surjective on objects. In
+  particular, if \(f : k^m \to k^n\) is linear, then the unique matrix
+  \(A\) of type \(n \times m\) such that \(FA = f\) is obtained as follows:
+  \begin{quote}
+    Take the canonical base \(\left\{ e_1, \dots, e_m \right\}\) of
+    \(k^m\): then \(A\) is the matrix whose \(i\)-th column
+    (\(i \in \left\{ 1, \dots, m \right\}\)) is \(f(e_i)\).
+  \end{quote}
+  Well, this is the case of the Proposition above: we have a functor
+  \(G : \FDVect_k \to \Mat_k\) and natural isomorphisms
+  \(\eta : \id_{\Mat_k} \Rightarrow GF\) and
+  \(\epsilon : FG \Rightarrow \id_{\FDVect_k}\) such that equations~\eqref{eqn:TriId1}
+  and~\eqref{eqn:TriId2} hold. As experiment, let us carry out the
+  constructions of the previous proof for this specific case.
+
+  What is \(G\) here? It is any functor such that \(FGV \cong V\): define
+  \(GV\) to be \(\dim V\), the dimension of \(V\), for example. What
+  about \(\epsilon_V\)? You can choose any linear isomorphism
+  \(k^{\dim V} \to V\). What about the action of \(G\) on linear maps now?
+  For \(g : V \to W\), the matrix \(Gg\) is determined by
+  \(F(G g) = \inv\epsilon_W g \epsilon_V\): in fact,
+  \(\inv\epsilon_W g \epsilon_V : k^{\dim V} \to k^{\dim W}\) and it is quite easy to
+  reconstruct the matrix \(Gg\) of type \(\dim W \times \dim V\). On the
+  other hand, recall this:
+  \begin{quote}
+    Let \(V\) and \(W\) be vector spaces together with bases
+    \(\mathcal{B}_V := \left\{ v_1, \dots, v_m\right\}\) and
+    \(\mathcal{B}_W := \left\{ w_1, \dots, w_n\right\}\) respectively and a linear
+    map \(f : V \to W\). Write \(p_{\mathcal{B}_V} : V \to k^m\) and
+    \(p_{\mathcal{B}_W} : W \to k^n\) the linear maps that send each vector to their
+    coordinates in the given base. Then there is a unique matrix \(A\)
+    of type \(n \times m\) such that commutes the following diagram
+    \[
+      \begin{tikzcd}
+        V \ar["{p_{\mathcal{B}_V}}", d, swap] \ar["{f}", r] & W \ar["{p_{\mathcal{B}_W}}", d] \\
+        k^m \ar["{x \mapsto Ax}", r, swap] & k^n
+      \end{tikzcd}
+    \]
+  \end{quote}
+  Well, there is a one-to-one correspondence between the linear
+  isomorphisms \(\epsilon_V : k^{\dim V} \to V\) and the bases of \(V\); in that
+  case, \(\epsilon_V\) is just the inverse of \(p_{\mathcal{B}_V}\) for one suitable base
+  \(\mathcal{B}_V\) of \(V\).
+
+  In substance, the equivalence \(F : \Mat_k \to \FDVect_k\) embodies the
+  mantra of your {\sc Linear Algebra} course:
+  \begin{quote}
+    Once you assign bases, linear maps of finite-dimension vector spaces
+    are just matrices.
+  \end{quote}
+
+  But let us return to the constructions. What is \(\eta\)? Its components
+  are just \(\eta_n : n \to n\), that is for each \(n \in \mathbb{N}\) a
+  \(n \times n\) matrix. Look at the proof more closely. \(\eta_m\) is such that
+  \(F(\eta_m) = \inv\epsilon_{Fm} = \inv\epsilon_{k^m}\) and
+  \(\epsilon_{k^m} : k^m \to k^m\), so it is a very precise matrix: it is the
+  matrix that lets you to pass from the canonical base of \(k^m\) to
+  another one.
+\end{example}
+
+
+
+\section{Exercises}
+
+\begin{exercise}
+  Given functors \(F_1 : \mathcal{C}_1 \to \mathcal{D}_1\) and \(F_2 : \mathcal{C}_2 \to \mathcal{D}_2\), construct
+  a functor
+  \[
+    F_1 \times F_2 : F_1 : \mathcal{C}_1 \times \mathcal{C}_2 \to \mathcal{D}_1 \times \mathcal{D}_2
+  \]
+  defined objects as \(F_1 \times F_2 (x, y) := \left( F_1 x, F_2 y \right)\).
+\end{exercise}
+
+\begin{exercise}
+  Fix \(C \in \obj{\Set}\) and consider the functions
+  \begin{align*}
+    & \alpha_{A,B} : \Set(C, A) \times \Set(C, B) \to \Set(C, A \times B) \\
+    & \alpha_{A,B}(f, g) :=  \lambda x . (f(x), g(x))
+  \end{align*}
+  for \(A, B \in \obj{\Set}\).
+  \begin{enumerate}
+  \item These functions are a bijection. More is true though: the
+    exercise for you is to understand that \(\eta_{A, B}\) is natural in
+    \(A\) and \(B\). To do so, you will need to understand who are the
+    functors \(F, G : \Set \times \Set \to \Set\) defined on objects as
+    \(F(A, B) := \Set(C, A) \times \Set(C, B)\) and
+    \(G(A, B) := \Set(C, A \times B)\).
+  \item Prove that for every \(C\) there is a function
+    \(\eta_C : C \to C \times C\) which is natural in \(C\) and enjoys the
+    following property
+    \begin{quote}
+      For every \(h : C \to A \times B\) there are unique
+      \(f : C \to A\) and \(g : C \to B\) which make the following diagram
+      commute
+      \[
+        \begin{tikzcd}
+          C \ar["{\eta_C}", r] \ar["{h}", dr, swap] & C \times C \ar["{f \times g}",
+          d] \\
+          & A \times B
+        \end{tikzcd}
+      \]
+    \end{quote}
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  {\color{red} [Functors of the adjunctions...]}
+\end{exercise}
+
+\begin{exercise}
+  Let \(\mathcal{C}\) and \(\mathcal{D}\) be two categories, \(\Phi : \op{\mathcal{C}} \times \mathcal{D} \to \Set\) a
+  functor and \(F_o : \obj{\mathcal{C}} \to \obj{\mathcal{D}}\) a function. Assume also that
+  for every \(a \in \obj{\mathcal{C}}\) we have a natural isomorphism
+  \[
+    \Phi(a, -) \cong \mathcal{D}(F_o(a), -) .
+  \]
+  Show that there is a unique functor \(F : \mathcal{C} \to \mathcal{D}\) such that:
+  \begin{enumerate}
+  \item \(F(a) = F_o(a)\) for every \(a \in \obj{\mathcal{C}}\).
+  \item The bijection \(\Phi(a, b) \cong \mathcal{D}(F(a), b)\) is also natural in \(a\).
+  \end{enumerate}
+  In particular, find a functor \(\Phi^\sharp : \op{\mathcal{C}} \to [\mathcal{D}, \Set]\) such that
+  \(\Phi^\sharp (a) = \mathcal{D}(F(a), -)\) for every \(a \in \obj{\mathcal{C}}\).
+\end{exercise}
+
+\begin{exercise}
+  Consider the functor
+  \(\hom_{\mathcal{C}} : \op{\mathcal{C}} \times \mathcal{C} \to \Set\). We have seen how we can associate to
+  each \(a \in \obj{\mathcal{C}}\) the functor
+  \(\mathcal{C}(a, -) : \mathcal{C} \to \Set\). Well, the exercise for you is: find a functor
+  \[
+    \yo_{\mathcal{C}} : \op{\mathcal{C}} \to [\mathcal{C}, \Set]
+  \]
+  such that on objects is defined by
+  \(\yo_{\mathcal{C}} (a) := \mathcal{C}(a, -)\). Can you find a functor
+  \(\mathcal{C} \to [\op{\mathcal{C}}, \Set]\)? Are the these two faithful? Are they full?
+\end{exercise}
+
+\begin{remark}
+  The functors above are the {\em Yoneda embeddings}. While it is
+  relatively simple to show they are faithful, fullness requires a non
+  trivial work to be done, which will be the subject for one of the next
+  chapters.
+\end{remark}
+
+\begin{figure}
+  \centering
+  \input{./tikz/el_cat.qtikz}
+  \caption{Exercise~\ref{exercise:RepresentableFunctorsInitialObjects}}
+\end{figure}
+
+\begin{exercise}\label{exercise:RepresentableFunctorsInitialObjects}
+  \begin{enumerate}
+  \item Let \(\mathcal{C}\) be a {\em locally small} category and
+    \(X : \mathcal{C} \to \Set\) a functor. Assume there is
+    \(a \in \obj{\mathcal{C}}\) such that there is a natural isomorphism
+    \[
+      \psi : \mathcal{C}(a, -) \Rightarrow X
+    \]
+    Let us introduce \(\tld a := \psi_a\left(\id_a\right)\), which is an
+    element of \(X(a)\). Prove that
+    \begin{quote}
+      for every \(x \in \obj{\mathcal{C}}\) and \(c \in X(x)\) there is a unique
+      \(f : a \to x\) such that \(X(f)\left(\tld a\right) = c\).
+    \end{quote}
+    
+  \item Consider a natural isomorphism
+    \(\psi : \mathcal{C}(a, -) \Rightarrow \mathcal{C}(b, -)\). Look at
+    \(\psi_a(\id_a) : b \to a\) and observe that there is a unique
+    \(f : a \to b\) such that \(f \psi_a(\id_a) = \id_b\) (why?). Show that
+    also \(\psi_a(\id_a) f = \id_a\). In particular, you can conclude that
+    if \(\mathcal{C}(a, -) \cong \mathcal{C}(b, -)\), then \(a \cong b\).
+  \end{enumerate}
+\end{exercise}
+
+\begin{remark}
+  If you have made to this point, congratulations! You have proved one
+  of the most important theorems of {\sc Category Theory}, without
+  passing before the {\em Yoneda Lemma} -- which is pretty the
+  standard. (We will follow this path in one of the next chapters and
+  meet some immediate consequences, like the one in the exercise above.)
+\end{remark}
 
 
 

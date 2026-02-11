@@ -8,16 +8,22 @@
 
 \begin{document}
 
-\input{title.tex}
+\include{title.tex}
 
 \cleardoublepage
 
-\newgeometry{ margin=3cm }
+%\cleardoublepage
+
+\newgeometry{ margin=2cm }
 \tableofcontents
 \restoregeometry
 
 \include{chapters/prelude.tex}
 \include{chapters/base.tex}
+\include{chapters/limits.tex}
+\include{chapters/adjunctions.tex}
+\include{chapters/representable.tex}
+\include{chapters/monads.tex}
 
 \printbibliography
 

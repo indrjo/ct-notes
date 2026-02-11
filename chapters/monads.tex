@@ -1,0 +1,361 @@
+
+\chapter{Monads and Algebras}
+
+\section{Definition and examples}
+
+\begin{definition}
+  A {\em monad} on a category \(\mathcal{C}\) consists of:
+  \begin{itemize}[leftmargin=*]
+  \item A functor \(T: \mathcal{C} \to \mathcal{C}\).
+  \item A natural transformation
+    \(\eta: \id_{\mathcal{C}} \Rightarrow T\) called {\em unit}.
+  \item A natural transformation \(\mu: T^2 \Rightarrow T\), called {\em
+      multiplication}.
+  \end{itemize}
+  such that the following diagrams commute:
+  \begin{enumerate}[leftmargin=*]
+  \item {\em Identity law}
+    \begin{equation}
+      \begin{tikzcd}
+        T \ar["{\eta T}", r, Rightarrow] \ar["{\id_T}", dr, swap,
+        Rightarrow] & T^2 \ar["{\mu}", d, Rightarrow] &
+        T \ar["{T \eta}", l, swap, Rightarrow] \ar["{\id_T}", dl, Rightarrow] \\
+        & T
+      \end{tikzcd}
+      \label{cd:MonadAxiomI}
+    \end{equation}
+  \item {\em Associativity law}
+    \begin{equation}
+      \begin{tikzcd}
+        T^3 \ar[r, "\mu T", Rightarrow] \ar["{T \mu}", d, swap, Rightarrow] & T^2
+        \ar["{\mu}", d, Rightarrow] \\
+        T^2 \ar["{\mu}", r, swap, Rightarrow] & T
+      \end{tikzcd}
+      \label{cd:MonadAxiomII}
+    \end{equation}
+  \end{enumerate}
+\end{definition}
+
+\begin{example}[The action monad/writer monad]\label{example:ActionWriterMonad}
+  Suppose we have a monoid \((M, \cdot, e)\). We can define the functor \(W_M : \Set
+  \to \Set\) to be \(- \times M\). For every set \(X\) we have the function
+  \begin{align*}
+    & \eta_X : X \to X \times M \\
+    & \eta_X(x) := (x, e)
+  \end{align*}
+  which is natural in \(X\). At this point, we have the unit \(\eta :
+  \id_\Set \Rightarrow W_M\). To conclude, we can define a multiplication \(\mu :
+  W_M^2 \Rightarrow W_M\) with components
+  \begin{align*}
+    & \mu_X : (X \times M) \times M \to X \times M \\
+    & \mu_X ((x, m), n) := (x, m \cdot n)
+  \end{align*}
+  \((W_M, \eta, \mu)\) is the {\em action monad} -- or, as programmers like to
+  call it, the {\em writer monad}.
+\end{example}
+
+If you have an adjunction, then you can obtain a monad in a quite simple manner.
+
+\begin{proposition}[Monads from adjunction]\label{proposition:FromAdjunctionsToMonads}
+  Consider and adjunction
+  \[
+    \begin{tikzcd}
+      \mathcal{C} \ar["{F}"{name=left}, r, bend left] & \mathcal{D} \ar["{G}"{name=right},
+      l, bend left] \ar["{\perp}"description, phantom, from=left, to=right]
+    \end{tikzcd}
+  \]
+  with unit \(\eta : \id_{\mathcal{C}} \Rightarrow G F\) and counit
+  \(\varepsilon : F G \Rightarrow \id_{\mathcal{D}}\). Then we have a monad
+  \((T, \eta, \mu)\) on \(\mathcal{C}\), where \(T := GF\) and
+  \(\mu : T^2 \Rightarrow T\) has components
+  \[
+    \mu_a := G \left( \epsilon_{Fa} \right) .
+  \]
+\end{proposition}
+
+\begin{example}
+  Consider the adjunction \(- \times B \dashv \Set(B, -)\) which has unit
+  \(\eta : \id_\Set \Rightarrow \Set(B, - \times B)\) with components
+  \[
+    \eta_A := \lambda a . \lambda b . (a, b)
+  \]
+  and has counit \(\epsilon : \Set(B, -) \times B \Rightarrow \id_\Set\) with components
+  \[
+    \epsilon_A := \lambda (f, a) . f a .
+  \]
+  (Recall Example~\ref{example:CurryingFunctions} if needed.) Now let us
+  compute the monad induced as in
+  Lemma~\ref{proposition:FromAdjunctionsToMonads}.
+  \begin{itemize}
+  \item The endofunctor of the monad is
+    \[
+      T := \Set(B, - \times B) : \Set \to \Set
+    \]
+    that is, the functor that maps an object \(A\) to
+    \(\Set(B, A \times B)\) and \(f : A \to A'\) to
+    \((f \times \id_B) \circ - : \Set(B, A \times B) \to \Set(B, A' \times B)\).
+  \item The unit is just \(\eta : \id_\Set \Rightarrow T\).
+  \item The multiplication is \(\mu : T \circ T \Rightarrow T\) with components
+    \[
+      \mu_A := \Set(B, \epsilon_{A \times B}) = \epsilon_{A \times B} \circ - .
+    \]
+    Ok, that is a difficult thing to imagine.
+  \end{itemize}
+\end{example}
+
+\begin{proof}[Proof of Proposition~\ref{proposition:FromAdjunctionsToMonads}]
+  Let us verify the axioms of monad are respected.
+
+  The first triangle identity (diagram~\eqref{cd:TriIds}) of the
+  adjunction states
+  \[
+    \begin{tikzcd}
+      F \ar[r, "{F\eta}", Rightarrow] \ar[dr, "{\id_F}", Rightarrow, swap] & FGF \ar[d,
+      "{\varepsilon F}", Rightarrow] \\
+      & F
+    \end{tikzcd}
+  \]
+  Applying \(F\) on the right, we have the commuting diagram
+  \[
+    \begin{tikzcd}
+      GF \ar["{GF\eta}", r, Rightarrow] \ar["{\id_{GF}}", dr, swap,
+      Rightarrow] & GFGF \ar["{G \epsilon F}", d, Rightarrow] \\
+      & GF
+    \end{tikzcd}
+  \]
+  Using the other triangle equality (diagram~\eqref{cd:TriIds}), you can
+  easily prove the other identity law.
+
+  We prove now the associativity law.
+  \begin{align*}
+    \mu_a \mu_{Ta} &= G\left( \epsilon_{Fa} \right) G \left( \epsilon_{FGFa} \right) = \\
+               &= G(\epsilon_{Fa} \epsilon_{FGFa}) \\
+    \mu_a T(\mu_a) &= G \left( \epsilon_{Fa} \right) GFG \left( \epsilon_{Fa} \right) = \\
+               &= G \left( \epsilon_{Fa} FG\left( \epsilon_{Fa} \right) \right)
+  \end{align*}
+  The conclusion follows from the naturality of \(\epsilon\), namely the
+  following diagram commutes
+  \[
+    \begin{tikzcd}
+      FGFGFa \ar["{FG(\epsilon_a)}", d, swap] \ar["{\epsilon_{FGFa}}", r] & FGFa \ar["{\epsilon_{Fa}}", d] \\
+      FGFa \ar["{\epsilon_{Fa}}", r, swap] & Fa
+    \end{tikzcd}
+    \qedhere
+  \]
+\end{proof}
+
+
+
+\section{Algebras over monads}
+
+\begin{definition}
+  Let \((T, \eta, \mu)\) be a monad of a category \(\mathcal{C}\). A \((T, \eta, \mu)\)-{\em
+    algebra} -- or simply \(T\)-{\em algebra} when \(\eta\) and \(\mu\) are
+  clear from the context -- is a pair \((a \in \obj{\mathcal{C}}, Ta \functo \alpha a)\)
+  that makes the following diagrams commute
+  \[
+    \begin{tikzcd}
+      a \ar["{\eta_a}", r] \ar["{\id_a}", dr, swap] & Ta \ar["{\alpha}", d] \\
+      & a
+    \end{tikzcd}
+    \qquad
+    \begin{tikzcd}
+      T^2a \ar["{\mu_a}", d, swap] \ar["{T\alpha}", r] & Ta \ar["{\alpha}", d] \\
+      Ta \ar["{\alpha}", r, swap] & a
+    \end{tikzcd}
+  \]
+  A {\em morphism of \(T\)-algebras} from \((a, \alpha)\) to \((b, \beta)\) is any \(f
+  : a \to b\) in \(\mathcal{C}\) such that the following commutes
+  \[
+    \begin{tikzcd}
+      Ta \ar["{\alpha}", d, swap] \ar["{Tf}", r] & Tb \ar["{\beta}", d] \\
+      a \ar["{f}", r, swap] & b
+    \end{tikzcd}
+  \]
+\end{definition}
+
+\begin{example}
+  Recall Example~\ref{example:ActionWriterMonad}. Let us try to figure
+  out what \((- \times M)\)-algebras \(\xi : X \times M \to X\) are. First of all, it
+  must be \(\xi \eta_X = \id_X\), which means \(\xi(x, e) = x\) for every \(x \in
+  X\). Moreover, it must be \(\xi \mu_X = \xi (\xi \times M)\): that is, \(\xi(\xi(x, m),
+  n) = \xi(x, m \cdot n)\). Thus \(\xi : X \times M \to X\) is just an action of \(M\)
+  on \(X\), and \((- \times M)\)-algebras are \(M\)-sets (i.e. sets with an
+  action of \(M\) on them). To conclude, observe that that a morphism of
+  \((- \times M)\)-algebras \((X, \xi_X)\) and \((Y, \xi_Y)\) is any function \(f :
+  X \to Y\) such that
+  \[
+    \xi_Y (f(x), m) = f\left(\xi_X(x, m)\right) \text{ for every } x \in X, m
+      \in M .
+  \]
+\end{example}
+
+\begin{lemma}
+  Let \((T, \eta, \mu)\) be a monad of a category \(\mathcal{C}\). Then \((Ta, \mu_a)\)
+  is a \(T\)-algebra for every \(a \in \obj{\mathcal{C}}\). In particular, for every
+  \(f : a \to b\), we have the morphism of \(T\)-algebras \(Tf : Ta \to Tb\).
+\end{lemma}
+
+\begin{proof}
+  The fact that \((Ta, \mu_a)\) is a \(T\)-algebra follows immediately
+  from the definition of monad. For the remaining part, just naturality
+  of \(\mu\) is enough.
+\end{proof}
+
+\begin{definition}
+  Let \((T, \eta, \mu)\) be a monad of a category \(\mathcal{C}\). The {\em free
+    \(T\)-algebra} on \(a \in \mathcal{C}\) is \((Ta, \mu_a)\).
+\end{definition}
+
+\begin{example}
+  Consider the action monad of
+  Example~\ref{example:ActionWriterMonad}. The free
+  \((- \times M)\)-algebras look all like \((X \times M, \mu_a)\), which in general
+  is not a set \(X\) together with an action \(\alpha : X \times M \to X\).
+\end{example}
+
+Thus, we can define the functor
+\[
+  F^T : \mathcal{C} \to \mathcal{C}^T
+\]
+defined objects by
+\[
+  F^T (a) := \left( Ta, \mu_a \right)
+\]
+and on morphisms by
+\[
+  F^T \left( \begin{tikzcd}[row sep=small, cramped] a \ar["{f}", d]
+      \\ b \end{tikzcd} \right) := Tf .
+\]
+
+\begin{proposition}
+  A monad is induced by a ``free \(\dashv\) forgetful'' adjunction as in
+  Proposition~\ref{proposition:FromAdjunctionsToMonads}. More explicitly, a monad
+  \((T, \eta, \mu)\) on \(\mathcal{C}\) is induced by an adjunction
+  \[
+    \begin{tikzcd}
+      \phantom{\mathcal{C}^T}\mathllap{\mathcal{C}} \ar["{F^T}"{name=left}, r, bend left] & \mathcal{C}^T \ar["{U^T}"{name=right},
+      l, bend left] \ar["{\perp}"description, phantom, from=left, to=right]
+    \end{tikzcd}
+  \]
+\end{proposition}
+
+\begin{proof}
+  Observe that \(U^T F^T = T\). We show that for every
+  \(a \in \obj{\mathcal{C}}\) the morphism \(\eta_a : a \to Ta\) is initial in
+  \(a \downarrow U^T\). Let \(f : a \to U^T(b, \beta)\) in
+  \(\mathcal{C}\): find \(\bar f : F^Ta \to (b, \beta)\) in
+  \(\mathcal{C}^T\) such that \(U^T\bar f \circ \eta_a = f\). Observe that
+  \(F^T f : F^Ta \to F^Tb\) is just \(Tf : Ta \to Tb\). The morphism
+  \(\beta \circ Tf : Ta \to b\) satisfies
+  \[
+    \beta \circ Tf \circ \eta_a = \beta \circ \eta_b \circ f = f .
+  \]
+  (We have used naturality of \(\eta\) and the fact that
+  \(\beta : Tb \to b\) is the structure morphism of \(b\).) Observe that
+  \(\beta \circ Tf\) is a morphism from \((Ta, \mu_a)\) to
+  \((b, \beta)\), since it the compostion of two morphisms of
+  \(T\)-algebras. (Remember that \(\beta : Tb \to b\) is a morphism from
+  \((Tb, \mu_b)\) to \((b, \beta)\).) In fact, this makes possible the
+  following move:
+  \[
+    f = U^T\left( \beta \circ F^Tf \right) \circ \eta_a .
+  \]
+  Now assume \(U^Tg \circ \eta_a = f\) for \(g : F^Ta \to (b, \beta)\). Here
+  \(U^Tg = g\). Applying \(F^T\) and composing with
+  \(\beta : Tb \to b\), we have
+  \[
+    \beta \circ \underbrace{F^T \left( U^Tg \circ \eta_a \right)}_{= Tg \circ T\eta_a} = \beta \circ
+    F^Tf .
+  \]
+  On the left hand side, \(\beta \circ Tg = g \circ \mu_a\): consequently, the left
+  hand side equals \(g \circ \mu_a \circ T\eta_a = g\) (we have used the identity law
+  here).
+\end{proof}
+
+\begin{proposition}\label{proposition:ComparisonFunctor}
+  Let \((T, \eta, \mu)\) be a monad on a category \(\mathcal{C}\) and consider an
+  adjunction
+  \[
+    \begin{tikzcd}
+      \mathcal{C} \ar["{F}"{name=left}, r, bend left] & \mathcal{D} \ar["{G}"{name=right},
+      l, bend left] \ar["{\perp}"description, phantom, from=left, to=right]
+    \end{tikzcd}
+  \]
+  Then there is a unique \(K : \mathcal{D} \to \mathcal{C}^T\) making the following triangles
+  commute
+  \[
+    \begin{tikzcd}[column sep=small]
+      \mathcal{D} \ar["{K}", rr] & & \mathcal{C}^T \\
+      & \mathcal{C} \ar["{F}", ul] \ar["{F^T}", ur, swap]
+    \end{tikzcd}
+    \qquad
+    \begin{tikzcd}[column sep=small]
+      \mathcal{D} \ar["{G}", dr, swap] \ar["{K}", rr] & & \mathcal{C}^T \ar["{F^T}", dl] \\
+      & \mathcal{C}
+    \end{tikzcd}
+  \]
+\end{proposition}
+
+The following observations are the key to try to figure out how to
+define \(K\). After all, \(K\) can be determined very explicitly.
+
+\begin{lemma}
+  Let \((T, \eta, \mu)\) be a monad on \(\mathcal{C}\) induced by an adjunction
+  \[
+    \begin{tikzcd}
+      \mathcal{C} \ar["{F}"{name=left}, r, bend left] & \mathcal{D} \ar["{G}"{name=right},
+      l, bend left] \ar["{\perp}"description, phantom, from=left, to=right]
+    \end{tikzcd}
+  \]
+  (recall Proposition~\ref{proposition:FromAdjunctionsToMonads}.) Let
+  \(\epsilon : FG \Rightarrow \id_{\mathcal{D}}\) be the counit of the adjunction. Then for every
+  \(d \in \obj{\mathcal{D}}\) we have the \(T\)-algebra \(\left( Gd, G\epsilon_d \right)\)
+  and for every \(f : a \to b\) of \(\mathcal{D}\), the morphism \(Gf : Ga \to Gb\) is
+  a morphism of \(T\)-algebras \(\left( Ga, G\epsilon_a \right) \to \left( Gb, G\epsilon_b \right)\).
+\end{lemma}
+
+\begin{proof}
+  \(G\epsilon_d \circ \eta_{Gd} = \id_{Gd}\) is one of the triangle identities
+  (look at~\eqref{cd:TriIds}). The square
+  \[
+    \begin{tikzcd}
+      T^2Gd \ar["{\mu_{Gd}}", d, swap] \ar["{TG\epsilon_d}", r] & TGd \ar["{G\epsilon_d}", d] \\
+      TGd \ar["{G\epsilon_d}", r, swap] & Gd
+    \end{tikzcd}
+  \]
+  commutes because \(T = GF\) and \(\mu_{Gd} = G\epsilon_{FGd}\) and the square it is obtained by some
+  naturality square for \(\epsilon : FG \Rightarrow \id_{\mathcal{C}}\) and applying \(G\) to that
+  diagram. The same considerations can be used to show that the
+  following square commutes
+  \[
+    \begin{tikzcd}
+      TGa \ar["{G\epsilon_a}", d, swap] \ar["{TGf}", r] & TGb \ar["{G\epsilon_b}", d] \\
+      Ga \ar["{Gf}", r, swap] & Gb
+    \end{tikzcd}
+    \qedhere
+  \]
+\end{proof}
+
+\begin{proof}[Proof of Proposition~\ref{proposition:ComparisonFunctor}]
+  As in the previous Lemma, write
+  \(\epsilon : FG \Rightarrow \id_{\mathcal{D}}\) the counit of the adjunction
+  \(F \dashv G\). We define \(K : \mathcal{D} \to \mathcal{C}^T\) on objects as
+  \[
+    Kd := (Gd, G\epsilon_d)
+  \]
+  and on morphisms as
+  \[
+    Kf := Gf .
+  \]
+  (In this case, functoriality is obvious.) {\color{red}
+    [Uniqueness...]}
+\end{proof}
+
+
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:

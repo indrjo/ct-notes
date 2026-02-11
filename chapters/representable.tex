@@ -1,0 +1,242 @@
+
+\chapter{Representable functors}
+
+\section{An introductory puzzle}
+
+In a category our tools are objects, morphisms and compositionality: an
+environment where objects generally do not live alone, but they look at
+other objects. A morphism \(a \to b\) is like \(a\) is viewing the object
+\(b\). Of course, there may be more than one morphisms \(a \to b\) or
+none: more morphisms is more facets of the target are noticed, no
+morphisms means the objects are isolated.
+
+Now, consider a {\em locally small} category \(\cat C\) with and two
+object \(a\), \(a'\) in it. Assume also we have a natural isomorphism
+\begin{equation}
+  \xi : \cat C (a, -) \tto \cat C(a', -) . \label{equation:IsoOfLeftHoms}
+\end{equation}
+
+Let us try to visualize the situation: the observations of \(a\) and
+\(a'\) are the same, where \q{the same} here means there is an
+isomorphism between the observations. Now some philosophy for you:
+%
+\begin{quotation}
+  if the world \(a\) looks at is equivalent to the world \(a'\) looks
+  at, can we conclude that that the observers themselves are equivalent?
+\end{quotation}
+%
+The answer of Category Theory is: yes, you have \(a \cong a'\).
+
+The construction of an isomorphism \(a \cong a'\) amounts at finding a way
+to make the pieces of a puzzle fit to each other. As you will realize,
+there is a unique way in doing things here. First things first:
+%
+\begin{quotation}
+  From a natural transformation
+  \(\xi : \cat C(a, -) \tto \cat C(a', -)\), could we construct some
+  morphism \(a \to a'\)? Or \(a' \to a\)? [In any case, it would be a huge
+  step ahead.]
+\end{quotation}
+%
+\begin{figure}
+  \centering \input{./tikz/stare-at.qtikz}
+  \caption{A natural transformation \(\cat C(a, -) \tto \cat C(a', -)\)
+    yields a morphism \(a' \to a\)}
+\end{figure}
+%
+Take \(\xi_a : \cat C (a, a) \to \cat C(a', a)\): we have a mapping that
+sends for example \(\id_a\) to some morphism
+\(\xi_a \left(\id_a\right) : a' \to a\). Of course, we hope the answer of
+the question
+%
+\begin{quotation}
+  Is \(\xi_a(\id_a) : a' \to a\) an isomorphism?
+\end{quotation}
+is yes. Now \(\xi_{a'} : \cat C(a, a') \to \cat C(a', a')\) and you have
+exactly one \(f : a \to a'\) such that \(\xi_{a'}(f) = \id_{a'}\). By
+naturality, we have
+\[
+  \begin{tikzcd}
+    a \ar["f", d, swap] & & \cat C (a, a) \ar["{\lambda g . fg}", d, swap] \ar["{\xi_a}", r] & \cat C(a', a) \ar["{\lambda h . fh}", d] \\
+    a' & & \cat C(a, a') \ar["{\xi_{a'}}", r, swap] & \cat C(a', a')
+  \end{tikzcd}
+\]
+Now just pick \(\id_a\) and pass it the consecutive functions in the
+square, so we will end with
+\[
+  \id_{a'} = \xi_{a'} (f) = f \xi_{a}(\id_a) .
+\]
+If we prove that also \(\xi_{a}(\id_a) f = \id_a\), then have found the
+inverse of \(\xi_a(\id_a)\)! We use naturality again to do so:
+\[
+  \begin{tikzcd}
+    a' \ar["{\xi_a(\id_a)}", d, swap] & & \cat C (a, a') \ar["{\lambda g . \xi_a(\id_a) g}", d, swap] \ar["{\xi_{a'}}", r] & \cat C(a', a') \ar["{\lambda h . \xi_{a} (\id_a)} h", d] \\
+    a & & \cat C(a, a) \ar["{\xi_a}", r, swap] & \cat C(a', a)
+  \end{tikzcd}
+\]
+Indeed, if we pick \(f : a \to a'\) and apply the functions as in the
+commutative square, we have
+\[
+  \xi_a \left( \xi_a(\id_a) f \right) = \xi_a(\id_a) .
+\]
+Being the \(\xi_a\)'s bijections, we can conclude and that's all.
+
+\begin{exercise}
+  Try to prove that if \(\cat C(-, a) \cong \cat C(-, a')\) then \(a \cong a'\).
+\end{exercise}
+
+
+
+\section{The Yoneda Lemma}
+
+There is nothing special about the \(\cat C(a', -)\) of the previous
+section. If we take a functor \(X : \cat C \to \Set\), we could readily
+see the construction there can be recycled nicely:
+\begin{quotation}
+  If you are provided a natural transformation
+  \(\eta : \cat C(a, -) \tto X\), then just consider
+  \(\eta_a : \cat C(a, a) \to X(a)\), and pick the element
+  \(\eta_a(\id_a)\) of \(X(a)\).
+\end{quotation}
+In the previous section, we managed to prove that \(\eta_a(\id_a)\) is an
+iso, but that happened in a context where we had a natural {\em
+  isomorphism}. What we will do here is realising that there is some
+bijection. More precisely:
+
+\begin{lemma}\label{lemma:YonedaLemmaLemma}
+  Let \(\cat C\) be a locally small category, \(a \in \obj{\cat C}\) and
+  functor \(X : \cat C \to \Set\). Then
+  \begin{equation}
+    \label{eqn:YonedaBijection}
+    [\cat C, \Set](\cat C(a, -), X) \cong X(a) .
+  \end{equation}
+\end{lemma}
+
+In particular, the classes \([\cat C, \Set](\cat C(a, -), X)\) are
+actual sets, which is not trivial at all.
+
+\begin{proof}
+  The function we need is already isolated, we just give it name that
+  cares with pedices because all in this proof will be reused later:
+  \begin{align*}
+    & \theta_{a, X} : [\cat C, \Set](\cat C(a, -), X) \to X(a) \\
+    & \theta_{a, X}(\eta) := \eta_a(\id_a) .
+  \end{align*}
+  We have the pieces of a puzzle here: we have some \(x \in X(a)\) and
+  wish to contruct an appropriate natural tranformation
+  \(\eta : \cat C(a, -) \tto X\), that is a family of functions
+  \(\eta_b : \cat C(a, b) \to X(b)\) for \(b \in \obj{\cat C}\). Well, a
+  morphism \(f : a \to b\) can be upgraded to a function
+  \(X(f) : X(a) \to X(b)\) and, if we must land somewhere onto \(X(b)\),
+  then we could just apply \(X(f)\) to that \(x\). In short, from a
+  single element \(x \in X(a)\) we have a collection of functions
+  \[
+    \lambda f . X(f)(x) : \cat C(a, b) \to X(b) \quad \text{for } b \in \obj{\cat C} .
+  \]
+  Now, we have to verify if these function form a natural transformation
+  as \(b\) varies. Take any morphism \(h : b \to c\) in \(\cat C\) and
+  then consider the diagram
+  \[
+    \begin{tikzcd}[column sep=large]
+      \cat C(a, b) \ar["{\lambda m . hm}", d, swap] \ar["{\lambda f . X(f)(x)}", r] & X(b) \ar["{X(h)}", d] \\
+      \cat C(a, c) \ar["{\lambda f . X(f)(x)}", r, swap] & X(c)
+    \end{tikzcd}
+  \]
+  We can immediately see the diagram commutes, hence what we have
+  construed is a genuine natural tranformation. At this point we have a
+  function
+  \begin{align*}
+    X(a) &\to [\cat C, \Set](\cat C(a, -), X) \\
+    x    &\to \lambda f . X(f)(x)
+  \end{align*}
+  It only remains to veirify the two functions here are one the inverse
+  of the another. Provided \(x \in X(a)\), you have the natural
+  transformation \(\lambda f . X(f)(x) : \cat C(a, -) \tto X\). Now, just
+  apply the component \(\lambda f . X(f)(x) : \cat C(a, a) \to X(a)\) to
+  \(\id_a\). The output is
+  \[
+    X(\id_a)(x) = \id_{X(a)} (x) = x .
+  \]
+  Take a natural transformation \(\eta : \cat C(a, -) \tto X\) and consider
+  \(\eta_a (\id_a)\). This element of \(X(a)\) will bring you to the
+  natural tranformation \(\lambda f . X(f) (\eta_a(\id_a))\). Remember that
+  \(\eta\) is a natural transformation \(\cat C (a, -) \tto X\), thus, if
+  \(f : a \to b\), we have
+  \[
+    \lambda f . X(f)(\eta_a(\id_a)) = \lambda f . \eta_b(f\id_a) = \lambda f . \eta_b (f) = \eta_b .
+  \]
+  It works!
+\end{proof}
+
+We look at~\eqref{eqn:YonedaBijection} again: is that bijection {\em
+  natural} in \(X\) and \(a\)? To answer this question, we need to
+understand understand the whole picture.
+
+Now we introduce some technology that we will need soon.  We have the
+{\em evaluation functor}
+\[
+  \ev_{\cat C} : \cat C \times [\cat C, \Set] \to \Set
+\]
+that on objects
+\[
+  \ev_{\cat C}(x, F) := F(x)
+\]
+and on morphisms
+\[
+  \ev\left(\begin{tikzcd}[row sep=small] a \ar["f", d] \\
+      b \end{tikzcd}, \begin{tikzcd}[row sep=small] F \ar["\eta", d, swap,
+      Rightarrow] \\ G \end{tikzcd}\right) := \eta_b F(f) = G(f) \eta_a .
+\]
+
+Let \(\cat C\) be a locally small category.  We have the functor
+\[\yo_{\cat C} : \cat C \times [\cat C, \Set] \to \Set\]
+given on objects as follows
+\[\yo_{\cat C}(x, F) := [\cat C, \Set]\big(\cat C(x, -), F\big)\]
+and on morphisms
+\[\left[\yo_{\cat C}\left(\begin{tikzcd}[row sep=small] a \ar["f", d,
+        swap] \\ b \end{tikzcd}, \begin{tikzcd}[row sep=small] F
+        \ar["\eta", d, swap, Rightarrow] \\
+        G \end{tikzcd}\right)\right]\left(\begin{tikzcd}[cramped, row
+      sep=small] {\cat C(a, -)} \ar["\alpha", d, Rightarrow] \\
+      F \end{tikzcd}\right) := \set{\left. \cat C(b, c) \functo{\eta_c \alpha_c
+        (\_ f)} G(c) \right\mid c \in \obj{\cat C}}.\] Observe that
+Lemma~\ref{lemma:YonedaLemmaLemma} solves annoying size issues in the
+definition of \(\yo_{\cat C}\) on objects. While the statement of this
+lemma is important for technical reasons, its proof guides us to the
+following completion.
+
+\begin{proposition}[Yoneda Lemma]
+  For \(\cat C\) locally small category,
+  \(\yo_{\cat C} \cong \ev_{\cat C}\).
+\end{proposition}
+
+\begin{proof}
+  The transformation \(\lambda : \yo_{\cat C} \tto \ev_{\cat C}\) having as
+  components the functions \(\lambda_{x, F}\) of the proof of
+  Lemma~\ref{lemma:YonedaLemmaLemma} is natural, that is
+  \[
+    \begin{tikzcd}
+      \yo_{\cat C} (a, F) \ar["\lambda_{a, F}", r] \ar["{\yo_{\cat C}(f, \eta)}", d, swap] & \ev_{\cat C} (a, F) \ar["{\ev_{\cat C}(f, \eta)}", d] \\
+      \yo_{\cat C} (b, G) \ar["\lambda_{b, G}", r, swap] & \ev_{\cat C}(b, G)
+    \end{tikzcd}
+  \] commutes for every \(f \in \cat C(a, b)\) and
+  \(\eta \in [\cat C, \Set](F, G)\). In fact, for every natural
+  transformation \(\eta \in \yo_{\cat C}(a, F)\) we have
+  \begin{align*}
+    & \ev_{\cat C}(f, \eta) \big(\lambda_{a, F} (\alpha)\big) = \eta_b\alpha_b \cat C(a,
+      f)(\id_a) = \eta_b \alpha_b f  \\
+    & \lambda_{b, G} \big(\yo_{\cat C}(f, \eta) (\alpha)\big) = \eta_b \alpha_b (\_ f)(1_b) =
+      \eta_b \alpha_b f .
+  \end{align*}
+  We can conclude \(\lambda\) is an isomorphism, as the proof of
+  Lemma~\ref{lemma:YonedaLemmaLemma} tells us its components are
+  isomorphisms.
+\end{proof}
+
+
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:

@@ -1,0 +1,2139 @@
+
+\chapter{Limits and Colimits}
+
+\section{Definition}
+
+Given two categories \(\mathcal{I}\) and \(\mathcal{C}\) and
+\(v \in \obj{\mathcal{C}}\), we define the functor
+\(k_v : \mathcal{I} \to \mathcal{C}\) as the one sending all objects of
+\(\mathcal{I}\) to \(v\) and all morphisms of \(\mathcal{C}\) to \(\id_v\).
+
+\begin{definition}
+  Let \(X : \mathcal{I} \to \mathcal{C}\) be a functor. A {\em cone} over
+  \(X\) is a natural transformation \(k_v \Rightarrow X\). Here,
+  \(v \in \obj{\mathcal{C}}\) is called {\em vertex} of the cone. Dually, a {\em
+    cocone} under \(X\) is a natural transformation
+  \(X \Rightarrow k_v\). Also in this case, we will refer to \(v\) as the vertex
+  of the cocone.
+\end{definition}
+
+More explicitly, a cone \(\eta : k_v \Rightarrow X\) is a family
+\(\set{ \eta_i : v \to X(i) | i \in \obj{\mathcal{I}} }\) such that the following diagram
+commutes for every \(f : i \to j\) of \(\mathcal{I}\)
+\[
+  \begin{tikzcd}[row sep=tiny]
+    & X(i) \ar["{X(f)}", dd] \\
+    v \ar["{\eta_i}", ur] \ar["{\eta_j}", dr, swap] \\
+    & X(j)
+  \end{tikzcd}
+\]
+
+\begin{definition}[Limits \&
+  colimits]\label{definition:LimitsAndColimits}
+  A {\em limit} of a functor \(X : \mathcal{I} \to \mathcal{C}\) is some object
+  \(v\) of \(\mathcal{C}\) together with a cone \(\lambda : k_v \tto X\) such that:
+  % \begin{quotation}
+  for any object \(a\) of \(\mathcal{C}\) and \(\mu : k_a \tto X\) there is one and
+  only one \(f : a \to v\) of \(\mathcal{C}\) such that
+  \[
+    \begin{tikzcd}[row sep=tiny]
+      a \ar["{\mu_i}", dr] \ar["f", dd, swap] \\
+      & X(i) \\
+      v \ar["{\lambda_i}", ur, swap]
+    \end{tikzcd}
+  \]
+  commutes for every \(i\) in \(\mathcal{I}\).
+  % \end{quotation}
+  A {\em colimit}, instead, is an object \(u\) of \(\mathcal{C}\) together with a
+  \(\chi : X \tto k_u\) that has the property:
+  % \begin{quotation}
+  for every object \(b\) of \(\mathcal{C}\) and \(\xi : X \tto k_b\) there exists
+  one and only one \(g : u \to b\) of \(\mathcal{C}\) that makes
+  \[
+    \begin{tikzcd}[row sep=tiny]
+      u  \ar["g", dd, swap] \\
+      & X(i) \ar["{\chi_i}", ul, swap] \ar["{\xi_i}", dl]\\
+      b
+    \end{tikzcd}
+  \]
+  commute for every \(i\) in \(\mathcal{I}\).
+  % \end{quotation}
+\end{definition}
+
+In general, (co)cones can be twisted things and (co)limits, if exist,
+can be even more so. Yes, for a functor \(\mathcal{I} \to \mathcal{C}\), the category
+\(\mathcal{C}\) has its share, but it is \(\mathcal{I}\) who has the last say in the
+research. The role of \(\mathcal{I}\) is to give a \q{shape} of the limits we are
+looking for, indeed.
+
+\begin{lemma}\label{lemma:UniqueMorphismToLim}
+  Let \(\lambda : k_v \Rightarrow X\) be a limit of a functor
+  \(X : \mathcal{I} \to \mathcal{C}\) and \(f, g : a \to v\) in \(\mathcal{C}\). If
+  \[
+    \lambda_i f = \lambda_i g \quad\text{for every } i \in \obj{\mathcal{I}}
+  \]
+  then \(f = g\). Dually, if \(\xi : X \Rightarrow k_u\) is a colimit of
+  \(X\) and \(f , g : u \to b\) in \(\mathcal{C}\) satisfy
+  \[
+    f \xi_i = g \xi_i \quad\text{for every } i \in \obj{\mathcal{I}}
+  \]
+  then \(f = g\).
+\end{lemma}
+
+\begin{proof}
+  The family of morphisms \(\mu_i := \lambda_i f : a \to X(i)\) is natural in
+  \(i\): in fact, for any \(s : i \to j\) in \(\mathcal{I}\) we have
+  \(X(s) \mu_i = X(s) \lambda_i f = \lambda_j f = \mu_j\).  By the universal property of
+  limit, there exactly one \(a \to v\) that makes the diagrams
+  \[
+    \begin{tikzcd}[row sep=tiny]
+      a \ar["{\mu_i}", dr] \ar["", dd, swap] \\
+      & X(i) \\
+      v \ar["{\lambda_i}", ur, swap]
+    \end{tikzcd}
+  \]
+  commute. By hypothesis both \(f\) and \(g\) do this, hence they are
+  equal.
+\end{proof}
+
+\begin{proposition}\label{proposition:LimitsHaveIsomorphicObjects}
+  If \(\eta : k_a \Rightarrow X\) and \(\theta : k_b \Rightarrow X\) are limits of the same functor
+  \(X : \mathcal{I} \to \mathcal{C}\), then \(a \cong b\). Dually, colimits of the same functor
+  have isomorphic vertices.
+\end{proposition}
+
+\begin{proof}
+  By definition of limit, we a have a unique \(f : a \to b\) and a unique
+  \(g : b \to a\) making the triangles in
+  \[
+    \begin{tikzcd}[row sep=small]
+      a \ar["{\eta_i}", dr] \ar["f" description, dd, bend left] \\
+      & X(i) \\
+      b \ar["{\theta_i}", ur, swap] \ar["g" description, uu, bend left]
+    \end{tikzcd}
+  \]
+  commute for every object \(i\) of \(\mathcal{I}\). Then
+  \[
+    \begin{aligned}
+      & \eta_i = \theta_i f = \eta_i (gf) \\
+      & \theta_i = \eta_i g = \theta_i (fg)
+    \end{aligned} \quad \text{for every } i \in \obj{\mathcal{I}}
+  \]
+  Invoking Lemma~\ref{lemma:UniqueMorphismToLim}, we can conclude that
+  \(gf = \id_a\) and \(fg = \id_b\).
+\end{proof}
+
+In general, one denotes the vertex of any of the limits of a functor
+\(X : \mathcal{I} \to \mathcal{C}\) as
+\[
+  \lim X \quad\text{or}\quad \lim_{i \in \obj{\mathcal{I}}} X(i) .
+\]
+Dually,
+\[
+  \colim X \quad\text{or}\quad \underset{i \in \obj{\mathcal{I}}}{\colim} X(i) .
+\]
+are reserved for the vertex of any of the colimits of \(X\).
+
+
+
+\section{Terminal and initial objects}
+
+\begin{definition}[Terminal \& initial objects]
+  For \(\mathcal{C}\) category, the limits of the empty functor
+  \(\nil \to \mathcal{C}\) are called {\em terminal objects} of \(\mathcal{C}\),
+  whereas the colimits {\em initial objects}.  More explicitly:
+  \begin{tcbitem}
+  \item A {\em terminal object} of \(\mathcal{C}\) is an object \(1\) of
+    \(\mathcal{C}\) such that for every object \(x\) of \(\mathcal{C}\) there
+    exists one and only one \(x \to 1\) in \(\mathcal{C}\).
+  \item An {\em initial object} of \(\mathcal{C}\) is an object \(0\) in
+    \(\mathcal{C}\) such that for every object \(x\) in \(\mathcal{C}\) there
+    exists one and only one morphism \(0 \to x\) in \(\mathcal{C}\).
+  \end{tcbitem}
+\end{definition}
+
+\begin{example}[Empty set and singletons]
+  It may sound weird, but for every set \(X\) there does exist a
+  function \(\nil \to X\); moreover, it is the unique one. To get this,
+  think set-theoretically: a function is any subset of \(\nil \times X\) that
+  has the property we know. But \(\nil \times X = \nil\), so its unique
+  subset is \(\nil\). This set is a function from \(\nil\) to \(X\)
+  since the statement
+  \begin{quotation}
+    for every \(a \in \nil\) there is one and only one \(b \in X\) such that
+    \((a, b) \in \nil\)
+  \end{quotation}
+  is a {\em vacuous truth}. So \(\nil\) is an initial object of
+  \(\Set\). This case is quite particular, since the initial objects of
+  \(\Set\) are actually equal to \(\nil\). \newline Now let us look for
+  terminal objects in \(\Set\). Take an arbitrary set \(X\): there is
+  exactly one function from \(X\) to any singleton, that is singletons
+  are terminal object of \(\Set\). Conversely, by
+  Proposition~\ref{proposition:LimitsHaveIsomorphicObjects}, the
+  terminal objects of \(\Set\) must be singletons.
+\end{example}
+
+\begin{exercise}
+  Trivial groups --- there is a unique way a singleton can be a group ---
+  are either terminal and initial objects of \(\Grp\).
+\end{exercise}
+
+\begin{example}[The ring \(\integers\)]
+  For if \(R\) is a ring, we write \(1_R\) to write the multiplicative
+  identity of \(R\). A simple ring homomorphism is
+  \[\phi : \integers \to R \,,\ \phi(r) := r 1_R .\]
+  Assume now, \(\psi : \integers \to R\) is another ring homomorphism: then
+  for every \(r \in \integers\) we have
+  \[\psi(r) = r \psi\left(1_R\right) = r \phi\left(1_R\right) = \phi(r) .\]
+  Thus we can conclude \(\integers\) is initial in \(\Ring\).
+\end{example}
+
+\begin{example}[Recursion]\label{example:Recursion}
+  The {\em Recursion Theorem} says:
+  \begin{quotation}
+    % Let \((\naturals, 0, s)\) be a Peano Model, where
+    % \(0 \in \naturals\) and \(s : \naturals \to \naturals\) is its
+    % successor function.
+    For every set \(X\), \(a \in X\) and \(f : X \to X\) there is a unique
+    function \(x : \naturals \to X\) such that
+    % \(x_0 = a\) and \(x_{n+1} = f(x_n)\) for every \(n \in \naturals\).
+    \begin{align*}
+      & x_0 = a \\
+      & x_{n+1} = f(x_n) \quad\text{for every } n \in \naturals
+    \end{align*}
+  \end{quotation}
+  % Here, by Peano Model we mean a set \(\naturals\) that has one
+  % element, we write \(0\), stood out and a function
+  % \(s : \naturals \to \naturals\) such that, all this complying some
+  % rules:
+  % \begin{tcbenum}
+  % \item \(s\) is injective;
+  % \item \(s(x) \ne 0\) for every \(x \in \naturals\);
+  % \item for if \(A \subseteq \naturals\) has \(0\) and \(s(n) \in A\) for every
+  %   \(n \in A\), then \(A = \naturals\).
+  % \end{tcbenum}
+  We show now how we can involve Category Theory in this case. First of
+  all, we need a category where to work. The statement is about things
+  made as follows:
+  \begin{quotation}
+    one set \(X\), one \(x \in X\) and one \(f : X \to X\).
+  \end{quotation}
+  We may refer to such new things by barely a triple \((X, x, f)\) or by
+  \[
+    \begin{tikzcd}[column sep=small]
+      1 \ar["{x}", r] & X \ar["{f}", r] & X
+    \end{tikzcd}
+  \]
+  where \(1\) is any singleton, as usual.
+  % Peano Models are such things, with some additional properties. It is
+  % told about the existence and the uniqueness of a certain function.
+  We do not want just functions, of course: given
+  \[
+    % 1 \functo x X \functo f X \text{ and } 1 \functo y Y \functo g Y ,
+    \begin{tikzcd}[column sep=small]
+      1 \ar["{x}", r] & X \ar["{f}", r] & X
+    \end{tikzcd}
+    \qquad\text{and}\qquad
+    \begin{tikzcd}[column sep=small]
+      1 \ar["{y}", r] & Y \ar["{g}", r] & Y
+    \end{tikzcd}
+  \]
+  we take the functions \(r : X \to Y\) such that
+  \[
+    \begin{tikzcd}[row sep=tiny]
+      & X \ar["f", r] \ar["r", dd] & X \ar["r", dd] \\
+      1 \ar["x", ur] \ar["y", dr, swap] \\
+      & Y \ar["g", r, swap] & Y
+    \end{tikzcd}
+  \]
+  commutes and nothing else. These ones are the things we want to be
+  morphisms. Now suppose given
+  \[
+    \begin{tikzcd}
+      & X \ar["f", r] \ar["p", d] & X \ar["p", d] \\
+      1 \ar["x", ur] \ar["y", r] \ar["z", dr, swap] & Y \ar["g", r] \ar["q", d] & Y \ar["q", d] \\
+      & Z \ar["h", r, swap] & Z
+    \end{tikzcd}
+  \]
+  where all the squares and triangles commute: thus we
+  obtain the commuting diagram
+  \[
+    \begin{tikzcd}[row sep=tiny]
+      & X \ar["f", r] \ar["qp", dd] & X \ar["qp", dd] \\
+      1 \ar["x", ur] \ar["z", dr, swap] \\
+      & Z \ar["h", r, swap] & Z
+    \end{tikzcd}
+  \]
+  This means that composing two morphisms as functions
+  in \(\Set\) produces a morphism. This is how we want composition to
+  defined in this context. This choice makes the categorial axioms
+  automatically respected. We call this category
+  \(\mathbf{Peano}\).\newline Being the environment set now, the Recursion Theorem
+  becomes more concise:
+  \begin{quotation}
+    \(\begin{tikzcd}[cramped] 1 \ar["{0}", r] &
+      \naturals \ar["{n \mapsto n+1}", r] & \naturals \end{tikzcd}\) is an
+    initial object of \(\mathbf{Peano}\).
+  \end{quotation}
+\end{example}
+
+\begin{exercise}[Induction \(\lrarr\) Recursion]
+  In \(\Set\), suppose you have
+  \(1 \functo 0 \naturals \functo s \naturals\), where \(s\) is
+  injective and \(s(n) \ne 0\) for every \(n \in \naturals\). Demonstrate
+  that the following statements are equivalent:
+  \begin{tcbenum}
+  \item for if \(A \subseteq \naturals\) has \(0\) and \(s(n) \in A\) for every
+    \(n \in A\), then \(A = \naturals\);
+  \item \(1 \functo 0 \naturals \functo s \naturals\) is an initial
+    object of \(\mathbf{Peano}\).
+  \end{tcbenum}
+\end{exercise}
+
+Limits (colimits) are terminal (initial) objects of appropriate
+categories.
+
+\begin{construction}[Category of cones]
+  For \(\mathcal{C}\) category, let \(F : \mathcal{I} \to \mathcal{C}\) be a
+  functor. Then we define the {\em category of cones} over \(F\) as
+  follows.
+  \begin{tcbitem}
+  \item The objects are the cones over \(F\).
+  \item For
+    \(\alpha := \set{a \functo{\alpha_i} F(i)}_{i \in \obj{\mathcal{I}}}\) and
+    \(\beta := \set{b \functo{\beta_i} F(i)}_{i \in \obj{\mathcal{I}}}\) two cones, the
+    morphisms from \(\alpha\) to \(\beta\) are the morphisms
+    \(f : a \to b\) of \(\mathcal{C}\) such that
+    \[\begin{tikzcd}[row sep=tiny]
+        a \ar["{\alpha_i}", dr] \ar["f", dd, swap] \\
+        & F(i) \\
+        b \ar["{\beta_i}", ur, swap]
+      \end{tikzcd}\] commutes for every \(i \in \obj{\mathcal{I}}\).
+  \item The composition of morphisms here is the same as that of
+    \(\mathcal{C}\).
+  \end{tcbitem}
+  We write such category as \(\cn_F\). We define also the {\em category
+    of cocones} over \(F\), written as \(\cocn_F\).
+  \begin{tcbitem}
+  \item The objects are the cocones over \(F\).
+  \item For
+    \(\alpha := \set{F(i) \functo{\alpha_i} a}_{i \in \obj{\mathcal{I}}}\) and
+    \(\beta := \set{F(i) \functo{\beta_i} b}_{i \in \obj{\mathcal{I}}}\) cocones, the
+    morphisms from \(\alpha\) to \(\beta\) are the morphisms
+    \(f : a \to b\) of \(\mathcal{C}\) such that
+    \[\begin{tikzcd}[row sep=tiny]
+        & a \ar["{\alpha_i}", dl, swap] \ar["f", dd] \\
+        F(i) \\
+        & b \ar["{\beta_i}", ul]
+      \end{tikzcd}\] commutes for every \(i \in \obj{\mathcal{I}}\).
+  \item The composition of morphisms here is the same as that of
+    \(\mathcal{C}\).
+  \end{tcbitem}
+  It is quite immediate in either of the cases to show that categorial
+  axioms are verified.
+\end{construction}
+
+\begin{exercise}
+  For \(\mathcal{C}\) category and \(F : \mathcal{I} \to \mathcal{C}\) functor, show that:
+  \begin{tcbitem}
+  \item limits of \(F\) are terminal objects of \(\cn_F\) and viceversa.
+  \item colimits of \(F\) are initial objects of \(\cocn_F\) and
+    viceversa.
+  \end{tcbitem}
+\end{exercise}
+
+
+
+\section{Products and coproducts}
+
+\begin{definition}[Products \& coproducts]
+  Let \(\mathcal{C}\) be a category, \(I\) a small discrete category (that is
+  a set) and consider a functor \(X : I \to \mathcal{C}\). A {\em
+    product} of \(X\) is any of the limits of \(X\). Dually, a {\em
+    coproduct} of \(X\) is any of the colimits of \(X\). More
+  explicitly, recalling that \(X\) in this case
+  is just the family \(\set{X_i \mid i \in I}\),
+  \begin{itemize}[leftmargin=*]
+  \item A product is any family
+    \(\set{\proj_i : p \to X_i \mid i \in I}\) of morphisms of
+    \(\mathcal{C}\), usually called {\em projections}, with the following
+    property: for every family \(\set{f_i : a \to X_i \mid i \in I}\) of
+    morphisms of \(\mathcal{C}\) there exists one and only one
+    \(h : a \to p\) of \(\mathcal{C}\) such that
+    \[
+      \begin{tikzcd}[row sep=tiny]
+        a \ar["h", dd, swap] \ar["{f_i}", dr] \\
+        & X_i \\
+        p \ar["{\proj_i}", ur, swap]
+      \end{tikzcd}
+    \]
+    commutes for every \(i \in I\).
+  \item A {\em coproduct} of \(\set{X_i \mid i \in I}\) of objects of
+    \(\mathcal{C}\) is any family \(\set{\inj_i : X_i \to q \mid i \in I}\) of
+    morphisms of \(\mathcal{C}\), often referred to as {\em injections},
+    having the property: for every family
+    \(\set{g_i : X_i \to b \mid i \in I}\) of morphisms of \(\mathcal{C}\) there
+    exists one and only one \(k : q \to b\) of \(\mathcal{C}\) such that
+    \[
+      \begin{tikzcd}[row sep=tiny]
+        b \\
+        & X_i \ar["{\inj_i}", dl] \ar["{g_i}", ul, swap] \\
+        q \ar["k", uu]
+      \end{tikzcd}
+    \]
+    commutes for every \(i \in I\).
+  \end{itemize}
+\end{definition}
+
+\begin{example}[Infima and suprema in prosets]
+  Consider a proset \((\mathbb P, \le)\) and a subset \(S\) of
+  \(\mathbb P\). In this instance, a product of \(S\) is some
+  \(p \in \mathbb P\) such that:
+  \begin{tcbenum}
+  \item \(p \le x\) for every \(x \in S\);
+  \item for every \(p' \in \mathbb P\) such that \(p' \le x\) for every
+    \(x \in S\) we have \(p' \le p\).
+  \end{tcbenum}
+  If we have quick look to some existing mathematics, cones over \(S\)
+  are what are called {\em lower bounds} of \(S\). An {\em infimum} of
+  \(S\) is any of the greatest lower bounds for \(S\).\newline On the other
+  hand, a coproduct of \(S\) is some \(q \in \mathbb P\) such that:
+  \begin{tcbenum}
+  \item \(x \le q\) for every \(x \in S\);
+  \item for every \(q' \in \mathbb P\) such that \(x \le q'\) for every
+    \(x \in S\) we have \(q \le q'\).
+  \end{tcbenum}
+  In other words, the cones over \(S\) are precisely the {\em upper
+    bounds} of \(S\). A {\em supremum} of \(S\) is any of the lowest
+  upper bounds for \(S\).\newline There is a dedicated notations for such
+  elements, if \((\mathbb P, \le)\) is a poset: the infimum of \(S\) is
+  written as \(\inf S\), whereas \(\sup S\) is the supremum of \(S\). If
+  the elements of \(S\) are indexed, that is
+  \(S = \set{x_i \mid i \in I}\), then it is customary to write
+  \(\inf_{i \in I} x_i\) and \(\sup_{i \in I} x_i\).
+\end{example}
+
+\begin{exercise}
+  Prosets provide some examples in which some subsets does not have
+  infima or suprema.
+\end{exercise}
+
+Now let us turn our attention to a pair of quite ubiquitous constructs.
+
+\begin{example}[Cartesian product]\label{example:ProdOfSets}
+  Given a family of sets \(\set{X_\alpha \mid \alpha \in \Gamma}\), we have the
+  corresponding {\em Cartesian product}
+  \[\prod_{\alpha \in \Gamma} X_\alpha := \set{\left. f : \Gamma \to \bigcup_{\alpha \in \Gamma} X_\alpha \right\mid f(\lambda) \in
+      X_\lambda \text{ for every } \lambda \in \Gamma} ,\] whose elements are the {\em
+    choices} from \(\set{X_\alpha \mid \alpha \in \Gamma}\). As the name indicates, a choice
+  \(f\) for every \(\lambda \in \Gamma\) indicates one element of
+  \(X_\lambda\). Our product comes with the {\em projections}, one for each
+  \(\mu \in \Gamma\),
+  \begin{align*}
+    & \proj_\mu : \prod_{\alpha \in \Gamma} X_\alpha \to X_\mu \\
+    & \proj_\mu(f) := f(\mu) .
+  \end{align*}
+  Now, any family of functions \(\set{f : A \to X_\alpha \mid \alpha}\) ca be
+  compressed into one function
+  \[\prod_{\alpha \in \Gamma} f_\alpha : A \to \prod_{\alpha \in I} X_\alpha .\]
+  % Taken now any set \(A\) and functions \(f_\alpha : A \to X_\alpha\), one for
+  % each \(\alpha \in \Gamma\), we have
+  % \[\prod_{\alpha \in \Gamma} f_\alpha : A \to \prod_{\alpha \in \Gamma} X_\alpha\]
+  by defining \(\left(\prod_{\alpha \in \Gamma} f_\alpha\right) (a)\) to be the function
+  \(\Gamma \to \bigcup_{\alpha \in \Gamma} X_\alpha\) mapping \(\mu \in \Gamma\) to \(f_\mu(a)\).
+  % \NotaInterna{Ok, the notation here is becoming cumbersome\dots{}
+  % Using \(f_\bullet\) instead of \(\prod_{i \in I} f_i\)? The idea is:
+  % \(f_\bullet (a)\) takes \(i\) as input by putting it in place of \(\bullet\).}
+  It is simple to show that
+  \[\begin{tikzcd}[row sep=small]
+      A \ar["{{\prod_{\alpha \in \Gamma}} f_\alpha}", dd, swap] \ar["{f_\mu}", dr] \\
+      & X_\mu \\
+      \prod_{\alpha \in \Gamma} X_\alpha \ar["{\proj_\mu}", ur, swap]
+    \end{tikzcd}\] commutes for every \(\mu \in \Gamma\). Moreover,
+  \(\prod_{\alpha \in \Gamma} f_\alpha\) is the only one that does this. Consider any
+  function \(g : A \to \prod_{\alpha \in \Gamma} X_\alpha\) with
+  \(f_\mu = \proj_\mu g\) for every \(\mu \in \Gamma\): then for every
+  \(x \in A\) we have
+  \[\begin{aligned}
+    \big(g(x)\big)(\mu) &= \proj_\mu \big(g(x)\big) = f_\mu (x) = \\
+                      &= p_\mu\left(\left(\prod_{\alpha \in \Gamma} f_\alpha\right)(x)\right) = \left(\left(\prod_{\alpha \in \Gamma} f_\alpha\right)(x)\right)(\mu) ,
+  \end{aligned}\]
+that is \(g = \prod_{\alpha \in \Gamma} f_\alpha\).
+\end{example}
+
+\begin{exercise}
+  It may be simple to reason about the Cartesian product of only two
+  sets \(X_1\) and \(X_2\). In this case, the product is written as
+  \(X_1 \times X_2\) and its elements are represented as pairs
+  \((a, b) \in X_1 \times X_2\) rather than functions
+  \(f : \set{1, 2} \to X_1 \cup X_2\) with \(f(i) \in X_i\) for
+  \(i \in \set{1, 2}\). By setting things like this, the \q{compression}
+  of two functions \(f_1 : A \to X_1\) and \(f_2 : A \to X_2\) into a
+  function \(A \to X_1 \times X_2\) becomes more obvious.
+\end{exercise}
+
+\begin{example}[Coproduct of sets]\label{example:CoprodOfSets}
+  For if \(\set{X_\alpha \mid \alpha \in \Lambda}\) is a family of sets, we introduce the
+  {\em disjoint union}
+  \[\sum_{\alpha \in \Lambda} X_\alpha := \bigcup_{\alpha \in \Lambda} X_\alpha \times \set{\alpha} = \set{(x, \alpha) \mid \alpha \in \Lambda\,,
+      \ x \in X_\alpha} .\] While the elements of every member of
+  \(\set{X_\alpha \mid \alpha \in \Lambda}\) are amalgamated in
+  \(\bigcup_{\alpha \in \Lambda} X_\alpha\), in the disjoint union
+  \(\sum_{\alpha \in \Lambda} X_\alpha\) the elements have attached a record of their
+  provenience --- in this case, the index of the set they come
+  from. Because of this feature, the elements of
+  \(\sum_{\alpha \in \Lambda} X_\alpha\) are called {\em dependent pairs}. The disjoint union
+  of \(\set{X_\alpha \mid \alpha \in \Lambda}\) has one {\em injection} for each \(\alpha \in \Lambda\):
+  \[\inj_\mu : X_\mu \to \sum_{\alpha \in \Lambda} X_\alpha\,, \ \inj_\mu(x) := (x, \mu) .\]
+  Similarly to what we have done in the previous example, a family of
+  functions \(\set{f_\alpha : X_\alpha \to A \mid \alpha \in \Lambda}\) can be compressed into this
+  one
+  \begin{align*}
+    & \sum_{\alpha \in \Lambda} f_\alpha : \sum_{\alpha \in \Lambda} X_\alpha \to A \\
+    & \left(\sum_{\alpha \in \Lambda} f_\alpha\right) (x, \mu) := f_\mu(x) ,
+  \end{align*}
+  which, in other words, checks the provenience of an element and give
+  it to an appropriate function \(f_\alpha\). This new function makes the
+  diagram
+  \[\begin{tikzcd}[row sep=small]
+      A \\
+      & X_\mu \ar["{\inj_\mu}", dl] \ar["{f_\mu}", ul, swap] \\
+      \sum_{\alpha \in \Lambda} X_\alpha \ar["{\sum_{\alpha \in \Lambda} f_\alpha}", uu]
+    \end{tikzcd}\] commute for every \(\mu \in \Lambda\), and it is the unique to
+  do this.%\newline
+  % Sometimes, you will see written \(\coprod\) instead of \(\sum\), but this
+  % does not shift the discourse.
+\end{example}
+
+\begin{exercise}
+  Prove \(\bigcup_{\alpha \in \Lambda} X_\alpha\) along with appropriate functions
+  \[X_\mu \to \bigcup_{\alpha \in \Lambda} X_\alpha\] one for each
+  \(\mu \in \Lambda\), is a coproduct if the \(X_\alpha\)-s are pairwise disjoint. If
+  some of them are not disjoint, what could go wrong?
+  % By the way, \(\bigcup_{\alpha \in \Lambda} X_\alpha\) is isomorphic to an appropriate
+  % quotient of \(\sum_{\alpha \in \Lambda} X_\alpha\). Part of the exercise is to find an
+  % equivalence relation \(\sim\) on \(\sum_{\alpha \in \Lambda} X_\alpha\) and a function
+  % \[\sum_{\alpha \in \Lambda} X_\alpha \to \bigcup_{\alpha \in \Lambda} X_\alpha\]
+  % which maps \(\sim\)-equivalent elements to the same element.
+\end{exercise}
+
+\begin{exercise}
+  Haskell natively offers the function
+  \begin{center} {\tt either :: (a -> c) -> (b -> c) -> Either a b -> c}
+  \end{center}
+  How do {\tt Either a b} and this function fit in the current topic?
+  If you accept this little exercise, remember {\tt Either a b} is
+  defined to be either {\tt Left a} or {\tt Right b}. We haven't talked
+  about the category of types, but it is not be that unseen.
+\end{exercise}
+
+\begin{example}[Product of topological spaces]
+  Consider now a family of topological spaces \(\set{X_i \mid i \in I}\) and
+  let us see if we can have a product of topological space in the sense
+  of the Definition above.\newline In order to talk about product topological
+  space we shall determine a topology over the set
+  \(\prod_{i \in I} X_i\). From the Example~\ref{example:ProdOfSets}, we have
+  a nice machinery, but it is all about sets and functions! We define
+  the {\em product topology} --- sometimes called \q{Tychonoff topology} ---
+  as the smallest among the topologies for \(\prod_{i \in I} X_i\) for which
+  all the projections \(\proj_j : \prod_{i \in I} X_i \to X_j\) of the
+  Example~\ref{example:ProdOfSets} are continuous.\newline The question is now:
+  do these continuous functions form a product in \(\Top\)?  Taking a
+  family of continuous functions \(\set{f_i : A \to X_i \mid i \in I}\) and
+  looking at the \q{underground} \(\Set\), there does exist one function
+  \(\hat f : A \to \prod_{i \in I} X_i\) such that
+  \(f_i = \proj_i \hat f\) for every \(i \in I\), but we do not know if it
+  is continuous! To give an answer, let us consider the family
+  \[\mathcal T := \set{\left. U \subseteq \prod_{i \in I} X_i \text{ open} \right\mid
+      \inv{\hat f} U \text{ is open in } A} :\] the idea is that if we
+  demonstrate \(\mathcal T\) is a topology for \(\prod_{i \in I} X_i\) and
+  \(\mathcal T\) makes all the \(\proj_i\)'s continuous, then we can
+  conclude the continuity of \(\hat f\). The first part is immediate, so
+  let us focus on the remaining part. If we take an open subset \(V\) of
+  \(X_j\), the open subset \(\inv{\proj_j} V\) of the product is in
+  \(\mathcal T\), because
+  \(\inv{f_j} V = \inv{\hat f} \left(\inv{\proj_j} V\right)\) is open in
+  \(A\).
+\end{example}
+
+\begin{example}[Coproduct of topological spaces]
+  As in the previous example, we move from
+  Example~\ref{example:CoprodOfSets}. In Topology, it is maybe more
+  customary to use
+  \[\coprod_{i \in I} X_i \text{ instead of } \sum_{i \in I} X_i\]
+  when \(\set{X_i \mid i \in I}\) is a family of topological spaces. However,
+  if we do not give a topology to \(\coprod_{i \in I} X_i\), this object remains
+  a bare set. In analogy to what happened with the Cartesian product, we
+  prescribe the open subsets of \(\coprod_{i \in I} X_i\) by making reference to
+  the injections \(\inj_j : X_j \to \coprod_{i \in I} X_i\):
+  \begin{quotation}
+    we define a subset \(A\) of \(\coprod_{i \in I} X_i\) to be open if and only
+    if \(\inv{\inj_j} A\) is an open subset of \(X_j\) for every
+    \(j \in I\).
+  \end{quotation}
+  Let us recycle the universal property enjoyed by the family of the
+  injections, that is for every family
+  \(\set{g_i : X_i \to A \mid i \in I}\) of continuous functions there exists
+  one function \(\tilde g : \coprod_{i \in I} X_i \to A\) such that
+  \(g_j = \tilde g \inj_j\) for every \(j \in I\). Furthermore,
+  \(\tilde g\) is continuous: if \(U \subseteq A\) is open, then so are the
+  subsets \(\inv{g_j} U \subseteq X_j\); consequently
+  \(\inv{g_j} U = \inv{\inj_j} \left(\inv{\tilde g} U\right)\) for every
+  \(j \in I\), which implies \(\inv{\tilde g} U\) is open.
+\end{example}
+
+\begin{example}[Existential and universal quantifiers]
+  Consider one logical predicate \(p\) in one variable, say
+  \(x\). Consider a universe of discourse \(\Omega\). \YetToBeTeXed{}
+\end{example}
+
+Sometimes, products and coproducts can be isomorphic, as in the
+following example.
+
+\begin{example}[Product and coproduct of modules]
+  \NotaInterna{Yet to be \TeX{}-ed\dots{}}
+\end{example}
+
+\begin{example}[Morphisms out of coproducts of terminal objects]
+  A set is an aggregate of single things, as such one thinks about sets
+  and as such axioms pertaining sets are crafted. This has a consequence
+  on how you do things, and since we are doing Category Theory there is
+  something that concerns us:
+%
+  \begin{quotation}
+    How do we introduce a function of sets \(f : A \to B\)?
+  \end{quotation}
+%
+  No surprise in the answer:
+%
+  \begin{quotation}
+    You do it {\em pointwise}: that is for every \(x \in A\) you prescribe
+    which element of \(B\) is the image.
+  \end{quotation}
+%
+  Perhaps, you will be more surprised by how Category Theory enters the
+  discourse now. As we have said many times, an element \(x \in A\) {\em
+    is} the function \(x : 1 \to A\) mapping the unique element of \(1\)
+  to \(x\) and applying a function \(f : A \to B\) to an element
+  \(x \in A\) means composing \(f x\).
+ %
+  \begin{quotation}
+    The functions \(1 \to A\) form a coproduct in
+    \(\Set\). %In other words, if for every function \(x : 1 \to A\) we provide a function \(y_x : 1 \to B\), then there is one and only one \(f : A \to B\) such that \(f x = y_x\).
+  \end{quotation}
+%
+  Make sure you understand why this is the precise formulation of the
+  term {\em pointwise} used above. So, here we are:
+%
+  \begin{quotation}
+    Let \(\mathcal{C}\) be a category with a terminal object \(1\) and with
+    the property: for every object \(a\) of \(\mathcal{C}\) the elements of
+    \(\mathcal{C} (1, a)\) form a coproduct. Then defining morphisms
+    \(f : a \to b\) is the same to assigning one morphism \(1 \to b\) for
+    every \(1\) the object \(a\) is made of.
+  \end{quotation}
+  It is the case of \(\Set\) and it is nice, isn't it?
+\end{example}
+
+\begin{exercise}
+  The previous remark is interesting. Does it work in \(\Top\)? Of
+  course no, you are required to think within the categorial frame built
+  so far and reinterpret what you already know. You are encouraged to
+  explore other categories as well.
+\end{exercise}
+
+Let us talk about {\em finite} products, that is products of a finite
+set of objects. The following arguments will be useful when we will deal
+with finite completeness of categories. Keep an eye on
+Figure~\ref{figure:ProductsReductions}.
+
+\begin{figure}
+  \centering
+  \begin{tabular}{c}
+    % \toprule
+    reduction from left (Proposition~\ref{proposition:FiniteProdLeftCons}) \\
+    % \midrule
+    \begin{tikzcd}[ampersand replacement=\&]
+      \& \& \& \& \& p_n \ar["{l_n}", dl, swap] \ar["{r_n}", dr] \\
+      \& \& \& \& p_{n-1} \ar["{l_{n-1}}", dl, swap] \ar["{r_{n-1}}", dr] \& \& x_n \\
+      \& \& \& \cdots{} \ar["{l_4}", dl, swap] \ar["{\cdots{}}", dr] \& \& x_{n-1} \\
+      \& \& p_3 \ar["{l_3}", dl, swap] \ar["{r_3}", dr] \& \& \cdots{} \\
+      \& p_2 \ar["{l_2}", dl, swap] \ar["{r_2}", dr] \& \& x_3 \\
+      x_1 \& \& x_2
+    \end{tikzcd}
+    \\
+    \midrule %\toprule
+    reduction from right (Proposition~\ref{proposition:FiniteProdRightCons}) \\
+    % \midrule
+    \begin{tikzcd}[ampersand replacement=\&]
+      \& p_n \ar["{l_n}", dl, swap] \ar["{r_n}", dr] \& \\
+      x_1 \& \& p_{n-1} \ar["{l_{n-1}}", dl, swap] \ar["{r_{n-1}}", dr] \\
+      \& x_2 \& \& \cdots{} \ar["{\cdots{}}", dl, swap] \ar["{r_4}", dr] \\
+      \& \& \cdots{} \& \& p_3 \ar["{l_3}", dl, swap] \ar["{r_3}", dr] \\
+      \& \& \& x_{n-2} \& \& p_2 \ar["{l_2}", dl, swap] \ar["{r_2}", dr] \\
+      \& \& \& \& x_{n-1} \& \& x_n
+    \end{tikzcd} \\
+    % \bottomrule
+  \end{tabular}
+  \caption{Finite products recursively constructed}
+  \label{figure:ProductsReductions}
+\end{figure}
+
+\begin{proposition}[Finite products, reduction from left]\label{proposition:FiniteProdLeftCons}
+  Let \(\mathcal{C}\) be a category a finite set \(\set{x_1, \dots{}, x_n}\),
+  with \(n \ge 2\), of objects of \(\mathcal{C}\). Let
+  \[\begin{tikzcd}[row sep=tiny, column sep=small]
+      & p_2 \ar["{l_2}", dl, swap] \ar["{r_2}", dr] \\
+      x_1 & & x_2 \end{tikzcd}\] be one of the products of
+  \(\set{x_1, x_2}\) and let
+  \[\begin{tikzcd}[row sep=tiny, column sep=small]
+      & p_{i+1} \ar["{l_{i+1}}", dl, swap] \ar["{r_{n+1}}", dr] \\
+      p_i & & x_{i+1}
+    \end{tikzcd}\] be one of the products of \(\set{p_i, x_{i+1}}\).
+%
+%\[\begin{tikzcd}[sep=small]
+%    & & & & & p_n \ar["{l_n}", dl, swap] \ar["{r_n}", dr] \\
+%    & & & & p_{n-1} \ar["{l_{n-1}}", dl, swap] \ar["{r_{n-1}}", dr] & & x_n \\
+%    & & & \cdots{} \ar["{l_4}", dl, swap] \ar["{\cdots{}}", dr] & & x_{n-1} \\
+%    & & p_3 \ar["{l_3}", dl, swap] \ar["{r_3}", dr] & & \cdots{} \\
+%    & p_2 \ar["{l_2}", dl, swap] \ar["{r_2}", dr] & & x_3 \\
+%    x_1 & & x_2
+%  \end{tikzcd}\]
+%
+  Then the morphisms
+  \[\begin{aligned}
+    l_2 \cdots{} l_n &: p_n \to x_1 \\
+    r_j l_{j+1} \cdots{} l_n &: p_n \to x_j \quad \text{for } j \in \set{2, \dots{}, n-1} \\
+    r_n &: p_n \to x_n
+  \end{aligned}\]
+of \(\mathcal{C}\) do form a product of \(\set{x_1, \dots{}, x_n}\).
+\end{proposition}
+
+\begin{proof}
+  The proof is conducted by induction on \(n \ge 2\). The case \(n=2\) is
+  the base case of our recursive definition. To proceed with the
+  inductive step, let us picture the situation:
+  \[\begin{tikzcd}
+      & & & & p_{n+1} \ar["{l_{n+1}}", dll, swap] \ar["{r_{n+1}}", drr] \\
+      & & p_n \ar["{l_2\cdots{}l_n}", dll, swap] \ar["{r_jl_{j+1}\cdots{}l_n}" description, d] \ar["{r_n}", drr] & & & & x_{n+1} \\
+      x_1 & & x_j & & x_n \\
+      \\
+      & & & & & a \ar["{f_1}" description, uulllll] \ar["{f_j}"
+      description, uulll] \ar["h" description, uuulll, dotted]
+      \ar["{f_n}" description, uul] \ar["k" description, uuuul, dotted]
+      \ar["{f_{n+1}}" description, uuur]
+    \end{tikzcd}\] where \(j \in \set{2, \dots{}, n-1}\), \(a\) is an
+  arbitrary object with morphisms \(f_1, \dots{}, f_n, f_{n+1}\). By the
+  universal property of product, we have
+  \[\begin{aligned}
+    f_1 &= l_1 \cdots{} l_n h \\
+    f_j &= r_jl_{j+1} \cdots{} l_n h \\
+    f_n &= r_n h
+  \end{aligned}\]
+for one and only one \(h : a \to p_n\). Again by the universal property of product.
+\[\begin{aligned}
+  h &= l_{n+1} k \\
+  f_{n+1} &= r_{n+1} k
+\end{aligned}\]
+for a unique \(k : a \to p_{n+1}\). Thus
+\[\begin{aligned}
+  f_1 &= l_1 \cdots{} l_n l_{n+1} k \\
+  f_j &= r_jl_{j+1} \cdots{} l_n l_{n+1} k \\
+  f_n &= r_n l_{n+1} k \\
+  f_{n+1} &= r_{n+1} k
+\end{aligned}\]
+and we have concluded.
+\end{proof}
+
+\begin{proposition}[Finite products, reduction from right]\label{proposition:FiniteProdRightCons}
+  Let \(\mathcal{C}\) be a category a finite set \(\set{x_1, \dots{}, x_n}\),
+  with \(n \ge 2\), of objects of \(\mathcal{C}\). Let
+  \[\begin{tikzcd}[row sep=tiny, column sep=small]
+      & p_2 \ar["{l_2}", dl, swap] \ar["{r_2}", dr] \\
+      x_{n-1} & & x_n
+    \end{tikzcd}\] be one of the products of \(\set{x_{n-1}, x_n}\) and
+  let
+  \[\begin{tikzcd}[row sep=tiny, column sep=small]
+      & p_{i+1} \ar["{l_{i+1}}", dl, swap] \ar["{r_{n+1}}", dr] \\
+      x_{n-i} & & p_i
+    \end{tikzcd}\] be one of the products of \(\set{x_{n-i}, p_i}\).
+%
+%\[\begin{tikzcd}[sep=small]
+%    & p_n \ar["{l_n}", dl, swap] \ar["{r_n}", dr] & \\
+%    x_1 & & p_{n-1} \ar["{l_{n-1}}", dl, swap] \ar["{r_{n-1}}", dr] \\
+%    & x_2 & & \cdots{} \ar["{\cdots{}}", dl, swap] \ar["{r_4}", dr] \\
+%%    &     & \cdots{} &          & \cdots{} \\
+%    & & \cdots{} & & p_3 \ar["{l_3}", dl, swap] \ar["{r_3}", dr] \\
+%    & & & x_{n-2} & & p_2 \ar["{l_2}", dl, swap] \ar["{r_2}", dr] \\
+%    & & & & x_{n-1} & & x_n
+%  \end{tikzcd}\]
+%
+  Then the morphisms
+  \[\begin{aligned}
+    r_2 \cdots{} r_n &: p_n \to x_n \\
+    l_j r_{j+1} \cdots{} r_n &: p_n \to x_{n-j+1} \quad \text{for } j \in \set{2, \dots{}, n-1} \\
+    r_n &: p_n \to x_1
+  \end{aligned}\]
+of \(\mathcal{C}\) do form a product of \(\set{x_1, \dots{}, x_n}\).
+\end{proposition}
+
+\begin{proof}
+  This is \inlinethm{exercise}. You should expect some work like in the
+  proof of Proposition~\ref{proposition:FiniteProdLeftCons}.
+\end{proof}
+
+\begin{corollary}[Associativity of product]\label{corollary:ProdAssoc}
+  In a category \(\mathcal{C}\), let
+  \[\begin{tikzcd}[sep=small]
+      x_1 & x_1 \times x_2 \ar["{p_1}", l, swap] \ar["{p_2}", r] & x_2
+    \end{tikzcd}\] a product of \(\set{x_1, x_2}\),
+  \[\begin{tikzcd}[sep=small]
+      x_1 \times x_2 & (x_1 \times x_2) \times x_3 \ar["{p_{1,2}}", l, swap]
+      \ar["{p_3}", r] & x_3
+    \end{tikzcd}\] a product of \(\set{x_1 \times x_2, x_3}\),
+  \[\begin{tikzcd}[sep=small]
+      x_2 & x_2 \times x_3 \ar["{q_2}", l, swap] \ar["{q_3}", r] & x_3
+    \end{tikzcd}\] a product of \(\set{x_2, x_3}\),
+  \[\begin{tikzcd}[sep=small]
+      x_1 & x_1 \times (x_2 \times x_3) \ar["{q_1}", l, swap] \ar["{q_{2,3}}", r]
+      & x_2 \times x_3
+    \end{tikzcd}\] a product of \(\set{x_1, x_2 \times x_3}\).
+  \[\begin{tikzcd}[sep=small,cramped]
+      & & (x_1 \times x_2) \times x_3 \ar["{p_{1,2}}", dl, swap] \ar["{p_3}", ddrr] \\
+      & x_1 \times x_2 \ar["{p_1}", dl, swap] \ar["{p_2}", dr] \\
+      x_1 & & x_2 & & x_3 \\
+      & & & x_2 \times x_3 \ar["{q_2}", ul] \ar["{q_3}", ur, swap] \\
+      & & x_1 \times (x_2 \times x_3) \ar["{q_1}", uull] \ar["{q_{2, 3}}", ur,
+      swap]
+    \end{tikzcd}\] Then
+  \[(x_1 \times x_2) \times x_3 \cong x_1 \times (x_2 \times x_3) .\]
+\end{corollary}
+
+\begin{proof}
+  It follows from Proposition~\ref{proposition:FiniteProdLeftCons} and
+  Proposition~\ref{proposition:FiniteProdRightCons}.
+\end{proof}
+
+\begin{corollary}\label{corollary:FiniteProductsIffTerminalAndBinaryProducts}
+  A category has all finite products if and only if has a terminal
+  object and all binary products.
+\end{corollary}
+
+\begin{proof}
+  One implication is easy. For the opposite one: terminal objects are
+  empty products; an object with identity is a product of itself; if you
+  are given at least two objects, either of
+  Proposition~\ref{proposition:FiniteProdLeftCons} and
+  Proposition~\ref{proposition:FiniteProdRightCons} tell you finite
+  product are consecutive binary products.
+\end{proof}
+
+\begin{exercise}
+  In a category with terminal object \(1\), we have
+  \(a \times 1 \cong 1 \times a \cong a\).
+\end{exercise}
+
+
+
+\section{Equalizers and coequalizers}
+
+\begin{definition}[Equalizers \& coequalizers, explicit]
+  For \(\mathcal{C}\) category, the limits of functors
+  \[
+    \left(\begin{tikzcd}[column sep=tiny] \bullet \ar[r, shift left] \ar[r,
+        shift right] & \bullet \end{tikzcd}\right) \to \mathcal{C}
+  \]
+  are called {\em equalizers}; dually, its colimits are called {\em
+    coequalizers} instead. More explicitly, given in \(\mathcal{C}\) two
+  morphisms
+  \begin{equation}
+    \begin{tikzcd}
+      a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
+    \end{tikzcd}\label{diagram:PairOfParallelMorphisms}
+  \end{equation}
+  we have:
+  \begin{itemize}[leftmargin=*]
+  \item An {\em equalizer} of this pair is a morphism \(i : c \to a\)
+    such that:
+    \begin{enumerate}[leftmargin=*]
+    \item The following diagram commutes
+      \[
+        \begin{tikzcd}
+          c \ar["i", r] & a \ar["f", r, shift left] \ar["g", r, shift
+          right, swap] & b
+        \end{tikzcd}
+      \]
+    \item For every \(i' : c' \to a\) of \(\mathcal{C}\) making
+      \[
+        \begin{tikzcd}
+          c' \ar["{i'}", r] & a \ar["f", r, shift left] \ar["g", r,
+          shift right, swap] & b
+        \end{tikzcd}
+      \]
+      commute, there is one and only one \(k : c' \to c\) in \(\mathcal{C}\)
+      such that the following commutes
+      \[
+        \begin{tikzcd}[row sep=small]
+          c' \ar["{i'}", dr] \ar["k", dd, swap] \\
+          & a \\
+          c \ar["i", ur, swap]
+        \end{tikzcd}
+      \]
+    \end{enumerate}
+  \item A {\em coequalizer} of the
+    pair~\eqref{diagram:PairOfParallelMorphisms} is a morphism
+    \(j : b \to d\) such that
+    \begin{enumerate}[leftmargin=*]
+    \item The following diagram commutes
+      \[
+        \begin{tikzcd}
+          a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
+          \ar["j", r] & d
+        \end{tikzcd}
+      \]
+    \item For every \(j' : b \to d'\) of \(\mathcal{C}\) making
+      \[
+        \begin{tikzcd}
+          a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
+          \ar["{j'}", r] & d'
+        \end{tikzcd}
+      \]
+      commute, there exists one and only one \(h : d \to d'\) such that
+      the following commutes
+      \[
+        \begin{tikzcd}[row sep=small]
+          & d \ar["h", dd] \\
+          b \ar["j", ur] \ar["{j'}", dr, swap] \\
+          & d'
+        \end{tikzcd}
+      \]
+    \end{enumerate}
+  \end{itemize}
+\end{definition}
+
+% Before we analyse some example, the following lemma, may be quite
+% useful to guide us.
+
+
+
+% How could this be of aid? For example, in \(\Set\) this means we have
+% to look for inclusions in the domain of the domain of the parallel
+% arrows. That is the case, indeed.
+
+The following example explains why the equalizers are called like
+that.
+
+\begin{example}[Equalizers in \(\Set\)]
+  In \(\Set\), consider two functions
+  \[\begin{tikzcd}
+      X \ar["f", r, shift left] \ar["g", r, shift right, swap] & Y
+    \end{tikzcd} .\] The subset
+  \[E := \set{x \in X \mid f(x) = g(x)}\] has the inclusion in \(X\), we
+  call it \(i : E \hookrightarrow X\). Of course, we have \(fi = gi\), so one part
+  of the work is done. Now, let us take a commuting diagram
+  \[\begin{tikzcd}
+      E' \ar["{i'}", r] & X \ar["f", r, shift left] \ar["g", r, shift
+      right, swap] & Y
+    \end{tikzcd} .\] It follows that \(i'(x) \in E\) for every
+  \(x \in E'\). Hence, we shall consider the function
+  \[h : E' \to E\,, \ h(x) := i'(x) .\] It is immediate now that
+  \(i : E \hookrightarrow X\) is an equalizer of \(f\) and \(g\).
+\end{example}
+
+Looking at the previous example, the subset where parallel functions
+agree gives an equalizer. As a matter of fact, having this intuition in
+mind is not wrong.
+
+\begin{lemma}\label{lemma:EqualizersAreMonos}
+  Equalizers are monomorphisms. Dually, coequalizers are epimorphisms.
+\end{lemma}
+
+\begin{proof}
+  Consider
+  \[\begin{tikzcd}
+      e' \ar["s", r, shift left] \ar["t", r, shift right, swap] & e
+      \ar["i", r] & a \ar["f", r, shift left] \ar["g", r, shift right,
+      swap] & b
+    \end{tikzcd}\] with \(i\) equalizer of \(f\) and \(g\) and
+  \(is = it\). We can redraw this diagram as follows:
+  \[\begin{tikzcd}[row sep=small]
+      e \ar["i", dr] \\
+      & a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b \\
+      e' \ar["s", uu, bend left=10] \ar["t", uu, bend right=10, swap]
+      \ar["{is = it}", ur, swap]
+    \end{tikzcd}\] In this case, we have
+  \(f(is) = f(it) = g(is) = g(it)\). Thus, by definition of equalizer,
+  it must be \(s = t\).
+\end{proof}
+
+Thus, if we want one example of coequalizer in \(\Set\), we have to look for
+some surjective functions.
+
+\begin{example}[Coequalizers in \(\Set\)]
+  In \(\Set\), consider two functions
+  \[
+    \begin{tikzcd}
+      X \ar["f", r, shift left] \ar["g", r, shift right, swap] & Y
+    \end{tikzcd} .
+  \] Having a commuting diagram like
+  \[
+    \begin{tikzcd}
+      X \ar["f", r, shift left] \ar["g", r, shift right, swap] & Y
+      \ar["j", r] & A
+    \end{tikzcd}
+  \]
+  means that we must look for some \(j : Y \to A\) such that, for
+  \(x \in X\), the elements \(f(x)\) and \(g(x)\) are brought to the same
+  element of \(A\). The thing works if take \(A\) to be the quotient
+  \[
+    \frac{Y}{f(x) \sim g(x) \ \text{for } x \in X}
+  \]
+  and define \(j\) as quotient map \(Y \to Y{/}{\sim}\). It only remains to
+  verify the universal property of coequalizer. Take any
+  \(j' : Y \to Z\) such that \(j'f = j'g\).
+  \[
+    \begin{tikzcd}[row sep=small]
+      & & Y{/}{\sim} \ar[dd, dashed] \\
+      X \ar["f", r, shift left] \ar["g", r, shift right, swap] & Y \ar["j", ur] \ar["{j'}", dr, swap] \\
+      & & Z
+    \end{tikzcd}
+  \]
+  The existence of the unique function \(Y{/}{\sim} \to Z\) is immediate.
+\end{example}
+
+% \begin{exercise}
+%   Retrieve Example~\ref{example:PushoutsInSet} and prepare to combine
+%   it with the example we have just made. The
+%   square~\eqref{diagram:NotYetACommSquareInSet} doesn't even commute,
+%   but \(A+B\) with the two injections is a coproduct, not a random
+%   thing out there. You can rearrange that diagram too
+%   \[\begin{tikzcd}[column sep=large]
+%       C \ar["{\linj f}",r, shift left] \ar["{\rinj g}", r, shift
+%       right, swap] & A+B
+%     \end{tikzcd}\] and summon the canonical projection
+%   \(A+B \to \frac{A+B}{\sim}\) which is a coequalizer. At this point, we
+%   have the commutative square~\eqref{diagram:NowACommSquareInSet},
+%   which we proved to be a pushout square. Luckily, this works in
+%   general, and it is up to you to realize why and make the dual of the
+%   result too.\newline In a category \(\mathcal{C}\), suppose you have a coproduct
+%   \[\begin{tikzcd}a \ar["{\linj}", r] & a+b & b \ar["{\rinj}", l,
+%       swap]\end{tikzcd}\] a square
+%   \[\begin{tikzcd}
+%       c \ar["f", r] \ar["g", d, swap]  & a \ar["\linj", d] \\
+%       b \ar["\rinj", r, swap] & a+b
+%     \end{tikzcd}\] and a coequalizer \(p : a+b \to d\) of \(\linj f\)
+%   and \(\rinj g\). Prove that
+%   \[\begin{tikzcd}
+%       c \ar["f", r] \ar["g", d, swap]  & a \ar["p\linj", d] \\
+%       b \ar["p\rinj", r, swap] & d
+%     \end{tikzcd}\] is a pushout square in \(\mathcal{C}\).% Eventually, you have an amazing result.
+% \end{exercise}
+
+% \begin{proposition}
+%   Categories with binary products/coproducts and
+%   equalizers/coequalizers have pullbacks/pushouts.
+% \end{proposition}
+
+% Another exercise will help you to prove the converse.
+
+% \begin{exercise}
+%   In a category \(\mathcal{C}\), consider two parallel morphisms
+%   \[\begin{tikzcd}
+%       a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
+%     \end{tikzcd}\] and a product
+%   \[\begin{tikzcd}
+%       a & a \times b \ar["{p_a}", l, swap] \ar["{p_b}", r] & b
+%     \end{tikzcd}\] The universal property of products gives the
+%   morphisms \(\bar f, \bar g : a \to a \times b\) such that
+%   \(p_a \bar f = \id_a\), \(p_b \bar f = f\), \(p_a \bar g = \id_a\)
+%   and \(p_b \bar g = g\):
+%   \[\begin{tikzcd}
+%       & a \ar["{\id_a}", dl, swap] \ar["{\bar f}", d, shift right, swap] \ar["{\bar g}", d, shift left] \ar["f", dr, shift right, swap] \ar["g", dr, shift left] \\
+%       a & a \times b \ar["{p_a}", l] \ar["{p_b}", r, swap] & b
+%     \end{tikzcd}\] Consider the pullback square
+%   \[\begin{tikzcd}
+%       c \ar["m", r] \ar["n", d, swap] & a \ar["{\bar f}", d] \\
+%       a \ar["{\bar g}", r, swap] & a \times b
+%     \end{tikzcd}\] and prove that:
+%   \begin{tcbenum}
+%   \item \(m = n\).
+%   \item \(m\) is equalizer of \(f\) and \(g\).
+%   \end{tcbenum}
+% \end{exercise}
+
+% In other words:
+
+% \begin{proposition}
+%   Categories with binary products/coproducts have
+%   equalizers/coequalizers if and only if have pullbacks/pushouts. That
+%   is: in a category with products/coproducts, pullbacks/pushouts can
+%   be obtained by equalizers/coequalizers and vice versa.
+% \end{proposition}
+
+% \begin{proposition}
+%   Categories with binary products/coproducts and pullbacks/pushouts
+%   have equalizers/coequalizers.
+% \end{proposition}
+
+% \NotaInterna{Write about {\em quotient objects}\dots{}}
+
+% The following proposition may be of help sometimes.
+
+Ok, let us step back to Lemma~\ref{lemma:EqualizersAreMonos}, for
+there is something curious. Equalizers are monomorphisms, but what are
+the consequences if an equalizer is in addition epic?
+
+\begin{proposition}\label{proposition:EpicEqualizersAreIsomorphisms}
+  An epic equalizer is an isomorphism. Dually, a monic epimonomorphism
+  is an isomorphism.
+\end{proposition}
+
+\begin{proof}
+  Assume \(i : e \to a\) is an epic equalizer of
+  \[\begin{tikzcd} a \ar["f", r, shift left] \ar["g", r, shift right,
+      swap] & b \end{tikzcd}\] From \(fi = gi\), we can derive
+  \(f = g\), being \(i\) epic. Hence
+  \[\begin{tikzcd} a \ar["{\id_a}", r] & a \ar["f", r, shift left]
+      \ar["g", r, shift right, swap] & b \end{tikzcd}\] commutes: by
+  the universal property of equalizers, \(\id_a = ik\) for a unique
+  \(k : a \to e\). Moreover, by simple computation
+  \(iki = i = i \id_e\), which implies that \(ki = \id_e\) since \(i\)
+  is monic. In conclusion, \(i\) is invertible.
+\end{proof}
+
+How could this become even interesting to us? If a category is such
+that every monomorphism is an equalizer of some pair of parallel
+arrows, then there monic and epic morphisms are ismorphisms, which we
+know it does not occur in every category.
+
+\begin{example}
+  In \(\Set\) that phenomenon does occur, let us look in it more
+  closely. The problem we have can be stated as follows: take and
+  injective function \(f : A \to B\) and find two parallel functions
+  parting from \(B\) to which \(f\) is an equalizer. We know, how to
+  construct equalizers in \(\Set\) and, even though that is not what
+  we want, that example may guide our exploration. The problem we want
+  to solve requires to find a certain set \(C\) and two certain
+  functions \(h, k : B \to C\). \YetToBeTeXed{}
+\end{example}
+
+\begin{exercise}
+  In a category \(\mathcal{C}\), if
+  \[\begin{tikzcd}
+      e \ar["i", r] \ar["i", d, swap] & a \ar["f", d] \\
+      a \ar["g", r, swap] & b
+    \end{tikzcd}\] is a pullback square, then \(i : e \to a\) is an
+  equalizer of the pair \(f\) and \(g\). Is the converse true? If it
+  is false, add hypothesis to make it true.
+\end{exercise}
+
+
+
+\section{Pullbacks and pushouts}
+
+Let \(\mathcal{C}\) be a category. The limits of the functors
+\[
+  \left(\begin{tikzcd}[sep=tiny]
+      \bullet \ar[dr] &         & \bullet \ar[dl] \\
+      & \bullet &
+    \end{tikzcd}\right) \to \mathcal{C}
+\]
+are called {\em pullbacks}. Dually, the colimits of the functors
+\[
+  \left(\begin{tikzcd}[sep=tiny]
+      & \bullet \ar[dl] \ar[dr] &         \\
+      \bullet & & \bullet
+    \end{tikzcd} \right) \to \mathcal{C}
+\]
+are said {\em pushouts}. More explicitly:
+
+\begin{definition}[Pullbacks \& pushouts, explicit]
+  Let \(\mathcal{C}\) a category and a pair of morphisms with the same codomain
+  \begin{equation}
+    \begin{tikzcd}[row sep=tiny]
+      a \ar["f", dr, swap] &   & b \ar["g", dl] \\
+      & c &
+    \end{tikzcd}
+    \label{diagram:MorphismsToPullback}
+  \end{equation}
+  in \(\mathcal{C}\). A {\em pullback} of~\eqref{diagram:MorphismsToPullback} is
+  any pair of morphisms with a common domain
+  \[
+    \begin{tikzcd}[row sep=tiny]
+      & p \ar["h", dl, swap] \ar["k", dr] &   \\
+      a & & b
+    \end{tikzcd}
+  \]
+  in \(\mathcal{C}\) such that:
+  \begin{tcbitem}
+  \item the following square commutes
+    \[
+      \begin{tikzcd}[row sep=tiny]
+        & p \ar["h", dl, swap] \ar["k", dr] &   \\
+        a \ar["f", dr, swap] &   & b \ar["g", dl] \\
+        & c &
+      \end{tikzcd}
+    \]
+  \item for every
+    \[
+      \begin{tikzcd}[row sep=tiny]
+        & p' \ar["{h'}", dl, swap] \ar["{k'}", dr] &   \\
+        a & & b
+      \end{tikzcd}
+    \]
+    in \(\mathcal{C}\) making the diagram
+    \[
+      \begin{tikzcd}[row sep=tiny]
+        & p \ar["{h'}", dl, swap] \ar["{k'}", dr] &   \\
+        a \ar["f", dr, swap] &   & b \ar["g", dl] \\
+        & c &
+      \end{tikzcd}
+    \]
+    commute there exists one and only one \(r : p' \to p\) in
+    \(\mathcal{C}\) such that
+    \[
+      \begin{tikzcd}
+        & p' \ar["{h'}", dl, swap] \ar["r", d, dashed] \ar["{k'}", dr] & \\
+        a & p \ar["h", l] \ar["k", r, swap] & b
+      \end{tikzcd}
+    \]
+    commutes.
+  \end{tcbitem}
+  Assuming now we have a pair of morphisms with the same domain
+  \begin{equation}
+    \begin{tikzcd}[row sep=tiny]
+      & c \ar["f", dl, swap] \ar["g", dr] & \\
+      a & & b
+    \end{tikzcd}
+    \label{diagram:MorphismsToPushout}
+  \end{equation}
+  in \(\mathcal{C}\), a {\em pushout} of~\eqref{diagram:MorphismsToPushout} is any
+  pair of morphisms in \(\mathcal{C}\) with a common codomain
+  \[
+    \begin{tikzcd}[row sep=tiny]
+      a \ar["h", dr, swap] & & b \ar["k", dl] \\
+      & q &
+    \end{tikzcd}
+  \]
+  such that:
+  \begin{tcbitem}
+  \item the square
+    \[
+      \begin{tikzcd}[row sep=tiny]
+        & c \ar["f", dl, swap] \ar["g", dr] &                \\
+        a \ar["h", dr, swap] &                                   & b \ar["k", dl] \\
+        & q &
+      \end{tikzcd}
+    \] commutes
+  \item for every
+    \[
+      \begin{tikzcd}[row sep=tiny]
+        a \ar["{h'}", dr, swap] & & b \ar["{k'}", dl] \\
+        & q' &
+      \end{tikzcd}
+    \]
+    in \(\mathcal{C}\) making
+    \[
+      \begin{tikzcd}[row sep=tiny]
+        & c \ar["f", dl, swap] \ar["g", dr] &                \\
+        a \ar["{h'}", dr, swap] &                                   & b \ar["{k'}", dl] \\
+        & q &
+      \end{tikzcd}
+    \]
+    commute there exists one and only one \(s : q \to q'\) in
+    \(\mathcal{C}\) such that
+    \[
+      \begin{tikzcd}
+        a \ar["h", r] \ar["{h'}", dr, swap] & q \ar["s", d, dashed] & b \ar["k", l, swap] \ar["{k'}", dl] \\
+        & q' &
+      \end{tikzcd}
+    \]
+    commutes.
+  \end{tcbitem}
+\end{definition}
+
+The definitions above become can be more concise though: pullbacks
+(pushouts) are products (coproducts) in certain categories.
+
+\begin{proposition}
+  A pullback of
+  \[\begin{tikzcd}[row sep=tiny]
+      a \ar["f", dr, swap] &   & b \ar["g", dl] \\
+      & c &
+    \end{tikzcd}\] in \(\mathcal{C}\) is any of the products that pair of
+  morphisms in \(\mathcal{C} {\downarrow} c\). Dually, a pushout of
+  \[\begin{tikzcd}[row sep=tiny]
+      & c \ar["f", dl, swap] \ar["g", dr] & \\
+      a & & b
+    \end{tikzcd}\] in \(\mathcal{C}\) is any of the coproducts such pair of
+  morphisms in \(c {\downarrow} \mathcal{C}\).
+\end{proposition}
+
+\begin{proof}
+  This is \inlinethm{exercise}.
+\end{proof}
+
+\begin{exercise}
+  Let \(\mathcal{C}\) be a category with initial object \(0\) and terminal
+  object \(1\). What are pullbacks of a pair of morphisms with codomain
+  \(1\)? What are pushouts of a pair of morphisms with domain \(0\)?
+\end{exercise}
+
+\begin{example}[Pullbacks in \(\Set\)]\label{example:PullbacksInSet}
+  Now we consider sets and functions as in
+  \[
+    \begin{tikzcd}
+      & A \ar["f", d] \\
+      B \ar["g", r, swap] & C
+    \end{tikzcd}
+  \]
+  with the aim to find a pullback of it. From the set
+  \[
+    D := \set{(a, b) \in A \times B \mid f(a) = g(b)}
+  \]
+  we can make the functions
+  \begin{align*}
+    & p : D \to A \\
+    & p(a, b) := a \\
+    & q : D \to B \\
+    & q(a, b) := b
+  \end{align*}
+  Hence we can draw at least the commuting square
+  \[
+    \begin{tikzcd}
+      D \ar["p", r] \ar["q", d, swap] & A \ar["f", d] \\
+      B \ar["g", r, swap] & C
+    \end{tikzcd}
+  \]
+  Now consider
+  \[
+    \begin{tikzcd}
+      D' \ar["{p'}", drr, bend left] \ar["{q'}", ddr, bend right, swap]                 \\
+      & D \ar["p", r] \ar["q", d, swap]                                & A \ar["f", d] \\
+      & B \ar["g", r, swap] & C
+    \end{tikzcd}
+  \]
+  with \(fp' = gq'\). This implies that
+  \(\left(p'(x), q'(x)\right) \in D\) for every \(x \in D'\), and allows us
+  to introduce the function
+  \begin{align*}
+    & r : D' \to D' \\
+    & r(x) := \left(p'(x), q'(x)\right)
+  \end{align*}
+  which is such
+  that \(p r = p'\) and \(q r = q'\). Finally, \(r\) is the unique one
+  to do so, which fact is immediate for how \(r\) is defined.
+\end{example}
+
+Let us remain in \(\Set\) for a moment and explore what happens if we
+pull a function back along itself. Provided a function \(f : A \to B\),
+the example above tells us we have the pullback square
+\[
+  \begin{tikzcd}
+    R_f \ar["p", r] \ar["q", d, swap] & A \ar["f", d] \\
+    A \ar["f", r, swap] & B
+  \end{tikzcd}
+\]
+where
+\[
+  R_f := \set{(a, b) \in A \times A \mid f(a) = f(b)} .
+\]
+This subset of \(A \times A\) is an equivalence relation over \(A\), namely
+the {\em kernel relation} of \(f\). There is nothing special of \(\Set\)
+that prevents us to generalize it to any category \(\mathcal{C}\).
+
+\begin{definition}[Kernel relation]
+  In a category \(\mathcal{C}\), the {\em kernel relation} of a morphism
+  \(f : a \to b\) is any of the pullbacks of
+  \[\begin{tikzcd}
+      & a \ar["f", d] \\
+      a \ar["f", r, swap] & b
+    \end{tikzcd}\]
+\end{definition}
+
+In \(\Grp\) pullbacks can be constructed as we have done in \(\Set\). So
+what is the kernel relation of a group homomorphism \(f : G \to H\) of \(\Grp\)? As above, it
+is the group \(R_f := \set{(a, b) \in G \times G \mid f(a) = f(b)}\) with the
+multiplication inherited from \(G \times G\). More explicitly,
+\[
+  R_f = \left\{ (a, b) \in G \times G \mid a = k b \text{ for some } k \in \ker f
+  \right .\}
+\]
+
+% As soon as we meet coequalizers, we will have the tool to express the
+% quotient \({X}{/}{R_f}\) in a categorial fashion, and thus to motivate
+% the general concept of {\em quotient object}.
+
+\begin{example}[Pushouts in \(\Set\)]\label{example:PushoutsInSet}
+  Recall what we have done in Example~\ref{example:CoprodOfSets}, but
+  change a bit the notation. Take a family of two sets \(A_1\) and
+  \(A_2\): write \(A_1+A_1\) instead of using the \(\sum\) or
+  \(\coprod\) notation, write \(\linj\) and \(\rinj\) in place of
+  \(\inj_1\) and \(\inj_2\), respectively.\newline To get started, let
+  us consider sets and functions
+  \[\begin{tikzcd}[row sep=tiny]
+      & C \ar["f", dl, swap] \ar["g", dr] &   \\
+      A & & B
+    \end{tikzcd}\] Let us draw a diagram
+  \begin{equation}\begin{tikzcd}
+      C \ar["f", r] \ar["g", d, swap]  & A \ar["\linj", d] \\
+      B \ar["\rinj", r, swap] & A+B
+    \end{tikzcd}\label{diagram:NotYetACommSquareInSet}\end{equation}
+  By definition of \(A+B\), it can be
+  \(\mathtt{left} f(x) \ne \mathtt{right} g(x)\) for some \(x \in
+  C\). However, we can make them \q{equal} under an adequate equivalence
+  relation \(\sim\): the smallest in which, for \(x \in C\), the
+  elements \(\linj f(x)\) and \(\rinj g(x)\) are identified; that is we
+  define \(\sim\) to be the smallest equivalence relation containing
+  \[R := \set{(\linj f(x), \rinj g(x)) \mid x \in C}.\] In this case,
+  let us write \(p\) the projection \(A+B \to \frac{A+B}{\sim}\). The
+  new square is
+  \begin{equation}\begin{tikzcd}
+      C \ar["f", r] \ar["g", d, swap] & A \ar["h", d]    \\
+      B \ar["k", r, swap] & \frac{A+B}{\sim}
+    \end{tikzcd}\label{diagram:NowACommSquareInSet}\end{equation}
+  with \(h := p \linj\) and \(k := p \rinj\) and it is commutative. Now,
+  pick
+  \[\begin{tikzcd}
+      C \ar["f", r] \ar["g", d, swap] & A \ar["h", d] \ar["{h'}", ddr, bend left] \\
+      B \ar["k", r, swap] \ar["{k'}", drr, bend right, swap] & \frac{A+B}{\sim} \\
+      & & X
+    \end{tikzcd}\] such that \(h'f = k'g\). By the universal property of
+  coproduct, we have the function
+  \[h' + k' : A + B \to X\] such that
+  \(\left(h' + k'\right) \linj = h'\) and
+  \(\left(h' + k'\right) \rinj = k'\). Taken, for any \(x \in C\), one
+  \((\linj f(x), \rinj g(x)) \in R\), we have
+  \begin{align*}
+    & (h'+g')(\rinj f(x)) = h'f(x) \\
+    & (h'+g')(\linj g(x)) = k'g(x) 
+  \end{align*}
+  which are equal for every \(x \in C\), by
+  assumption. \NotaInterna{Talk about generated equivalence relations
+    and what follows.} Thus the triangle
+  \[\begin{tikzcd}[column sep=tiny]
+      A+B \ar["{h'+k'}", rr] \ar["p", dr, swap] & & X \\
+      & \frac{A+B}{\sim} \ar[ur, dashed, swap]
+    \end{tikzcd}\] commutes for exactly one dashed function. This
+  function is the one we are looking for. \NotaInterna{Complete\dots{}}
+\end{example}
+
+\begin{exercise}
+  In the previous example, what is \(\frac{A+B}{\sim}\) if
+  \(C = A \cap B\) and \(f\) and \(g\) are just the inclusions of \(C\)
+  in \(A\) and \(B\) respectively? \NotaInterna{There is other material
+    to put here\dots{}}
+\end{exercise}
+
+\begin{exercise}
+  Go back to Example~\ref{example:PushoutsInSet}. What if we started our
+  discourse from
+  \[\begin{tikzcd}
+      C \ar["f", r] \ar["g", d, swap]  & A \ar[d, hookrightarrow] \\
+      B \ar[r, hookrightarrow] & A \cup B
+    \end{tikzcd}\] instead?
+  % You may tackle this question from two different points: trying to
+  % readapt the discourse or prove that
+  % \((A \cup B){/}{\sim'} \cong (A+B){/}{\sim}\), where \(\sim'\) is
+  % the equivalence relation generated by
+  % \[f(x) \sim' g(x) \ \text{for } x \in C.\]
+\end{exercise}
+
+\begin{lemma}
+  Let \(\mathcal{C}\) be a category and
+  \begin{equation}\begin{tikzcd}[row sep=tiny]
+      a \ar["f", dr, swap] &   & b \ar["g", dl] \\
+      & c &
+    \end{tikzcd}\label{diagram:MorphismsToBePullbacked}\end{equation}
+  a couple of morphisms in \(\mathcal{C}\). If \(\mathcal{C}\) has a product
+  \begin{equation}\begin{tikzcd}[row sep=tiny]
+      & p \ar["h", dl, swap] \ar["k", dr] &   \\
+      a & & b
+    \end{tikzcd}\label{diagram:ProductToBePullback}\end{equation}
+  of \(a\) and \(b\) such that the square
+  \[\begin{tikzcd}[row sep=tiny]
+      & p \ar["h", dl, swap] \ar["k", dr] &   \\
+      a \ar["f", dr, swap] &   & b \ar["g", dl] \\
+      & c &
+    \end{tikzcd}\] commutes, then~\eqref{diagram:ProductToBePullback} is
+  a pullback of~\eqref{diagram:MorphismsToBePullbacked}.
+\end{lemma}
+
+\begin{exercise}[Gluing topological spaces]
+  If you are given two spaces \(X\) and \(A\), a subspace
+  \(E \subseteq A\) and a continuous function \(f : E \to X\), then
+  \(X \sqcup_f A\) denotes the disjoint union \(X \sqcup A\) where every
+  \(x \in E\) is identified to \(f(x)\), that
+  is% . More formally: on \(X \sqcup A\) we define the equivalence relation \(\sim_f\) as the smallest one containing \(R_f := \set{(f(x), x) \mid x \in E}\) and
+  \[X \sqcup_f A := \frac{X \sqcup A}{x \sim f(x) \text{ for } x \in E}
+    .\] Find a pushout square
+  \[\begin{tikzcd}
+      E \ar[r, hookrightarrow] \ar["f", d, swap] & A \ar[d]     \\
+      X \ar[r] & X \sqcup_f A
+    \end{tikzcd}\] in \(\Top\). The exercise requires you to work about
+  the topologies involved and about continuity.
+  % with the arrow \(\hookrightarrow\) indicating a mere inclusion. Does
+  % this look familiar? Yes! Continue. Part of the exercise is to reason
+  % about the topology over the stuff involved here.
+\end{exercise}
+
+\begin{example}[CW complexes]
+  In Topology, several spaces often employed are homotopic --- or even
+  homeomorphic --- to other spaces glued together. Although you can glue
+  everything to everything, very simple spaces to attach are disks
+  \(\mathbb D^n := \set{x \in \mathbb R^n \mid \lVert x \rVert \le 1}\)
+  along their boundaries \(\mathbb S^{n-1} := \partial \dsc^n\). (Pay
+  attention to superscripts.) For any topological space \(X\), we can
+  perform the following recursive construction:
+  \begin{tcbitem}
+  \item Let \(X_0\) be the space \(X\) but with the discrete topology.
+  \item For \(n \in \naturals\), from topological space \(X_n\) we
+    prescribe the construction of another space \(X_{n+1}\). If we are
+    given a family \(\set{D_\alpha \mid \alpha \in \Lambda}\) of copies
+    of \(\mathbb D^{n+1}\) and collection of continuous functions
+    \[\set{\left. f_\alpha : \partial D_\alpha \to X_n \right\mid \alpha
+        \in \Lambda}\]
+    then we can consider the following topological space
+    \[X_{n+1} := \frac{X_n \sqcup \coprod_{\alpha \in \Lambda}
+        D_\alpha}{ x \sim f_\alpha(x) \text{ for } \alpha \in \Lambda
+        \text{ and } x \in \partial D_\alpha }.\] In other words,
+    \(X_{n+1}\) is \(X_n\) with \((n+1)\)-dimensional disks attached to
+    it along their boundaries.
+  \end{tcbitem}
+  As always, we are striving to find some universal property worth of
+  consideration. A square comes easily if you consider the inclusions
+  running in parallel \(\mathbb S^n \hookrightarrow \mathbb D^{n+1}\)
+  and \(X_n \hookrightarrow X_{n+1}\) together with
+  \(\mathbb D^{n+1} \hookrightarrow X_{n+1}\) of the construction
+  above. The other pieces are the attaching maps: indeed we have a
+  commuting square
+  % \NotaInterna{A lot of ugly notation and imprecision here\dots{}} As
+  % before, at every step of recursive construction just described, we
+  % have a commuting square
+  \[\begin{tikzcd}[column sep=large]
+      \coprod_{\alpha \in \Lambda} \partial D_\alpha \ar[r,
+      hookrightarrow] \ar["{\coprod_{\alpha \in \Lambda} f_\alpha}", d,
+      swap] & \coprod_{\alpha \in \Lambda} D_\alpha \ar[d,
+      hookrightarrow]
+      \\
+      X_n \ar[r, hookrightarrow] & X_{n+1}
+    \end{tikzcd}\] This square is a pushout one in \(\Top\), which is
+  easy to prove.
+\end{example}
+
+\begin{exercise}[Spheres are CW complexes] Consider the case in which
+  \(X_0\) is a single point space and so are the spaces \(X_i\) for
+  \(1 \le i \le n-1\). Such situation can be achieved by attaching no
+  disk for a while; afterwards, attach one disk \(\dsc^{n}\) along
+  \(\sph^{n-1}\) to \(X_{n-1}\). Hence we have a homeomorphism
+  \(X_n \cong {\dsc^n}{/}{\sph^{n-1}}\), but you will show something
+  more, that is \(X_n \cong \sph^n\).\newline In your Topology course,
+  you might have managed to show this as follows:
+  \begin{tcbenum}
+  \item You have constructed a surjective continuous function
+    \(f : \dsc^n \to \sph^n\) and considered the quotient space
+    \({\dsc^n}{/}{\sim_f}\) where \(\sim_f\) is the kernel relation
+    \NotaInterna{talk about kernel relations!} of \(f\). This relation
+    is not a random relation: for every \(x, y \in \dsc^n\), we have
+    \(x \sim_f y\) if and only if \(x = y\) or \(x, y \in
+    \sph^{n-1}\). As consequence,
+    \({\dsc^n}{/}{\sim_f} = {\dsc^n}{/}{\sph^{n-1}}\).
+  \item Thanks to the universal property of quotients, the function
+    \(\phi : {\dsc^n}{/}{\sph^{n-1}} \to \sph^n\) such that
+    \(f = \phi p_n\), with the \(p_n\) the canonical projection, is
+    continuous and bijective. Now, recalling that continuous functions
+    from compact spaces to Hausdorff spaces are closed, conclude that
+    indeed \(\phi\) is a homeomorphism.
+  \end{tcbenum}
+  The aim of this exercise it that you can arrive to the same result in
+  a different manner. If you can recollect your memories or retrieve
+  your notes, see if you can recycle the \(f\) above and write a pushout
+  square
+  \begin{equation}\begin{tikzcd}
+      \sph^{n-1} \ar[hookrightarrow, r] \ar["!", d, swap] & \dsc^n \ar["f", d] \\
+      X_{n-1} \ar[r] & \sph^n
+    \end{tikzcd}\label{diagram:SpherePushout}\end{equation}
+  If you do not know how \({\dsc^n}{/}{\sph^{n-1}} \cong \sph^n\), it
+  does not matter since you will force yourself to search for a pushout
+  square like~\eqref{diagram:SpherePushout}.
+\end{exercise}
+
+\begin{exercise}[\(\rpspc^n\) is a CW complex]
+  In Topology, the \(n\)-th {\em real projective space} is
+  \[\rpspc^n := \frac{\reals^{n+1} \setminus \set{0}}{x \sim \lambda x
+      \text{ for } x \in \reals^{n+1}, \lambda \in \reals}\] which is
+  known to be homeomorphic to the sphere \(\sph^n\) which has the
+  antipodal points identified:
+  \[\frac{\sph^n}{\displaystyle x \sim - x \text{ for } x \in \sph^n}
+    .\] This observation is the key for the coming arguments. In fact,
+  \(\sph^n\) is the boundary of \(\dsc^{n+1}\) and we already have a
+  continuous function \(p_n : \sph^n \to \rpspc^n\) that attaches the
+  the disc to the projective space along the boundary. Find a pushout
+  square of the form
+  \[\begin{tikzcd}
+      \sph^n \ar[hookrightarrow, r] \ar["p_n", d, swap] & \dsc^{n+1} \ar["?", d] \\
+      \rpspc^n \ar[r, hookrightarrow] & \rpspc^{n+1}
+    \end{tikzcd}.\]
+  % This has remarkable consequence: here is how the real projective
+  % spaces are CW complexes!
+\end{exercise}
+
+Topology, again, but combined with Group Theory.
+
+\begin{example}[Seifert-van Kampen Theorem]
+  Suppose given a topological space \(X\), two open subsets
+  \(A, B \subseteq X\) such that \(A \cup B = X\) and one point \(x_0\)
+  of \(A \cap B\). Let us denote by \(i_A\), \(i_B\), \(j_A\) and
+  \(j_B\) the group morphisms induced by the inclusions
+  \(A \cap B \hookrightarrow A\), \(A \cap B \hookrightarrow B\),
+  \(A \hookrightarrow X\) and \(B \hookrightarrow X\), respectively. If
+  \(A\), \(B\) and \(A \cap B\) are path-connected then,
+  \[\begin{tikzcd}[sep=small]
+      & \pi_1(A, x_0) \ar["{j_A}", dr] & \\
+      \pi_1(A \cap B, x_0) \ar["{i_A}", ur] \ar["{i_B}", dr, swap] & & \pi_1(X, x_0) \\
+      & \pi_1(B, x_0) \ar["{j_B}", ur, swap]
+    \end{tikzcd}\] is a pushout square of \(\Grp\).
+\end{example}
+
+\NotaInterna{The Pullback Lemma is dropped here without a precise plan
+  to embed it nicely with examples and further development. It's an
+  issue that must be fixed.}
+
+\begin{proposition}[The Pullback Lemma]
+  In a category \(\mathcal{C}\) consider a diagram
+  \[\begin{tikzcd}
+      \bullet \ar["a", r] \ar["d", d, swap] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r] \ar["g" description, d] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d]\\
+      \bullet \ar["e", r, swap] & \bullet \ar["f", r, swap] & \bullet
+    \end{tikzcd}\] where the perimetric rectangle commutes and the
+  square on the right is a pullback one. Then that on the left is a
+  pullback square is and only if so is the outer rectangle.
+\end{proposition}
+
+\begin{proof}
+  Let us assume \(Q_1\) is a pullback square first. Consider any choice
+  of \(h\) and \(k\) such that \(ch = f(ek)\):
+  \[\begin{tikzcd}
+      \bullet \ar["h", bend left=10, drrr, blue] \ar["k", bend right=10, ddr, swap, blue] & & & \\
+      & \bullet \ar["a", r, swap] \ar["d", d] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r, swap] \ar["g", d] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d, blue]\\
+      & \bullet \ar["e", r, swap, blue] & \bullet \ar["f", r, swap,
+      blue] & \bullet
+    \end{tikzcd}\] Being \(Q_2\) a pullback square, there exists one and
+  only one \(l\) such that \(h = bl\) and \(gl = ek\).
+  \[\begin{tikzcd}
+      \bullet \ar["h", bend left=10, drrr, blue] \ar["k", bend right=10, ddr, swap, blue] \ar["l"{description}, bend left=8, drr] & & & \\
+      & \bullet \ar["a", r, swap] \ar["d", d] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r, swap] \ar["g", d] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d, blue]\\
+      & \bullet \ar["e", r, swap, blue] & \bullet \ar["f", r, swap,
+      blue] & \bullet
+    \end{tikzcd}\] We have just said that this square in red commutes:
+  \[\begin{tikzcd}
+      \bullet \ar["h", bend left=10, drrr] \ar["k", bend right=10, ddr, swap, red] \ar["l"{description}, drr, bend left=8, red] & & & \\
+      & \bullet \ar["a", r, swap] \ar["d", d] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r, swap] \ar["g", d, red] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d]\\
+      & \bullet \ar["e", r, swap, red] & \bullet \ar["f", r, swap] &
+      \bullet
+    \end{tikzcd}\] Now, being \(Q_1\) a pullback square, we have one
+  \(m\) such that\(l = am\) and \(k = dm\):
+  \[\begin{tikzcd}
+      \bullet \ar["h", bend left=10, drrr] \ar["k", bend right=10, ddr, swap, red] \ar["l"{description}, drr, bend left=8, red] \ar["m"{description}, dr] & & & \\
+      & \bullet \ar["a", r, swap] \ar["d", d] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r, swap] \ar["g", d, red] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d]\\
+      & \bullet \ar["e", r, swap, red] & \bullet \ar["f", r, swap] &
+      \bullet
+    \end{tikzcd}\] At this point, we have \(b a m = b l = h\) and
+  \(dm = k\). To conclude the first half of the theorem, you have to
+  pick any \(m'\) making commute the triangles in green:
+  \[\begin{tikzcd}
+      \bullet \ar["h", bend left=10, drrr, green!65!black] \ar["k", bend right=10, ddr, swap, green!65!black] \ar["am" description, drr, bend left=8] \ar["{m'}" description, dr, green!65!black] & & & \\
+      & \bullet \ar["a", r, swap, green!65!black] \ar["d", d, green!65!black] \ar["{Q_1}", dr, phantom] & \bullet \ar["b", r, swap, green!65!black] \ar["g", d] \ar["{Q_2}", dr, phantom] & \bullet \ar["c", d]\\
+      & \bullet \ar["e", r, swap] & \bullet \ar["f", r, swap] & \bullet
+    \end{tikzcd}\] Being \(Q_2\) a pullback square, we have
+  \(am' = am\). In conclusion, being \(Q_1\) a pullback square too, we
+  have \(m = m'\). \NotaInterna{Finer explanation here\dots{}}
+\end{proof}
+
+\begin{exercise}
+  Prove the remaining part of the theorem above.
+\end{exercise}
+
+\begin{example}[Character functions]
+  Consider a subset \(A\) of some larger set \(X\). You sure know a
+  simple function called {\em character function} with just says if an
+  element of \(X\) is a member of \(A\):
+  \[\chi_A : X \to \set{\mathtt{true}, \mathtt{false}}\,,\ \chi_A (x)
+    := \begin{cases} \mathtt{true} & \text{if } x \in A \\
+      \mathtt{false} & \text{otherwise} \end{cases}\] From now on, let
+  us write \(\Omega\) to mean \(\set{\mathtt{true},
+  \mathtt{false}}\). As always, let us draw what we have:
+\[\begin{tikzcd}
+    A \ar[r, hookrightarrow] & X \ar["{\chi_A}", d] \\
+    & \Omega
+  \end{tikzcd}\] with \(A \hookrightarrow X\) being the usual
+inclusion. The composition of such functions is function constant to
+\(\mathtt{true}\). We know that constant functions are such because they
+can be factored through some function \(A \to 1\) \NotaInterna{write
+  about this explicitly somewhere}, which results in a commuting square
+\[\begin{tikzcd}
+    A \ar[r, hookrightarrow] \ar["!", d, swap] & X \ar["{\chi_A}", d] \\
+    1 \ar["{\lambda x. \mathtt{true}}", r, swap] & \Omega
+  \end{tikzcd}\] Well, this square is a pullback square. Of course, that
+is not all we have to say. \NotaInterna{To be continued.}
+\end{example}
+
+% Let us introduce a small generalization of pullbacks and pushouts. Let
+% \(\mathcal{I}\) be a category which has one object \(b\) and, for
+% \(\lambda \in \Gamma\), one object \(x_\lambda\) one morphism
+% \(f_\lambda : x_\lambda \to b\); there is no other morphisms than these ones and the
+% identities in \(\mathcal{I}\). What are limits of functors
+% \(F : \mathcal{I} \to \mathcal{C}\) in more explicit terms? Any limit of
+% \(F\) consists of one object \(p\), one morphism \(h : p \to b\) and, for
+% every \(\lambda \in \Gamma\), one morphism \(g_\lambda : p \to x_\lambda\) such that
+% \[f_\lambda g_\lambda = h \text{ for every } \lambda \in \Gamma .\] We
+% shall call this kind of limits {\em generalized
+%   pullbacks}. \NotaInterna{\q{Unofficial} name.}  Generalized because
+% the usual definition of pullback is obtained by choosing \(\Gamma\) to
+% be a set of solely two elements. Observe also, as in the case of
+% pullbacks, generalized pullbacks are products in certain comma
+% categories. \NotaInterna{Talk about generalized pushouts too.}
+
+% \begin{example}[Generalized pullbacks in \(\Set\)]
+%   Consider a family of sets \(\set{X_\lambda \mid \lambda \in \Gamma}\), one set
+%   \(T\) and functions \(f_\lambda : X_\lambda \to T\).
+%   \[E := \set{\left. x \in \prod_{\lambda \in \Gamma} X_\lambda \right\mid f_\alpha (x(\alpha)) = f_\beta (x(\beta))
+%       \text{ for every } \alpha, \beta \in \Gamma} .\] We have then commutative squares
+%   \[\begin{tikzcd}
+%       E \ar["{p_\alpha}", r] \ar["{p_\beta}", d, swap] & X_\alpha \ar["{f_\alpha}", d] \\
+%       X_\beta \ar["{f_\beta}", r, swap] & T
+%     \end{tikzcd}\] where the \(p_\alpha\)-s are restrictions to \(E\) of the
+%   \(\proj_\alpha\)-s in Example~\ref{example:ProdOfSets}. Consider, for
+%   \(\alpha, \beta \in \Gamma\),
+%   \[\begin{tikzcd}
+%       Y \ar["{g_\alpha}", drr, bend left] \ar["{g_\beta}", ddr, bend right, swap] \\
+%       & E \ar["{p_\alpha}", r] \ar["{p_\beta}", d, swap] & X_\alpha \ar["{f_\alpha}", d] \\
+%       & X_\beta \ar["{f_\beta}", r, swap] & T
+%     \end{tikzcd}\] where \(f_\alpha g_\alpha = f_\beta g_\beta\). Thus
+%   \(g_\bullet (y) \in E\) for every \(y \in Y\), which fact motivates the
+%   following function
+%   \[Y \to E\,, \ y \to g_\bullet(y).\] After realizing how here we have
+%   generalized Example~\ref{example:PullbacksInSet}, continue and finish
+%   this example: \inlinethm{exercise}.
+% \end{example}
+
+\begin{example}[Generalized pushouts in \(\Set\)]
+  Recall Example~\ref{example:PushoutsInSet}, because we will need
+  it. Consider a family of sets \(\set{X_\mu \mid \mu \in \Lambda}\),
+  one set \(T\) and functions \(g_\mu : S \to X_\mu\), one for each
+  \(\mu \in \Lambda\). As in the binary case, we have non commuting
+  diagrams
+  \[\begin{tikzcd}
+      S \ar["{g_\delta}", r] \ar["{g_\eta}", d, swap] & X_\eta \ar["{\inj_\delta}", d] \\
+      X_\eta \ar["{\inj_\eta}", r, swap] & {\displaystyle\sum_{\mu \in
+          \Lambda} X_\mu}
+    \end{tikzcd}\] for \(\delta, \eta \in \Lambda\). This is just to
+  push ourselves to the next move: consider the smallest relation
+  \(\sim\) on the disjoint sum containing
+  \[R := \set{(\inj_\delta g_\delta (x), \inj_\eta g_\eta(x)) \mid x \in
+      S \text{ and } \delta, \eta \in \Lambda} .\] In this case, we have
+  a commutative diagram
+  \[\begin{tikzcd}
+      S \ar["{g_\delta}", r] \ar["{g_\eta}", d, swap] & X_\delta \ar["{q_\delta}", d] \\
+      X_\eta \ar["{q_\eta}", r, swap] & \frac{\sum_{\mu \in \Lambda}
+        X_\mu}{\sim}
+    \end{tikzcd}\] where, for \(\mu \in \Lambda\), we define
+  \(q_\mu (x)\) to be the \(\sim\)-equivalence class of \(x \in
+  X_\mu\). Take now one function \(h_\mu : X_k \to F\), for
+  \(\mu \in \Lambda\), such that \(h_\delta g_\delta = h_\eta g_\theta\)
+  for every \(\delta, \eta \in \Lambda\).
+  \[\begin{tikzcd}
+      S \ar["{g_\delta}", r] \ar["{g_\eta}", d, swap] & X_\delta \ar["{q_\delta}", d] \ar["{h_\delta}", ddr, bend left] \\
+      X_\eta \ar["{q_\eta}", r, swap] \ar["{h_\eta}", drr, bend right, swap] & \frac{\sum_{\mu \in \Lambda} X_\mu}{\sim} \ar[dr, dashed] \\
+      & & F
+    \end{tikzcd}\] To construct the dotted function, we proceed
+  similarly as in the binary case. We have the function
+  \[\sum_{\mu \in \Lambda} h_\mu : \sum_{\mu \in \Lambda} X_\mu \to F\]
+  which satisfies
+  \begin{align*}
+    & \left( \sum_{\mu \in \Lambda} h_\mu \right) (\inj_\delta g_\delta (x)) = h_\delta g_\delta (x) =  %\\
+    & = h_\eta g_\eta (x) = \left( \sum_{\mu \in \Lambda} h_\mu \right) (\inj_\eta g_\eta (x))
+  \end{align*}
+  \[\left( \sum_{\mu \in \Lambda} h_\mu \right) (\inj_\delta g_\delta (x)) = h_\delta g_\delta (x) = h_\eta
+    g_\eta (x) = \left( \sum_{\mu \in \Lambda} h_\mu \right) (\inj_\eta g_\eta (x))\] for
+  \(x \in S\) and \(\delta, \eta \in \Lambda\). The function we are looking for is the one
+  induce by \(\sum_{\mu \in \Lambda} h_\mu\). The continuation of this example is
+  \inlinethm{exercise}.
+\end{example}
+
+\begin{exercise}
+  Can you do something similar to what we have done with finite
+  products? We are referring to
+  Proposition~\ref{proposition:FiniteProdLeftCons},
+  Proposition~\ref{proposition:FiniteProdRightCons} and
+  Corollary~\ref{corollary:ProdAssoc}.
+\end{exercise}
+
+
+
+\section{(Co)Completeness}
+
+As the examples of the previous sections have shown, existence of limits
+in general is not to be taken for granted.
+
+\begin{definition}
+  A category \(\mathcal{C}\) is said to be {\em (co)complete} whenever any functor
+  \(X : \mathcal{I} \to \mathcal{C}\) has a (co)limit. Dually,
+  \(\mathcal{C}\) is said {\em finitely (co)complete} when every functor
+  \(\mathcal{I} \to \mathcal{C}\) out of a {\em finite} category \(\mathcal{I}\) admits a (co)limit.
+\end{definition}
+
+Let us look at the first non trivial case, \(\Set\). Let \(X : \mathcal{I} \to \mathcal{C}\)
+be any functor. Write \(\left\lvert X \right\rvert : \obj{\mathcal{I}} \to \mathcal{C}\) the
+{\em underlying discrete functor}, that is the functor defined on objects by \(\left\lvert X
+\right\rvert (a) :=  X(a)\).
+
+Why are we introducing this construction? Well, look at the definitions
+of limit and product: they are almost the same. The cones of the
+definition of limits are just families of morphisms \(\pi_i : P \to X(i)\) for \(i
+\in \mathcal{I}\). In contrast, the cones of the definition of limit are families of
+morphisms \(\lambda_i : L \to X(i)\) for \(i \in \mathcal{I}\) such that \(X(f) \lambda_i = \lambda_j\)
+for every \(i, j \in \mathcal{I}\) and \(f : i \to j\) in \(\mathcal{I}\). The case
+\(\mathcal{C} = \Set\) can be illuminating in this sense. 
+
+We know \(\Set\) has products, that is \(\left\lvert X \right\rvert\)
+has a limit: the set
+\[
+  \prod_{i \in \mathcal{I}} \left\lvert X \right\rvert (i) = \prod_{i \in \mathcal{I}} X(i) 
+\]
+with the family of functions
+\begin{align*}
+  & \pi_k : \prod_{i \in \mathcal{I}} X(i) \to X(k) \\
+  & \pi_k (x) := x_k
+\end{align*}
+Let us see if within \(\prod_{i \in \mathcal{I}} X(i)\) we can find a limit of the
+diagram \(X : \mathcal{I} \to \mathcal{C}\). Well, since we want naturality, let us just
+consider
+\begin{align*}
+  L &:= \left\{ \left. x \in \prod_{i \in \mathcal{I}} X(i) \right\mid X(f) \pi_i (x) = \pi_j (x)
+      \text{ for every } i, j \in \mathcal{I} \text{ and } f \in \mathcal{I}(i, j) \right\} = \\
+    &= \left\{ \left. x \in \prod_{i \in \mathcal{I}} X(i) \right\mid X(f) (x_i) = x_j
+      \text{ for every } i, j \in \mathcal{I} \text{ and } f \in \mathcal{I}(i, j) \right\}
+\end{align*}
+Then
+\begin{align*}
+  & \lambda_i : L \to X(i) \\
+  & \lambda_i(x) := x_i
+\end{align*}
+is natural in \(i\) and gives a limit of \(X\).
+
+\begin{proposition}[Completeness Theorem]\label{proposition:Completeness}
+  Categories that have products and equalizers are complete.
+\end{proposition}
+
+\begin{proof}
+  Take \({\bf I}\) and \(\mathcal{C}\) to be two categories, and
+  \(X : {\bf I} \to \mathcal{C}\) any functor; just for convenience, let us
+  write \(I\) for \(\obj{{\bf I}}\). \(\mathcal{C}\) has all products, so
+  let us write
+  \[\set{\left. p \functo{\phi_i} X_i \right\mid i \in I}\]
+  for one of --- it does not matter which one, right? --- the products of
+  \(\set{X_i \mid i \in I}\). The class
+  \[H := \set{j \in I \mid {\bf I}(i, j) \ne \nil \text{ for some } i \in I}\]
+  will be useful for the constructions to come. For \(i \in I\),
+  \(j \in H\) and \(f \in {\bf I}(i, j)\) we can draw this
+  \[\begin{tikzcd}[row sep=tiny]
+      & X_i \ar["{X_f}", dr, bend left=15pt] \\
+      p \ar["{\phi_i}", ur, bend left=15pt] \ar["{\phi_j}", rr, swap, bend
+      right] & & X_j
+    \end{tikzcd}\] Again by the fact that \(\mathcal{C}\) has products, let
+  us write
+  \[\set{\left. q \functo{\xi_j} X_j \right\mid j \in H}\]
+  for one of the products of \(\set{X_j \mid j \in H}\). Now, the universal
+  property of products yields two morphisms
+  \begin{equation}
+    \begin{tikzcd} p \ar["\delta", r, shift left] \ar["\theta", r, shift right, swap] & q \end{tikzcd}
+    \label{diagram:TwoProducts}
+  \end{equation}
+  of \(\mathcal{C}\) obtained as follows:
+  \begin{tcbenum}%[label=(\arabic*), ref=\arabic*]
+  \item\label{universal:theta} \(\theta\) is the one that factors
+    \(\phi_j\) through \(\xi_j\) for \(j \in H\), viz \(\phi_j = \xi_j \theta\).
+  \item\label{universal:delta} \(\delta\) is the unique that factors
+    \(X_f \phi_i\) through \(\xi_j\) for every \(i \in I\),
+    \(j \in H\) and \(f \in {\bf I}(i, j)\), that is \(X_f \phi_i = \xi_j \delta\)
+  \end{tcbenum}
+  \(\mathcal{C}\) has equalizers too, so let \(\epsilon : e \to p\) be one of the
+  equalizers of the parallel morphisms
+  in~\eqref{diagram:TwoProducts}. Now that everything is arranged, the
+  rest of the proof is to prove that
+  \[\set{\left. e \functo{\phi_i \epsilon} X_i \right\mid i \in I}\]
+  is a limit of \(X\). It is important, however, to check
+  preliminarily that it is a natural transformation. Take
+  \[\begin{tikzcd}[row sep=tiny]
+      & X_i \ar["{X_f}", dd] \\
+      e \ar["{\phi_i\epsilon}", ur] \ar["{\phi_j\epsilon}", dr, swap] \\
+      & X_j
+    \end{tikzcd}\] with \(i, j \in I\) and \(f \in {\bf I}(i, j)\). If
+  \(j \notin H\), then the commutativity of the diagram is a vacuous truth;
+  otherwise,
+  \[X_i \phi_i \epsilon = \underbrace{\xi_j \delta \epsilon = \xi_j \theta \epsilon}_{\epsilon \text{ is
+        equalizer}} = \phi_j \epsilon .\] So, let us conclude the proof:
+  provided a natural transformation
+  \[\set{\left. a \functo{\sigma_i} X_i \right\mid i \in I} ,\]
+  we show how to construct \(a \to e\) that makes
+  \[\begin{tikzcd}[row sep=tiny]
+      a \ar["{\sigma_i}", dr] \ar[dd] \\
+      & X_i \\
+      e \ar["{\phi_i \epsilon}", ur, swap]
+    \end{tikzcd}\] commute. By universal property of product, there is
+  a unique \(\mu : a \to p\) such that
+  \(\sigma_i = \phi_i \mu = \xi_i \theta \mu\) for every \(i \in I\). In particular, for
+  \(j \in H\), \(i \in I\) and \(f \in {\bf I} (i, j)\)
+  \[
+    \sigma_j =
+    \begin{cases}
+      \phi_j \mu = \xi_j \theta \mu & \text{by~\eqref{universal:theta}} \\
+      X_f \sigma_i = X_f \phi _i \mu = \xi_j  \delta \mu & \parbox{9.5em}{because \(\sigma\) is
+                                        a natural transformation
+                                        and~\eqref{universal:delta}}
+    \end{cases}
+  \]
+  As a consequence of the universal property of product of \(\xi\), we
+  must have \(\theta \mu = \delta \mu\). Moreover, being
+  \(\epsilon : e \to p\) an equalizer of~\eqref{diagram:TwoProducts}, then
+  \(\mu = \epsilon \psi\) for exactly one \(\psi : a \to e\) of
+  \(\mathcal{C}\). Thus \(\sigma_i = \phi_i \mu = \phi_i \epsilon \psi\), so
+  \(\psi\) is what we are are looking for; at this point you can observe
+  the uniqueness of \(\psi\) as well. That's all.
+\end{proof}
+
+% \begin{lemma}
+%   A category has finite products if and only if it has a terminal
+%   object and all binary products.
+% \end{lemma}
+
+% \begin{proof}
+%   One implication is trivial. Let \(\mathcal{C}\) be a category that has a
+%   terminal object, say \(1\), and all binary products
+%   \NotaInterna{write what this would mean}. Let
+%   \(\set{x_1, \dots{}, x_n} \subseteq \obj{\mathcal{C}}\) and construct one product
+%   for them. We proceed by induction on \(n\). If \(n=0\), we have a
+%   product: the terminal object \(1\). Assume now
+%   \(\set{x_1, \dots{}, x_n}\) has a product, say the set of morphisms
+%   of \(\mathcal{C}\)
+%   \[\set{\alpha_i : p \to x_i \mid i = 1, \dots{}, n} .\]
+%   Take one \(x_{n+1} \in \obj{\mathcal{C}}\). By assumption, there is a
+%   product of \(p\) and \(x_{n+1}\), a pair of morphisms
+%   \[p \xleftarrow \beta q \xrightarrow \gamma x_{n+1} .\] The question is: do
+%   the morphisms \(\alpha_i \beta : q \to x_i\), for
+%   \(i = 1, \dots{}, n\), and \(\gamma\) form a product of
+%   \(\set{x_1, \dots{}, x_n, x_{n+1}}\)? Yes, \inlinethm{exercise} (the
+%   drawing below is a hint).
+%   \[\begin{tikzcd}
+%       & & r \ar["{f_i}", ddll, swap, bend right] \ar["{f_{n+1}}", ddr,
+%       bend left]
+%       \ar[ddl, bend right, dashed] \ar[d, dotted] \\
+%       & & q \ar["\beta", dl] \ar["\gamma", dr, swap] \\
+%       x_i & p \ar["{\alpha_i}", l] & & x_{n+1}
+%     \end{tikzcd}\qedhere\]
+% \end{proof}
+
+A special place is for finite (co)limits.
+
+\begin{proposition}[Finite Completeness Theorem I]
+  Categories having terminal objects, binary products and equalizers
+  are finitely complete. \NotaInterna{Write a definition for \q{finite
+      completeness}.}
+\end{proposition}
+
+\begin{proof}
+  Use
+  Corollary~\ref{corollary:FiniteProductsIffTerminalAndBinaryProducts}
+  and the argument to prove the Completeness Theorem.
+\end{proof}
+
+% Actually, we have another finite completeness theorem, which requires
+% some preliminary work.
+
+% \begin{lemma}
+%   If a category has a terminal object and pullbacks, then it has
+%   binary products and equalizers.
+% \end{lemma}
+
+% \begin{proof}
+%   Call \(\mathcal{C}\) the category of the assumptions and \(1\) one of its
+%   terminal objects. An exercise in the section about pullbacks asked
+%   you to show that the pullbacks of \(a \to 1 \gets b\) are products of
+%   \(a\) and \(b\). Now we show how to get an equalizer out of a
+%   terminal object and an appropriate pullback. Consider two parallel
+%   morphisms
+%   \[\begin{tikzcd}
+%       a \ar["f", r, shift left] \ar["g", r, shift right, swap] & b
+%     \end{tikzcd}\] of \(\mathcal{C}\). Now, let
+%   \[\begin{tikzcd}a & a \times b \ar["{p_a}", l, swap] \ar["{p_b}", r] &
+%       b \end{tikzcd}\] be one the products of \(a\) and
+%   \(b\). Afterwards, define \(\bar f : a \to a \times b\) to be that morphism
+%   such that \(p_a \bar f = \id_a\) and \(f = p_b \bar f\); similarly,
+%   let \(\bar g : a \to a \times b\) be the morphism such that
+%   \(p_a \bar g = \id_a\) and \(g = p_b \bar g\).
+%   \[\begin{tikzcd}
+%       & a \ar["{\id_a}", dl, swap] \ar["{\bar f}", d] \ar["f", dr] \\
+%       a & a \times b \ar["{p_a}", l] \ar["{p_b}", r, swap] & b
+%     \end{tikzcd} \quad \begin{tikzcd}
+%       & a \ar["{\id_a}", dl, swap] \ar["{\bar g}", d] \ar["g", dr] \\
+%       a & a \times b \ar["{p_a}", l] \ar["{p_b}", r, swap] & b
+%     \end{tikzcd}\] By assumption, \(\mathcal{C}\) has the pullback square
+%   \[\begin{tikzcd}
+%       p \ar["m", r] \ar["n", d, swap] & a \ar["{\bar f}", d] \\
+%       a \ar["{\bar g}", r, swap] & a \times b
+%     \end{tikzcd}\] Here \(m = \alpha \bar f m = \alpha \bar g n = n\), so we can
+%   collapse all to the commuting
+%   \[\begin{tikzcd}
+%       p \ar["m", r] & a \ar["{\bar f}", r, shift left] \ar["{\bar g}",
+%       r, shift right, swap] & a \times b
+%     \end{tikzcd}\] with \(m\) equalizer of \(\bar f\) and \(\bar g\).
+% \end{proof}
+
+% \begin{exercise}
+%   Show that \(m\) is an equalizer. (Hint: \(\bar f\) and \(\bar g\)
+%   are monomorphisms.)
+% \end{exercise}
+
+\begin{proposition}[Finite Completeness Theorem II]
+  Categories that have terminal objects and pullbacks are finitely
+  complete.
+\end{proposition}
+
+\begin{proof}
+  Use the previous Lemma and the Finite Completeness Theorem I.
+\end{proof}
+
+Let us sum all up in one corollary:
+
+\begin{corollary}[Finite Completeness Theorem]
+  For any category, the following facts are equivalent:
+  \begin{tcbenum}
+  \item it is finitely complete
+  \item it has a terminal, binary products and equalizers
+  \item it has a terminal object and pullbacks
+  \end{tcbenum}
+\end{corollary}
+
+
+
+\section{Exercises}
+
+In the category \(\Modu_R\), homsets have the structure of abelian
+group. We want to do generalise this.
+
+\begin{definition}[Preadditve categories]
+  A {\em preadditive category} \(\mathcal{C}\) is a category where
+  \begin{enumerate}[leftmargin=*]
+  \item For every \(x, y \in \obj{\mathcal{C}}\) there are an operation
+    \(+_{x, y}\) on \(\mathcal{C}(x, y)\) and a {\em zero morphism}
+    \(0_x^y \in \mathcal{C}(x, y)\) making \(\mathcal{C}(x, y)\) an abelian group. In general,
+    we write \(+\) without pedices when there is no ambiguity to
+    unclutter our notation. Sometimes, we do the same for zero
+    morphisms.
+  \item For every \(a, b, c \in \obj{\mathcal{C}}\) and \(f : a \to b\) the functions
+    \begin{align*}
+      & f_\ast := \mathcal{C} (c, f) : \mathcal{C}(c, a) \to \mathcal{C}(c, b) \\
+      & f^\ast := \mathcal{C} (f, c) : \mathcal{C}(b, c) \to \mathcal{C}(a, c)
+    \end{align*}
+    are group homomorphisms.
+  \end{enumerate}
+\end{definition}
+
+In the following exercise you will prove elementary properties about
+limits and colimits in preadditive categories.
+
+\begin{exercise}
+  Let \(\mathcal{C}\) be a preadditive category.
+  \begin{enumerate}
+  \item In \(\mathcal{C}\), initial objects are also terminal; dually, terminal
+    objects are initial. Thus initial objects and terminal objects are
+    {\em zero objects}. We usually write zero objects in preadditive
+    categories as \(0\). Pay attention, when \(0\) denotes zero
+    morphisms.
+
+  \item If \(\mathcal{C}\) has zero object \(0\), then
+    \(0_a^b : a \to b\) is the composition of
+    \[
+      \begin{tikzcd}[column sep=small]
+        a \ar["{\exists!}", r] & 0 \ar["{\exists!}", r] & b
+      \end{tikzcd}
+    \]
+
+  \item In \(\mathcal{C}\) let
+    \[
+      \begin{tikzcd}[column sep=small]
+        a & a \times b \ar["{p_a}", l, swap] \ar["{p_b}", r] & b
+      \end{tikzcd}
+    \]
+    be a product. Then introduce two morphisms
+    \begin{align*}
+      & i_a := \langle\id_a, 0_a^b\rangle : a \to a \times b \\
+      & i_b := \langle0_b^a, \id_b\rangle : a \to a \times b
+    \end{align*}
+    Show these two morphisms form a coproduct. Hence in a preaddtive
+    category \(a \times b \cong a + b\). Now do the converse: take a coproduct
+    and find a way to have a product. It is customary to write \(a \oplus b\)
+    for both \(a \times b\) and \(a + c\).
+
+  \item In \(\mathcal{C}\) consider objects and morphisms
+    \[
+      \begin{tikzcd}[column sep=small]
+        a \ar["{i_a}", r, swap, shift right] & c \ar["{p_a}", l,
+        swap, shift right] \ar["{p_b}", r, shift left] & b \ar["{i_b}",
+        l, shift left]
+      \end{tikzcd}
+    \]
+    such that
+    \begin{align*}
+      & p_a i_b = 0_b^a \\
+      & p_b i_a = 0_a^b \\
+      & i_a p_a + i_b p_b = \id_c
+    \end{align*}
+    Show that \(p_a\) and \(p_b\) are a product and \(i_a\) and \(i_b\)
+    are a coproduct.
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Limits in \(\Set^{\mathcal{C}}\)] %\([\mathcal{C}, \Set]\)]
+  In this exercise you will understand how to compute the limits of
+  diagrams \(X : \mathcal{I} \to [\mathcal{C}, \Set]\). Let us unbox
+  things and see where to put hands first. We need a functor \(L :
+  \mathcal{C} \to \Set\) together with a family of natural
+  transformations \(\lambda_i : L \Rightarrow X(i)\) natural in \(i \in \obj{\mathcal{I}}\). (Make
+  sure you got it right: for every \(i\) we have a natural
+  transformation \(\lambda_i : L \Rightarrow X(i)\) and \(\lambda_i\) is natural in
+  \(i\). Write things in components.) Also, this cone \(\lambda\) should enjoy a
+  universal property: for every cone \(\left\{ \eta_i : A \Rightarrow X(i) \mid i \in
+    \obj{\mathcal{I}} \right\}\) there is a unique \(\psi : A \Rightarrow L\) such that \(\lambda_i \psi
+  = \eta_i\) for every \(i\). If you write this in components, you would
+  have the commutative diagrams
+  \[
+    \begin{tikzcd}[row sep=small]
+      A(a) \ar["{\psi_a}", dd, swap] \ar["{\eta_{i,a}}", dr] \\
+      & X(i)(a) \\
+      L(a) \ar["{\lambda_{i, a}}", ur, swap]
+    \end{tikzcd}
+  \]
+  So what if \(L(a) := \lim_{i \in \obj{\mathcal{I}}} X(i)(a)\)? You will be ask to
+  not hurry too much and to duly verify all the details.
+  \begin{enumerate}
+  \item For every \(a \in \obj{\mathcal{C}}\) construct a functor \(X(-)(a) :
+    \mathcal{C} \to \Set\) defined on objects by \(X(-)(a) (i) := X(i)(a)\). These
+    functors have a limit. Why?
+  \item For every \(a \in \obj{\mathcal{C}}\) let
+    \[
+      \left\{ \lambda_{i, a} : L(a) \to X(i)(a) \mid i \in \obj{\mathcal{I}} \right\}
+    \]
+    a limit for \(X(-)(a)\). Can you find a functor \(L : \mathcal{C} \to \Set\)
+    such that \(L(a)\) is a the vertex of the limit cone above?
+  \item Finally, verify that \(\left\{ \lambda_i : L \Rightarrow X(i) \mid i \in \obj{\mathcal{I}}
+    \right\}\) is a limit of \(X : \mathcal{I} \to [\mathcal{C}, \Set]\).
+  \end{enumerate}
+\end{exercise}
+
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:

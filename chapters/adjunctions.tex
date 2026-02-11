@@ -1,0 +1,608 @@
+
+\chapter{Adjointness}
+
+\section{Isolating the concept}
+
+\begin{example}[Defining linear
+  maps]\label{example:DefineLinearFunctionsI}
+  One of the first theorems of {\sc Linear Algebra} sounds like this:
+  \begin{quote}
+    Let \(V\) and \(W\) two vector spaces, both over a field \(k\), and
+    let \(S\) be a base of \(V\). Then for every {\em function}
+    \(\phi : S \to W\) there exists one and only one {\em linear map}
+    \(f : V \to W\) that extends \(\phi\) to \(V\), that is
+    \[
+      \begin{tikzcd}
+        S \ar[r, hook] \ar["\phi", dr, swap] & V \ar["f", d] \\
+        & W
+      \end{tikzcd}
+    \]
+    commutes.
+  \end{quote}
+  Let us reason about the theorem, namely we focus on the emphasised
+  parts: it's about a function extended to a linear map. First of all,
+  morphisms are between objects inhabiting the same category: thus an
+  extreme precision requires you to say that \(\phi\) is a function from
+  \(S\) to the {\em underlying set} of \(W\) and the inclusion of \(S\)
+  is into the {\em underlying set} of \(V\). Also, you compose morphisms
+  within the same category: you might object that after all a linear map
+  is a function and we are composing the {\em function} \(f\)
+  with the inclusion of \(S\), and you are right. As you might have
+  inferred by yourself, behind the scenes two functors are moving:
+  \begin{itemize}
+  \item \(F : \Set \to \Vect_k\) {\em constructs} a vector space
+    \(F(S)\) from a set \(S\) it and from a function between bases
+    \(\alpha : S \to T\) gives a linear map \(F(\alpha) : F(S) \to F(T)\).
+  \item \(U : \Vect_k \to \Set\) is the {\em forgetful functor}.
+  \end{itemize}
+  Let us rewrite the quoted theorem to make it more aware of these
+  functors.
+  \begin{quote}
+    Let \(V\) and \(W\) two vector spaces over a field \(k\), and let
+    \(S\) be a base of \(V\). In this context, \(V = F(S)\). Moreover,
+    write \(i_S\) for the inclusion function
+    \(S \hookrightarrow U(F(S))\). Then for every function
+    \(\phi : S \to U(W)\) there exists one and only one linear function
+    \(f : V \to W\) for which
+    \[
+      \begin{tikzcd}
+        S \ar["{i_S}", r, hook] \ar["\phi", dr, swap] & U(F(S)) \ar["U(f)", d] \\
+        & U(W)
+      \end{tikzcd}
+    \]
+    is a commutative diagram of \(\Set\).
+  \end{quote}
+  We can rewrite even further the statement above:
+  \begin{quote}
+    For \(S\) a set and \(W\) a vector space, the function
+    \begin{equation}
+      \begin{aligned}
+        & \xi_{S,W} : \Vect_k(F(S), W) \to \Set(S, U(W)) \\
+        & \xi_{S,W}(f) := U(f)i_S
+      \end{aligned}
+      \label{function:AdjBijSetVect}
+    \end{equation}
+    is a bijection.
+  \end{quote}
+  We need to pause the example a bit now and resume it later.
+\end{example}
+
+  \begin{figure}
+    \centering
+    \input{./tikz/free-forgetful-adjunction.qtikz}
+    \caption{\(F\) upgrades sets to vector spaces; \(U\) does the
+      opposite, that is downgrades}
+  \end{figure}
+
+\begin{construction}
+  Let \(\mathcal{C}\) and \(\mathcal{D}\) be two locally small categories and two
+  functors
+  \[\begin{tikzcd} \mathcal{C} \ar["L", r, shift left] & \mathcal{D} \ar["R", l,
+      shift left] \end{tikzcd}\] We have then the functor
+  \[\mathcal{C}(\hole, R(\hole)) : \opcat C \times \mathcal{D} \to \Set\]
+  that maps objects \((x, y)\) to \(\mathcal{C}(x, R(y))\) and pairs of
+  morphisms
+  \[\left(\begin{tikzcd}[row sep=small](x, y) \ar["{(f, g)}", d, swap]
+        \\ (x', y')\end{tikzcd}\right) = \left(\begin{tikzcd}[row
+        sep=small]x \\ x' \ar["f", u]\end{tikzcd}, \begin{tikzcd}[row
+        sep=small]y \ar["g", d] \\ y'\end{tikzcd}\right)\] to functions
+  \[\begin{aligned}
+    \mathcal{C}(x, R(y)) &\to \mathcal{C}(x', R(y')) \\
+    h &\to R(g) h f
+  \end{aligned}\]
+We have also the functor
+\[\mathcal{D}(L(\hole), \hole) : \opcat C \times \mathcal{D} \to \Set\]
+that maps \((x, y)\) to \(\mathcal{C}(L(x), y)\) and pairs of morphisms
+\[\left(\begin{tikzcd}[row sep=small](x, y) \ar["{(f, g)}", d, swap]
+      \\ (x', y')\end{tikzcd}\right) = \left(\begin{tikzcd}[row
+      sep=small]x \\ x' \ar["f", u]\end{tikzcd}, \begin{tikzcd}[row
+      sep=small]y \ar["g", d] \\ y'\end{tikzcd}\right)\] to functions
+\[\begin{aligned}
+  \mathcal{D}(L(x), y) &\to \mathcal{D}(L(x'), y') \\
+  h &\to g h L(f) .
+\end{aligned}\]
+\end{construction}
+
+We need one more machinery.
+
+\begin{construction}
+  Let \(\mathcal{C}\) and \(\mathcal{J}\) two categories, \(a\) one of its objects
+  and take a functor \(F : \mathcal{J} \to \mathcal{C}\). We have the category
+  \(a {\downarrow} F\) made as follows:
+  \begin{tcbitem}
+  \item the objects are the morphisms \(a \to F(x)\) of \(\mathcal{C}\), with
+    \(x\) being an object of \(\mathcal{J}\);
+  \item the morphisms from \(f : a \to F(x)\) to \(g : a \to F(y)\) are
+    the morphisms \(h : x \to y\) of \(\mathcal{J}\) such that
+    \[\begin{tikzcd}[row sep=small]
+        & F(x) \ar["{F(h)}", dd] \\
+        a \ar["f", ur] \ar["g", dr, swap] \\
+        & F(y)
+      \end{tikzcd}\] commutes;
+  \item the composition is that of \(\mathcal{J}\).
+  \end{tcbitem}
+\end{construction}
+
+Here we are a nice tool:
+
+\begin{proposition}\label{proposition:AdjunctionAsInitialInCommaCategory}
+  Suppose given two locally small categories \(\mathcal{C}\) and \(\mathcal{D}\),
+  two functors
+  \[
+    \begin{tikzcd}[column sep=small]
+      \mathcal{C} \ar["L", r, shift left] & \mathcal{D} \ar["R", l, shift left]
+    \end{tikzcd}
+  \]
+  and a natural transformation \(\eta : \id_{\mathcal{C}} \tto RL\) such that
+  \(\eta_x : x \to RL(x)\) is initial in \(x {\downarrow} R\) for every
+  \(x \in \obj{\mathcal{C}}\). Then for every \(x \in \obj{\mathcal{C}}\) and
+  \(y \in \obj{\mathcal{D}}\) the function
+  \begin{align*}
+    & \alpha_{x,y} : \mathcal{D}(L(x), y) \to \mathcal{C}(x, R(y)) \\
+    & \alpha_{x,y}(f) := R(f)\eta_x
+  \end{align*}
+  is a bijection and is natural in \(x\) and \(y\).
+\end{proposition}
+
+\begin{example}
+  We return to Example~\ref{example:DefineLinearFunctionsI} now. We can
+  easily check that \(i_S : S \to U(F(S))\) is natural in \(S\) and it is
+  initial in \(S{\downarrow} U\): thanks to
+  Proposition~\ref{proposition:AdjunctionAsInitialInCommaCategory}, we
+  can conclude that the bijection~\eqref{function:AdjBijSetVect} is
+  natural in \(S\) and \(W\).
+\end{example}
+
+\begin{proof}[Proof of
+  Proposition~\ref{proposition:AdjunctionAsInitialInCommaCategory}]
+  The fact that \(\eta_x\) is initial object implies that these function
+  are all bijective. Now we take \(x, x' \in \obj{\mathcal{C}}\),
+  \(y, y' \in \obj{\mathcal{D}}\), \(f : x' \to x\) and \(g : y \to y'\) and we
+  prove that
+  \[
+    \begin{tikzcd}[column sep=large]
+      \mathcal{D}(L(x), y) \ar["{\mathcal{D}(L(f), g)}", d, swap] \ar["{\alpha_{x,y}}", r] & \mathcal{C}(x, R(y)) \ar["{\mathcal{C}(f, R(g))}", d] \\
+      \mathcal{D}\left(L\left(x'\right), y'\right) \ar["{\alpha_{x',y'}}", r,
+      swap] & \mathcal{C}\left(x', R\left(y'\right)\right)
+    \end{tikzcd}
+  \]
+  is a commutative diagram. For \(h : L(x) \to y\) we have
+  \begin{align*}
+    & \mathcal{C}(f, R(g)) \left(\alpha_{x,y} (h)\right) = R(g) R(h) \eta_x f = R(gh) \eta_x f \\
+    & \alpha_{x',y'} \left(\mathcal{D} (L(f), g)(h)\right) = R(guL(f)) \eta_{x'} = R(gu) RL(f) \eta_{x'}
+  \end{align*}
+  By the naturality of \(\eta\), we have \(\eta_x f = RL(f) \eta_{x'}\), and the
+  proof ends here.
+\end{proof}
+
+% Here is another example in the spirit of the initial example about
+% vector spaces and of the proposition just proved here.
+
+% \begin{example}[Isomorphism Theorem for Set Theory]
+%   We have defined \(\Eqv\) earlier, recall it here. Let us introduce
+%   the functor
+%   \[E : \Set \to \Eqv\] that maps a set \(X\) to a setoid
+%   \((X, =_X)\), where \(=_X\) is the equality relation over \(X\), and
+%   a function \(f : X \to Y\) to itself regarded as morphisms of
+%   setoids. Besides, Corollary~\ref{cor:SetIso2} gives a functor
+%   \[P : \Eqv \to \Set .\] Consequently,
+%   Proposition~\ref{proposition:SetIso1} can be easily rephrased more
+%   concisely as:
+%   \begin{quotation}
+%     the canonical projection \((X, \sim) \to E(P(X, \sim))\) is
+%     initial in \((X, \sim) \downarrow E\).
+%   \end{quotation}
+% \end{example}
+
+There is the dual of
+Proposition~\ref{proposition:AdjunctionAsInitialInCommaCategory} as
+well.
+
+\begin{proposition}\label{proposition:AdjunctionAsTerminalInCommaCategory}
+  Suppose given two locally small categories \(\mathcal{C}\) and \(\mathcal{D}\),
+  two functors
+  \[
+    \begin{tikzcd}[column sep=small]
+      \mathcal{C} \ar["L", r, shift left] & \mathcal{D} \ar["R", l, shift left]
+    \end{tikzcd}
+  \]
+  and a natural transformation \(\theta : LR \tto \id_{\mathcal{D}}\) such that
+  \(\theta_y : LR(y) \to y\) is terminal in \(L {\downarrow} y\) for every
+  \(y \in \obj{\mathcal{C}}\).  Then
+  \[
+    \beta_{x,y} : \mathcal{C}(x, R(y)) \to \mathcal{D}(L(x), y) \,,\ \beta_{x,y}(f) := \theta_y
+    L(f)
+  \]
+  is a bijection and is natural in \(x \in \obj{\mathcal{C}}\) and
+  \(y \in \obj{\mathcal{D}}\).
+\end{proposition}
+
+\begin{exercise}
+  The proof of
+  Proposition~\ref{proposition:AdjunctionAsTerminalInCommaCategory} is
+  left to you.
+\end{exercise}
+
+
+
+\section{Definition, units and counits}
+
+The natural isomorphism isolated in the previous section is relevant to
+us, and has its own name.
+
+\begin{definition}[Adjunctions]
+  Consider locally small categories and two functors
+  \[
+    \begin{tikzcd}[column sep=small]
+      \mathcal{C} \ar["L", r, shift left] & \mathcal{D} \ar["R", l,
+      shift left]
+    \end{tikzcd}
+  \]
+  An {\em adjunction} from \(L\) to \(R\) any natural isomorphism
+  \begin{equation}
+    \begin{tikzcd}[column sep=large]
+      \op{\mathcal{C}} \times \mathcal{D} \ar["{\mathcal{D}(L(\hole),
+        \hole)}"{name=A}, r, bend left=35] \ar["{\mathcal{C}(\hole,
+        R(\hole))}"{name=B}, r, bend right=35, swap] & \Set
+      \ar["\alpha", from=A, to=B, natural]
+    \end{tikzcd}
+    \label{diagram:AdjunctionI}
+  \end{equation}
+  We write \(L \dashv R\) to say there is an adjunction from \(L\) to
+  \(R\); sometimes, if we want to introduce the name of the adjunction,
+  we could write something like \(\alpha : L \dashv R\). When
+  \(L \dashv R\), we say \(L\) is the {\em left adjoint} and \(R\) is
+  the {\em right adjoint}.
+\end{definition}
+
+% The reason behind the adjective ``left'' and ``right'' comes from when
+% we write the bijections
+% \[
+%   \mathcal{D} (Lx, y) \cong \mathcal{C} (x, Ry)
+% \]
+% which are natural in \(x\) and \(y\): \(L\) occurs on the left in
+% \(\mathcal{D} (Lx, y)\), while \(R\) appears in \(\mathcal{C} (x, Ry)\) on the right.
+
+\(L\) is the {\em left} adjoint and \(R\) is the {\em right} adjoint,
+because the adjunction takes morphisms \(f : Lx \to y\), \(L\) is on the
+{\em left} with respect to \(\to\), to a morphism \(x \to Ry\), \(R\) is on
+the {\em right}.
+
+Since an adjunction is a natural isomorphism, there is no preferred
+direction,
+\[
+  \mathcal{D}(L(\hole), \hole) \Rightarrow \mathcal{C}(\hole, R(\hole)) \quad\text{or}\quad \mathcal{C}(\hole, R(\hole))
+  \Rightarrow \mathcal{D}(L(\hole), \hole) .
+\]
+Nonetheless, the pair of adjectives {\em left}/{\em right} continues to
+do a decent job: \(R\) is the {\em right} adjoint and \(L\) is the {\em
+  left} one, because the adjunction takes morphisms \(g : x \to Ry\),
+\(R\) is on the {\em right}, to a morphism \(Lx \to y\), \(L\) is on the
+{\em left}.
+
+If there is space on the paper, we can write something like
+\begin{equation}
+  \begin{tikzcd}
+    \mathcal{C} \ar["L"{name=L}, r, bend left] & \mathcal{D} \ar["R"{name=R}, l, bend left]
+    \ar["\perp"{description}, from=L, to=R, phantom]
+  \end{tikzcd}
+  \label{diagram:AdjunctionII}
+\end{equation}
+which has the advantage to display the whole context.
+
+An adjuction \(\alpha : L \dashv R\) is a family of isomorphisms
+\(\alpha_{x, y} : \mathcal{D} (Lx, y) \to \mathcal{C}(x, Ry)\) and naturality can be stated
+explicitly as: for every \(f : x' \to x\) in \(\mathcal{C}\),
+\(g : y \to y'\) in \(\mathcal{D}\) and \(h : Fx \to y\) we have
+\[
+  \alpha_{x', y'} (g h F(f)) = G(g) \alpha_{x, y}(h) f .
+\]
+However subscripts can be cumbersome and make you waste time -- you have
+to remember how to place them -- instead of focusing on ideas. If
+\(h : Fx \to y\) in \(\mathcal{D}\) then it can be passed to the component
+\(\alpha_{x, y}\). But, if we write \(f^\sharp\) instead of
+\(\alpha_{x, y} (f)\), then the previous equation becomes
+\begin{equation}
+  (ghF(f))^\sharp = G(g) h^\sharp f .
+  \label{eqn:NatualityAdjunction}
+\end{equation}
+The unique thing you have to control here is things {\em type-check}.
+
+An adjunction is a natural isomorphism in {\em two} variables. To verify
+naturality in two variables we have an instrument, that is
+Proposition~\ref{proposition:NaturalityInToVariables}. We apply this to
+a simple example.
+
+% \newcommand\curry{\mathtt{curry}}
+
+\begin{example}[Currying]\label{example:CurryingFunctions}
+  For every \(A, B, C\) sets consider the function
+  \begin{equation}
+    \begin{aligned}
+      & (\hole)^\sharp : \Set(A \times B, C) \to \Set(A, \Set(B, C)) \\
+      & f^\sharp := \lambda x. \lambda y. f(x, y)
+    \end{aligned}
+    \label{function:Curry}
+  \end{equation}
+  The truth is it is more than a bijection, but to realise that we need
+  the whole picture which involves categories and two functors running
+  in opposite directions. To get a hint about which functors, look
+  at~\eqref{function:Curry} for a hint:
+  \[
+    \begin{tikzcd}
+      \Set \ar["{(\times B)}", r, shift left] & \Set \ar["{\Set(B, -)}", l,
+      shift left]
+    \end{tikzcd}
+  \]
+  We check this data fit in an adjunction
+  \((\times B) \dashv \Set(B, -)\). As you can see, the set \(B\) is fixed and we
+  are trying to prove naturality in \(A\) and \(C\).
+
+  Let us explicitly check naturality of~\eqref{function:Curry}. Consider
+  \[
+    \begin{tikzcd}
+      \Set(A \times B, C) \ar["{\Set(f \times \id_B, g)}", d, swap]
+      \ar["{(\hole)^\sharp}",
+      r] & \Set(A, \Set(B, C)) \ar["{\Set(f, \Set(B, g))}", d] \\
+      \Set(A' \times B, C') \ar["{(\hole)^\sharp}", r, swap] & \Set(A', \Set(B,
+      C'))
+    \end{tikzcd}
+  \]
+  for \(f : A' \to A\) and \(g : C \to C'\) and calculate: for every
+  function \(h : A \times B \to C\) we have
+  \begin{align*}
+    & \left(g h (f \times \id_B) \right)^\sharp = \lambda x. \lambda y. gh(f(x), y) \\
+    & (g \circ -) h^\sharp f = (g \circ -) (\lambda x. \lambda y. h(x, y)) f = \lambda x. \lambda y. gh(f(x), y))
+  \end{align*}
+\end{example}
+
+As you can see, checking naturality of maps
+\(\mathcal{D}(Fx, y) \to \mathcal{C}(x, Gy)\) in two variables can be a
+serious challenge. In the previous section we have isolated two
+Propositions that usually make work easier: you need morphisms
+\(\eta_x : x \to RLx\) natural in \(x\) or \(\epsilon_y : LRy \to y\)
+natural in \(y\) enjoying certain universal properties.
+
+\begin{exercise}
+  Find morphisms
+  \[
+    \eta_A : A \to \Set(B, A \times B)
+  \]
+  natural in \(A\) and show \(\eta_A\) is initial in
+  \(A{\downarrow}\Set(B, -)\). Deduce that the
+  bijection~\eqref{function:Curry} is natural in \(A\) and \(C\).
+\end{exercise}
+
+In the previous section, we have deduced from the notion of adjunction
+from terminal and initial objects of certain comma categories. The
+converse is true: adjunctions give terminal and initial objects in the
+same comma categories.
+
+\begin{figure}
+  % \centering
+  \begin{tabular}{c|c}
+    \input{./tikz/unit.qtikz} & \input{./tikz/counit.qtikz}
+  \end{tabular}
+  \caption{Units and co-units of an adjunction}
+\end{figure}
+
+\begin{proposition}\label{proposition:UnitsAndCounits}
+  Provided you have locally small categories and functors
+  \[
+    \begin{tikzcd}[column sep=small]
+      \mathcal{C} \ar["L", r, shift left] & \mathcal{D} \ar["R", l,
+      shift left]
+    \end{tikzcd}
+  \]
+  and an adjunction
+  \[
+    (\hole)^\sharp : \mathcal{D}(L(\hole), \hole) \to \mathcal{C}(\hole,
+    R(\hole)) .
+  \]
+  Then:
+  \begin{tcbenum}
+  \item The morphism
+    \[
+      \eta_x := \left( \id_{L(x)} \right)^\sharp : x \to RL(x)
+    \]
+    is natural in \(x \in \obj{\mathcal{C}}\) and is initial in
+    \(x {\downarrow} R\).
+  \item The morphism \(\epsilon_y : LRy \to y\) such that
+    \[
+      \left( \epsilon_y \right)^\sharp = \id_{Ry}
+    \]
+    is natural in \(y \in \obj{\mathcal{C}}\) and is terminal in
+    \(L {\downarrow} y\).
+  \end{tcbenum}
+\end{proposition}
+
+\begin{proof}
+  We verify that
+  \[
+    \begin{tikzcd}
+      x \ar["{\eta_x}", r] \ar["f", d, swap] & RL(x) \ar["RL(f)", d] \\
+      y \ar["{\eta_y}", r, swap] & RL(y)
+    \end{tikzcd}
+  \]
+  commutes for every \(f : x \to y\) in \(\mathcal{C}\).
+  \begin{align*}
+    & RL(f) \eta_x = R(Lf) \left( \id_{L(x)} \right)^\sharp \id_x =
+      \left( L(f) \id_{L(x)} \id_{L(x)} \right)^\sharp = (Lf)^\sharp \\
+    & \eta_y f = R(\id_{L(y)}) \left( \id_{L(y)} \right)^\sharp f =
+      \left(\id_{L(y)} \id_{L(y)} L(f) \right)^\sharp = (Lf)^\sharp .
+  \end{align*}
+  It remains to show that the morphisms \(\eta_x : x \to RL(x)\) are
+  initial in \(x {\downarrow} R\). In \(\mathcal{C}\) we draw
+  \[
+    \begin{tikzcd}
+      x \ar["{\eta_x}", r] \ar["g", dr, swap] & RL(x) \\
+      & R(y)
+    \end{tikzcd}
+  \]
+  We know that there is one and only one \(h : L(x) \to y\) such that
+  \(g = h^\sharp\). Then
+  \[
+    g = \left( h \id_{L(x)} L\left(\id_x\right) \right) = R(h)
+    \left(\id_{L(x)} \right)^\sharp \id_{x} = R(h) \eta_x . \qedhere
+  \]
+\end{proof}
+
+{\color{red} [Insert examples where units and counits are explictly calculated.]}
+
+
+
+\section{Triangle Identities}
+
+In this section we will meet {\em triangle identities}
+(see~\eqref{eqn:TriId1} and~\eqref{eqn:TriId2}) once again.
+
+\begin{proposition}
+  Consider two functors \(\begin{tikzcd}[column sep=small, cramped] \mathcal{C}
+    \ar["{L}", r, shift left] & \mathcal{D} \ar["{R}", l, shift
+    left] \end{tikzcd}\), an adjunction \((\hole)^\sharp : L \dashv R\) with unit
+  \(\eta : \id_{\mathcal{C}} \Rightarrow RL\) and counit
+  \(\epsilon : LR \Rightarrow \id_{\mathcal{D}}\). Thus the following diagrams commute:
+  \begin{equation}
+    \begin{tikzcd}
+      L \ar["{L\eta}", r, Rightarrow] \ar["{\id_L}", dr, Rightarrow, swap]
+      & LRL
+      \ar["{\epsilon L}", d, Rightarrow] \\
+      & L
+    \end{tikzcd}
+    \qquad
+    \begin{tikzcd}
+      R \ar["{\eta R}", r, Rightarrow] \ar["{\id_R}", dr, Rightarrow, swap]
+      & RLR
+      \ar["{R\epsilon}", d, Rightarrow] \\
+      & R
+    \end{tikzcd}
+    \label{cd:TriIds}
+  \end{equation}
+  Conversely, given \(L : \mathcal{C} \to \mathcal{D}\),
+  \(R : \mathcal{D} \to \mathcal{C}\), \(\eta : \id_{\mathcal{C}} \Rightarrow RL\) and
+  \(\epsilon : LR \Rightarrow \id_{\mathcal{D}}\) making diagrams~\eqref{cd:TriIds} commute,
+  then \(\eta_x : x \to RLx\) is initial in \(x \downarrow R\). In particular,
+  \begin{align*}
+    & (\hole)^\sharp : \mathcal{D}(Lx, y) \to \mathcal{C}(x, Ry) \\
+    & f^\sharp := R(f) \eta_x
+  \end{align*}
+  is a bijection natural in \(x \in \obj{\mathcal{C}}\),
+  \(y \in \obj{\mathcal{D}}\).
+\end{proposition}
+
+\begin{proof}
+  % Consider the composite
+  % \[
+  %   \begin{tikzcd}
+  %     Ry \ar["{\eta_{Ry}}", r] & RLRy \ar["{R\epsilon_y}", r] & Gy
+  %   \end{tikzcd} .
+  % \]
+  By definition of \(\eta\) and \(\epsilon\), we have
+  \[
+    (R\epsilon_y) \eta_{Ry} = (R\epsilon_y) \left( \id_{LRy} \right)^\sharp = \left( \epsilon_y
+    \right)^\sharp = \id_{Ry} .
+  \]
+  On the other hand
+  \[
+    \left( \epsilon_{Lx} (L\eta_x) \right)^\sharp = \left( \epsilon_{Lx} \right)^\sharp \eta_x =
+    \id_{RLx} \eta_x = \left(\id_{Lx}\right)^\sharp
+  \]
+  Since \((\hole)^\sharp\) is an isomorphism, we can conclude that
+  \(\epsilon_{Lx} (L\eta_x) = \id_{Lx}\).
+
+  For the converse, we will show that \(\eta_x\) is initial in
+  \(x{\downarrow}R\), so that the result derives from
+  Proposition~\ref{proposition:AdjunctionAsInitialInCommaCategory}. Take
+  \(f : x \to Ry\) in \(\mathcal{C}\) and find some \(g : Lx \to y\) such that
+  \(f = R(g) \eta_x\). Let us put together the pieces of the puzzle:
+  \(Lf : Ly \to LRy\) can be composed with \(\epsilon_y : LRy \to y\). In fact,
+  \[
+    R(\epsilon_y (Lf)) \eta_x = (R\epsilon_y) (RLf) \eta_x = (R\epsilon_y) \eta_{Ry} f = f
+  \]
+  where the last equality is possible thanks to the naturality of
+  \(\eta\) and to the second commutative diagram in~\eqref{cd:TriIds}. To
+  conclude take \(g : Lx \to y\) such that \(f = R(g) \eta_x\) and show that
+  \(g = \epsilon_y (Lf)\). By Applying \(L\), we have \(Lf = (LRg) (L\eta_x)\);
+  multiplying both sides by \(\epsilon_y\), we have
+  \[
+    \epsilon_y (LRg) (L\eta_x) = \epsilon_y (Lf)
+  \]
+  The left hand side is equal to \(g \epsilon_{Lx} (L\eta_x)\), which equals \(g\)
+  because of the first commutative diagram in~\eqref{cd:TriIds}. 
+\end{proof}
+
+
+
+\section{Preservation of (co)limits}
+
+\begin{definition}
+  A functor \(F : \mathcal{C} \to \mathcal{D}\) is said to {\em preserve limits}
+  whenever for every diagram \(X : \mathcal{I} \to \mathcal{C}\), if
+  \(\lambda : k_L \Rightarrow X\) is a limit of \(X\), then \(F\lambda\) is a limit of
+  \(FX : \mathcal{I} \to \mathcal{D}\).
+\end{definition}
+
+\NotaInterna{Talk about natural transformations like \(F\lambda\)\dots}
+
+\begin{proposition}
+  Right adjoints preserve limits; left adjoints preserve colimits.
+\end{proposition}
+
+\begin{proof}
+  Consider an adjunction
+  \[
+    \begin{tikzcd}
+      \mathcal{C} \ar["F"{name=L}, r, bend left] & \mathcal{D} \ar["G"{name=R}, l,
+      bend left] \ar["{\perp}"{description}, from=L, to=R, phantom]
+    \end{tikzcd}
+  \]
+  As usual, for \(f : Fx \to y\) in \(\mathcal{D}\) we write
+  \(f^\sharp : x \to Gy\) the transposition. Let
+  \(X : \mathcal{I} \to \mathcal{D}\) be with limit
+  \(\lambda : k_L \Rightarrow X\) and look at \(G\lambda\).
+
+  Take a generic cone \(\alpha : k_A \Rightarrow GX\) and a construct some
+  \(f : A \to GL\) such that
+  \begin{equation}
+    \alpha_i = (G\lambda_i) f \quad \text{for every } i \in \obj{\mathcal{I}} .
+    \label{eqn:AlphaFactoredThroughGlambda}
+  \end{equation}
+  Consider now \(\beta_i : FA \to X_i\) defined by
+  \(\beta_i^\sharp = \alpha_i\) and show that it is natural in
+  \(i \in \obj{\mathcal{I}}\). In fact, for every \(h : i \to j\) in
+  \(\mathcal{I}\) we have
+  \[
+    \left( (Xh) \beta_i \right)^\sharp = G(Xh) \beta_i^\sharp = (GX h) \alpha_i = \alpha_j = \beta_j^\sharp
+  \]
+  which yields \(\beta_j = (Xh) \beta_i\).
+
+  Consequently, by the universal property of limit, there is a unique
+  \(g : FA \to L\) such that \(\beta_i = \lambda_i g\) for every
+  \(i \in \obj{\mathcal{I}}\). Show that \(f := g^\sharp : A \to GL\)
+  satisfies~\eqref{eqn:AlphaFactoredThroughGlambda}.
+  \[
+    \alpha_i = \beta_i^\sharp = \left( \lambda_i g \right)^\sharp = (G\lambda_i) g^\sharp = (G\lambda_i) f .
+  \]
+  Uniqueness of \(f\) follows from the uniqueness of \(g\).
+\end{proof}
+
+\begin{example}
+  We show that \(A \times (B + C) \cong (A \times B) + (A \times C)\), categorially. The
+  functor \((A \times) : \Set \to \Set\) is a left adjoint, so it preserves
+  colimits. \(B+C\) with injections \(\inj_B : B \to B+C\) and
+  \(\inj_C : C \to B+C\) is a coproduct of \(B\) and \(C\), thus \(A \times
+  (B+C)\) with morphisms
+  \begin{align*}
+    & \id_A \times \inj_B : A \times B \to A \times (B + C) \\
+    & \id_A \times \inj_C : A \times C \to A \times (B + C) 
+  \end{align*}
+  is a coproduct of \(A \times B\) and \(A \times C\).
+\end{example}
+
+
+
+%%% Local Variables:
+%%% mode: LaTeX
+%%% TeX-master: "../CT"
+%%% TeX-engine: luatex
+%%% End:
