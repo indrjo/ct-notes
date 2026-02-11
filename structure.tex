@@ -79,6 +79,24 @@
 \newtheorem{example}     [coun]{Example}
 \newtheorem{exercise}    [coun]{Exercise}
 
+\usepackage[skins, theorems, breakable, hooks]{tcolorbox}
+\tcbset{breakable, boxsep=0mm}
+\tcolorboxenvironment{definition}{tile,
+  left=2mm, right=2mm, top=2mm, bottom=2mm, colback=gray!30!white}
+\tcolorboxenvironment{lemma}{skin=emptymiddle,
+  borderline west={1pt}{0pt}{gray}, top=0mm, left=1mm, right=2mm,
+  bottom=0mm}
+\tcolorboxenvironment{proposition}{skin=emptymiddle,
+  borderline west={1pt}{0pt}{gray}, top=0mm, left=1mm, right=0mm,
+  bottom=0mm}
+\tcolorboxenvironment{corollary}{skin=emptymiddle,
+  borderline west={1pt}{0pt}{gray}, top=0mm, left=1mm, right=0mm,
+  bottom=0mm}
+
+% \newtcolorbox{tcbquote}{skin=emptymiddle,
+%   borderline={1pt}{0pt}{gray}, top=0mm, left=1mm, right=1mm,
+%   bottom=0mm}
+
 %\renewcommand\theequation{\thesection.\arabic{equation}}
 \counterwithin{equation}{section}
 \newcommand\inlinethm[1]{\stepcounter{coun}{\bf #1~\thecoun}}
