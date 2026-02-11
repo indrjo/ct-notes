@@ -7,6 +7,7 @@
 \newcommand\Abs[1]{\left\lVert#1\right\rVert}
 \renewcommand\bar\overline
 \renewcommand\tilde\widetilde
+\newcommand\tld\widetilde
 \renewcommand\hat\widehat
 \newcommand\tto\Rightarrow
 \newcommand\lrarr\Leftrightarrow
@@ -47,6 +48,9 @@
 \newcommand\im{\operatorname{im}}
 
 \newcommand\subobjs{\operatorname{Sub}}
+\newcommand\colim{\operatorname{colim}}
+
+\newcommand\swap{\operatorname{swap}}
 
 % Some categories
 \newcommand\uno{\mathbb{1}}
@@ -94,7 +98,17 @@
 %\DeclareFontFamily{U}{dmjhira}{}
 %\DeclareFontShape{U}{dmjhira}{m}{n}{ <-> dmjhira }{}
 %\DeclareRobustCommand{\yo}{\text{\usefont{U}{dmjhira}{m}{n}\symbol{'110}}}
-\newcommand\yo{\mathcal{Y}}
+%\newcommand\yo{\mathcal{Y}}
+\defaultfontfeatures[HaranoAjiMincho]{
+    Renderer=HarfBuzz,
+    Script=Kana,
+    Scale=MatchUppercase,
+    UprightFont=*-Light,
+    BoldFont=*-Medium,
+    Extension=.otf
+}
+\newfontfamily\kanafont{HaranoAjiMincho}
+\DeclareRobustCommand\yo{\textup{\kanafont よ}}
 
 % I'd like a \mathtt\lambda, but I don't know how to have this here.
 %\newcommand\lam\lambda
