@@ -1,0 +1,36 @@
+﻿
+%\newcommand\cat\mathcal
+%\newcommand\id{\mathtt 1}
+
+\begin{tikzpicture}
+  [ category/.style={ draw
+                    , rectangle
+                    , minimum width=2cm
+                    , minimum height=3cm
+                    , rounded corners=2pt
+                    , fill=gray!15!white
+                    }
+  ]
+\def\l{1.2}
+% category C
+\node [category, label=above:\(\cat C\)] at (0,0) {};
+\node (a)   at (0,.5*\l cm)  {\(a\)};
+\node (RLa) at (0,-.5*\l cm) {\(R(L(a))\)};
+\draw [->] (a) to node[auto, swap]{\(\eta_a\)} (RLa);
+% category D
+\def\loopradius{1}
+\def\loopangle{80}
+\def\loopdiff{25}
+\begin{scope}[xshift=3 cm]
+\node [category, label=above:\(\cat D\)] at (0,0) {};
+\node (La) at (0,0)  {\(L(a)\)};
+\draw [->]
+  (La) 
+  .. controls (\loopangle-\loopdiff:\loopradius) and (\loopangle+\loopdiff:\loopradius) ..
+  node[auto, swap]{\(\id_{L(a)}\)}
+  (La);
+\end{scope}
+% functors
+\draw [->, thick] (a)  to node[auto]{\(L\)} (La);
+\draw [->, thick] (La) to node[auto]{\(R\)} (RLa);
+\end{tikzpicture}

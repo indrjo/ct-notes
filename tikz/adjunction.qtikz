@@ -1,0 +1,22 @@
+﻿
+%\newcommand\cat\mathcal
+
+\begin{tikzpicture}
+\def\a{55}
+\def\r{1.6}
+\draw [rounded corners=2pt, fill=gray!15!white] (\a:\r cm) rectangle (\a+180:\r cm);
+\def\l{1.2}
+\node (a)  at (0,.5*\l cm)  {\(a\)};
+\node (Gb) at (0,-.5*\l cm) {\(G(b)\)};
+\draw [->] (a) to node[auto, swap]{\(f\)} (Gb);
+\def\d{3}
+\draw [rounded corners=2pt, fill=gray!15!white] ($(\d,0) + (\a:\r cm)$) rectangle ($(\d,0) + (\a+180:\r cm)$);
+\def\l{1.2}
+\node (Fa) at ($(\d,0) + (0,.5*\l cm)$)  {\(F(a)\)};
+\node (b)  at ($(\d,0) + (0,-.5*\l cm)$) {\(b\)};
+\draw [->] (Fa) to node[auto]{\(\bar f\)} (b);
+\draw [->, thick] (a) to node[auto]{\(F\)} (Fa);
+\draw [->, thick] (b) to node[auto]{\(G\)} (Gb);
+\node at (-90:\r cm) {\(\cat C\)};
+\node at ($(\d,0) + (-90:\r cm)$) {\(\cat D\)};
+\end{tikzpicture}

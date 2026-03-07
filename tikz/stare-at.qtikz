@@ -1,0 +1,15 @@
+﻿
+%\usetikzlibrary{positioning}
+
+\begin{tikzpicture}%[every node/.style={circle}]
+\node (a) [circle] {\(a\)};
+\def\dista{4}
+\node (a') [circle] at ($(a) + (\dista,0) $) {\(a'\)};
+\node (x) [circle] at ($(a)!.5!(a') + (0,-.5*\dista)$) {\(x\)};
+\foreach \b in {-20,-10,...,20} {
+  \draw [->] (a)  to[bend left=\b] (x);
+  \draw [->] (a') to[bend left=\b] (x);
+}
+\draw [->] (a') to[bend right=10] node[auto,swap]{\(\xi_a(\id_a)\)} (a);
+\path (a) to[bend right=30] node{\(\implies\)} node[auto,swap]{\(\xi\)} (a');
+\end{tikzpicture}

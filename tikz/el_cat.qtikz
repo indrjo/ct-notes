@@ -1,0 +1,25 @@
+﻿
+\begin{tikzpicture}
+  [ catC/.style={fill, gray!30!white, ellipse, minimum width=3cm, minimum height=4cm}
+  , catSet/.style={draw, black, rectangle, minimum width=3cm, minimum height=4cm}
+  , point/.style={fill, black, circle, minimum width=1mm}
+  , set/.style={fill, gray!30!white, circle, minimum width=1cm}
+  , shorten <=1pt, shorten >=1pt
+  , inner sep=0mm
+  , label distance=1mm
+  ]
+\node [catC, label=below:$\mathcal C$] (C) {};
+\node [catSet, label=below:$\mathbf{Set}$, anchor=west] (Set) at ($ (C.east)+(1cm, 0) $) {};
+
+\node [point, label=above:$a$] (a) at ($ (C.north)!.5!(C.center) $) {}; 
+\node [point, label=below:$x$] (x) at ($ (C.south)!.5!(C.center) $) {};
+\draw [->] (a) to[bend left] node[auto, swap]{$f := \psi_x^{-1}(c)$} (x);
+
+\node [set, label=north east:$X(a)$] (Xa) at ($ (Set.north west)!.3!(Set.south east) $) {};
+\node [set, label=south west:$X(x)$] (Xx) at ($ (Set.south east)!.3!(Set.north west) $) {};
+
+\draw [->] (Xa) to[bend left] node[auto]{$X(f)$} (Xx);
+
+\node [point, label=west:$\tilde a$] (tilde a) at ($ (Xa)+.1*(rnd, -rnd) $) {};
+\node [point, label=east:$c$] (c) at ($ (Xx)+.1*(-rnd, rnd) $) {};
+\end{tikzpicture}

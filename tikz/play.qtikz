@@ -1,0 +1,10 @@
+﻿
+\begin{tikzpicture}
+\def\r{2}
+\foreach \i/\obj in {1/A, 2/B, 3/C} {
+  \node (\obj) [circle] at ({120*\i}:\r) {\(\obj\)};
+}
+\draw[->, thick] (A) -- node[auto, swap]{\(f\)} (B);
+\draw[->, thick] (B) -- node[auto, swap]{\(g\)} (C);
+\draw[->, thick] (A) -- node[auto]{\(gf\)} (C);
+\end{tikzpicture}
